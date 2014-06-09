@@ -1,0 +1,60 @@
+body {
+	margin:0px;
+  	font-family: Verdana, Geneva, Arial, helvetica, sans-serif;
+  	padding: 0px;
+  	height: 100%;
+	border: 0px;
+  	overflow: auto;
+}
+
+label{
+	font-family: "Comic Sans MS";
+	margin: 0px;
+	font-size: larger;
+	text-shadow: 1px;
+}
+
+table{
+	border-top: 60px;
+	text-align: center;
+}
+
+#atas{
+	background: url("../images/login/depkes.png"), url("../images/login/background atas.png");
+	background-position: top center;
+	background-size: 50%,cover;
+	background-repeat: no-repeat;
+	height:100%;
+	width:100%;
+	position: absolute;
+}
+
+.bawah{
+	margin-top: 30%;
+	background: #d2d7dd url("../images/login/login bawah kiri.jpg") no-repeat left bottom;	
+	height: 30%;
+	width: 100%;
+	position: absolute;
+}
+
+select, input{
+	width: 40%;
+}
+
+.bawah #submit-button{
+	font-size: 18px;
+	height: 60px;
+	width: 120px;
+}
+
+.render{
+	font-size: xx-small;
+	text-align: right;
+	margin-right: 15px;
+}
+
+.error{
+	font-size: xx-small;
+	text-align: right;
+	background: #FBE6F2;
+}

@@ -1,0 +1,158 @@
+.header {
+	text-align: center;
+	font-family:DejaVuSansCondensed;
+	font-size: 10pt;
+	font-weight:bold;
+}
+
+.alamat {
+	text-align: center;
+	font-family:DejaVuSansCondensed;
+	font-size: 8pt;
+}
+
+.atas td{
+	border-bottom: 1px solid #000000; 
+	page-break-after:avoid; 
+	font-family:DejaVuSansCondensed;
+	font-size: 10pt;
+}
+
+.TITLE {
+	text-align: center;
+	font-weight: bold;
+	position: absolute;
+	top: auto;
+	clip: rect(auto,auto,auto,auto);
+}
+.nama {
+	text-align: center;
+}
+.tempat_dan_tanggal {
+	text-align: center;
+}
+.tanaman_betina {
+	font-weight: bold;
+	font-style: italic;
+}
+.header_text {
+	font-weight: bold;
+}
+.TITLE {
+	top: 0px;
+}
+
+.tengah {
+	page-break-after:avoid;
+}
+			
+.lembar td{
+	border-top: 1px solid #000000; 
+	page-break-after:avoid;
+	font-size: 9pt;
+}
+			
+tr.hidden_tr {
+	bgcolor:#0C3;
+	color:#F00;
+}
+
+tr.break {
+	page-break-before:always;
+}
+
+.page_break {
+	page-break-before:always;
+}
+
+.border_sisi {
+	border:1px solid #000000 !important;
+}
+
+.border_atas {
+	border-top:1px solid #000000 !important;
+}
+
+.border_bawah {
+	border-bottom:1px solid #000000 !important;
+}
+
+.border_top tr {
+	border-top:1px #000000 solid !important;
+}
+			
+body { font-family: "Times New Roman"; font-size: 10pt;  }
+		p { 	text-align: justify; margin-bottom: 4pt; margin-top:0pt;  }
+
+		table {font-family: "Times New Roman"; font-size: 12pt; line-height: 1.2;
+			margin-top: 2pt; margin-bottom: 5pt;
+			border-collapse: collapse;  }
+
+		thead {	font-weight: bold; vertical-align: bottom; }
+		tfoot {	font-weight: bold; vertical-align: top; }
+		thead td { font-weight: bold; }
+		tfoot td { font-weight: bold; }
+
+		.headerrow td, .headerrow th { background-gradient: linear #b7cebd #f5f8f5 0 1 0 0.2;  }
+		.footerrow td, .footerrow th { background-gradient: linear #b7cebd #f5f8f5 0 1 0 0.2;  }
+
+		th {	font-weight: bold; 
+			vertical-align: top; 
+			text-align:left; 
+			padding-left: 2mm; 
+			padding-right: 2mm; 
+			padding-top: 0.5mm; 
+			padding-bottom: 0.5mm; 
+		 }
+
+		td {	padding-left: 2mm; 
+			vertical-align: top; 
+			text-align:left; 
+			padding-right: 2mm; 
+			padding-top: 0.5mm; 
+			padding-bottom: 0.5mm;
+		 }
+
+		th p { text-align: left; margin:0pt;  }
+		td p { text-align: left; margin:0pt;  }
+
+		table.widecells td {
+			padding-left: 5mm;
+			padding-right: 5mm;
+		}
+		table.tallcells td {
+			padding-top: 3mm;
+			padding-bottom: 3mm; 
+		}
+
+		hr {	width: 70%; height: 1px; 
+			text-align: center; color: #999999; 
+			margin-top: 8pt; margin-bottom: 8pt; }
+
+		a {	color: #000066; font-style: normal; text-decoration: underline; 
+			font-weight: normal; }
+
+		ul {	text-indent: 5mm; margin-bottom: 9pt; }
+		ol {	text-indent: 5mm; margin-bottom: 9pt; }
+
+		pre { font-family: "Times New Roman"; font-size: 9pt; margin-top: 5pt; margin-bottom: 5pt; }
+
+		h1 {	font-weight: normal; font-size: 26pt; color: #000066; 
+			font-family: "Times New Roman"; margin-top: 18pt; margin-bottom: 6pt; 
+			border-top: 0.075cm solid #000000; border-bottom: 0.075cm solid #000000; 
+			text-align: ; page-break-after:avoid; }
+		h2 {	font-weight: bold; font-size: 12pt; color: #000066; 
+			font-family: "Times New Roman"; margin-top: 6pt; margin-bottom: 6pt; 
+			border-top: 0.07cm solid #000000; border-bottom: 0.07cm solid #000000; 
+			text-align: ;  text-transform:uppercase; page-break-after:avoid; }
+		h3 {	font-weight: normal; font-size: 26pt; color: #000000; 
+			font-family: "Times New Roman"; margin-top: 0pt; margin-bottom: 6pt; 
+			border-top: 0; border-bottom: 0; 
+			text-align: ; page-break-after:avoid; }
+		h4 {	font-weight: ; font-size: 13pt; color: #9f2b1e; 
+			font-family: "Times New Roman"; margin-top: 10pt; margin-bottom: 7pt; 
+			font-variant: small-caps;
+			text-align: ;  margin-collapse:collapse; page-break-after:avoid; }
+		h5 {	font-weight: bold; font-style:italic; ; font-size: 11pt; color: #000044; 
+			font-family: "Times New Roman"; margin-top: 8pt; margin-bottom: 4pt; 
+			text-align: ;  page-break-after:avoid; }

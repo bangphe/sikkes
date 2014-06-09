@@ -1,0 +1,16 @@
+	input[type="button"], input[type="submit"], input[type="reset"] {
+		background-image:url(../../images/beranda/reset-button.png);
+		border: 1px solid #666666;
+		background-color: #f0f0f0;
+		padding: 3px 15px;
+		line-height: 16px;
+		vertical-align: middle;
+		-moz-border-radius: 6px;
+	}
+		input[type="submit"], input[type="button"].submit {
+		background-image:url(../../images/beranda/button.png);
+		background-repeat:repeat-x;
+		-moz-border-radius: 6px;
+		color: #000;	
+		border:thin solid #000000;
+	}

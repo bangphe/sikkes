@@ -1,0 +1,35 @@
+
+.menu_list {	
+	padding-top:10px;
+	width: 175px;
+	text-align:center;
+}
+.menu_head {
+	color:#666;
+	font-size: 10px;
+	padding-bottom:10px;
+	padding-top:13px;
+	padding-right:5px;
+	padding-left:20px;
+	cursor: pointer;
+	position: relative;
+	margin:1.5px;
+    font-weight:bold;
+	background-image:url(../images/main/bl_head0.png)
+}
+.menu_head a{
+	color:#666;
+}
+.menu_body {
+	display:none;
+}
+.menu_body a{
+  display:block;
+  color:#FFFFFF;
+  background:#64A147;
+  padding-left:10px;
+  text-decoration:none;
+}
+.menu_body a:hover{
+  text-decoration:underline;
+}

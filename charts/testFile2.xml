@@ -1,0 +1,15 @@
+<graph yAxisName='Presentase' caption='Grafik Progres Keuangan' subcaption='Tahun 2013' hovercapbg='FFECAA' hovercapborder='F47E00' formatNumberScale='0' decimalPrecision='0' showvalues='0' numdivlines='5' numVdivlines='0' yaxisminvalue='1000' yaxismaxvalue='100'  rotateNames='1' NumberSuffix='%25'>
+					<categories >
+						<category name='Jan' />
+						<category name='Feb' />
+						<category name='Mar' />
+						<category name='Apr' />
+						<category name='Mei' />
+						<category name='Jun' />
+						<category name='Jul' />
+						<category name='Agt' />
+						<category name='Sep' />
+						<category name='Okt' />
+						<category name='Nop' />
+						<category name='Des' />
+					</categories><dataset seriesName='Rencana' color='1D8BD1' anchorBorderColor='1D8BD1' anchorBgColor='1D8BD1'><set value="2.78" /><set value="2.78" /><set value="100" /><set value="100" /><set value="100" /><set value="100" /><set value="100" /><set value="100" /><set value="100" /><set value="100" /><set value="100" /><set value="100" /></dataset><dataset seriesName='Progres' color='F1683C' anchorBorderColor='F1683C' anchorBgColor='F1683C'><set value="2" /><set value="0" /><set value="0" /><set value="75" /><set value="0" /><set value="0" /><set value="0" /><set value="0" /><set value="0" /><set value="0" /><set value="0" /><set value="0" /></dataset></graph>

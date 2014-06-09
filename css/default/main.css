@@ -1,0 +1,242 @@
+/* CSS Document */
+body{
+	padding:0;
+	margin:12px 0 0;
+	font:11px Arial, Helvetica, sans-serif;
+	color:#000000;
+	background-color: #edeff1;
+	background-repeat: repeat-x;
+	background-position: 0 0;
+}
+
+a{
+	color:#0000FF;
+	text-decoration:none;
+}
+
+th,td{
+	color:#000000;
+}
+
+legend{
+	color:#FFFFFF;
+	font-weight:normal;
+	font-size:160%;
+	clear:left;
+	font: Calibri;
+}
+
+div, p, ul, h1, h4, h5, img{
+	margin:0px; 
+	padding:0px;
+}
+
+h3{
+	color:#0066CC;
+	text-align:center;
+}
+
+ul{
+	list-style-type:none;
+}
+
+#mainpanel{
+	width:99%;
+	background-color:#edeff1;
+	margin:auto;
+}
+
+#toppanel{
+	background-image:url(../../images/main/header-repeat.png);
+	background-repeat:repeat-x;
+	width:100%;
+	height:90px;
+	-moz-border-radius: 5px; 
+}
+
+#logo{
+	float:left;
+	margin-left: 8px;
+	margin-top: 5px;
+	margin-right: 8px;
+}
+
+#header1{
+	float:left;
+	color:#fff;
+	padding-top:8px;
+	font-family:Verdana;
+	font-weight:bold;
+	border-bottom:solid thin #FFFFFF;
+	padding-bottom:5px;
+}
+
+#header2{
+	float:right;
+	color:#333333;
+	background-color:#FFFFFF;
+	padding:5px;
+	font-family:Verdana;
+	font-size:10px;
+	border-bottom:solid thin #FFFFFF;
+	padding-bottom:5px;
+	-moz-border-radius: 3px;
+	text-align:center;
+	margin-right:70px;
+	margin-top:35px;
+}
+
+#contentform{
+	height:85%;
+	overflow:auto;
+}
+
+#contentdetails{
+	height:90%;
+	overflow:auto;
+}
+
+#contentpanel{
+	background-image:url(../images/main/main_09.png);
+	background-repeat:repeat;
+	float:left;
+	width:100%;
+	height:350px;
+	border:solid thin #000000;
+}
+
+#main{
+	float:left;
+	width:100%;
+	height:100%;
+	text-align:left;
+}
+
+#inner_content{
+	float:left;
+	margin-left:40px;
+	margin-top:10px;
+}
+
+#menu_kanan{
+	float:right;
+	margin-right:70px;
+	margin-top:10px;
+	width:15%;
+	background-color:#000000;
+}
+
+#footerpanel{
+	background-image:url(../../images/main/footer.png);
+	width:100%;
+	height:30px;
+}
+
+#footer{
+	float:left;
+	width:100%;
+	color:#fff;
+	font-family:Verdana;
+	font-weight:bold;
+	padding-bottom:5px;
+	text-align:left;
+	padding-top:20px;
+	padding-left:20px;
+}
+
+#spt{
+	float:left;
+	width:100%;
+	height:82%;
+	overflow:auto;
+}
+
+#petunjuk{
+	font-weight:bold;
+	color : #77ad04;
+}
+
+#menu_atas{
+	text-align:center;
+	background-color:#333333;
+	-moz-border-radius:2px;
+}
+
+#menu_atas a{
+	color:#6a9709;
+}
+
+#menu_atas td{
+	text-align:center;
+	background-color:#333333;
+	-moz-border-radius:2px;
+}
+
+#menu_atas td:hover{
+	background-color:#CCCCCC;
+	-moz-border-radius:2px;
+}
+
+/**
+	 *	Basic Layout Theme
+	 * 
+	 *	This theme uses the default layout class-names for all classes
+	 *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+	 */
+
+	.ui-layout-pane { /* all 'panes' */ 
+		background: #FFF; 
+		overflow: auto;
+	} 
+	
+	.outer-east{
+		
+	}
+	
+	.ui-layout-north{
+	}
+	
+	.outer-center{
+		
+	}
+	
+	.ui-layout-south{
+	
+	}
+
+	.ui-layout-resizer { /* all 'resizer-bars' */ 
+		background-color:#333333;
+		border-left:thin solid #121212;
+		border-right:thin solid #121212;
+	} 
+
+	.ui-layout-toggler { /* all 'toggler-buttons' */ 
+		background: #4b6d02; 
+	} 
+	
+.multiupload{
+	border:2px dotted #000;
+	background: #CCCCFF;
+	width:500px;
+	height:50px;
+	color:#0000FF;
+	margin-top:5px;
+}
+
+.user_info{
+	background-color:#333333;
+	padding:0 10px 0 5px;
+	width:90%;
+}
+
+.user_info table tr td{
+	color:#FFFFFF;
+	vertical-align:middle;
+	padding-left:5px;
+}
+
+.user_info table tr th{
+	color:#FFB21A;
+	vertical-align:middle;
+}
+

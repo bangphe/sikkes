@@ -1,0 +1,109 @@
+/* CSS Document */
+
+input.text:hover, input.text:focus{
+	background: #333333;
+	color:#CCCCCC;
+	border: 2px solid #ccc;
+	
+}
+
+#main_panel{
+	width:848px;
+	background-color:#FFFFFF;
+	margin:auto;
+}
+
+#panel1{
+	background-image:url(../../images/beranda/login_01.png);
+	background-repeat: no-repeat;
+	float:left;
+	width:36px;
+	height:303px;
+}
+
+#panel2{
+	background-image:url(../../images/beranda/login_02.png);
+	background-repeat: no-repeat;
+	float:left;
+	width:252px;
+	height:303px;
+}
+
+#panel3{
+	background-image:url(../../images/beranda/login_03.png);
+	background-repeat: no-repeat;
+	float:left;
+	width:244px;
+	height:303px;
+}
+
+#panel4{
+	background-image:url(../../images/beranda/login_04.png);
+	background-repeat: no-repeat;
+	float:left;
+	width:218px;
+	height:303px;
+}
+
+#panel5{
+	background-image:url(../../images/beranda/login_05.png);
+	background-repeat: no-repeat;
+	float:left;
+	width:98px;
+	height:303px;
+}
+
+#panel6{
+	background-image:url(../../images/beranda/login_06.png);
+	background-repeat: no-repeat;
+	float:left;
+	width:36px;
+	height:190px;
+}
+
+#panel7{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#333333;
+	font-weight:bold;
+	background-image:url(../../images/beranda/login_07.png);
+	background-repeat: no-repeat;
+	float:left;
+	width:252px;
+	height:190px;
+}
+
+#panel8{
+	background-image:url(../../images/beranda/login_08.png);
+	background-repeat: no-repeat;
+	float:left;
+	width:244px;
+	height:190px;
+}
+
+#panel9{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#0462bc;
+	background-image:url(../../images/beranda/login_09.png);
+	background-repeat: no-repeat;
+	float:left;
+	width:218px;
+	height:36px;
+}
+
+#panel10{
+	background-image:url(../../images/beranda/login_10.png);
+	background-repeat: no-repeat;
+	float:left;
+	width:98px;
+	height:190px;
+}
+
+#panel11{
+	background-image:url(../../images/beranda/login_11.png);
+	background-repeat: no-repeat;
+	float:left;
+	width:218px;
+	height:154px;
+}

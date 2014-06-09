@@ -1,0 +1,24 @@
+SERVER 113
+alamat : http://113.20.29.50/sikkes
+
+ssh: 113.20.29.50
+     user: root
+     password: Matrix08559930382
+
+mysql: 113.20.29.50
+      user: root
+      password: root
+
+SERVER 72
+alamat : http://202.70.136.72/sikkes
+
+ssh: 202.70.136.72
+     user: depkes2012
+     password: depkes2012
+
+SERVER 112
+alamat : http://202.70.136.112/sikkes
+
+ssh: 202.70.136.112
+     user: root
+     password: 3-r3ng4r

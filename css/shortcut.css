@@ -1,0 +1,102 @@
+/* CSS Document */
+
+body {
+	font-family:arial;	
+}
+
+.qitem {
+	width:126px;
+	height:126px;	
+	border:1px solid #222;	
+	margin:5px 5px 5px 0;
+	background: url('../images/shortcut/bg.gif') no-repeat;
+	-moz-border-radius:10px;
+	
+	/* required to hide the image after resized */
+	overflow:hidden;
+	
+	/* for child absolute position */
+	position:relative;
+	
+	/* display div in line */
+	float:left;
+	cursor:hand; cursor:pointer;
+}
+
+.qitem_2 {
+	width:250px;
+	height:250px;	
+	border:1px solid #222;	
+	margin:5px 5px 5px 5px;
+	text-align: center; 
+	background: url('../images/shortcut/bg.gif') no-repeat;
+	-moz-border-radius:10px;
+	
+	/* required to hide the image after resized */
+	overflow:hidden;
+	
+	/* for child absolute position */
+	position:relative;
+	
+	/* display div in line */
+	float:left;
+	cursor:hand; cursor:pointer;
+}
+
+	.qitem img {
+		border:0;
+		-moz-border-radius:10px;
+		/* allow javascript moves the img position*/
+		position:absolute;
+		z-index:200;
+	}
+
+	.qitem .caption {
+		position:absolute;
+		z-index:0;	
+		color:#ccc;
+		display:block;
+	}
+
+		.qitem .caption h4 {
+			font-size:12px;
+			padding:10px 5px 0 8px;
+			margin:0;
+			color:#369ead;
+		}
+
+		.qitem .caption p {
+			font-size:10px;	
+			padding:3px 5px 0 8px;
+			margin:0;
+		}
+
+
+
+/* Setting for corners */
+
+.topLeft, .topRight, .bottomLeft, .bottomRight {
+	position:absolute;
+	background-repeat: no-repeat; 
+	float:left;
+}
+
+.topLeft {
+	background-position: top left; 	
+} 
+
+.topRight {
+	background-position: top right; 
+} 
+
+.bottomLeft {
+	background-position: bottom left; 
+} 
+
+.bottomRight {
+	background-position: bottom right; 
+}
+
+.clear {
+	clear:both;	
+}
