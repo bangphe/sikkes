@@ -81,7 +81,7 @@
 	       <?= anchor(site_url().'/master_data/master_propinsi',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Provinsi',''); ?>
 		   <?= anchor(site_url().'/master_data/master_tahun_anggaran',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Tahun Anggaran',''); ?>
 		   <?= anchor(site_url().'/master_data/master_program',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Program',''); ?>
-		   <?= anchor(site_url().'/e-planning/referensi2/grid_periode',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Periode',''); ?>
+		   <?= anchor(site_url().'/master_data/master_periode',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Periode',''); ?>
 		   <?= anchor(site_url().'/master_data/master_kegiatan',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Kegiatan',''); ?>
 		   <?= anchor(site_url().'/master_data/master_ikk',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' IKK',''); ?>
 		   <?= anchor(site_url().'/master_data/master_menu_kegiatan',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Menu Kegiatan',''); ?>
