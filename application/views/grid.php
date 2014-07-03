@@ -5,6 +5,41 @@
 	<input name="klik" id="klik" type="button" value="click me" onclick="TES(4);"/>
 </div>
 -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#dialog").dialog({
+		autoOpen: false,
+		resizable: false,
+		draggable: false,
+		height:375,
+		maxHeight:600,
+		width:700,
+		show: { effect: "fade", duration: 350 },
+		modal: true,
+	});
+});
+function opendialog(kdpengajuan){
+	var path = '<?php echo base_url();?>index.php/e-planning/manajemen/tampil_ikk/'+kdpengajuan;
+	$.ajax({
+		url:path,
+		type:'get',
+		data:'',
+		beforeSend:function(){
+			$("#dialog").dialog("open");
+			$("#dialog-body").html('loading...');
+		},
+		success: function(data){
+			$("#dialog-body").html(data);
+		}
+	});
+	//$("#dialog").dialog("open");
+}
+</script>
+
+<div id="dialog" title="Target Nasional - Renja KL">
+  <p id="dialog-body">This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
+
 <div id="tengah">
 <div id="judul" class="title">
 	<?php echo $judul; ?>

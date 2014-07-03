@@ -227,7 +227,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<tr>
 						<td>(<?php echo $row->KodeIku;?>) <?php echo $row->Iku; ?></td>
 						<td align="center" width="14%"><?php foreach($this->pm->get_where_double('target_iku',  $row->KodeIku, 'KodeIku', $idTahun, 'idThnAnggaran')->result() as $r) echo $r->TargetNasional; ?></td>
-						<td align="center" width="14%"><?php echo $row->Jumlah; ?></td>
+						<td align="center" width="14%"><?php echo $row->Jumlah=="" ? "0" : $row->Jumlah; ?></td>
 						<?php
 							$targetIku = $this->pm->get_where_double('target_iku', $row->KodeIku, 'KodeIku', $idTahun, 'idThnAnggaran');
 							//$cek = count($targetIku);
@@ -274,7 +274,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<tr>
 						<td>(<?php	echo $row->KodeIkk; ?>) <?php echo $row->Ikk; ?></td>
 						<td align="center" width="14%"><?php foreach($this->pm->get_where_double('target_ikk',  $row->KodeIkk, 'KodeIkk',$idTahun, 'idThnAnggaran')->result() as $r) echo $r->TargetNasional; ?></td>
-						<td align="center" width="14%"><?php echo $row->Jumlah; ?></td>
+						<td align="center" width="14%"><?php echo $row->Jumlah=="" ? "0" : $row->Jumlah; ?></td>
 						<?php
 							foreach($this->pm->get_where_double('target_ikk',  $row->KodeIkk, 'KodeIkk',$idTahun, 'idThnAnggaran')->result() as $r)
 							{

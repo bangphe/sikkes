@@ -4,10 +4,24 @@
 <div id="content">
 	<form name="form_tambah_misi" method="POST" id="form_tambah_misi" action="#">
 	<table width="100%" height="100%">
-		<tr>
+		<!-- <tr>
 			<td>Periode</td>
 			<td>
-				<?php echo form_dropdown('periode', $periode); ?>
+				<?php //echo form_dropdown('periode', $periode); ?>
+			</td>
+		</tr> -->
+		<tr>
+			<td>Tahun</td>
+			<td>
+				<select id="tahun" name="tahun">
+        			<option value="0">--- Pilih Tahun ---</option>
+        			<?php
+						  foreach($tahun->result() as $row)
+						  {
+							  echo '<option value="'.$row->idThnAnggaran.'">'.$row->thn_anggaran.'</option>';
+						  }
+					?>
+        		</select>
 			</td>
 		</tr>
 		<tr>

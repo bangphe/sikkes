@@ -424,14 +424,20 @@ class Manajemen_model extends CI_Model {
 		$this->db->from('pengajuan');
 		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
 		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
-		$this->db->join('data_program','pengajuan.KD_PENGAJUAN=data_program.KD_PENGAJUAN');
+		if($this->session->userdata('eselon') == '1') {
+			$this->db->join('data_program','pengajuan.KD_PENGAJUAN=data_program.KD_PENGAJUAN');
+			$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		}
+		elseif($this->session->userdata('eselon') == '2') {
+			$this->db->join('data_kegiatan','pengajuan.KD_PENGAJUAN=data_kegiatan.KD_PENGAJUAN');
+			$this->db->like('data_kegiatan.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		}
 		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
 		//$this->db->where('kdlokasi',$kdlokasi);
 		$this->db->where('STATUS !=', 0);
 		$this->db->where('STATUS !=', 4);
 		$this->db->where('STATUS !=', 5);
 		$this->db->where('STATUS !=', 7);
-		$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
 		$this->db->order_by('TANGGAL_PEMBUATAN', 'desc');
 		$this->CI->flexigrid->build_query();
 		$return['records'] = $this->db->get();
@@ -440,14 +446,20 @@ class Manajemen_model extends CI_Model {
 		$this->db->from('pengajuan');
 		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
 		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
-		$this->db->join('data_program','pengajuan.KD_PENGAJUAN=data_program.KD_PENGAJUAN');
+		if($this->session->userdata('eselon') == '1') {
+			$this->db->join('data_program','pengajuan.KD_PENGAJUAN=data_program.KD_PENGAJUAN');
+			$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		}
+		elseif($this->session->userdata('eselon') == '2') {
+			$this->db->join('data_kegiatan','pengajuan.KD_PENGAJUAN=data_kegiatan.KD_PENGAJUAN');
+			$this->db->like('data_kegiatan.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		}
 		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
 		//$this->db->where('kdlokasi',$kdlokasi);
 		$this->db->where('STATUS !=', 0);
 		$this->db->where('STATUS !=', 4);
 		$this->db->where('STATUS !=', 5);
 		$this->db->where('STATUS !=', 7);
-		$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
 		$this->db->order_by('TANGGAL_PEMBUATAN', 'desc');
 		$this->CI->flexigrid->build_query(FALSE);
 		$return['record_count'] = $this->db->count_all_results();

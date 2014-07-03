@@ -151,7 +151,22 @@ class Master_model extends CI_Model {
 		return $return;
 	}
 	
-	
+	function cek_satker_program_per_satker($kdsatker) {
+		$this->db->select('*');
+		$this->db->from('ref_satker_program');
+		$this->db->where('kdsatker', $kdsatker);
+
+		return $this->db->get();
+	}
+
+	function cek_satker_kegiatan_per_satker($kdsatker) {
+		$this->db->select('*');
+		$this->db->from('ref_satker_kegiatan');
+		$this->db->where('kdsatker', $kdsatker);
+
+		return $this->db->get();
+	}
+
 	function get_allsatker(){
 		$this->db->select('*');
 		$this->db->from('ref_satker');

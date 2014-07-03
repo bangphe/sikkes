@@ -872,4 +872,70 @@ class Pendaftaran_model extends CI_Model {
 		$query['record_count'] = $this->db->count_all_results();
 		return $query;
 	}
+
+	function get_jumlah_ikk($kd_pengajuan) {
+		$this->db->select('i.*');
+		$this->db->from('data_kegiatan d');
+		$this->db->join('ref_ikk i', 'i.KodeKegiatan=d.KodeKegiatan');
+		$this->db->where('d.KD_PENGAJUAN',$kd_pengajuan);
+
+		return $this->db->get();
+	}
+
+	function get_ikk_by_kdpengajuan($kd_pengajuan) {
+		$this->db->select('*');
+		$this->db->from('data_ikk');
+		$this->db->where('KD_PENGAJUAN',$kd_pengajuan);
+
+		return $this->db->get();
+	}
+
+	function get_ikk_by_kodeikk($kd_pengajuan, $kd_ikk) {
+		$this->db->select('*');
+		$this->db->from('data_ikk d');
+		$this->db->join('target_ikk t','d.KodeIkk=t.KodeIkk');
+		$this->db->join('ref_tahun_anggaran a','a.idThnAnggaran=t.idThnAnggaran');
+		$this->db->where('d.KD_PENGAJUAN',$kd_pengajuan);
+		$this->db->where('d.KodeIkk',$kd_ikk);
+		$this->db->where('a.thn_anggaran',$this->session->userdata('thn_anggaran'));
+
+		return $this->db->get()->row();
+	}
+
+	function getTargetIkk($kd_pengajuan) {
+		$this->db->select('*');
+		$this->db->from('data_ikk');
+		$this->db->where('KD_PENGAJUAN',$kd_pengajuan);
+
+		return $this->db->get();
+	}
+
+	function get_ikk_by_satker($kd_pengajuan) {
+		$this->db->select('*');
+		$this->db->from('data_ikk d');
+		$this->db->join('ref_ikk t','d.KodeIkk=t.KodeIkk');
+		$this->db->where('d.KD_PENGAJUAN',$kd_pengajuan);
+
+		return $this->db->get();
+	}
+
+	function get_ikk_by_kdpengajuan_ikk($kd_pengajuan, $kd_ikk) {
+		$this->db->select('*');
+		$this->db->from('data_ikk d');
+		$this->db->where('d.KD_PENGAJUAN',$kd_pengajuan);
+		$this->db->where('d.KodeIkk',$kd_ikk);
+
+		return $this->db->get();
+	}
+
+	function get_targetikk_by_kdpengajuan_ikk($kd_pengajuan, $kd_ikk, $thn) {
+		$this->db->select('*');
+		$this->db->from('data_ikk d');
+		$this->db->join('target_ikk i', 'i.KodeIkk=d.KodeIkk');
+		$this->db->where('d.KD_PENGAJUAN',$kd_pengajuan);
+		$this->db->where('d.KodeIkk',$kd_ikk);
+		$this->db->where('i.idThnAnggaran',$thn);
+
+		return $this->db->get();
+	}
 }

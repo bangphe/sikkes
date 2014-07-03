@@ -5,9 +5,9 @@
 	<form name="form_update_misi" method="POST" id="form_update_misi" action="#">
 	<table width="100%" height="100%">
 		<tr>
-				<td>Periode</td>
+				<td>Tahun</td>
 				<td>
-					<?php echo form_dropdown('periode', $periode, $selected_periode); ?>
+					<?php echo form_dropdown('tahun', $tahun, $selected_tahun); ?>
 				</td>
 			</tr>
 		<tr>

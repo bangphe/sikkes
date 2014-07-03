@@ -446,6 +446,7 @@ class Master extends CI_Controller {
 			$option_periode[$row->idPeriode] = $row->periode_awal.'-'.$row->periode_akhir;
 		}
 		$data['periode'] = $option_periode;
+		$data['tahun'] = $this->masmo->get('ref_tahun_anggaran');
 		$data['judul'] = 'Tambah Visi';
 		$this->load->view('e-planning/referensi/tambah_visi',$data);
 	}
@@ -474,7 +475,8 @@ class Master extends CI_Controller {
 		else{
 			$data=array(
 				'kdsatker'=>$this->session->userdata('kdsatker'),
-				'idPeriode'=>$_POST['periode'],
+				'idPeriode'=>1,
+				'idThnAnggaran'=>$_POST['tahun'],
 				'Visi'=>$_POST['Visi']
 			);
 			$this->masmo->save('ref_visi',$data);
@@ -486,13 +488,19 @@ class Master extends CI_Controller {
 		foreach($this->masmo->get('ref_periode')->result() as $row){
 			$option_periode[$row->idPeriode] = $row->periode_awal.'-'.$row->periode_akhir;
 		}
+		$option_tahun;
+		foreach($this->masmo->get('ref_tahun_anggaran')->result() as $row){
+			$option_tahun[$row->idThnAnggaran] = $row->thn_anggaran;
+		}
 		$data['periode'] = $option_periode;
+		$data['tahun'] = $option_tahun;
 		$data['visi']='';
 		$data['idVisi']=$idVisi;
 		$data['selected_periode']='';
 		foreach($this->masmo->get_where('ref_visi','idVisi',$idVisi)->result() as $row){
 			$data['visi']=$row->Visi;
 			$data['selected_periode']=$row->idPeriode;
+			$data['selected_tahun']=$row->idThnAnggaran;
 		}
 		$data['judul']='Update Visi';
 		$data2['content'] = $this->load->view('e-planning/referensi/update_visi',$data);
@@ -501,7 +509,7 @@ class Master extends CI_Controller {
 	function updateVisi_referensi($idVisi){
 		$data=array(
 			'Visi'=>$_POST['Visi'],
-			'idPeriode'=>$_POST['periode']
+			'idThnAnggaran'=>$_POST['tahun'],
 		);
 		$this->masmo->update('ref_visi', $data, 'idVisi', $_POST['idVisi']);
 	}
@@ -517,6 +525,7 @@ class Master extends CI_Controller {
 			$option_periode[$row->idPeriode] = $row->periode_awal.'-'.$row->periode_akhir;
 		}
 		$data['periode'] = $option_periode;
+		$data['tahun'] = $this->masmo->get('ref_tahun_anggaran');
 		$data['judul'] = 'Tambah Misi';
 		$this->load->view('e-planning/referensi/tambah_misi',$data);
 	}
@@ -536,17 +545,18 @@ class Master extends CI_Controller {
 	}
 	
 	function saveMisi_referensi(){
-		if($this->validasi_misi() == FALSE){
-			redirect('');
-		}
-		else{
+		// if($this->validasi_misi() == FALSE){
+		// 	redirect('');
+		// }
+		//else{
 			$data=array(
 				'kdsatker'=>$this->session->userdata('kdsatker'),
-				'idPeriode'=>$_POST['periode'],
+				'idPeriode'=>1,
+				'idThnAnggaran'=>$_POST['tahun'],
 				'Misi'=>$_POST['Misi'],
 			);
 			$this->masmo->save('ref_misi',$data);
-		}
+		//}
 	}
 	
 	function loadUpdateMisi_referensi($idMisi){
@@ -554,13 +564,19 @@ class Master extends CI_Controller {
 		foreach($this->masmo->get('ref_periode')->result() as $row){
 			$option_periode[$row->idPeriode] = $row->periode_awal.'-'.$row->periode_akhir;
 		}
+		$option_tahun;
+		foreach($this->masmo->get('ref_tahun_anggaran')->result() as $row){
+			$option_tahun[$row->idThnAnggaran] = $row->thn_anggaran;
+		}
 		$data['periode'] = $option_periode;
+		$data['tahun'] = $option_tahun;
 		$data['misi']='';
 		$data['idMisi']=$idMisi;
 		$data['selected_periode'] = '';
 		foreach($this->masmo->get_where('ref_misi','idMisi',$idMisi)->result() as $row){
 			$data['misi']=$row->Misi;
 			$data['selected_periode'] = $row->idPeriode;
+			$data['selected_tahun']=$row->idThnAnggaran;
 		}
 		$data['judul']='Update Misi';
 		$data2['content'] = $this->load->view('e-planning/referensi/update_misi',$data);
@@ -569,7 +585,7 @@ class Master extends CI_Controller {
 	function updateMisi_referensi(){
 		$data=array(
 			'Misi'=>$_POST['Misi'],
-			'idPeriode'=>$_POST['periode']
+			'idThnAnggaran'=>$_POST['tahun']
 		);
 		$this->masmo->update('ref_misi', $data, 'idMisi', $_POST['idMisi']);
 	}
@@ -654,6 +670,7 @@ class Master extends CI_Controller {
 		$colModel['nmsatker'] = array('Satker',400,TRUE,'left',1);
 		$colModel['NamaProvinsi'] = array('Provinsi',150,TRUE,'left',1);
 		$colModel['NamaKabupaten'] = array('Kabupaten',150,TRUE,'left',1);
+		$colModel['status'] = array('Status',100,TRUE,'center',1);
 		$colModel['edit'] = array('Edit',100,TRUE,'center',1);
 			
 		//setting konfigurasi pada bottom tool bar flexigrid
@@ -700,13 +717,25 @@ class Master extends CI_Controller {
 		$no = 0;
 		foreach ($records['records']->result() as $row){
 			$no = $no+1;
-			$record_items[] = array(
+			
+			//cek program per satker
+			$cek_program = $this->masmo->cek_satker_program_per_satker($row->kdsatker);
+			$cek_kegiatan = $this->masmo->cek_satker_kegiatan_per_satker($row->kdsatker);
+			if ($cek_program->num_rows() > 0) {
+				$status = '<img border=\'0\' src=\''.base_url().'images/flexigrid/setujui.png\'>';
+			}
+			else {
+				$status = '<img border=\'0\' src=\''.base_url().'images/flexigrid/tolak.png\'>';
+			}
+
+			$record_items[] = array(			
 				$row->kdsatker,
 				$no,
 				$row->kdsatker,
 				$row->nmsatker,
 				$row->NamaProvinsi,
 				$row->NamaKabupaten,
+				$status,
 				'<a href='.site_url().'/e-planning/master/kemampuan_satker/'.$row->kdsatker.'><img border=\'0\' src=\''.base_url().'images/flexigrid/edit.png\'></a>'
 			);
 		}

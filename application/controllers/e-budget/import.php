@@ -251,18 +251,18 @@ class import extends CI_Controller {
                     $this->mm->delete_table($thang);
                 }
                 
-                // $this->mm->import_d_soutput($target_path);
-                // $this->mm->import_d_kmpnen($target_path);
-                // $this->mm->import_d_skmpnen($target_path);
-                // $this->mm->import_d_item($target_path, $maxid);
+                $this->mm->import_d_soutput($target_path);
+                $this->mm->import_d_kmpnen($target_path);
+                $this->mm->import_d_skmpnen($target_path);
+                $this->mm->import_d_item($target_path, $maxid);
 
-                // $this->mm->import_t_unit($target_path);
-                // $this->mm->import_t_program($target_path);
+                $this->mm->import_t_unit($target_path);
+                $this->mm->import_t_program($target_path);
                 $this->mm->import_t_giat($target_path);
-                // $this->mm->import_t_output($target_path);
-                // $this->mm->import_t_akun($target_path);
-                // $this->mm->import_t_satker($target_path);
-                // $this->mm->import_t_lokasi($target_path);
+                $this->mm->import_t_output($target_path);
+                $this->mm->import_t_akun($target_path);
+                $this->mm->import_t_satker($target_path);
+                $this->mm->import_t_lokasi($target_path);
             }  
             $this->delete_dir($target_path);
             $data2['result'] = "Import berhasil";

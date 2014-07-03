@@ -16,5 +16,5 @@ class Status_model {
 	5 - sudah ditolak di kementerian
 	6 - dipertimbangkan (nantinya bisa di setujui atau ditolak kalo ndak salah)
 	7 - kalo ndak salah tidak diverifikasi di tingkat verifikator.. ditolak verifikator
-
+	8 - di direktorat
 }

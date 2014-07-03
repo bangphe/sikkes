@@ -842,7 +842,7 @@ class Pendaftaran extends CI_Controller {
 		$data2['fungsi']=$this->pm->get_where('ref_fungsi','1','KodeStatus');
 		
 		// if($this->pm->cek1('ref_satker_program','kdsatker',$kdsatker))
-			$data2['program']=$this->pm->get_program_satker();
+		$data2['program']=$this->pm->get_program_satker();
 		// else $data2['program']=$this->pm->get_where_double('ref_program','1','KodeStatus','024','KodeKementerian');
 		// }
 		$data2['tgl']=date('d-m-Y');

@@ -7,7 +7,7 @@
 			<tr>
 				<td>Periode</td>
 				<td>
-					<?php echo form_dropdown('periode', $periode, $selected_periode); ?>
+					<?php echo form_dropdown('tahun', $tahun, $selected_tahun); ?>
 				</td>
 			</tr>
 			<tr>

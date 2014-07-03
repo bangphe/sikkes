@@ -1,3 +1,19 @@
+<style type="text/css">
+	table.myTable { width:65%; border-collapse:collapse;  }
+	table.myTable .tes { 
+		background-color: #dfe4ea; color:#000;
+		font-family: Arial,Helvetica,sans-serif;
+		font-size: 12px; font-weight:bold;}
+	table.myTable td { padding:10px 15px 10px 15px;}
+
+	table.myTable tr:nth-child(even) { /*(even) or (2n+0)*/
+		background: #fff;
+	}
+	table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
+		background-color: #f2f5f9;
+	}
+</style>
+
 <div id="tengah">
 <div id="judul" class="title">
 	Update Proposal
@@ -13,8 +29,9 @@
 		<tr>
 			<td width="15%" style="padding-left:10px;vertical-align:top;">Sumber Dana</td>
 			<td width="85%">
-				<?php 
-					echo form_dropdown('rencana_anggaran',$rencana_anggaran,$selected_rencana_anggaran);
+				<?php
+					$js = 'id="rencana_anggaran" style="width:30%; padding:3px;"'; 
+					echo form_dropdown('rencana_anggaran',$rencana_anggaran,$selected_rencana_anggaran,$js);
 				?>
 			</td>
 		</tr>
@@ -24,7 +41,7 @@
 			<td width="15%" height="21" style="padding-left:10px;vertical-align:top;">Nama Satker</td> 
 			<td width="85%">
 				<?php
-					$js = 'id="satker" onChange="get_data(this)" disabled="disabled"'; 
+					$js = 'id="satker" onChange="get_data(this)" disabled="disabled" style="width:50%; padding:3px;"'; 
 					echo form_dropdown('satker', $satker, $selected_worker, $js) 
 				?>
 				<?php echo form_error('satker'); ?>
@@ -34,13 +51,13 @@
 		</tr>
 		<tr>
 			<td height="24" style="padding-left:10px;vertical-align:top;">Propinsi</td>
-			<td><input name="provinsi" id="provinsi"  disabled="disabled" value="<?php echo $provinsi; ?>" /></td>
+			<td><input name="provinsi" id="provinsi"  disabled="disabled" style="padding:3px;" value="<?php echo $provinsi; ?>" /></td>
 		</tr>
 		<tr>
-			<td height="33" style="padding-left:10px;vertical-align:top;">Jenis Satker</td>
+			<td height="33" style="padding-left:10px;vertical-align:top;">Jenis Kewenangan</td>
 			<td>
 				<?php 
-					$disabled = 'id="jenis_satker" disabled="disabled"';
+					$disabled = 'id="jenis_satker" disabled="disabled" style="width:16%; padding:3px;"';
 					echo form_dropdown('jenis_satker', $jenis_satker,$KodeJenisSatker,$disabled);
 				?>
 			</td>
@@ -51,30 +68,30 @@
 		<tr>
 			<td width="15%"  style="padding-left:10px;vertical-align:top;">Judul Proposal</td>
 			<td width="85%">
-				<textarea name="judul_proposal" cols="72" id="judul_proposal"><?php echo $judul; ?></textarea>
+				<textarea name="judul_proposal" cols="60" rows="4" id="judul_proposal"><?php echo $judul; ?></textarea>
 				<?php echo form_error('judul_proposal'); ?>
 			</td>
 		</tr>
 		<tr>
 			<td width="15%" height="37" style="padding-left:10px;vertical-align:top;">Nomor Surat Pengantar</td>
 			<td width="85%">
-				<input type="text" id="nomor_proposal" name="nomor_proposal" value="<?php echo $nomor;?>"/></td>
+				<input type="text" id="nomor_proposal" name="nomor_proposal" value="<?php echo $nomor;?>" style="padding:3px;"/></td>
 		</tr>
 		<tr>
 			<td style="padding-left:10px;vertical-align:top;">Tanggal Surat</td>
 			<td><p>
-			  <input name="tanggal_pembuatan" id="tanggal_pembuatan" type="text"  value="<?php echo $tanggal_pembuatan;?>"/> (hh-bb-tttt)
+			  <input name="tanggal_pembuatan" id="tanggal_pembuatan" type="text"  value="<?php echo $tanggal_pembuatan;?>" style="padding:3px;"/> (hh-bb-tttt)
 			</p></td>
         </tr>
 		  <tr>
 			<td width="15%" height="37" style="padding-left:10px;vertical-align:top;">Perihal Surat</td>
-			<td width="85%"><textarea id="perihal" name="perihal" rows="3" cols="72"><?php echo $perihal;?></textarea></td>
+			<td width="85%"><textarea id="perihal" name="perihal" cols="60" rows="4"><?php echo $perihal;?></textarea></td>
 		  </tr>
     
 		<tr>
 		<tr>
 			<td style="padding-left:10px;vertical-align:top;">Th. Anggaran</td>
-			<td><input name="thn_anggaran" id="thn_anggaran" value="<?php echo $thn_anggaran; ?>" readonly="TRUE" /></td>
+			<td><input name="thn_anggaran" id="thn_anggaran" value="<?php echo $thn_anggaran; ?>" readonly="TRUE" style="padding:3px;"/></td>
 		</tr>
 		<?php /*<tr>
 			<td style="padding-left:10px;vertical-align:top;">Triwulan</td>
@@ -121,13 +138,13 @@
       <tr>
         <td width="15%" height="24"style="padding-left:10px;vertical-align:top;">Tanggal Mulai </td>
         <td><p>
-          <input name="tanggal_mulai" id="tanggal_mulai" type="text" value="<?php echo $tanggal_mulai;?>"/> (hh-bb-tttt)
+          <input name="tanggal_mulai" id="tanggal_mulai" type="text" style="padding:3px;" value="<?php echo $tanggal_mulai;?>"/> (hh-bb-tttt)
         </p></td>
         </tr>
       <tr>
         <td style="padding-left:10px;vertical-align:top;">Tanggal Selesai </td>
         <td><p>
-          <input name="tanggal_selesai" id="tanggal_selesai" type="text" value="<?php echo $tanggal_selesai;?>"/> (hh-bb-tttt)
+          <input name="tanggal_selesai" id="tanggal_selesai" type="text" style="padding:3px;" value="<?php echo $tanggal_selesai;?>"/> (hh-bb-tttt)
         </p></td>
         </tr>
 	</table>
@@ -183,22 +200,187 @@
 			<td></td>
 			<td></td>
 		</tr>
-		<?php } else { ?>
+		<?php } elseif ($this->session->userdata('kd_role') == Role_model::PENGUSUL || $this->session->userdata('kd_role') == Role_model::ADMIN_PLANNING || $this->session->userdata('kd_role') == Role_model::ADMIN) { ?>
 		<tr>
+			<td width="15%" style="vertical-align:top;">File Lampiran</td>
+			<td><table class="myTable">
+				<tr>
+					<td class="tes"></td>
+					<td class="tes">Lampiran</td>
+					<td class="tes">Download</td>
+					<td class="tes">Hapus</td>
+				</tr>	
+				<tr>
+					<td width="15%" style="padding-left:10px;vertical-align:top;">Proposal</td>
+					<td style="vertical-align:top;">
+						<input id="file1" name="file1" class="element file" type="file"/>
+						<p style="color:red">File maksimum 10MB</p>
+					</td>
+					<td style="vertical-align:top;">
+						<?php if($proposal != '-') { ?>
+						<div class="buttons">
+						    <a href="<?php echo base_url().'file/'.$proposal; ?>" class="negative">
+								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+								Download
+							</a>
+						</div>
+						<?php } else { ?>
+						Tidak ada lampiran file
+						<?php } ?>
+					</td>
+					<td style="vertical-align:top;">
+						<?php if($proposal != '-') { ?>
+						<div class="buttons">
+						    <a href="<?php echo site_url().'/e-planning/manajemen/delete_file_proposal/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
+								<img src="<?php echo base_url(); ?>images/flexigrid/tolak.png" alt=""/>
+								Hapus
+							</a>
+						</div>
+						<?php } else { ?>
+						Tidak ada lampiran file
+						<?php } ?>
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" style="padding-left:10px;vertical-align:top;">TOR</td>
+					<td style="vertical-align:top;">
+						<input id="file2" name="file2" class="element file" type="file"/>
+						<p style="color:red">File maksimum 10MB</p>
+					</td>
+					<td style="vertical-align:top;">
+						<?php if($tor != '-') { ?>
+						<div class="buttons">
+						    <a href="<?php echo base_url().'file/'.$tor; ?>" class="negative">
+								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+								Download
+							</a>
+						</div>
+						<?php } else { ?>
+						Tidak ada lampiran file
+						<?php } ?>
+					</td>
+					<td style="vertical-align:top;">
+						<?php if($tor != '-') { ?>
+						<div class="buttons">
+						    <a href="<?php echo site_url().'/e-planning/manajemen/delete_file_tor/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
+								<img src="<?php echo base_url(); ?>images/flexigrid/tolak.png" alt=""/>
+								Hapus
+							</a>
+						</div>
+						<?php } else { ?>
+						Tidak ada lampiran file
+						<?php } ?>
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" style="padding-left:10px;vertical-align:top;">Data Pendukung</td>
+					<td style="vertical-align:top;">
+						<input id="file3" name="file3" class="element file" type="file"/>
+						<p style="color:red">File maksimum 10MB</p>
+					</td>
+					<td style="vertical-align:top;">
+						<?php if($data_pendukung_lainnya != '-') { ?>
+						<div class="buttons">
+						    <a href="<?php echo base_url().'file/'.$data_pendukung_lainnya; ?>" class="negative">
+								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+								Download
+							</a>
+						</div>
+						<?php } else { ?>
+						Tidak ada lampiran file
+						<?php } ?>
+					</td>
+					<td style="vertical-align:top;">
+						<?php if($data_pendukung_lainnya != '-') { ?>
+						<div class="buttons">
+						    <a href="<?php echo site_url().'/e-planning/manajemen/delete_file_pendukung/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
+								<img src="<?php echo base_url(); ?>images/flexigrid/tolak.png" alt=""/>
+								Hapus
+							</a>
+						</div>
+						<?php } else { ?>
+						Tidak ada lampiran file
+						<?php } ?>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		<!-- <tr>
 			<td width="15%" style="padding-left:10px;vertical-align:top;">Proposal</td>
-			<td><input id="file1" name="file1" class="element file" type="file"/> <?php if($proposal != '-'){ echo'<a href="'.base_url().'file/'.$proposal.'">'.$proposal.'</a>'; } ?></td>
+			<td><input id="file1" name="file1" class="element file" type="file"/> <?php //if($proposal != '-'){ echo'<a href="'.base_url().'file/'.$proposal.'">'.$proposal.'</a>'; } ?></td>
 		</tr>
 		<tr>
 			<td style="padding-left:10px;vertical-align:top;">TOR</td>
-			<td><input id="file2" name="file2" class="element file" type="file"/> <?php if($tor != '-'){ echo'<a href="'.base_url().'file/'.$tor.'">'.$tor.'</a>'; } ?></td>
+			<td><input id="file2" name="file2" class="element file" type="file"/> <?php //if($tor != '-'){ echo'<a href="'.base_url().'file/'.$tor.'">'.$tor.'</a>'; } ?></td>
 		</tr>
 		<tr>
 			<td style="padding-left:10px;vertical-align:top;">Data Pendukung Lainnya</td>
-			<td><input id="file3" name="file3" class="element file" type="file"/> <?php if($data_pendukung_lainnya != '-'){ echo'<a href="'.base_url().'file/'.$data_pendukung_lainnya.'">'.$data_pendukung_lainnya.'</a>'; } ?></td>
+			<td><input id="file3" name="file3" class="element file" type="file"/> <?php //if($data_pendukung_lainnya != '-'){ echo'<a href="'.base_url().'file/'.$data_pendukung_lainnya.'">'.$data_pendukung_lainnya.'</a>'; } ?></td>
 		</tr>
 		<tr>
 			<td></td>
 			<td></td>
+		</tr> -->
+		<?php } else {?>
+			<tr>
+			<td width="15%" style="vertical-align:top;">File Lampiran</td>
+			<td><table class="myTable">
+				<tr>
+					<td class="tes"></td>
+					<td class="tes">Lampiran</td>
+					<td class="tes">Download</td>
+				</tr>	
+				<tr>
+					<td width="15%" style="padding-left:10px;vertical-align:top;">Proposal</td>
+					<td style="vertical-align:top;"><input id="file1" name="file1" class="element file" type="file"/></td>
+					<td style="vertical-align:top;">
+						<?php if($proposal != '-') { ?>
+						<div class="buttons">
+						    <a href="<?php echo base_url().'file/'.$proposal; ?>" class="negative">
+								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+								Download
+							</a>
+						</div>
+						<?php } else { ?>
+						Tidak ada lampiran file
+						<?php } ?>
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" style="padding-left:10px;vertical-align:top;">TOR</td>
+					<td style="vertical-align:top;"><input id="file2" name="file2" class="element file" type="file"/></td>
+					<td style="vertical-align:top;">
+						<?php if($tor != '-') { ?>
+						<div class="buttons">
+						    <a href="<?php echo base_url().'file/'.$tor; ?>" class="negative">
+								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+								Download
+							</a>
+						</div>
+						<?php } else { ?>
+						Tidak ada lampiran file
+						<?php } ?>
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" style="padding-left:10px;vertical-align:top;">Data Pendukung</td>
+					<td style="vertical-align:top;"><input id="file3" name="file3" class="element file" type="file"/></td>
+					<td style="vertical-align:top;">
+						<?php if($data_pendukung_lainnya != '-') { ?>
+						<div class="buttons">
+						    <a href="<?php echo base_url().'file/'.$data_pendukung_lainnya; ?>" class="negative">
+								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+								Download
+							</a>
+						</div>
+						<?php } else { ?>
+						Tidak ada lampiran file
+						<?php } ?>
+					</td>
+				</tr>
+				</table>
+			</td>
 		</tr>
 		<?php } ?>
 		</table>
@@ -210,7 +392,7 @@
           <td width="15%" height="23"  style="padding-left:10px;vertical-align:top;">Fungsi</td>
           <td width="85%">
 				<?php
-					$js = ' id="fungsi" onchange="get_sub(this.value);"'; 
+					$js = 'id="fungsi" onchange="get_sub(this.value);" style="width:75%; padding:3px;"'; 
 					echo form_dropdown('fungsi', $fungsi, $selected_fungsi, $js) ;
 				?>
 				<?php echo form_error('fungsi'); ?>
@@ -226,7 +408,7 @@
 		<tr >
 			<td width="15%" style="padding-left:10px;vertical-align:top;">Sub Fungsi</td>
 			<td width="85%">
-				<select id="subfungsi" name="subfungsi">
+				<select id="subfungsi" name="subfungsi" style="width:75%; padding:3px;">
 					<option value="0">--- Pilih Sub Fungsi ---</option>
 			        <?php
 					  foreach($sub_fungsi->result() as $row)
@@ -246,10 +428,10 @@
 	<table width="100%" height="3%">
 	  <div>
         <tr>
-          <td width="15%"  style="padding-left:10px;vertical-align:top;">Program</td>
+          <td width="15%" style="padding-left:10px;vertical-align:top;">Program</td>
           <td><label>
 				<?php
-					$pr = '  id="program" name="program" onchange="get_keg(this.value);  get_outcome(this.value), get_iku(this.value) "'; 
+					$pr = 'id="program" name="program" onchange="get_keg(this.value);  get_outcome(this.value), get_iku(this.value)" style="width:75%; padding:3px;"'; 
 					echo form_dropdown('program', $program, $selected_program, $pr) ;
 				?>
 				<?php echo form_error('program'); ?>
@@ -296,7 +478,7 @@
        
 		<tr>
           <td width="15%" height="21"  style="padding-left:10px;vertical-align:top;">Kegiatan</td>
-          <td><label><select id="kegiatan_" name="kegiatan_" onchange="get_output(this.value); get_ikk(this.value)">
+          <td><label><select id="kegiatan_" name="kegiatan_" onchange="get_output(this.value); get_ikk(this.value)" style="width:75%; padding:3px;">
             				<option value="0">--- Pilih Kegiatan ---</option>
                             <?php
 							  foreach($kegiatan->result() as $row)
@@ -333,7 +515,7 @@
 			<tr><td></td><td></td><td  align="center"><b>Target Nasional</b></td><td  align="center"><b>Jumlah</b></td></tr>
 				<?php if(isset($ikk)){ foreach($ikk as $row) { ?>
 				<tr>
-				<td>	<input style="width:20px;" id="<?php echo "ikk".$row->KodeIkk; ?>" name="ikk_[]" type="checkbox" value="<?php echo $row->KodeIkk; ?>"  <?php if($this->pm->cek('data_ikk', 'KodeIkk', $row->KodeIkk, 'KD_PENGAJUAN', $kd_pengajuan)) echo "checked=\"true\""; ?>/> </td>
+				<td><input style="width:20px;" id="<?php echo "ikk".$row->KodeIkk; ?>" name="ikk_[]" type="checkbox" value="<?php echo $row->KodeIkk; ?>"  <?php if($this->pm->cek('data_ikk', 'KodeIkk', $row->KodeIkk, 'KD_PENGAJUAN', $kd_pengajuan)) echo "checked=\"true\""; ?>/> </td>
 				<td width="85%"><?php echo '['.$row->KodeIkk.'] '.$row->Ikk; ?></td>
 				<td width="14%"><input type="text" style="text-align:center;vertical-align:top;" id="<?php echo "nasional_ikk".$row->KodeIkk; ?>" name="<?php echo "nasional_ikk".$row->KodeIkk; ?>" <?php  foreach($this->pm->get_where_double('target_ikk',  $row->KodeIkk, 'KodeIkk', $idTahun, 'idThnAnggaran')->result() as $r) echo 'value="'.$r->TargetNasional.'"'; ?>  disabled="disabled"/></td>
 				<td width="14%"><input type="text" style="text-align:center;vertical-align:top;" id="<?php echo "target_ikk_".$row->KodeIkk; ?>" onblur="if(this.value=='') this.value='0';" onfocus="if(this.value=='0') this.value='';"  name="<?php echo "target_ikk_".$row->KodeIkk; ?>" <?php if($this->pm->cek('data_ikk', 'KodeIkk', $row->KodeIkk, 'KD_PENGAJUAN', $kd_pengajuan)){ foreach($this->mm->get_where2('data_ikk','KodeIkk',$row->KodeIkk,'KD_PENGAJUAN',$kd_pengajuan)->result() as $r) echo  "value=\"".$r->Jumlah."\"";} else echo "value=\"0\""; ?>  /></td>

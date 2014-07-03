@@ -68,7 +68,7 @@ class Telaah extends CI_Controller {
 		// $grid_js = build_grid_js('user',$url,$colModel,'ID','asc',$gridParams,$buttons);
 		$grid_js = build_grid_js('user',$url,$colModel,'ID','asc',$gridParams);
 		$data['js_grid'] = $grid_js;
-		if($this->session->userdata('kd_role') == Role_model::DIREKTORAT) {
+		if($this->session->userdata('kd_role') == Role_model::DIREKTORAT || $this->session->userdata('kd_role') == Role_model::VERIFIKATOR) {
 			$data['added_php'] = 
 				"<div class=\"buttons\">
 					<form action=\"".base_url()."index.php/e-planning/manajemen/grid_pengajuan\" method=\"POST\">
@@ -133,6 +133,7 @@ class Telaah extends CI_Controller {
 			elseif($row->STATUS == '7') {$status = 'Telah ditelaah Kabiro'; $posisi = 'Proses Penelaahan Selesai';}
 			elseif($row->STATUS == '8') {$status = 'Telah ditelaah Administrator'; $posisi = 'Proses Penelaahan Selesai';}
 			elseif($row->STATUS == '9') {$status = 'Telah ditelaah Direktorat'; $posisi = 'Proses Penelaahan Selesai';}
+			elseif($row->STATUS == '10') {$status = 'Telah ditelaah Verifikator'; $posisi = 'Proses Penelaahan Selesai';}
 			else {$status = 'Draft'; $posisi = 'Staf';}
 			
 			$kirimsetuju = '';
@@ -156,9 +157,18 @@ class Telaah extends CI_Controller {
 					$koreksi = '<a href="#"><img border=\'0\' src=\''.base_url().'images/flexigrid/edit_mono.png\'></a>';;
 				}
 			}
+			elseif($this->session->userdata('kd_role') == Role_model::VERIFIKATOR){
+					$kirimsetuju = '<a href="'.site_url().'/e-planning/telaah/setuju_verifikator/'.$kd_pengajuan.'/'.$row->KODE_TELAAH_STAFF.'" onclick="return confirm(\'Anda yakin ingin menyetujui ?\')"><img border=\'0\' src=\''.base_url().'images/flexigrid/setujui.png\'></a>';
+					$mintakoreksi = '';
+					$koreksi = '<a href="'.site_url().'/e-planning/telaah/update_telaah_staff/'.$kd_pengajuan.'/'.$row->KODE_TELAAH_STAFF.'"><img border=\'0\' src=\''.base_url().'images/flexigrid/edit.png\'></a>';
+				if($row->STATUS == '10') {
+					$kirimsetuju = '-';
+					$koreksi = '<a href="#"><img border=\'0\' src=\''.base_url().'images/flexigrid/edit_mono.png\'></a>';;
+				}
+			}
 			elseif($this->session->userdata('eselon') == '0'){
 				if($row->STATUS == '0' || $row->STATUS == '2'){
-					$kirimsetuju = '<a href="'.site_url().'/e-planning/telaah/kirim/'.$row->KODE_TELAAH_STAFF.'" onclick="return confirm(\'Anda yakin ingin mengirim telaah ?\')"><img border=\'0\' src=\''.base_url().'images/flexigrid/send.png\'></a>';
+					$kirimsetuju = '<a href="'.site_url().'/e-planning/telaah/kirim/'.$row->KODE_TELAAH_STAFF.'" onclick="return confirm(\'Anda yasdkin ingin mengirim telaah ?\')"><img border=\'0\' src=\''.base_url().'images/flexigrid/send.png\'></a>';
 					$koreksi = '<a href="'.site_url().'/e-planning/telaah/update_telaah_staff/'.$kd_pengajuan.'/'.$row->KODE_TELAAH_STAFF.'"><img border=\'0\' src=\''.base_url().'images/flexigrid/edit.png\'></a>';
 				}
 			}
@@ -501,6 +511,23 @@ class Telaah extends CI_Controller {
 		$data_status = array('STATUS'=> '9');
 		$this->mm->update('data_telaah_staff', $data_status, 'KODE_TELAAH_STAFF', $KODE_TELAAH_STAFF);
 		
+		
+		foreach($this->mm->get_where('users', 'USER_ID', $this->session->userdata('id_user'))->result() as $row)
+				$kode_jabatan = $row->KODE_JABATAN;
+		$data_akses= array(
+			'KODE_TELAAH_STAFF' => $KODE_TELAAH_STAFF,
+			'KD_PENGAJUAN' => $kd_pengajuan,
+			'ID_USER' => $this->session->userdata('id_user'),
+			'JABATAN' => $kode_jabatan,
+			'AKTIVITAS' => 'Menyetujui telaah'
+		);
+		$this->mm->save('pengakses_telaah', $data_akses);
+		redirect('e-planning/telaah/grid_telaah_staff/'.$kd_pengajuan);
+	}
+
+	function setuju_verifikator($kd_pengajuan,$KODE_TELAAH_STAFF){
+		$data_status = array('STATUS'=> '10');
+		$this->mm->update('data_telaah_staff', $data_status, 'KODE_TELAAH_STAFF', $KODE_TELAAH_STAFF);
 		
 		foreach($this->mm->get_where('users', 'USER_ID', $this->session->userdata('id_user'))->result() as $row)
 				$kode_jabatan = $row->KODE_JABATAN;
