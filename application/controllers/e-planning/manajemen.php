@@ -34,14 +34,17 @@ class Manajemen extends CI_Controller {
 		$colModel['JUDUL_PROPOSAL'] = array('Judul Proposal',300,TRUE,'left',1);
 		$colModel['NILAI_PROPOSAL'] = array('Nilai Proposal',150,TRUE,'right',1);
 		$colModel['rencana_anggaran'] = array('Sumber Dana',70,TRUE,'center',1);
-		if($this->session->userdata('kd_role') == Role_model::ADMIN) $colModel['IKK'] = array('Target IKK',75,TRUE,'center',0);
+		if($this->session->userdata('kd_role') == Role_model::ADMIN) {
+			$colModel['IKK'] = array('Target IKK',75,TRUE,'center',0);
+			$colModel['IKU'] = array('Target IKU',75,TRUE,'center',0);
+		}
 		$colModel['DETAIL'] = array('Detail',30,TRUE,'center',0);
 		
 		if($this->session->userdata('kd_role') != Role_model::PENYETUJU && $this->session->userdata('kd_role') != Role_model::PENELAAH && $this->session->userdata('kd_role') != Role_model::VERIFIKATOR && $this->session->userdata('kd_role') != Role_model::DIREKTORAT){
-		$colModel['KOREKSI'] = array('Koreksi',40,TRUE,'center',0);
-		$colModel['HAPUS'] = array('Hapus',25,TRUE,'center',0);
-		$colModel['AKTIVITAS'] = array('RAB',25,TRUE,'center',0);
-		$colModel['FPRK'] = array('Fokus Prioritas & Reformasi Kesehatan',125,TRUE,'center',0);
+			$colModel['KOREKSI'] = array('Koreksi',40,TRUE,'center',0);
+			$colModel['HAPUS'] = array('Hapus',25,TRUE,'center',0);
+			$colModel['AKTIVITAS'] = array('RAB',25,TRUE,'center',0);
+			$colModel['FPRK'] = array('Fokus Prioritas & Reformasi Kesehatan',125,TRUE,'center',0);
 		}
 		//$colModel['TELAAH_STAFF'] = array('Telaah Staff',50,TRUE,'center',0);
 		if($this->session->userdata('kd_role') == Role_model::PENGUSUL){
@@ -59,7 +62,10 @@ class Manajemen extends CI_Controller {
 			$colModel['TELAAH_STAFF'] = array('Telaah Staf',200,TRUE,'center',0);
 			$colModel['REKOMENDASI'] = array('Rekomendasi',100,TRUE,'center',0);
 			$colModel['STATUS'] = array('Status',200,TRUE,'center',1);
-		}else if($this->session->userdata('kd_role') == Role_model::ADMIN || $this->session->userdata('kd_role') == Role_model::PENYETUJU || $this->session->userdata('kd_role') == Role_model::PENELAAH || $this->session->userdata('kd_role') == Role_model::ADMIN_PLANNING){
+		}else if($this->session->userdata('kd_role') == Role_model::ADMIN_PLANNING){
+			$colModel['TELAAH_STAFF'] = array('Telaah Staf',200,TRUE,'center',0);
+			$colModel['STATUS'] = array('Status',200,TRUE,'center',1);
+		}else if($this->session->userdata('kd_role') == Role_model::ADMIN || $this->session->userdata('kd_role') == Role_model::PENYETUJU || $this->session->userdata('kd_role') == Role_model::PENELAAH){
 			$colModel['STATUS'] = array('Status',200,TRUE,'center',1);
 		}else {
 			$colModel['STATUS'] = array('Status',200,TRUE,'center',1);
@@ -607,7 +613,115 @@ class Manajemen extends CI_Controller {
 				$this->output->set_output('{"page":"1","total":"0","rows":[]}');
 		} //END
 
-		elseif($this->session->userdata('kd_role') == Role_model::ADMIN || $this->session->userdata('kd_role') == Role_model::ADMIN_PLANNING){
+		elseif($this->session->userdata('kd_role') == Role_model::ADMIN_PLANNING){
+			foreach ($records4['records']->result() as $row){
+				$telaah='-'; $stat_telaah='';
+				$Biaya=0;
+				if($row->STATUS==0 && $row->NO_REG_SATKER == $this->session->userdata('kdsatker')){
+					if($this->mm->cek('aktivitas','KD_PENGAJUAN',$row->KD_PENGAJUAN) && $this->mm->cek('data_telaah_staff','KD_PENGAJUAN',$row->KD_PENGAJUAN) && $this->mm->get_where('data_telaah_staff','KD_PENGAJUAN',$row->KD_PENGAJUAN)->row()->STATUS >= 7) 
+						{$persetujuan = '<a href='.site_url().'/e-planning/manajemen/kirim_pengajuan_roren/'.$row->KD_PENGAJUAN.' onclick="return confirm(\'Anda yakin ingin mengirim ?\')"><img border=\'0\' src=\''.base_url().'images/flexigrid/send.png\'></a>';}
+					else {$persetujuan='<a href="#" onclick="alert(\'Anda harus mengisi RAB & melakukan Telaah terlebih dahulu\')"><img border=\'0\' src=\''.base_url().'images/flexigrid/send.png\'></a>';}
+
+					if($this->pm->cek1('data_telaah_staff','KD_PENGAJUAN',$row->KD_PENGAJUAN)) 	{
+						foreach($this->mm->get_where('data_telaah_staff', 'KD_PENGAJUAN', $row->KD_PENGAJUAN)->result() as $rw){
+							if($rw->STATUS == '1') {$stat_telaah = 'Sudah ditelaah Staf';}
+							elseif($rw->STATUS == '2') {$stat_telaah = 'Belum ditelaah';}
+							elseif($rw->STATUS == '3') {$stat_telaah = 'Sudah ditelaah Kasubag';}
+							elseif($rw->STATUS == '4') {$stat_telaah = 'Sudah ditelaah Staf';}
+							elseif($rw->STATUS == '5') {$stat_telaah = 'Sudah ditelaah Kabag';}
+							elseif($rw->STATUS == '6') {$stat_telaah = 'Sudah ditelaah Kasubag';}
+							elseif($rw->STATUS == '7') {$stat_telaah = 'Sudah ditelaah Karoren';}
+							elseif($rw->STATUS == '8') {$stat_telaah = 'Sudah ditelaah Admin';}
+							elseif($rw->STATUS == '9') {$stat_telaah = 'Sudah ditelaah Direktorat';}
+							elseif($rw->STATUS == '10') {$stat_telaah = 'Sudah ditelaah Verifikator';}
+							else $stat_telaah = 'Belum ditelaah';
+						}
+						$telaah = $stat_telaah.'</br><a href="'.site_url().'/e-planning/telaah/grid_telaah_staff/'.$row->KD_PENGAJUAN.'"><img border=\'0\' src=\''.base_url().'images/flexigrid/magnifier.png\' title="Lihat Telaah Proposal"></a>';
+					}
+					else{
+						$telaah = 'Belum ditelaah</br><a href="'.site_url().'/e-planning/telaah/telaah_staff/'.$row->KD_PENGAJUAN.'"><img border=\'0\' src=\''.base_url().'images/flexigrid/magnifier.png\' title="Buat Telaah Proposal"></a>';
+					}
+				}
+				elseif($row->STATUS==6) $persetujuan='Sedang Dipertimbangkan';
+				elseif($row->STATUS==1) $persetujuan='Proses di Tingkat Provinsi';
+				elseif($row->STATUS==2) $persetujuan='Proses di Tingkat Unit Utama';
+				elseif($row->STATUS==3) $persetujuan='Proses di Roren';
+				elseif($row->STATUS==0) $persetujuan='Proses di Satker';
+				elseif($row->STATUS==8) $persetujuan='Proses di Tingkat Direktorat / Pusat / Biro';
+				else {
+					$telaah = '-';
+				}
+				
+				$fungsi;
+				foreach($this->mm->get_where('data_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $rw){
+					$fungsi= $rw->KodeFungsi;}
+				
+				$subfungsi;
+				foreach($this->mm->get_where('data_sub_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $rw){
+					$subfungsi= $rw->KodeSubFungsi;}
+				
+				$program;
+				foreach($this->mm->get_where('data_program','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $rw){
+					$program= $rw->KodeProgram;}
+				
+				$kegiatan = '';
+				foreach($this->mm->get_where('data_kegiatan','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $rw){
+					$kegiatan= $rw->KodeKegiatan;}
+					
+				$aktivitas = '<a href='.site_url().'/e-planning/aktivitas/grid_aktivitas/'.$row->KD_PENGAJUAN.'/'.$fungsi.'/'.$subfungsi.'/'.$program.'/'.$kegiatan.'><img border=\'0\' src=\''.base_url().'images/flexigrid/magnifier.png\'></a>';
+				if($this->mm->cek('data_fokus_prioritas','KD_PENGAJUAN', $row->KD_PENGAJUAN) == FALSE || $this->mm->cek('data_reformasi_kesehatan','KD_PENGAJUAN', $row->KD_PENGAJUAN) == FALSE)
+					$aktivitas = '<a href="#"  onclick="alert(\'Anda harus memilih paling sedikit 1 (satu) fokus prioritas dan 1 (satu) reformasi kesehatan. Silakan mengoreksi proposal Anda.\')"><img border=\'0\' src=\''.base_url().'images/flexigrid/magnifier.png\'></a>';
+				$tanggal_pembuatan = $row->TANGGAL_PEMBUATAN;
+
+				$no = $no+1;
+				if($row->STATUS == 0){
+					$record_items4[] = array(
+						$no,
+						$no,
+						$row->KD_PENGAJUAN,
+						$tanggal_pembuatan,
+						$row->nmsatker,
+						$row->JUDUL_PROPOSAL,
+						'Rp '.number_format($this->mm->sum('aktivitas','Jumlah', 'KD_PENGAJUAN',$row->KD_PENGAJUAN)),
+						$row->rencana_anggaran,
+						'<a href='.site_url().'/e-planning/manajemen/detail_pengajuan/'.$row->KD_PENGAJUAN.'/1><img border=\'0\' src=\''.base_url().'images/flexigrid/detail.png\'></a>',
+						'<a href='.site_url().'/e-planning/manajemen/detail_pengajuan/'.$row->KD_PENGAJUAN.'/2><img border=\'0\' src=\''.base_url().'images/flexigrid/edit.png\'></a>',
+						'<a href='.site_url().'/e-planning/manajemen/delete_pengajuan/'.$row->KD_PENGAJUAN.' onclick="return confirm(\'Anda yakin ingin menghapus ?\')"><img border=\'0\' src=\''.base_url().'images/flexigrid/hapus.png\'></a>',
+						$aktivitas,
+						'<a href='.site_url().'/e-planning/manajemen/biaya_fprk/'.$row->KD_PENGAJUAN.'><img border=\'0\' src=\''.base_url().'images/flexigrid/detail.png\'></a>',
+						$telaah,
+						$persetujuan,
+						'<a href='.base_url().'index.php/e-planning/utility/cetak_rab/'.$row->KD_PENGAJUAN.'><img border=\'0\' src=\''.base_url().'images/main/excel.png\'></a>'
+					);
+				}
+				else{
+				$record_items4[] = array(
+						$no,
+						$no,
+						$row->KD_PENGAJUAN,
+						$tanggal_pembuatan,
+						$row->nmsatker,
+						$row->JUDUL_PROPOSAL,
+						'Rp '.number_format($this->mm->sum('aktivitas','Jumlah', 'KD_PENGAJUAN',$row->KD_PENGAJUAN)),
+						$row->rencana_anggaran,
+						'<a href='.site_url().'/e-planning/manajemen/detail_pengajuan/'.$row->KD_PENGAJUAN.'/1><img border=\'0\' src=\''.base_url().'images/flexigrid/detail.png\'></a>',
+						'<a href='.site_url().'/e-planning/manajemen/detail_pengajuan/'.$row->KD_PENGAJUAN.'/2><img border=\'0\' src=\''.base_url().'images/flexigrid/edit.png\'></a>',
+						'<a href='.site_url().'/e-planning/manajemen/delete_pengajuan/'.$row->KD_PENGAJUAN.' onclick="return confirm(\'Anda yakin ingin menghapus ?\')"><img border=\'0\' src=\''.base_url().'images/flexigrid/hapus.png\'></a>',
+						$aktivitas,
+						'<a href='.site_url().'/e-planning/manajemen/biaya_fprk/'.$row->KD_PENGAJUAN.'><img border=\'0\' src=\''.base_url().'images/flexigrid/detail.png\'></a>',
+						$telaah,
+						$persetujuan,
+						'<a href='.base_url().'index.php/e-planning/utility/cetak_rab/'.$row->KD_PENGAJUAN.'><img border=\'0\' src=\''.base_url().'images/main/excel.png\'></a>'
+					);
+				}
+			}
+			if(isset($record_items4))
+				$this->output->set_output($this->flexigrid->json_build($records4['record_count'],$record_items4));
+			else
+				$this->output->set_output('{"page":"1","total":"0","rows":[]}');
+		}
+
+		elseif($this->session->userdata('kd_role') == Role_model::ADMIN){
 			foreach ($records4['records']->result() as $row){
 				$Biaya=0;
 				if($row->STATUS==0 && $row->NO_REG_SATKER == $this->session->userdata{'kdsatker'})	{
@@ -650,6 +764,7 @@ class Manajemen extends CI_Controller {
 					$aktivitas = '<a href="#"  onclick="alert(\'Anda harus memilih paling sedikit 1 (satu) fokus prioritas dan 1 (satu) reformasi kesehatan. Silakan mengoreksi proposal Anda.\')"><img border=\'0\' src=\''.base_url().'images/flexigrid/magnifier.png\'></a>';
 				$tanggal_pembuatan = $row->TANGGAL_PEMBUATAN;
 
+				//============START TARGET NASIONAL IKK================
 				//ambil ikk yang dipilih
 				$d_ikk = $this->pm->get_ikk_by_kdpengajuan($row->KD_PENGAJUAN);
 				//ambil dari jumlah ikk dari kegiatan yang dipilih
@@ -672,37 +787,72 @@ class Manajemen extends CI_Controller {
 							$ikk=$ikk;
 						}
 					}
-					$tot = round($ikk / $keg * 100,0);
+					$total_ikk = round($ikk / $keg * 100,0);
 					//warning icon IKK
-					if($tot < 50)
+					if($total_ikk < 50)
 					{
 
-						$warning_icon_ikk = '<a href="#" onclick="opendialog('.$row->KD_PENGAJUAN.')"><img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_red.png\'></a>';
+						$warning_icon_ikk = '<a href="#" onclick="ikk('.$row->KD_PENGAJUAN.')"><img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_red.png\'></a>';
 					}
-					else if($tot >= 50 && $tot < 75)
+					else if($total_ikk >= 50 && $total_ikk < 75)
 					{
-						$warning_icon_ikk = '<a href="#" onclick="opendialog('.$row->KD_PENGAJUAN.')"><img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_yellow.png\'></a>';
+						$warning_icon_ikk = '<a href="#" onclick="ikk('.$row->KD_PENGAJUAN.')"><img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_yellow.png\'></a>';
 					}
-					else if($tot >= 75 && $tot <= 100)
+					else if($total_ikk >= 75 && $total_ikk <= 100)
 					{
-						$warning_icon_ikk = '<a href="#" onclick="opendialog('.$row->KD_PENGAJUAN.')"><img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_green.png\'></a>';
+						$warning_icon_ikk = '<a href="#" onclick="ikk('.$row->KD_PENGAJUAN.')"><img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_green.png\'></a>';
 					}
 				}
 
 				else {
-					$tot = 0;
+					$total_ikk = 0;
 				}
-				
-				
-				
-				
+				//============END TARGET NASIONAL IKK================
 
-				$tar='';
-				$t=0;
-				foreach ($this->pm->getTargetIkk($row->KD_PENGAJUAN)->result() as $value) {
-					$tar[$t] = $value->Jumlah;
-					$t++;
+				//============START TARGET NASIONAL IKU================
+				//ambil IKU yang dipilih
+				$d_iku = $this->pm->get_iku_by_kdpengajuan($row->KD_PENGAJUAN);
+				//ambil dari jumlah IKU dari kegiatan yang dipilih
+				$d_prog = $this->pm->get_jumlah_iku($row->KD_PENGAJUAN); 
+
+				if($d_iku->num_rows() > 0 || $d_keg->num_rows() > 0) {
+					$iku = $d_iku->num_rows();
+					$prog = $d_prog->num_rows();
+
+					$target_iku='';
+					$target_nasional='';
+					foreach($d_iku->result() as $data_iku) {
+						$target = $this->pm->get_iku_by_kodeiku($row->KD_PENGAJUAN, $data_iku->KodeIku);
+						$target_nasional = $target->TargetNasional;
+						$target_iku = $target->Jumlah;
+						if($target_iku < $target_nasional) {
+							$iku--;
+						}
+						elseif($target_iku >= $target_nasional) {
+							$iku=$iku;
+						}
+					}
+					$total_iku = round($iku / $prog * 100,0);
+					//warning icon IKU
+					if($total_iku < 50)
+					{
+
+						$warning_icon_iku = '<a href="#" onclick="iku('.$row->KD_PENGAJUAN.')"><img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_red.png\'></a>';
+					}
+					else if($total_iku >= 50 && $total_iku < 75)
+					{
+						$warning_icon_iku = '<a href="#" onclick="iku('.$row->KD_PENGAJUAN.')"><img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_yellow.png\'></a>';
+					}
+					else if($total_iku >= 75 && $total_iku <= 100)
+					{
+						$warning_icon_iku = '<a href="#" onclick="iku('.$row->KD_PENGAJUAN.')"><img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_green.png\'></a>';
+					}
 				}
+
+				else {
+					$total_iku = 0;
+				}
+				//============END TARGET NASIONAL IKU================
 
 				$no = $no+1;
 				if($row->STATUS == 0){
@@ -717,7 +867,8 @@ class Manajemen extends CI_Controller {
 					'Rp '.number_format($this->mm->sum('aktivitas','Jumlah', 'KD_PENGAJUAN',$row->KD_PENGAJUAN)),
 					$row->rencana_anggaran,
 					//$ikk.'/'.$keg,
-					$tot.' % '.$warning_icon_ikk,
+					$total_ikk.' % '.$warning_icon_ikk,
+					$total_iku.' % '.$warning_icon_iku,
 					'<a href='.site_url().'/e-planning/manajemen/detail_pengajuan/'.$row->KD_PENGAJUAN.'/1><img border=\'0\' src=\''.base_url().'images/flexigrid/detail.png\'></a>',
 					'<a href='.site_url().'/e-planning/manajemen/detail_pengajuan/'.$row->KD_PENGAJUAN.'/2><img border=\'0\' src=\''.base_url().'images/flexigrid/edit.png\'></a>',
 					'<a href='.site_url().'/e-planning/manajemen/delete_pengajuan/'.$row->KD_PENGAJUAN.' onclick="return confirm(\'Anda yakin ingin menghapus ?\')"><img border=\'0\' src=\''.base_url().'images/flexigrid/hapus.png\'></a>',
@@ -740,7 +891,8 @@ class Manajemen extends CI_Controller {
 					'Rp '.number_format($this->mm->sum('aktivitas','Jumlah', 'KD_PENGAJUAN',$row->KD_PENGAJUAN)),
 					$row->rencana_anggaran,
 					//$ikk.'/'.$keg,
-					$tot.' % '.$warning_icon_ikk,
+					$total_ikk.' % '.$warning_icon_ikk,
+					$total_iku.' % '.$warning_icon_iku,
 					'<a href='.site_url().'/e-planning/manajemen/detail_pengajuan/'.$row->KD_PENGAJUAN.'/1><img border=\'0\' src=\''.base_url().'images/flexigrid/detail.png\'></a>',
 					'<a href='.site_url().'/e-planning/manajemen/detail_pengajuan/'.$row->KD_PENGAJUAN.'/2><img border=\'0\' src=\''.base_url().'images/flexigrid/edit.png\'></a>',
 					'<a href='.site_url().'/e-planning/manajemen/delete_pengajuan/'.$row->KD_PENGAJUAN.' onclick="return confirm(\'Anda yakin ingin menghapus ?\')"><img border=\'0\' src=\''.base_url().'images/flexigrid/hapus.png\'></a>',
@@ -805,11 +957,24 @@ class Manajemen extends CI_Controller {
 		$data['kegiatan']=$this->pm->get_kegiatan_satker($data['selected_program']);
 		$kodekegiatan=$this->pm->get_where('data_kegiatan',$kode_pengajuan,'KD_PENGAJUAN')->row()->KodeKegiatan;
 		$data['selected_kegiatan']=$kodekegiatan;
-		$data['ikk']=$this->pm->get_ikk_satker($data['selected_kegiatan'])->result();
+		$data['ikk']=$this->pm->get_ikk_satker($data['selected_program'])->result();
 		$data['judul'] = 'Tampil IKK';
 		$data['kdpengajuan'] = $kode_pengajuan;
 		$data['idTahun'] = $this->mm->get_where('ref_tahun_anggaran','thn_anggaran',$this->session->userdata('thn_anggaran'))->row()->idThnAnggaran;
 		$this->load->view('e-planning/tambah_pengusulan/tampil_ikk',$data);
+	}
+
+	function tampil_iku($kode_pengajuan){
+		$kodeprogram=$this->pm->get_where('data_program',$kode_pengajuan,'KD_PENGAJUAN')->row()->KodeProgram;
+		$data['selected_program']=$kodeprogram;
+		$data['kegiatan']=$this->pm->get_kegiatan_satker($data['selected_program']);
+		$kodekegiatan=$this->pm->get_where('data_kegiatan',$kode_pengajuan,'KD_PENGAJUAN')->row()->KodeKegiatan;
+		$data['selected_kegiatan']=$kodekegiatan;
+		$data['iku']=$this->pm->get_iku_satker($data['selected_program'])->result();
+		$data['judul'] = 'Tampil IKU';
+		$data['kdpengajuan'] = $kode_pengajuan;
+		$data['idTahun'] = $this->mm->get_where('ref_tahun_anggaran','thn_anggaran',$this->session->userdata('thn_anggaran'))->row()->idThnAnggaran;
+		$this->load->view('e-planning/tambah_pengusulan/tampil_iku',$data);
 	}
 
 	function grid_persetujuan(){

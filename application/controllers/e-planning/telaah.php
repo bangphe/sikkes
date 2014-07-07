@@ -68,7 +68,7 @@ class Telaah extends CI_Controller {
 		// $grid_js = build_grid_js('user',$url,$colModel,'ID','asc',$gridParams,$buttons);
 		$grid_js = build_grid_js('user',$url,$colModel,'ID','asc',$gridParams);
 		$data['js_grid'] = $grid_js;
-		if($this->session->userdata('kd_role') == Role_model::DIREKTORAT || $this->session->userdata('kd_role') == Role_model::VERIFIKATOR) {
+		if($this->session->userdata('kd_role') == Role_model::DIREKTORAT || $this->session->userdata('kd_role') == Role_model::VERIFIKATOR || $this->session->userdata('kd_role') == Role_model::ADMIN_PLANNING) {
 			$data['added_php'] = 
 				"<div class=\"buttons\">
 					<form action=\"".base_url()."index.php/e-planning/manajemen/grid_pengajuan\" method=\"POST\">
@@ -168,7 +168,7 @@ class Telaah extends CI_Controller {
 			}
 			elseif($this->session->userdata('eselon') == '0'){
 				if($row->STATUS == '0' || $row->STATUS == '2'){
-					$kirimsetuju = '<a href="'.site_url().'/e-planning/telaah/kirim/'.$row->KODE_TELAAH_STAFF.'" onclick="return confirm(\'Anda yasdkin ingin mengirim telaah ?\')"><img border=\'0\' src=\''.base_url().'images/flexigrid/send.png\'></a>';
+					$kirimsetuju = '<a href="'.site_url().'/e-planning/telaah/kirim/'.$row->KODE_TELAAH_STAFF.'" onclick="return confirm(\'Anda yakin ingin mengirim telaah ?\')"><img border=\'0\' src=\''.base_url().'images/flexigrid/send.png\'></a>';
 					$koreksi = '<a href="'.site_url().'/e-planning/telaah/update_telaah_staff/'.$kd_pengajuan.'/'.$row->KODE_TELAAH_STAFF.'"><img border=\'0\' src=\''.base_url().'images/flexigrid/edit.png\'></a>';
 				}
 			}

@@ -156,7 +156,7 @@ class Master_tahun_anggaran extends CI_Controller {
 		$data['selected_year'] = $thn_anggaran->row()->thn_anggaran;
 		$data['idThnAnggaran'] = $idThnAnggaran;
 		$data['opt_periode'] = $option_periode;
-		$data['periode'] = $thn_anggaran->row()->idPeriode;
+		$data['periode'] = $thn_anggaran->row()->idperiode;
 		$data['content'] = $this->load->view('form_master_data/form_edit_tahun_anggaran',$data,true);
 		$this->load->view('main',$data);
 	}

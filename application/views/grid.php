@@ -18,7 +18,7 @@ $(document).ready(function(){
 		modal: true,
 	});
 });
-function opendialog(kdpengajuan){
+function ikk(kdpengajuan){
 	var path = '<?php echo base_url();?>index.php/e-planning/manajemen/tampil_ikk/'+kdpengajuan;
 	$.ajax({
 		url:path,
@@ -33,6 +33,21 @@ function opendialog(kdpengajuan){
 		}
 	});
 	//$("#dialog").dialog("open");
+}
+function iku(kdpengajuan){
+	var path = '<?php echo base_url();?>index.php/e-planning/manajemen/tampil_iku/'+kdpengajuan;
+	$.ajax({
+		url:path,
+		type:'get',
+		data:'',
+		beforeSend:function(){
+			$("#dialog").dialog("open");
+			$("#dialog-body").html('loading...');
+		},
+		success: function(data){
+			$("#dialog-body").html(data);
+		}
+	});
 }
 </script>
 
