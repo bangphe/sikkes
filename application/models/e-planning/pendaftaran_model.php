@@ -189,7 +189,6 @@ class Pendaftaran_model extends CI_Model {
 		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
 		$this->db->join('ref_provinsi','ref_satker.kdlokasi=ref_provinsi.KodeProvinsi');
 		$this->db->where('KD_PENGAJUAN',$kd_pengajuan);
-		$this->db->order_by('TANGGAL_PENGAJUAN', 'desc');
 		return $this->db->get();
 	}
     
@@ -966,12 +965,32 @@ class Pendaftaran_model extends CI_Model {
 		return $this->db->get();
 	}
 
+	function get_iku_by_kdpengajuan_iku($kd_pengajuan, $kd_iku) {
+		$this->db->select('*');
+		$this->db->from('data_iku d');
+		$this->db->where('d.KD_PENGAJUAN',$kd_pengajuan);
+		$this->db->where('d.KodeIku',$kd_iku);
+
+		return $this->db->get();
+	}
+
 	function get_targetikk_by_kdpengajuan_ikk($kd_pengajuan, $kd_ikk, $thn) {
 		$this->db->select('*');
 		$this->db->from('data_ikk d');
 		$this->db->join('target_ikk i', 'i.KodeIkk=d.KodeIkk');
 		$this->db->where('d.KD_PENGAJUAN',$kd_pengajuan);
 		$this->db->where('d.KodeIkk',$kd_ikk);
+		$this->db->where('i.idThnAnggaran',$thn);
+
+		return $this->db->get();
+	}
+
+	function get_targetiku_by_kdpengajuan_iku($kd_pengajuan, $kd_iku, $thn) {
+		$this->db->select('*');
+		$this->db->from('data_iku d');
+		$this->db->join('target_iku i', 'i.KodeIku=d.KodeIku');
+		$this->db->where('d.KD_PENGAJUAN',$kd_pengajuan);
+		$this->db->where('d.KodeIku',$kd_iku);
 		$this->db->where('i.idThnAnggaran',$thn);
 
 		return $this->db->get();

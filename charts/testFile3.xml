@@ -1,0 +1,15 @@
+<graph yAxisName='Presentase' caption='Grafik Rencana Fisik Pelaksanaan Paket' subcaption='Tahun 2015' hovercapbg='FFECAA' hovercapborder='F47E00' formatNumberScale='0' decimalPrecision='0' showvalues='0' numdivlines='5' numVdivlines='0' yaxisminvalue='1000' yaxismaxvalue='100'  rotateNames='1' NumberSuffix='%25'>
+					<categories >
+						<category name='Jan' />
+						<category name='Feb' />
+						<category name='Mar' />
+						<category name='Apr' />
+						<category name='Mei' />
+						<category name='Jun' />
+						<category name='Jul' />
+						<category name='Agt' />
+						<category name='Sep' />
+						<category name='Okt' />
+						<category name='Nop' />
+						<category name='Des' />
+					</categories><dataset seriesName='Rencana Kontraktual' color='1D8BD1' anchorBorderColor='1D8BD1' anchorBgColor='1D8BD1'><set value="10" /><set value="12" /><set value="15" /><set value="15" /><set value="15" /><set value="15" /><set value="15" /><set value="15" /><set value="15" /><set value="15" /><set value="15" /><set value="15" /></dataset>

@@ -329,11 +329,19 @@ class Manajemen_model extends CI_Model {
 		$this->db->where('kdsatker',$this->session->userdata('kdsatker'));
 		return $this->db->get();
 	}
+
+	function get_satker_kegiatan(){
+		$this->db->select('*');
+		$this->db->from('ref_satker_kegiatan');
+		$this->db->where('kdsatker',$this->session->userdata('kdsatker'));
+		return $this->db->get();
+	}
 	
 	function get_data_pengajuan(){
 		$this->db->select('*');
 		$this->db->from('pengajuan');
 		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_provinsi','ref_satker.kdlokasi=ref_provinsi.KodeProvinsi');
 		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
 		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
 		$this->db->where('STATUS !=', 4);
@@ -347,6 +355,7 @@ class Manajemen_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('pengajuan');
 		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_provinsi','ref_satker.kdlokasi=ref_provinsi.KodeProvinsi');
 		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
 		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
 		$this->db->where('STATUS !=', 4);
@@ -372,6 +381,33 @@ class Manajemen_model extends CI_Model {
 		else
 			return false;
 	}
+
+	function cetak_pengajuan_dekon(){
+		$kdlokasi='';
+		// $kdunit='';
+		foreach($this->get_prov_unit()->result() as $row){
+			$kdlokasi = $row->kdlokasi;
+			// $kdunit = $row->kdunit;
+		}
+		$this->db->select('*');
+		$this->db->from('pengajuan');
+		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_provinsi','ref_satker.kdlokasi=ref_provinsi.KodeProvinsi');
+		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
+		$this->db->join('data_program','data_program.KD_PENGAJUAN=pengajuan.KD_PENGAJUAN');
+		$this->db->join('data_kegiatan','data_kegiatan.KD_PENGAJUAN=pengajuan.KD_PENGAJUAN');
+		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
+		$this->db->where('kdlokasi',$kdlokasi);
+		$this->db->where('KodeJenisSatker !=', 3);
+		$this->db->where('KodeJenisSatker !=', 4);
+		$this->db->where('KodeJenisSatker !=', 5);
+		$this->db->where('STATUS !=', 4);
+		$this->db->where('STATUS !=', 5);
+		$this->db->where('STATUS !=', 7);
+		$this->db->order_by('TANGGAL_PEMBUATAN', 'desc');
+		
+		return $this->db->get();
+	}
 	
 	function get_data_pengajuan_dekon(){
 		$kdlokasi='';
@@ -383,6 +419,7 @@ class Manajemen_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('pengajuan');
 		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_provinsi','ref_satker.kdlokasi=ref_provinsi.KodeProvinsi');
 		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
 		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
 		$this->db->where('kdlokasi',$kdlokasi);
@@ -399,6 +436,7 @@ class Manajemen_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('pengajuan');
 		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_provinsi','ref_satker.kdlokasi=ref_provinsi.KodeProvinsi');
 		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
 		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
 		$this->db->where('kdlokasi',$kdlokasi);
@@ -419,19 +457,27 @@ class Manajemen_model extends CI_Model {
 		foreach($this->get_prov_unit()->result() as $row){
 			$kdlokasi = $row->kdlokasi;
 		}
+		foreach($this->get_satker_kegiatan()->result() as $row){
+			$kdsatker_kegiatan = $row->KodeKegiatan;
+		}
 
 		$this->db->select('*');
 		$this->db->from('pengajuan');
 		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_provinsi','ref_satker.kdlokasi=ref_provinsi.KodeProvinsi');
 		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
-		if($this->session->userdata('eselon') == '1') {
-			$this->db->join('data_program','pengajuan.KD_PENGAJUAN=data_program.KD_PENGAJUAN');
-			$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
-		}
-		elseif($this->session->userdata('eselon') == '2') {
-			$this->db->join('data_kegiatan','pengajuan.KD_PENGAJUAN=data_kegiatan.KD_PENGAJUAN');
-			$this->db->like('data_kegiatan.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
-		}
+		$this->db->join('data_program','pengajuan.KD_PENGAJUAN=data_program.KD_PENGAJUAN');
+		$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		$this->db->join('data_kegiatan','pengajuan.KD_PENGAJUAN=data_kegiatan.KD_PENGAJUAN');
+		$this->db->where('data_kegiatan.KodeKegiatan =', $kdsatker_kegiatan);
+		// if($this->session->userdata('eselon') == '1') {
+		// 	$this->db->join('data_program','pengajuan.KD_PENGAJUAN=data_program.KD_PENGAJUAN');
+		// 	$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		// }
+		// elseif($this->session->userdata('eselon') == '2') {
+		// 	$this->db->join('data_kegiatan','pengajuan.KD_PENGAJUAN=data_kegiatan.KD_PENGAJUAN');
+		// 	$this->db->like('data_kegiatan.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		// }
 		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
 		//$this->db->where('kdlokasi',$kdlokasi);
 		$this->db->where('STATUS !=', 0);
@@ -445,15 +491,20 @@ class Manajemen_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('pengajuan');
 		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_provinsi','ref_satker.kdlokasi=ref_provinsi.KodeProvinsi');
 		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
-		if($this->session->userdata('eselon') == '1') {
-			$this->db->join('data_program','pengajuan.KD_PENGAJUAN=data_program.KD_PENGAJUAN');
-			$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
-		}
-		elseif($this->session->userdata('eselon') == '2') {
-			$this->db->join('data_kegiatan','pengajuan.KD_PENGAJUAN=data_kegiatan.KD_PENGAJUAN');
-			$this->db->like('data_kegiatan.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
-		}
+		$this->db->join('data_program','pengajuan.KD_PENGAJUAN=data_program.KD_PENGAJUAN');
+		$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		$this->db->join('data_kegiatan','pengajuan.KD_PENGAJUAN=data_kegiatan.KD_PENGAJUAN');
+		$this->db->where('data_kegiatan.KodeKegiatan =', $kdsatker_kegiatan);
+		// if($this->session->userdata('eselon') == '1') {
+		// 	$this->db->join('data_program','pengajuan.KD_PENGAJUAN=data_program.KD_PENGAJUAN');
+		// 	$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		// }
+		// elseif($this->session->userdata('eselon') == '2') {
+		// 	$this->db->join('data_kegiatan','pengajuan.KD_PENGAJUAN=data_kegiatan.KD_PENGAJUAN');
+		// 	$this->db->like('data_kegiatan.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		// }
 		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
 		//$this->db->where('kdlokasi',$kdlokasi);
 		$this->db->where('STATUS !=', 0);
@@ -466,17 +517,45 @@ class Manajemen_model extends CI_Model {
 		return $return;
 	}
 	
+	function cetak_pengajuan_direktorat(){
+		foreach($this->get_satker_kegiatan()->result() as $row){
+			$kdsatker_kegiatan = $row->KodeKegiatan;
+		}
+		$this->db->select('*');
+		$this->db->from('pengajuan');
+		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_provinsi','ref_satker.kdlokasi=ref_provinsi.KodeProvinsi');
+		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
+		$this->db->join('data_program','pengajuan.KD_PENGAJUAN=data_program.KD_PENGAJUAN');
+		$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		$this->db->join('data_kegiatan','pengajuan.KD_PENGAJUAN=data_kegiatan.KD_PENGAJUAN');
+		$this->db->where('data_kegiatan.KodeKegiatan =', $kdsatker_kegiatan);
+		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
+		$this->db->where('STATUS !=', 0);
+		$this->db->where('STATUS !=', 4);
+		$this->db->where('STATUS !=', 5);
+		$this->db->where('STATUS !=', 7);
+		$this->db->order_by('TANGGAL_PEMBUATAN', 'desc');
+		
+		return $this->db->get();
+	}
+
 	function get_data_pengajuan_unit_utama(){
 		$this->db->select('*');
 		$this->db->from('pengajuan');
 		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_provinsi','ref_satker.kdlokasi=ref_provinsi.KodeProvinsi');
 		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
 		$this->db->join('data_program','pengajuan.KD_PENGAJUAN=data_program.KD_PENGAJUAN');
 		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
 		$this->db->where('STATUS !=', 4);
 		$this->db->where('STATUS !=', 5);
 		$this->db->where('STATUS !=', 7);
-		$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		if ($this->session->userdata('kdsatker') == 465915) {
+			$this->db->where('STATUS !=', 6);
+		}else {
+			$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		}
 		$this->db->order_by('TANGGAL_PEMBUATAN', 'desc');
 		$this->CI->flexigrid->build_query();
 		$return['records'] = $this->db->get();
@@ -484,13 +563,18 @@ class Manajemen_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('pengajuan');
 		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_provinsi','ref_satker.kdlokasi=ref_provinsi.KodeProvinsi');
 		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
 		$this->db->join('data_program','pengajuan.KD_PENGAJUAN=data_program.KD_PENGAJUAN');
 		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
 		$this->db->where('STATUS !=', 4);
 		$this->db->where('STATUS !=', 5);
 		$this->db->where('STATUS !=', 7);
-		$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		if ($this->session->userdata('kdsatker') == 465915) {
+			$this->db->where('STATUS !=', 6);
+		}else {
+			$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		}
 		$this->db->order_by('TANGGAL_PEMBUATAN', 'desc');
 		$this->CI->flexigrid->build_query(FALSE);
 		$return['record_count'] = $this->db->count_all_results();
@@ -501,8 +585,11 @@ class Manajemen_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('pengajuan');
 		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_provinsi','ref_satker.kdlokasi=ref_provinsi.KodeProvinsi');
 		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
+		$this->db->join('data_kegiatan', 'pengajuan.KD_PENGAJUAN=data_kegiatan.KD_PENGAJUAN');
 		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
+		//$this->db->where('STATUS', 0);
 		$this->db->where('STATUS !=', 4);
 		$this->db->where('STATUS !=', 5);
 		$this->db->where('STATUS !=', 6);
@@ -514,8 +601,11 @@ class Manajemen_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('pengajuan');
 		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_provinsi','ref_satker.kdlokasi=ref_provinsi.KodeProvinsi');
 		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
+		$this->db->join('data_kegiatan', 'pengajuan.KD_PENGAJUAN=data_kegiatan.KD_PENGAJUAN');
 		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
+		//$this->db->where('STATUS', 0);
 		$this->db->where('STATUS !=', 4);
 		$this->db->where('STATUS !=', 5);
 		$this->db->where('STATUS !=', 6);
@@ -526,6 +616,7 @@ class Manajemen_model extends CI_Model {
 		return $return;
 		
 	}
+
 	function get_data_pertimbangan(){
 		$this->db->select('*');
 		$this->db->from('pengajuan');
@@ -1012,4 +1103,190 @@ class Manajemen_model extends CI_Model {
 		return $this->db->get();
 		
 	}
+	
+	function rekap_data_pengajuan_satker(){
+		$this->db->select('*');
+		$this->db->from('pengajuan');
+		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
+		$this->db->join('data_kegiatan','pengajuan.KD_PENGAJUAN=data_kegiatan.KD_PENGAJUAN');
+		$this->db->join('ref_kegiatan','data_kegiatan.KodeKegiatan=ref_kegiatan.KodeKegiatan');
+		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
+		$this->db->where('STATUS !=', 4);
+		$this->db->where('STATUS !=', 5);
+		$this->db->where('STATUS !=', 7);
+		$this->db->where('STATUS !=', 8);
+		$this->db->where('ref_kegiatan.KodeKegiatan =', 2093);
+		$this->db->order_by('TANGGAL_PEMBUATAN', 'desc');
+		
+		return $this->db->get();
+	}
+
+	function cetak_telaah(){
+		$this->db->select('*');
+		$this->db->from('pengajuan');
+		$this->db->join('data_telaah_staff','pengajuan.KD_PENGAJUAN=data_telaah_staff.KD_PENGAJUAN');
+		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_provinsi','ref_satker.kdlokasi=ref_provinsi.KodeProvinsi');
+		
+		return $this->db->get();
+	}
+
+	function cetak_apbn(){
+		$this->db->select('p.KD_PENGAJUAN, rp.NamaProvinsi, rs.nmsatker, p.JUDUL_PROPOSAL, p.NOMOR_SURAT, p.TANGGAL_PENGAJUAN, p.TANGGAL_PEMBUATAN, dp.NamaProgram, dk.NamaKegiatan');
+		$this->db->from('pengajuan p');
+		$this->db->join('ref_satker rs','p.NO_REG_SATKER=rs.kdsatker');
+		$this->db->join('ref_provinsi rp','rs.kdlokasi=rp.KodeProvinsi');
+		$this->db->join('data_program dp','dp.KD_PENGAJUAN=p.KD_PENGAJUAN');
+		$this->db->join('data_kegiatan dk','dk.KD_PENGAJUAN=p.KD_PENGAJUAN');
+		$this->db->where('p.TAHUN_ANGGARAN =', $this->session->userdata('thn_anggaran'));
+		// $this->db->where('STATUS =', 2);
+		//$this->db->where('STATUS !=', 1);
+		$this->db->where('p.STATUS !=', 4);
+		$this->db->where('p.STATUS !=', 5);
+		$this->db->where('p.STATUS !=', 7);
+		//$this->db->where('STATUS !=', 8);
+		$this->db->order_by('rp.KodeProvinsi','ASC');
+		return $this->db->get();
+	}
+
+	function cetak_fokus_prioritas_reformasi_kesehatan($thang){
+		$this->db->select('p.KD_PENGAJUAN, rp.NamaProvinsi, rs.nmsatker, p.JUDUL_PROPOSAL, p.NOMOR_SURAT, p.TANGGAL_PENGAJUAN, p.TANGGAL_PEMBUATAN, dp.KodeProgram, dp.NamaProgram, dk.KodeKegiatan, dk.NamaKegiatan');
+		$this->db->from('pengajuan p');
+		$this->db->join('ref_satker rs','p.NO_REG_SATKER=rs.kdsatker');
+		$this->db->join('ref_provinsi rp','rs.kdlokasi=rp.KodeProvinsi');
+		$this->db->join('data_program dp','dp.KD_PENGAJUAN=p.KD_PENGAJUAN');
+		$this->db->join('data_kegiatan dk','dk.KD_PENGAJUAN=p.KD_PENGAJUAN');
+		$this->db->where('p.TAHUN_ANGGARAN =', $thang);
+		$this->db->where('p.STATUS !=', 4);
+		$this->db->where('p.STATUS !=', 5);
+		$this->db->where('p.STATUS !=', 7);
+		$this->db->order_by('rp.KodeProvinsi','ASC');
+		return $this->db->get();
+	}
+
+	function cetak_dak($thang){
+		$this->db->select('p.KD_PENGAJUAN, rp.NamaProvinsi, rs.nmsatker, p.JUDUL_PROPOSAL, p.NOMOR_SURAT, p.TANGGAL_PENGAJUAN, p.TANGGAL_PEMBUATAN, dp.KodeProgram, dp.NamaProgram, dk.KodeKegiatan, dk.NamaKegiatan');
+		$this->db->from('pengajuan p');
+		$this->db->join('ref_satker rs','p.NO_REG_SATKER=rs.kdsatker');
+		$this->db->join('ref_provinsi rp','rs.kdlokasi=rp.KodeProvinsi');
+		$this->db->join('data_program dp','dp.KD_PENGAJUAN=p.KD_PENGAJUAN');
+		$this->db->join('data_kegiatan dk','dk.KD_PENGAJUAN=p.KD_PENGAJUAN');
+		$this->db->join('ref_rencana_anggaran ra', 'ra.id_rencana_anggaran=p.ID_RENCANA_ANGGARAN');
+		$this->db->where('p.TAHUN_ANGGARAN =', $thang);
+		$this->db->where('p.STATUS !=', 4);
+		$this->db->where('p.STATUS !=', 5);
+		$this->db->where('p.STATUS !=', 7);
+		$this->db->where('p.ID_RENCANA_ANGGARAN =', 2);
+		$this->db->order_by('rp.KodeProvinsi','ASC');
+		return $this->db->get();
+	}
+
+	function rekap_data_pengajuan_unit_utama(){
+		$this->db->select('*');
+		$this->db->from('pengajuan');
+		$this->db->join('ref_satker','pengajuan.NO_REG_SATKER=ref_satker.kdsatker');
+		$this->db->join('ref_rencana_anggaran','pengajuan.id_rencana_anggaran=ref_rencana_anggaran.id_rencana_anggaran');
+		$this->db->join('data_program','pengajuan.KD_PENGAJUAN=data_program.KD_PENGAJUAN');
+		$this->db->where('tahun_anggaran',$this->session->userdata('thn_anggaran'));
+		$this->db->where('STATUS !=', 4);
+		$this->db->where('STATUS !=', 5);
+		$this->db->where('STATUS !=', 7);
+		$this->db->like('data_program.KodeProgram','024.'.$this->session->userdata('kdunit'), 'after');
+		$this->db->order_by('TANGGAL_PEMBUATAN', 'desc');
+		
+		return $this->db->get();
+	}
+
+	const PERIODE_1 = '1', PERIODE_2 = '2', PERIODE_3 = '3';
+
+	function periode_pengajuan($periode)
+	{
+		$this->db->select('*');
+		$this->db->from('periode_pengajuan');
+		$this->db->where('KODE_PERIODE_PENGAJUAN', $periode);
+
+		return $this->db->get()->row();
+	}
+
+	function periode_pengajuan_2()
+	{
+		$this->db->select('*');
+		$this->db->from('periode_pengajuan');
+		$this->db->where('KODE_PERIODE_PENGAJUAN', self::PERIODE_2);
+
+		return $this->db->get()->row();
+	}
+
+	function isPeriodeSatuBuka()
+    {
+        //$today = '2015-04-03';
+        $today=date('Y-m-d');
+        if($today>=self::periode_pengajuan(self::PERIODE_1)->TANGGAL_AWAL && $today<=self::periode_pengajuan(self::PERIODE_1)->TANGGAL_AKHIR)
+            return true;
+        else
+            return false;
+    }
+
+    function isPeriodeSatuOpen()
+    {
+        //$today = '2015-04-03';
+        $today=date('Y-m-d');
+        if($today>=self::periode_pengajuan(self::PERIODE_1)->TANGGAL_AWAL && $today<=self::periode_pengajuan(self::PERIODE_1)->TANGGAL_AKHIR)
+            return 1;
+        else
+            return 0;
+    }
+
+    function isPeriodeDuaBuka()
+    {
+    	//$today = '2015-04-03';
+        $today=date('Y-m-d');
+        if($today>=self::periode_pengajuan(self::PERIODE_2)->TANGGAL_AWAL && $today<=self::periode_pengajuan(self::PERIODE_2)->TANGGAL_AKHIR)
+            return true;
+        else
+            return false;
+    }
+
+    function isPeriodeDuaOpen()
+    {
+    	//$today = '2015-04-03';
+        $today=date('Y-m-d');
+        if($today>=self::periode_pengajuan(self::PERIODE_2)->TANGGAL_AWAL && $today<=self::periode_pengajuan(self::PERIODE_2)->TANGGAL_AKHIR)
+            return 1;
+        else
+            return 0;
+    }
+
+    function isPeriodeTigaBuka()
+    {
+        $today=date('Y-m-d');
+        if($today>=self::periode_pengajuan(self::PERIODE_3)->TANGGAL_AWAL && $today<=self::periode_pengajuan(self::PERIODE_3)->TANGGAL_AKHIR)
+            return true;
+        else
+            return false;
+    }
+
+    function isPeriodeTigaOpen()
+    {
+        $today=date('Y-m-d');
+        if($today>=self::periode_pengajuan(self::PERIODE_3)->TANGGAL_AWAL && $today<=self::periode_pengajuan(self::PERIODE_3)->TANGGAL_AKHIR)
+            return 1;
+        else
+            return 0;
+    }
+
+	function cek_periode_pengajuan()
+    {
+        $today=date('Y-m-d');
+        //$today = '2015-04-03';
+        if($today>=self::periode_pengajuan(self::PERIODE_1)->TANGGAL_AWAL && $today<=self::periode_pengajuan(self::PERIODE_1)->TANGGAL_AKHIR)
+            return 'Pagu Indikatif (01 Januari 2015 - 30 April 2015)';
+        elseif ($today>=self::periode_pengajuan(self::PERIODE_2)->TANGGAL_AWAL && $today<=self::periode_pengajuan(self::PERIODE_2)->TANGGAL_AKHIR) {
+        	return 'Anggaran (01 Juni 2015 - 30 Juni 2015)';
+        }
+        elseif ($today>=self::periode_pengajuan(self::PERIODE_3)->TANGGAL_AWAL && $today<=self::periode_pengajuan(self::PERIODE_3)->TANGGAL_AKHIR) {
+        	return 'Pagu Definitif (01 Juli 2015 - 31 Desember 2015)';
+        }
+    }
 }

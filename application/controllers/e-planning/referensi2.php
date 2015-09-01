@@ -148,10 +148,11 @@ class Referensi2 extends CI_Controller {
 	function grid_visi(){
 		//$this->cek_session();
 		$colModel['no'] = array('No',20,TRUE,'center',0);
-		$colModel['tahun'] = array('Tahun',100,TRUE,'center',1);
+		$colModel['periode'] = array('Periode',80,TRUE,'center',1);
+		$colModel['tahun'] = array('Tahun',80,TRUE,'center',1);
 		$colModel['nmsatker'] = array('Satker',200,TRUE,'left',1);
-		$colModel['Visi'] = array('Visi',650,TRUE,'left',1);
-		if ($this->session->userdata('kd_role') == Role_model::PENGUSUL || $this->session->userdata('kd_role') == Role_model::ADMIN_REF || $this->session->userdata('kd_role') == Role_model::ADMIN){
+		$colModel['Visi'] = array('Visi',585,TRUE,'left',1);
+		if ($this->session->userdata('kd_role') == Role_model::PENGUSUL || $this->session->userdata('kd_role') == Role_model::ADMIN_REF || $this->session->userdata('kd_role') == Role_model::ADMIN || $this->session->userdata('kd_role') == Role_model::DIREKTORAT){
 		$colModel['EDIT'] = array('Edit',50,TRUE,'center',0);
 		$colModel['DELETE'] = array('Delete',50,TRUE,'center',0);
 		}
@@ -167,14 +168,14 @@ class Referensi2 extends CI_Controller {
 			'showTableToggleBtn' => false,
 			'nowrap' => false
 		);
-		if ($this->session->userdata('kd_role') == Role_model::PENGUSUL || $this->session->userdata('kd_role') == Role_model::ADMIN_REF || $this->session->userdata('kd_role') == Role_model::ADMIN){
+		if ($this->session->userdata('kd_role') == Role_model::PENGUSUL || $this->session->userdata('kd_role') == Role_model::ADMIN_REF || $this->session->userdata('kd_role') == Role_model::ADMIN || $this->session->userdata('kd_role') == Role_model::DIREKTORAT){
 		//menambah tombol pada flexigrid top toolbar
 		$buttons[] = array('Tambah','add','spt_js');
 		}
 		// mengambil data dari file controler ajax pada method grid_user		
 		$url = base_url()."index.php/e-planning/referensi2/grid_list_visi";
 		
-		if ($this->session->userdata('kd_role') == Role_model::PENGUSUL || $this->session->userdata('kd_role') == Role_model::ADMIN_REF || $this->session->userdata('kd_role') == Role_model::ADMIN){
+		if ($this->session->userdata('kd_role') == Role_model::PENGUSUL || $this->session->userdata('kd_role') == Role_model::ADMIN_REF || $this->session->userdata('kd_role') == Role_model::ADMIN || $this->session->userdata('kd_role') == Role_model::DIREKTORAT){
 		$grid_js = build_grid_js('user',$url,$colModel,'ID','asc',$gridParams,$buttons);
 		}
 		else $grid_js = build_grid_js('user',$url,$colModel,'ID','asc',$gridParams);
@@ -202,6 +203,7 @@ class Referensi2 extends CI_Controller {
 					dataType: 'html',
 					data:{
 						Visi:document.form_tambah_visi.visi.value,
+						periode:document.form_tambah_visi.periode.value,
 						tahun:document.form_tambah_visi.tahun.value
 					},
 					success: function (response) {
@@ -222,6 +224,7 @@ class Referensi2 extends CI_Controller {
 					data:{
 						idVisi:IdVisi,
 						Visi:document.form_update_visi.visi.value,
+						periode:document.form_update_visi.periode.value,
 						tahun:document.form_update_visi.tahun.value
 					},
 					success: function (response) {
@@ -270,7 +273,7 @@ class Referensi2 extends CI_Controller {
 		$valid_fields = array('Visi','nmsatker', 'periode_awal');
 		$this->flexigrid->validate_post('Visi','asc',$valid_fields);
 		//$records = $this->refmo->where_join_double_flexigrid('ref_visi',$this->session->userdata('kdsatker'),'ref_visi.kdsatker','ref_periode','ref_visi.idPeriode=ref_periode.idPeriode','ref_satker','ref_visi.kdsatker=ref_satker.kdsatker');
-		$records = $this->refmo->where_join_double_flexigrid('ref_visi',$this->session->userdata('kdsatker'),'ref_visi.kdsatker','ref_tahun_anggaran','ref_visi.idThnAnggaran=ref_tahun_anggaran.idThnAnggaran','ref_satker','ref_visi.kdsatker=ref_satker.kdsatker');
+		$records = $this->refmo->where_join_triple_flexigrid('ref_visi',$this->session->userdata('kdsatker'),'ref_visi.kdsatker','ref_tahun_anggaran','ref_visi.idThnAnggaran=ref_tahun_anggaran.idThnAnggaran','ref_satker','ref_visi.kdsatker=ref_satker.kdsatker','ref_periode','ref_visi.idPeriode=ref_periode.idPeriode');
 		$this->output->set_header($this->config->item('json_header'));
 		
 		$no = 0;
@@ -279,6 +282,7 @@ class Referensi2 extends CI_Controller {
 			$record_items[] = array(
 				$no,
 				$no,
+				$row->periode_awal.'-'.$row->periode_akhir,
 				$row->thn_anggaran,
 				$row->nmsatker,
 				$row->Visi,
@@ -297,9 +301,10 @@ class Referensi2 extends CI_Controller {
 	function grid_misi(){
 		//$this->cek_session();
 		$colModel['no'] = array('No',20,TRUE,'center',0);
-		$colModel['tahun'] = array('Tahun',100,FALSE,'center',0);
+		$colModel['periode'] = array('Periode',80,TRUE,'center',1);
+		$colModel['tahun'] = array('Tahun',80,TRUE,'center',1);
 		$colModel['nmsatker'] = array('Satker',200,TRUE,'left',1);
-		$colModel['Misi'] = array('Misi',650,TRUE,'left',1);
+		$colModel['Misi'] = array('Misi',585,TRUE,'left',1);
 		if ($this->session->userdata('kd_role') == Role_model::PENGUSUL  || $this->session->userdata('kd_role') == Role_model::ADMIN_REF || $this->session->userdata('kd_role') == Role_model::ADMIN){
 		$colModel['EDIT'] = array('Edit',50,TRUE,'center',0);
 		$colModel['DELETE'] = array('Delete',50,TRUE,'center',0);
@@ -351,6 +356,7 @@ class Referensi2 extends CI_Controller {
 					dataType: 'html',
 					data:{
 						Misi:document.form_tambah_misi.misi.value,
+						periode:document.form_tambah_misi.periode.value,
 						tahun:document.form_tambah_misi.tahun.value
 					},
 					success: function (response) {
@@ -371,6 +377,7 @@ class Referensi2 extends CI_Controller {
 					data:{
 						idMisi:IdMisi,
 						Misi:document.form_update_misi.misi.value,
+						periode:document.form_update_misi.periode.value,
 						tahun:document.form_update_misi.tahun.value
 					},
 					success: function (response) {
@@ -398,8 +405,7 @@ class Referensi2 extends CI_Controller {
 		$valid_fields = array('Misi','nmsatker');
 		$this->flexigrid->validate_post('Misi','asc',$valid_fields);
 		//$records = $this->refmo->where_join_double_flexigrid('ref_misi',$this->session->userdata('kdsatker'),'ref_misi.kdsatker','ref_periode','ref_misi.idPeriode=ref_periode.idPeriode','ref_satker','ref_misi.kdsatker=ref_satker.kdsatker');
-		$records = $this->refmo->where_join_double_flexigrid('ref_misi',$this->session->userdata('kdsatker'),'ref_misi.kdsatker','ref_tahun_anggaran','ref_misi.idThnAnggaran=ref_tahun_anggaran.idThnAnggaran','ref_satker','ref_misi.kdsatker=ref_satker.kdsatker');
-
+		$records = $this->refmo->where_join_triple_flexigrid('ref_misi',$this->session->userdata('kdsatker'),'ref_misi.kdsatker','ref_tahun_anggaran','ref_misi.idThnAnggaran=ref_tahun_anggaran.idThnAnggaran','ref_satker','ref_misi.kdsatker=ref_satker.kdsatker','ref_periode','ref_misi.idPeriode=ref_periode.idPeriode');
 		$this->output->set_header($this->config->item('json_header'));
 		
 		$no = 0;
@@ -408,7 +414,7 @@ class Referensi2 extends CI_Controller {
 			$record_items[] = array(
 				$no,
 				$no,
-				//$row->periode_awal.'-'.$row->periode_akhir,
+				$row->periode_awal.'-'.$row->periode_akhir,
 				$row->thn_anggaran,
 				$row->nmsatker,
 				$row->Misi,

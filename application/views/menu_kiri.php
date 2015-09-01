@@ -52,9 +52,11 @@
 		<p class="menu_head"><??> E-Budgeting</p>
 		<div class="menu_body" align="left">
             <?= anchor(site_url().'/e-budget/import',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Import RKA-KL','');?>
-            <?= anchor(site_url().'/e-budget/mapping/form_mapping',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Mapping Komponen','');?>
+            <?//= anchor(site_url().'/e-budget/mapping/form_mapping',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Mapping Output','');?>
+            <?= anchor(site_url().'/e-budget/mapping_output',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Mapping Output','');?>
 			<?= anchor(site_url().'/e-budget/feedback/form_mapping',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Feedback','');?>
-			<?= anchor(site_url().'/e-budget/sinonim/grid_sinonim/1',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Sinonim','');?>
+			<?= anchor(site_url().'/e-budget/sinonim/index/1',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Sinonim Positif','');?>
+			<?= anchor(site_url().'/e-budget/sinonim/index/2',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Sinonim Negatif','');?>
 			<?= anchor(site_url().'/e-budget/akungroup/grid_akungroup/1',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Akun Group','');?>
             <?= anchor(site_url().'/e-budget/pencarian/form_pencarian_canggih/0',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Pencarian Canggih','');?>
             <?= anchor(site_url().'/e-budget/pencarian/form_pencarian_canggih/2',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Rekap Pencarian Canggih','');?>
@@ -70,7 +72,7 @@
           <?= anchor(site_url('e-monev/dashboard_satker'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Dashboard Satker',''); ?>
 		  <?= anchor(site_url('e-monev/dashboard_unit'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Dashboard Unit Utama',''); ?>
 		  <?= anchor(site_url('e-monev/laporan_monitoring'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Laporan Monitoring',''); ?>
-          <?= anchor(site_url('e-monev/laporan_evaluasi'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Laporan Evaluasi',''); ?>
+          <!--<?= anchor(site_url('e-monev/laporan_evaluasi'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Laporan Evaluasi',''); ?>-->
           <?= anchor(site_url('e-monev/laporan_kinerja'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Laporan Kinerja Kementrian',''); ?>
 		</div>
 		<p class="menu_head"><??>Referensi</p>
@@ -81,7 +83,7 @@
 	       <?= anchor(site_url().'/master_data/master_propinsi',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Provinsi',''); ?>
 		   <?= anchor(site_url().'/master_data/master_tahun_anggaran',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Tahun Anggaran',''); ?>
 		   <?= anchor(site_url().'/master_data/master_program',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Program',''); ?>
-		   <?= anchor(site_url().'/master_data/master_periode',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Periode',''); ?>
+		   <?= anchor(site_url().'/e-planning/referensi2/grid_periode',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Periode',''); ?>
 		   <?= anchor(site_url().'/master_data/master_kegiatan',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Kegiatan',''); ?>
 		   <?= anchor(site_url().'/master_data/master_ikk',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' IKK',''); ?>
 		   <?= anchor(site_url().'/master_data/master_menu_kegiatan',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Menu Kegiatan',''); ?>
@@ -95,7 +97,7 @@
            <?= anchor(site_url().'/master_data/master_pegawai',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Pegawai',''); ?> 
            <?= anchor(site_url().'/master_data/master_jenis_kewenangan',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Jenis Kewenangan',''); ?>
            <?= anchor(site_url().'/master_data/master_jenis_usulan',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Jenis Usulan',''); ?>
-           <?= anchor(site_url().'/e-monev/master_bank',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Bank',''); ?>
+           <?//= anchor(site_url().'/e-monev/master_bank',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Bank',''); ?>
 		   <?= anchor(site_url('e-monev/laporan_monitoring/referensi'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Ketentuan Pengisian Progres',''); ?>
            <?= anchor(site_url('master_data/master_kppn'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' KPPN',''); ?>
            <?= anchor(site_url('master_data/master_jenis_satker'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Jenis Satker',''); ?>
@@ -154,7 +156,8 @@
 		<p class="menu_head"><??> E-Budgeting</p>
 		<div class="menu_body" align="left">
             <?= anchor(site_url().'/e-budget/import',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Import RKA-KL','');?>
-            <?= anchor(site_url().'/e-budget/mapping/form_mapping',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Mapping Komponen','');?>
+            <?//= anchor(site_url().'/e-budget/mapping/form_mapping',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Mapping Output','');?>
+            <?= anchor(site_url().'/e-budget/mapping_output',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Mapping Output','');?>
 			<?= anchor(site_url().'/e-budget/feedback/form_mapping',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Feedback','');?>
 			<?= anchor(site_url().'/e-budget/sinonim/grid_sinonim/1',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Sinonim','');?>
 			<?= anchor(site_url().'/e-budget/akungroup/grid_akungroup/1',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Akun Group','');?>
@@ -172,13 +175,13 @@
           <?//= anchor(site_url('e-monev/dashboard'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Dashboard',''); ?> 
           <?= anchor(site_url('e-monev/dashboard_satker'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Dashboard Satker',''); ?>
 <?php if($this->session->userdata('kodejenissatker') == 2){ ?>
-		  <?= anchor(site_url('e-monev/dashboard_propinsi'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Dashboard Propinsi',''); ?>
+		  <?//= anchor(site_url('e-monev/dashboard_propinsi'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Dashboard Propinsi',''); ?>
 <?php } ?>
 <?php if($this->session->userdata('kodejenissatker') == 3){ ?>
 		  <?= anchor(site_url('e-monev/dashboard_unit'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Dashboard Unit Utama',''); ?>
 <?php } ?>
 		  <?= anchor(site_url('e-monev/laporan_monitoring'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Laporan Monitoring',''); ?>
-          <?= anchor(site_url('e-monev/laporan_evaluasi'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Laporan Evaluasi',''); ?>
+          <!--<?= anchor(site_url('e-monev/laporan_evaluasi'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Laporan Evaluasi',''); ?>-->
           <?= anchor(site_url('e-monev/laporan_kinerja'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Laporan Kinerja Kementrian',''); ?>
 		</div>
 <?php } ?>
@@ -225,7 +228,8 @@
 		<p class="menu_head"><??> E-Budgeting</p>
 		<div class="menu_body" align="left">
             <?= anchor(site_url().'/e-budget/import',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Import RKA-KL','');?>
-            <?= anchor(site_url().'/e-budget/mapping/form_mapping',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Mapping Komponen','');?>
+            <?//= anchor(site_url().'/e-budget/mapping/form_mapping',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Mapping Output','');?>
+            <?= anchor(site_url().'/e-budget/mapping_output',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Mapping Output','');?>
 			<?= anchor(site_url().'/e-budget/feedback/form_mapping',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Feedback','');?>
 			<?= anchor(site_url().'/e-budget/sinonim/grid_sinonim/1',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Sinonim','');?>
 			<?= anchor(site_url().'/e-budget/akungroup/grid_akungroup/1',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Akun Group','');?>
@@ -248,7 +252,8 @@
 		<p class="menu_head"><??> E-Budgeting</p>
 		<div class="menu_body" align="left">
             <?= anchor(site_url().'/e-budget/import',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Import RKA-KL','');?>
-            <?= anchor(site_url().'/e-budget/mapping/form_mapping',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Mapping Komponen','');?>
+            <?//= anchor(site_url().'/e-budget/mapping/form_mapping',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Mapping Output','');?>
+            <?= anchor(site_url().'/e-budget/mapping_output',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Mapping Output','');?>
 			<?= anchor(site_url().'/e-budget/feedback/form_mapping',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Feedback','');?>
 			<?= anchor(site_url().'/e-budget/sinonim/grid_sinonim/1',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Sinonim','');?>
 			<?= anchor(site_url().'/e-budget/akungroup/grid_akungroup/1',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).'Akun Group','');?>
@@ -278,7 +283,7 @@
           <?= anchor(site_url('e-monev/dashboard_satker'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Dashboard Satker',''); ?>
 		  <?= anchor(site_url('e-monev/dashboard_unit'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Dashboard Unit Utama',''); ?>
 		  <?= anchor(site_url('e-monev/laporan_monitoring'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Laporan Monitoring',''); ?>
-          <?= anchor(site_url('e-monev/laporan_evaluasi'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Laporan Evaluasi',''); ?>
+          <!--<?= anchor(site_url('e-monev/laporan_evaluasi'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Laporan Evaluasi',''); ?>-->
           <?= anchor(site_url('e-monev/laporan_kinerja'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Laporan Kinerja Kementrian',''); ?>
 		</div>
 <?php } ?>
@@ -305,7 +310,7 @@
 		<?= anchor(site_url().'/master_data/master_pegawai',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Pegawai',''); ?> 
 		<?= anchor(site_url().'/master_data/master_jenis_kewenangan',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Jenis Kewenangan',''); ?>
 		<?= anchor(site_url().'/master_data/master_jenis_usulan',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Jenis Usulan',''); ?>
-		<?= anchor(site_url().'/e-monev/master_bank',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Bank',''); ?>
+		<?//= anchor(site_url().'/e-monev/master_bank',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Bank',''); ?>
 		<?= anchor(site_url('e-monev/laporan_monitoring/referensi'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Ketentuan Pengisian Progres',''); ?>
 		<?= anchor(site_url('master_data/master_kppn'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' KPPN',''); ?>
 		<?= anchor(site_url('master_data/master_jenis_satker'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Jenis Satker',''); ?>
@@ -334,7 +339,7 @@
 		<div class="menu_body" align="left">
 			<?= anchor(site_url().'/e-monev/dashboard_monev',img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Dashboard',''); ?>
           <?= anchor(site_url('e-monev/dashboard'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Dashboard Kementerian',''); ?>
-          <?= anchor(site_url('e-monev/laporan_evaluasi'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Laporan Evaluasi',''); ?>
+          <!--<?= anchor(site_url('e-monev/laporan_evaluasi'),img(array('src'=>'images/icon/doc.png','border'=>'0','alt'=>'')).' Laporan Evaluasi',''); ?>-->
 		</div>
 <?php } ?>
 

@@ -1,5 +1,5 @@
 <fieldset>
-<legend>Detail Paket</legend>
+<legend>Detail Output</legend>
 <br />
 	<table width="100%">
 		<tr>
@@ -32,17 +32,17 @@
 				<?php echo $ursoutput;?>
 			</td>
 		</tr>
-		<tr>
+		<!-- <tr>
 			<td width="50%"><b>Nama Komponen :</b></td>
 			<td width="50%">
-				<?php echo $urkmpnen;?>
+				<?php //echo $urkmpnen;?>
 			</td>
 		</tr>
 		<tr>
 			<td width="50%"><b>Nama Sub Komponen :</b></td>
 			<td width="50%">
-				<?php echo $sub_komponen;?>
+				<?php //echo $sub_komponen;?>
 			</td>
-		</tr>
+		</tr> -->
 </table>
 </fieldset>

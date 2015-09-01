@@ -10,9 +10,9 @@
 	<img src="<?php echo base_url() ?>images/login/background.jpg" class="bg">
 
 	<div id="page-wrap">
-		<!-- <h1><center>Sistem sedang dalam perbaikan. Sistem akan kembali dapat diakses pukul 12.00 WIB.</center></h1> -->
-		<h1><center>PENGUMUMAN!!</center></h1>
-		<h1><center>Pengajuan Proposal Telah DITUTUP.</center></h1>
+		<h1><center>Sistem sedang dalam perbaikan. Mohon maaf atas ketidaknyamanannya.</center></h1>
+		<!-- <h1><center>PENGUMUMAN!!</center></h1>
+		<h1><center>Pengajuan Proposal Telah DITUTUP.</center></h1> -->
 	</div>
 	<div class="footer_"><img src="<?php echo base_url() ?>images/login/logoerenggar.png"></div>
 	

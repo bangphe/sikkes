@@ -347,7 +347,8 @@ class Pendaftaran extends CI_Controller {
 			}
 		}
 		
-		redirect('e-planning/manajemen/grid_pengajuan/');
+		//redirect('e-planning/manajemen/grid_pengajuan/');
+		redirect('e-planning/manajemen/grid_aktivitas/'.$kd_pengajuan.'/'.$fungsi.'/'.$subfungsi.'/'.$program.'/'.$kegiatan);
 		// }
 	}
 	
@@ -882,7 +883,16 @@ class Pendaftaran extends CI_Controller {
 			$data2['error_file'] = $this->session->userdata('upload_file');
 			$this->session->unset_userdata('upload_file');
 		} 
-		$data['content'] = $this->load->view('e-planning/tambah_pengusulan/pengajuan1',$data2,true);
+		//tampil form pengajuan proposal
+		// if ($this->session->userdata('kdsatker') == '465915' || $this->session->userdata('kodeprovinsi') == '13') {
+			$data['content'] = $this->load->view('e-planning/tambah_pengusulan/pengajuan1',$data2,true);
+		// }
+		// else {
+		// 	$data['content'] = $this->load->view('e-planning/tambah_pengusulan/tutup',$data2,true);
+		// }
+		//$data['content'] = $this->load->view('e-planning/tambah_pengusulan/pengajuan1',$data2,true);
+		
+		//menutup form pengajuan proposal
 		//$data['content'] = $this->load->view('e-planning/tambah_pengusulan/tutup',$data2,true);
 		$this->load->view('main',$data);
 	}
@@ -899,14 +909,27 @@ class Pendaftaran extends CI_Controller {
 		echo json_encode($datajson);
 	}
 	
+	// function get_output($kode1)
+	// {
+	// 	$query = $this->pm->get_where('ref_output', $kode1, 'KodeKegiatan');
+	// 	$i=0;
+	// 	foreach($query->result() as $row)
+	// 	{
+	// 		$datajson[$i]['KodeOutput'] = $row->KodeOutput;
+	// 		$datajson[$i]['Output'] = $row->Output;
+	// 		$i++;
+	// 	}
+		
+	// 	echo json_encode($datajson);
+	// }
 	function get_output($kode1)
 	{
-		$query = $this->pm->get_where('ref_output', $kode1, 'KodeKegiatan');
+		$query = $this->pm->get_where('t_output', $kode1, 'kdgiat');
 		$i=0;
 		foreach($query->result() as $row)
 		{
-			$datajson[$i]['KodeOutput'] = $row->KodeOutput;
-			$datajson[$i]['Output'] = $row->Output;
+			$datajson[$i]['KodeOutput'] = $row->kdoutput;
+			$datajson[$i]['Output'] = $row->nmoutput;
 			$i++;
 		}
 		
@@ -993,5 +1016,4 @@ class Pendaftaran extends CI_Controller {
 		 
 		echo json_encode($datajson);
 	}
-	
 }

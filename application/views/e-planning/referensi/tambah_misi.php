@@ -4,16 +4,17 @@
 <div id="content">
 	<form name="form_tambah_misi" method="POST" id="form_tambah_misi" action="#">
 	<table width="100%" height="100%">
-		<!-- <tr>
+		<tr>
 			<td>Periode</td>
 			<td>
-				<?php //echo form_dropdown('periode', $periode); ?>
+				<?php $js = 'id="periode" style="width:15%; padding:3px;"'; 
+				echo form_dropdown('periode',$periode,null,$js); ?>
 			</td>
-		</tr> -->
+		</tr>
 		<tr>
 			<td>Tahun</td>
 			<td>
-				<select id="tahun" name="tahun">
+				<select id="tahun" name="tahun" style="width:15%; padding:3px;">
         			<option value="0">--- Pilih Tahun ---</option>
         			<?php
 						  foreach($tahun->result() as $row)
@@ -27,7 +28,7 @@
 		<tr>
 			<td>Misi</td>
 			<td>
-				<textarea name="misi" id="misi" cols=100></textarea><?php echo form_error('misi')?>
+				<textarea name="misi" id="misi" rows="4" cols="60"></textarea><?php echo form_error('misi')?>
 			</td>
 		</tr>
 		<tr>

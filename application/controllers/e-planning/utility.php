@@ -152,7 +152,7 @@ class utility extends CI_Controller
 	function cetak_rab($KD_PENGAJUAN){
 		$this->load->library('excel');                 
 		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-		$this->excel = $objReader->load('file/RAB.xlsx');
+		$this->excel = $objReader->load('file/cetak/RAB.xlsx');
 		$this->excel->setActiveSheetIndex(0);
 		$no=1;
 		$index=6;
@@ -289,7 +289,7 @@ class utility extends CI_Controller
 		$this->excel->getActiveSheet()->setCellValue('G'.$index, $total);
 		
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="'.$judul.'.xlsx"');
+        header('Content-Disposition: attachment;filename="RAB Proposal - '.$KD_PENGAJUAN.'.xlsx"');
         header('Cache-Control: max-age=0');
 
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
@@ -327,7 +327,7 @@ class utility extends CI_Controller
 									  ->setCellValue('J4', 'DAK');
 		$no=1;
 		$index=5;
-		foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','4','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
+		foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','1','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
 			$this->excel->getActiveSheet()->getStyle('A'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 			$this->excel->getActiveSheet()->getStyle('C'.$index.':J'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 			$this->excel->getActiveSheet()->getStyle('A'.$index.':J'.$index)->getFont()->setBold(true);
@@ -377,697 +377,1136 @@ class utility extends CI_Controller
         $objWriter->save('php://output');
 	}
 	
-	function rekap_fokus_prioritas()
-	{
-		$TAHUN_ANGGARAN = $this->input->post('thn_anggaran');
-		$pilihan_rekap = $this->input->post('rekap');
+	// function rekap_fokus_prioritas()
+	// {
+	// 	$TAHUN_ANGGARAN = $this->input->post('thn_anggaran');
+	// 	$pilihan_rekap = $this->input->post('rekap');
 		
-		$this->load->library('excel');    
-		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-		$this->excel = $objReader->load('file/rekap_fokus_prioritas.xlsx');
-		$this->excel->setActiveSheetIndex(0);
-		$this->excel->getActiveSheet()->setCellValue('A1', 'REKAPITULASI USULAN PROPOSAL BERDASARKAN FOKUS PRIORITAS TAHUN '.$TAHUN_ANGGARAN);
-		$this->excel->getActiveSheet()->setCellValue('A3', 'NO')
-									  ->setCellValue('B3', 'SATKER PENGUSUL')
-									  ->setCellValue('C3', 'KAB/KOTA')
-									  ->setCellValue('D3', 'JUDUL PROPOSAL AKTIVITAS')
-									  ->setCellValue('E3', 'NO/TGL SURAT PENGANTAR')
-									  ->setCellValue('F3', 'PROGRAM')
-									  ->setCellValue('G3', 'INDIKATOR KINERJA UTAMA (IKU)')
-									  ->setCellValue('H3', 'KEGIATAN')
-									  ->setCellValue('I3', 'INDIKATOR KINERJA KEGIATAN (IKK)')
-									  ->setCellValue('J3', 'TARGET KINERJA NASIONAL')
-									  ->setCellValue('K3', 'TARGET KINERJA DAERAH')
-									  ->setCellValue('L3', 'USULAN')
-									  ->setCellValue('L4', 'Fokus 1. Peningkatan')
-									  ->setCellValue('M4', 'Fokus 2. Perbaikan')
-									  ->setCellValue('N4', 'Fokus 3. Pengendalian')
-									  ->setCellValue('O4', 'Fokus 4. Pemenuhan')
-									  ->setCellValue('P4', 'Fokus 5. Peningkatan')
-									  ->setCellValue('Q4', 'Fokus 6. Pengembangan')
-									  ->setCellValue('R4', 'Fokus 7. Pemberdayaan')
-									  ->setCellValue('S4', 'Fokus 8. Peningkatan');
+	// 	$this->load->library('excel');    
+	// 	$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+	// 	$this->excel = $objReader->load('file/rekap_fokus_prioritas.xlsx');
+	// 	$this->excel->setActiveSheetIndex(0);
+	// 	$this->excel->getActiveSheet()->setCellValue('A1', 'REKAPITULASI USULAN PROPOSAL BERDASARKAN FOKUS PRIORITAS TAHUN '.$TAHUN_ANGGARAN);
+	// 	$this->excel->getActiveSheet()->setCellValue('A3', 'NO')
+	// 								  ->setCellValue('B3', 'SATKER PENGUSUL')
+	// 								  ->setCellValue('C3', 'KAB/KOTA')
+	// 								  ->setCellValue('D3', 'JUDUL PROPOSAL AKTIVITAS')
+	// 								  ->setCellValue('E3', 'NO/TGL SURAT PENGANTAR')
+	// 								  ->setCellValue('F3', 'PROGRAM')
+	// 								  ->setCellValue('G3', 'INDIKATOR KINERJA UTAMA (IKU)')
+	// 								  ->setCellValue('H3', 'KEGIATAN')
+	// 								  ->setCellValue('I3', 'INDIKATOR KINERJA KEGIATAN (IKK)')
+	// 								  ->setCellValue('J3', 'TARGET KINERJA NASIONAL')
+	// 								  ->setCellValue('K3', 'TARGET KINERJA DAERAH')
+	// 								  ->setCellValue('L3', 'USULAN')
+	// 								  ->setCellValue('L4', 'Fokus 1. Peningkatan')
+	// 								  ->setCellValue('M4', 'Fokus 2. Perbaikan')
+	// 								  ->setCellValue('N4', 'Fokus 3. Pengendalian')
+	// 								  ->setCellValue('O4', 'Fokus 4. Pemenuhan')
+	// 								  ->setCellValue('P4', 'Fokus 5. Peningkatan')
+	// 								  ->setCellValue('Q4', 'Fokus 6. Pengembangan')
+	// 								  ->setCellValue('R4', 'Fokus 7. Pemberdayaan')
+	// 								  ->setCellValue('S4', 'Fokus 8. Peningkatan');
 
-		$no=1;
-		$index=5;
+	// 	$no=1;
+	// 	$index=5;
 		
-		foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','4','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
-			$this->excel->getActiveSheet()->getStyle('A'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-			$this->excel->getActiveSheet()->getStyle('C'.$index.':J'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-			//$this->excel->getActiveSheet()->getStyle('A'.$index.':J'.$index)->getFont()->setBold(true);
-			$this->excel->getActiveSheet()->setCellValue('A'.$index, $no);
-			$this->excel->getActiveSheet()->setCellValue('B'.$index, $row->nmsatker);
+	// 	foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','1','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
+	// 		$this->excel->getActiveSheet()->getStyle('A'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	// 		$this->excel->getActiveSheet()->getStyle('C'.$index.':J'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	// 		//$this->excel->getActiveSheet()->getStyle('A'.$index.':J'.$index)->getFont()->setBold(true);
+	// 		$this->excel->getActiveSheet()->setCellValue('A'.$index, $no);
+	// 		$this->excel->getActiveSheet()->setCellValue('B'.$index, $row->nmsatker);
 
-			foreach($this->mm->get_where2_join('ref_satker','kdlokasi',$row->kdlokasi,'kdsatker',$row->kdsatker,'ref_kabupaten','ref_kabupaten.KodeKabupaten=ref_satker.kdkabkota')->result() as $tes){
-				foreach($this->mm->get_where2('ref_kabupaten','KodeProvinsi',$tes->kdlokasi,'KodeKabupaten',$tes->kdkabkota)->result() as $tes2)			
-				$this->excel->getActiveSheet()->setCellValue('C'.$index, $tes2->NamaKabupaten);			
-			}
-			$this->excel->getActiveSheet()->setCellValue('D'.$index, $row->JUDUL_PROPOSAL);			
-			$tanggal = explode('-', $row->TANGGAL_PENGAJUAN);
-			$this->excel->getActiveSheet()->setCellValue('E'.$index, $row->NOMOR_SURAT.'/'.$tanggal[2].'-'.$tanggal[1].'-'.$tanggal[0]);
-			/*if($row->ID_RENCANA_ANGGARAN == '1'){
-				$this->excel->getActiveSheet()->setCellValue('I'.$index, 'V');
-			}else{
-				$this->excel->getActiveSheet()->setCellValue('J'.$index, 'V');
-			}*/
-			//$index++;
-			$index2 = $index;
-			$index3 = $index;
-			foreach($this->mm->get_where('data_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $row2){
-				foreach($this->mm->get_where2('data_sub_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi)->result() as $row3){
-					foreach($this->mm->get_where3('data_program','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi)->result() as $row4){
-						$this->excel->getActiveSheet()->setCellValue('F'.$index2, $row4->NamaProgram);
-						foreach($this->mm->get_where4_join('data_iku','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'data_iku.KodeProgram',$row4->KodeProgram,'ref_iku','data_iku.KodeIku=ref_iku.KodeIku')->result() as $row5){
-							$this->excel->getActiveSheet()->setCellValue('G'.$index2, $row5->Iku);
-							$index2++;
-						}
-						foreach($this->mm->get_where4('data_kegiatan','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram)->result() as $row6){
-							$this->excel->getActiveSheet()->setCellValue('H'.$index3, $row6->NamaKegiatan);
-							$n=0;
-								$biaya;
-								foreach($this->pm->get('fokus_prioritas')->result() as $fok)
-								{
-									if($this->mm->cek2('data_fokus_prioritas', 'idFokusPrioritas', $fok->idFokusPrioritas, 'KD_PENGAJUAN', $row->KD_PENGAJUAN)) {
-									$biaya[$n] = $this->pm->get_biaya('data_fokus_prioritas','Biaya', 'KD_PENGAJUAN',$row->KD_PENGAJUAN,'idFokusPrioritas',$fok->idFokusPrioritas);
-									}
-									else $biaya[$n]='0';
-									$n++;
-								}
+	// 		foreach($this->mm->get_where2_join('ref_satker','kdlokasi',$row->kdlokasi,'kdsatker',$row->kdsatker,'ref_kabupaten','ref_kabupaten.KodeKabupaten=ref_satker.kdkabkota')->result() as $tes){
+	// 			foreach($this->mm->get_where2('ref_kabupaten','KodeProvinsi',$tes->kdlokasi,'KodeKabupaten',$tes->kdkabkota)->result() as $tes2)			
+	// 			$this->excel->getActiveSheet()->setCellValue('C'.$index, $tes2->NamaKabupaten);			
+	// 		}
+	// 		$this->excel->getActiveSheet()->setCellValue('D'.$index, $row->JUDUL_PROPOSAL);			
+	// 		$tanggal = explode('-', $row->TANGGAL_PENGAJUAN);
+	// 		$this->excel->getActiveSheet()->setCellValue('E'.$index, $row->NOMOR_SURAT.'/'.$tanggal[2].'-'.$tanggal[1].'-'.$tanggal[0]);
+	// 		/*if($row->ID_RENCANA_ANGGARAN == '1'){
+	// 			$this->excel->getActiveSheet()->setCellValue('I'.$index, 'V');
+	// 		}else{
+	// 			$this->excel->getActiveSheet()->setCellValue('J'.$index, 'V');
+	// 		}*/
+	// 		//$index++;
+	// 		$index2 = $index;
+	// 		$index3 = $index;
+	// 		foreach($this->mm->get_where('data_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $row2){
+	// 			foreach($this->mm->get_where2('data_sub_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi)->result() as $row3){
+	// 				foreach($this->mm->get_where3('data_program','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi)->result() as $row4){
+	// 					$this->excel->getActiveSheet()->setCellValue('F'.$index2, $row4->NamaProgram);
+	// 					foreach($this->mm->get_where4_join('data_iku','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'data_iku.KodeProgram',$row4->KodeProgram,'ref_iku','data_iku.KodeIku=ref_iku.KodeIku')->result() as $row5){
+	// 						$this->excel->getActiveSheet()->setCellValue('G'.$index2, $row5->Iku);
+	// 						$index2++;
+	// 					}
+	// 					foreach($this->mm->get_where4('data_kegiatan','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram)->result() as $row6){
+	// 						$this->excel->getActiveSheet()->setCellValue('H'.$index3, $row6->NamaKegiatan);
+	// 						$n=0;
+	// 							$biaya;
+	// 							foreach($this->pm->get('fokus_prioritas')->result() as $fok)
+	// 							{
+	// 								if($this->mm->cek2('data_fokus_prioritas', 'idFokusPrioritas', $fok->idFokusPrioritas, 'KD_PENGAJUAN', $row->KD_PENGAJUAN)) {
+	// 								$biaya[$n] = $this->pm->get_biaya('data_fokus_prioritas','Biaya', 'KD_PENGAJUAN',$row->KD_PENGAJUAN,'idFokusPrioritas',$fok->idFokusPrioritas);
+	// 								}
+	// 								else $biaya[$n]='0';
+	// 								$n++;
+	// 							}
 								
-								$this->excel->getActiveSheet()->setCellValue('L'.$index3, "Rp.".$biaya[0]); 
-								$this->excel->getActiveSheet()->setCellValue('M'.$index3, "Rp.".$biaya[1]);
-								$this->excel->getActiveSheet()->setCellValue('N'.$index3, "Rp.".$biaya[2]);
-								$this->excel->getActiveSheet()->setCellValue('O'.$index3, "Rp.".$biaya[3]);
-								$this->excel->getActiveSheet()->setCellValue('P'.$index3, "Rp.".$biaya[4]); 
-								$this->excel->getActiveSheet()->setCellValue('Q'.$index3, "Rp.".$biaya[5]); 
-								$this->excel->getActiveSheet()->setCellValue('R'.$index3, "Rp.".$biaya[6]);  
-								$this->excel->getActiveSheet()->setCellValue('S'.$index3, "Rp.".$biaya[7]);
+	// 							$this->excel->getActiveSheet()->setCellValue('L'.$index3, "Rp.".$biaya[0]); 
+	// 							$this->excel->getActiveSheet()->setCellValue('M'.$index3, "Rp.".$biaya[1]);
+	// 							$this->excel->getActiveSheet()->setCellValue('N'.$index3, "Rp.".$biaya[2]);
+	// 							$this->excel->getActiveSheet()->setCellValue('O'.$index3, "Rp.".$biaya[3]);
+	// 							$this->excel->getActiveSheet()->setCellValue('P'.$index3, "Rp.".$biaya[4]); 
+	// 							$this->excel->getActiveSheet()->setCellValue('Q'.$index3, "Rp.".$biaya[5]); 
+	// 							$this->excel->getActiveSheet()->setCellValue('R'.$index3, "Rp.".$biaya[6]);  
+	// 							$this->excel->getActiveSheet()->setCellValue('S'.$index3, "Rp.".$biaya[7]);
 								
-								if($this->mm->cek('data_fokus_prioritas','KD_PENGAJUAN',$row->KD_PENGAJUAN)) 
-								$total = $this->mm->sum('data_fokus_prioritas','Biaya','KD_PENGAJUAN',$row->KD_PENGAJUAN);
-								else $total = 0;
-								$this->excel->getActiveSheet()->setCellValue('T'.$index3, "Rp.".$total);
-							foreach($this->mm->get_where5_join('data_ikk','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram,'data_ikk.KodeKegiatan',$row6->KodeKegiatan,'ref_ikk','data_ikk.KodeIkk=ref_ikk.KodeIkk')->result() as $row7){
-								$this->excel->getActiveSheet()->setCellValue('I'.$index3, $row7->Ikk);
-								if($this->mm->cek('target_ikk','KodeIkk',$row7->KodeIkk))
-								$target_nasional = $this->mm->get_where('target_ikk','KodeIkk',$row7->KodeIkk)->row()->TargetNasional;
-								else $target_nasional = '0';
-									$this->excel->getActiveSheet()->setCellValue('J'.$index3, $target_nasional.'%');
-								$jumlah_ikk = $this->mm->get_where('data_ikk','KodeIkk',$row7->KodeIkk)->row()->Jumlah;
-									$this->excel->getActiveSheet()->setCellValue('K'.$index3, $jumlah_ikk.'%');
+	// 							if($this->mm->cek('data_fokus_prioritas','KD_PENGAJUAN',$row->KD_PENGAJUAN)) 
+	// 							$total = $this->mm->sum('data_fokus_prioritas','Biaya','KD_PENGAJUAN',$row->KD_PENGAJUAN);
+	// 							else $total = 0;
+	// 							$this->excel->getActiveSheet()->setCellValue('T'.$index3, "Rp.".$total);
+	// 						foreach($this->mm->get_where5_join('data_ikk','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram,'data_ikk.KodeKegiatan',$row6->KodeKegiatan,'ref_ikk','data_ikk.KodeIkk=ref_ikk.KodeIkk')->result() as $row7){
+	// 							$this->excel->getActiveSheet()->setCellValue('I'.$index3, $row7->Ikk);
+	// 							if($this->mm->cek('target_ikk','KodeIkk',$row7->KodeIkk))
+	// 							$target_nasional = $this->mm->get_where('target_ikk','KodeIkk',$row7->KodeIkk)->row()->TargetNasional;
+	// 							else $target_nasional = '0';
+	// 								$this->excel->getActiveSheet()->setCellValue('J'.$index3, $target_nasional.'%');
+	// 							$jumlah_ikk = $this->mm->get_where('data_ikk','KodeIkk',$row7->KodeIkk)->row()->Jumlah;
+	// 								$this->excel->getActiveSheet()->setCellValue('K'.$index3, $jumlah_ikk.'%');
 								
-								$index3++;
-							}
+	// 							$index3++;
+	// 						}
 							
-						}
+	// 					}
 						
-						if($index3>=$index2){
-							$index=$index3;
-						}else{
-							$index=$index2;
-						}
+	// 					if($index3>=$index2){
+	// 						$index=$index3;
+	// 					}else{
+	// 						$index=$index2;
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 		$no++;
+	// 	}
+	// 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+ //        header('Content-Disposition: attachment;filename="DAFTAR PENGAJUAN '.$TAHUN_ANGGARAN.'.xlsx"');
+ //        header('Cache-Control: max-age=0');
+
+ //        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
+ //        $objWriter->save('php://output');
+	// }
+
+	function rekap_fokus_prioritas() {
+		$tanggal_print = date('d/m/Y');
+		$tanggal_judul = date('dmY');
+		$thn = $this->input->post('thn_anggaran');
+		$records = $this->mm->cetak_fokus_prioritas_reformasi_kesehatan($thn);
+		ini_set("memory_limit", "256M");
+		// set to excel
+		$this->load->library('excel');                 
+		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+		$this->excel = $objReader->load('file/cetak_fokus_prioritas.xlsx');
+		$this->excel->setActiveSheetIndex(0);
+		
+		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, 'Rekap Proposal Tahun Anggaran '.$thn); //print judul
+		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(2, 2, $tanggal_print); //print tanggal	
+		
+		$no = 0;
+		$awal_baris = 7; //awal baris
+		$baris = $awal_baris;
+
+		if($records->num_rows()>0){
+			foreach($records->result() as $row){
+				$no = $no + 1;
+
+				$tgl_asli = $row->TANGGAL_PEMBUATAN;
+				$tgl = date("d-m-Y", strtotime($tgl_asli));
+
+				//SetCellValue
+				$this->excel->getActiveSheet()->setCellValue('A'.$baris, $no);
+				$this->excel->getActiveSheet()->setCellValue('B'.$baris, $row->NamaProvinsi);
+				$this->excel->getActiveSheet()->setCellValue('C'.$baris, $row->nmsatker);
+				$this->excel->getActiveSheet()->setCellValue('D'.$baris, $row->JUDUL_PROPOSAL);
+				$this->excel->getActiveSheet()->setCellValue('E'.$baris, $row->NOMOR_SURAT);
+				$this->excel->getActiveSheet()->setCellValue('F'.$baris, '['.$row->KodeProgram.'] '.$row->NamaProgram);
+				$this->excel->getActiveSheet()->setCellValue('G'.$baris, '['.$row->KodeKegiatan.'] '.$row->NamaKegiatan);
+				$n=0;
+				$biaya;
+				foreach($this->pm->get('fokus_prioritas')->result() as $fok)
+				{
+					if($this->mm->cek2('data_fokus_prioritas', 'idFokusPrioritas', $fok->idFokusPrioritas, 'KD_PENGAJUAN', $row->KD_PENGAJUAN)) {
+					$biaya[$n] = $this->pm->get_biaya('data_fokus_prioritas','Biaya', 'KD_PENGAJUAN',$row->KD_PENGAJUAN,'idFokusPrioritas',$fok->idFokusPrioritas);
 					}
+					else $biaya[$n]='0';
+					$n++;
 				}
+				
+				$this->excel->getActiveSheet()->setCellValue('H'.$baris, "Rp.".number_format($biaya[0],2)); 
+				$this->excel->getActiveSheet()->setCellValue('I'.$baris, "Rp.".number_format($biaya[1],2));
+				$this->excel->getActiveSheet()->setCellValue('J'.$baris, "Rp.".number_format($biaya[2],2));
+				$this->excel->getActiveSheet()->setCellValue('K'.$baris, "Rp.".number_format($biaya[3],2));
+				$this->excel->getActiveSheet()->setCellValue('L'.$baris, "Rp.".number_format($biaya[4],2)); 
+				$this->excel->getActiveSheet()->setCellValue('M'.$baris, "Rp.".number_format($biaya[5],2)); 
+				$this->excel->getActiveSheet()->setCellValue('N'.$baris, "Rp.".number_format($biaya[6],2));  
+				$this->excel->getActiveSheet()->setCellValue('O'.$baris, "Rp.".number_format($biaya[7],2));
+				$this->excel->getActiveSheet()->setCellValue('P'.$baris, "Rp.".number_format($biaya[8],2));
+				
+				if($this->mm->cek('data_fokus_prioritas','KD_PENGAJUAN',$row->KD_PENGAJUAN))
+					$biaya_total = $this->mm->sum('data_fokus_prioritas','Biaya','KD_PENGAJUAN',$row->KD_PENGAJUAN);
+				else 
+					$biaya_total=0;
+				$this->excel->getActiveSheet()->setCellValue('Q'.$baris, "Rp. ".number_format($biaya_total,2));
+				$baris++;
 			}
-			$no++;
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':Q'.($baris-1))->getBorders()->getInside()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':Q'.($baris-1))->getBorders()->getBottom()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':Q'.($baris-1))->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':Q'.($baris-1))->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 		}
+		
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="DAFTAR PENGAJUAN '.$TAHUN_ANGGARAN.'.xlsx"');
+        header('Content-Disposition: attachment;filename="Rekap Pengajuan Proposal Fokus Prioritas.xlsx"');
         header('Cache-Control: max-age=0');
 
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
         $objWriter->save('php://output');
 	}
 	
-	function rekap_reformasi_kesehatan()
-	{
-		$TAHUN_ANGGARAN = $this->input->post('thn_anggaran');
-		$pilihan_rekap = $this->input->post('rekap');
+	// function rekap_reformasi_kesehatan()
+	// {
+	// 	$TAHUN_ANGGARAN = $this->input->post('thn_anggaran');
+	// 	$pilihan_rekap = $this->input->post('rekap');
 		
-		$this->load->library('excel');    
-		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-		$this->excel = $objReader->load('file/rekap_reformasi_kesehatan.xlsx');
-		$this->excel->setActiveSheetIndex(0);
-		$this->excel->getActiveSheet()->setCellValue('A1', 'REKAPITULASI USULAN PROPOSAL BERDASARKAN REFORMASI KESEHATAN TAHUN '.$TAHUN_ANGGARAN);
-		$this->excel->getActiveSheet()->setCellValue('A3', 'NO')
-									  ->setCellValue('B3', 'SATKER PENGUSUL')
-									  ->setCellValue('C3', 'KAB/KOTA')
-									  ->setCellValue('D3', 'JUDUL PROPOSAL AKTIVITAS')
-									  ->setCellValue('E3', 'NO/TGL SURAT PENGANTAR')
-									  ->setCellValue('F3', 'PROGRAM')
-									  ->setCellValue('G3', 'INDIKATOR KINERJA UTAMA (IKU)')
-									  ->setCellValue('H3', 'KEGIATAN')
-									  ->setCellValue('I3', 'INDIKATOR KINERJA KEGIATAN (IKK)')
-									  ->setCellValue('J3', 'TARGET KINERJA NASIONAL')
-									  ->setCellValue('K3', 'TARGET KINERJA DAERAH')
-									  ->setCellValue('L3', 'USULAN')
-									  ->setCellValue('L4', 'Reform 1. Pengembangan')
-									  ->setCellValue('M4', 'Reform 2. Peningkatan')
-									  ->setCellValue('N4', 'Reform 3. Ketersediaan')
-									  ->setCellValue('O4', 'Reform 4. Reformasi')
-									  ->setCellValue('P4', 'Reform 5. Pemenuhan')
-									  ->setCellValue('Q4', 'Reform 6. Penanganan')
-									  ->setCellValue('R4', 'Reform 7. Pengembangan');
+	// 	$this->load->library('excel');    
+	// 	$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+	// 	$this->excel = $objReader->load('file/rekap_reformasi_kesehatan.xlsx');
+	// 	$this->excel->setActiveSheetIndex(0);
+	// 	$this->excel->getActiveSheet()->setCellValue('A1', 'REKAPITULASI USULAN PROPOSAL BERDASARKAN REFORMASI KESEHATAN TAHUN '.$TAHUN_ANGGARAN);
+	// 	$this->excel->getActiveSheet()->setCellValue('A3', 'NO')
+	// 								  ->setCellValue('B3', 'SATKER PENGUSUL')
+	// 								  ->setCellValue('C3', 'KAB/KOTA')
+	// 								  ->setCellValue('D3', 'JUDUL PROPOSAL AKTIVITAS')
+	// 								  ->setCellValue('E3', 'NO/TGL SURAT PENGANTAR')
+	// 								  ->setCellValue('F3', 'PROGRAM')
+	// 								  ->setCellValue('G3', 'INDIKATOR KINERJA UTAMA (IKU)')
+	// 								  ->setCellValue('H3', 'KEGIATAN')
+	// 								  ->setCellValue('I3', 'INDIKATOR KINERJA KEGIATAN (IKK)')
+	// 								  ->setCellValue('J3', 'TARGET KINERJA NASIONAL')
+	// 								  ->setCellValue('K3', 'TARGET KINERJA DAERAH')
+	// 								  ->setCellValue('L3', 'USULAN')
+	// 								  ->setCellValue('L4', 'Reform 1. Pengembangan')
+	// 								  ->setCellValue('M4', 'Reform 2. Peningkatan')
+	// 								  ->setCellValue('N4', 'Reform 3. Ketersediaan')
+	// 								  ->setCellValue('O4', 'Reform 4. Reformasi')
+	// 								  ->setCellValue('P4', 'Reform 5. Pemenuhan')
+	// 								  ->setCellValue('Q4', 'Reform 6. Penanganan')
+	// 								  ->setCellValue('R4', 'Reform 7. Pengembangan');
 
-		$no=1;
-		$index=5;
+	// 	$no=1;
+	// 	$index=5;
 		
-		foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','4','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
-			$this->excel->getActiveSheet()->getStyle('A'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-			$this->excel->getActiveSheet()->getStyle('C'.$index.':J'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-			//$this->excel->getActiveSheet()->getStyle('A'.$index.':J'.$index)->getFont()->setBold(true);
-			$this->excel->getActiveSheet()->setCellValue('A'.$index, $no);
-			$this->excel->getActiveSheet()->setCellValue('B'.$index, $row->nmsatker);
+	// 	foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','1','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
+	// 		$this->excel->getActiveSheet()->getStyle('A'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	// 		$this->excel->getActiveSheet()->getStyle('C'.$index.':J'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	// 		//$this->excel->getActiveSheet()->getStyle('A'.$index.':J'.$index)->getFont()->setBold(true);
+	// 		$this->excel->getActiveSheet()->setCellValue('A'.$index, $no);
+	// 		$this->excel->getActiveSheet()->setCellValue('B'.$index, $row->nmsatker);
 
-			foreach($this->mm->get_where2_join('ref_satker','kdlokasi',$row->kdlokasi,'kdsatker',$row->kdsatker,'ref_kabupaten','ref_kabupaten.KodeKabupaten=ref_satker.kdkabkota')->result() as $tes){
-				foreach($this->mm->get_where2('ref_kabupaten','KodeProvinsi',$tes->kdlokasi,'KodeKabupaten',$tes->kdkabkota)->result() as $tes2)			
-				$this->excel->getActiveSheet()->setCellValue('C'.$index, $tes2->NamaKabupaten);			
-			}
-			$this->excel->getActiveSheet()->setCellValue('D'.$index, $row->JUDUL_PROPOSAL);			
-			$tanggal = explode('-', $row->TANGGAL_PENGAJUAN);
-			$this->excel->getActiveSheet()->setCellValue('E'.$index, $row->NOMOR_SURAT.'/'.$tanggal[2].'-'.$tanggal[1].'-'.$tanggal[0]);
-			/*if($row->ID_RENCANA_ANGGARAN == '1'){
-				$this->excel->getActiveSheet()->setCellValue('I'.$index, 'V');
-			}else{
-				$this->excel->getActiveSheet()->setCellValue('J'.$index, 'V');
-			}*/
-			//$index++;
-			$index2 = $index;
-			$index3 = $index;
-			foreach($this->mm->get_where('data_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $row2){
-				foreach($this->mm->get_where2('data_sub_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi)->result() as $row3){
-					foreach($this->mm->get_where3('data_program','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi)->result() as $row4){
-						$this->excel->getActiveSheet()->setCellValue('F'.$index2, $row4->NamaProgram);
-						foreach($this->mm->get_where4_join('data_iku','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'data_iku.KodeProgram',$row4->KodeProgram,'ref_iku','data_iku.KodeIku=ref_iku.KodeIku')->result() as $row5){
-							$this->excel->getActiveSheet()->setCellValue('G'.$index2, $row5->Iku);
-							$index2++;
-						}
-						foreach($this->mm->get_where4('data_kegiatan','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram)->result() as $row6){
-							$this->excel->getActiveSheet()->setCellValue('H'.$index3, $row6->NamaKegiatan);
+	// 		foreach($this->mm->get_where2_join('ref_satker','kdlokasi',$row->kdlokasi,'kdsatker',$row->kdsatker,'ref_kabupaten','ref_kabupaten.KodeKabupaten=ref_satker.kdkabkota')->result() as $tes){
+	// 			foreach($this->mm->get_where2('ref_kabupaten','KodeProvinsi',$tes->kdlokasi,'KodeKabupaten',$tes->kdkabkota)->result() as $tes2)			
+	// 			$this->excel->getActiveSheet()->setCellValue('C'.$index, $tes2->NamaKabupaten);			
+	// 		}
+	// 		$this->excel->getActiveSheet()->setCellValue('D'.$index, $row->JUDUL_PROPOSAL);			
+	// 		$tanggal = explode('-', $row->TANGGAL_PENGAJUAN);
+	// 		$this->excel->getActiveSheet()->setCellValue('E'.$index, $row->NOMOR_SURAT.'/'.$tanggal[2].'-'.$tanggal[1].'-'.$tanggal[0]);
+	// 		/*if($row->ID_RENCANA_ANGGARAN == '1'){
+	// 			$this->excel->getActiveSheet()->setCellValue('I'.$index, 'V');
+	// 		}else{
+	// 			$this->excel->getActiveSheet()->setCellValue('J'.$index, 'V');
+	// 		}*/
+	// 		//$index++;
+	// 		$index2 = $index;
+	// 		$index3 = $index;
+	// 		foreach($this->mm->get_where('data_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $row2){
+	// 			foreach($this->mm->get_where2('data_sub_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi)->result() as $row3){
+	// 				foreach($this->mm->get_where3('data_program','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi)->result() as $row4){
+	// 					$this->excel->getActiveSheet()->setCellValue('F'.$index2, $row4->NamaProgram);
+	// 					foreach($this->mm->get_where4_join('data_iku','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'data_iku.KodeProgram',$row4->KodeProgram,'ref_iku','data_iku.KodeIku=ref_iku.KodeIku')->result() as $row5){
+	// 						$this->excel->getActiveSheet()->setCellValue('G'.$index2, $row5->Iku);
+	// 						$index2++;
+	// 					}
+	// 					foreach($this->mm->get_where4('data_kegiatan','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram)->result() as $row6){
+	// 						$this->excel->getActiveSheet()->setCellValue('H'.$index3, $row6->NamaKegiatan);
 							
-								$n=0;
-								$biaya;
-								foreach($this->pm->get('reformasi_kesehatan')->result() as $ref)
-								{
-									if($this->mm->cek2('data_reformasi_kesehatan', 'idReformasiKesehatan', $ref->idReformasiKesehatan, 'KD_PENGAJUAN', $row->KD_PENGAJUAN)) {
-									$biaya[$n] = $this->pm->get_biaya('data_reformasi_kesehatan','Biaya', 'KD_PENGAJUAN',$row->KD_PENGAJUAN,'idReformasiKesehatan',$ref->idReformasiKesehatan);
-									}
-									else $biaya[$n]='0';
-									$n++;
-								}
+	// 							$n=0;
+	// 							$biaya;
+	// 							foreach($this->pm->get('reformasi_kesehatan')->result() as $ref)
+	// 							{
+	// 								if($this->mm->cek2('data_reformasi_kesehatan', 'idReformasiKesehatan', $ref->idReformasiKesehatan, 'KD_PENGAJUAN', $row->KD_PENGAJUAN)) {
+	// 								$biaya[$n] = $this->pm->get_biaya('data_reformasi_kesehatan','Biaya', 'KD_PENGAJUAN',$row->KD_PENGAJUAN,'idReformasiKesehatan',$ref->idReformasiKesehatan);
+	// 								}
+	// 								else $biaya[$n]='0';
+	// 								$n++;
+	// 							}
 								
-								$this->excel->getActiveSheet()->setCellValue('L'.$index3, "Rp.".$biaya[0]); 
-								$this->excel->getActiveSheet()->setCellValue('M'.$index3, "Rp.".$biaya[1]);
-								$this->excel->getActiveSheet()->setCellValue('N'.$index3, "Rp.".$biaya[2]);
-								$this->excel->getActiveSheet()->setCellValue('O'.$index3, "Rp.".$biaya[3]);
-								$this->excel->getActiveSheet()->setCellValue('P'.$index3, "Rp.".$biaya[4]); 
-								$this->excel->getActiveSheet()->setCellValue('Q'.$index3, "Rp.".$biaya[5]); 
-								$this->excel->getActiveSheet()->setCellValue('R'.$index3, "Rp.".$biaya[6]);  
+	// 							$this->excel->getActiveSheet()->setCellValue('L'.$index3, "Rp.".$biaya[0]); 
+	// 							$this->excel->getActiveSheet()->setCellValue('M'.$index3, "Rp.".$biaya[1]);
+	// 							$this->excel->getActiveSheet()->setCellValue('N'.$index3, "Rp.".$biaya[2]);
+	// 							$this->excel->getActiveSheet()->setCellValue('O'.$index3, "Rp.".$biaya[3]);
+	// 							$this->excel->getActiveSheet()->setCellValue('P'.$index3, "Rp.".$biaya[4]); 
+	// 							$this->excel->getActiveSheet()->setCellValue('Q'.$index3, "Rp.".$biaya[5]); 
+	// 							$this->excel->getActiveSheet()->setCellValue('R'.$index3, "Rp.".$biaya[6]);  
 								
-								if($this->mm->cek('data_reformasi_kesehatan','KD_PENGAJUAN',$row->KD_PENGAJUAN)) $total = $this->mm->sum('data_reformasi_kesehatan','Biaya','KD_PENGAJUAN',$row->KD_PENGAJUAN);
-								else $total = 0;
-								$this->excel->getActiveSheet()->setCellValue('S'.$index3, "Rp.".$total);
-							foreach($this->mm->get_where5_join('data_ikk','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram,'data_ikk.KodeKegiatan',$row6->KodeKegiatan,'ref_ikk','data_ikk.KodeIkk=ref_ikk.KodeIkk')->result() as $row7){
-								$this->excel->getActiveSheet()->setCellValue('I'.$index3, $row7->Ikk);
-								if($this->mm->cek('target_ikk','KodeIkk',$row7->KodeIkk))
-								$target_nasional = $this->mm->get_where('target_ikk','KodeIkk',$row7->KodeIkk)->row()->TargetNasional;
-								else $target_nasional = '0';
-									$this->excel->getActiveSheet()->setCellValue('J'.$index3, $target_nasional.'%');
-								$jumlah_ikk = $this->mm->get_where('data_ikk','KodeIkk',$row7->KodeIkk)->row()->Jumlah;
-									$this->excel->getActiveSheet()->setCellValue('K'.$index3, $jumlah_ikk.'%');
+	// 							if($this->mm->cek('data_reformasi_kesehatan','KD_PENGAJUAN',$row->KD_PENGAJUAN)) $total = $this->mm->sum('data_reformasi_kesehatan','Biaya','KD_PENGAJUAN',$row->KD_PENGAJUAN);
+	// 							else $total = 0;
+	// 							$this->excel->getActiveSheet()->setCellValue('S'.$index3, "Rp.".$total);
+	// 						foreach($this->mm->get_where5_join('data_ikk','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram,'data_ikk.KodeKegiatan',$row6->KodeKegiatan,'ref_ikk','data_ikk.KodeIkk=ref_ikk.KodeIkk')->result() as $row7){
+	// 							$this->excel->getActiveSheet()->setCellValue('I'.$index3, $row7->Ikk);
+	// 							if($this->mm->cek('target_ikk','KodeIkk',$row7->KodeIkk))
+	// 							$target_nasional = $this->mm->get_where('target_ikk','KodeIkk',$row7->KodeIkk)->row()->TargetNasional;
+	// 							else $target_nasional = '0';
+	// 								$this->excel->getActiveSheet()->setCellValue('J'.$index3, $target_nasional.'%');
+	// 							$jumlah_ikk = $this->mm->get_where('data_ikk','KodeIkk',$row7->KodeIkk)->row()->Jumlah;
+	// 								$this->excel->getActiveSheet()->setCellValue('K'.$index3, $jumlah_ikk.'%');
 								
-								$index3++;
-							}
+	// 							$index3++;
+	// 						}
 							
-						}
+	// 					}
 						
-						if($index3>=$index2){
-							$index=$index3;
-						}else{
-							$index=$index2;
-						}
+	// 					if($index3>=$index2){
+	// 						$index=$index3;
+	// 					}else{
+	// 						$index=$index2;
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 		$no++;
+	// 	}
+	// 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+ //        header('Content-Disposition: attachment;filename="DAFTAR PENGAJUAN '.$TAHUN_ANGGARAN.'.xlsx"');
+ //        header('Cache-Control: max-age=0');
+
+ //        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
+ //        $objWriter->save('php://output');
+	// }
+
+	function rekap_reformasi_kesehatan() {
+		$tanggal_print = date('d/m/Y');
+		$tanggal_judul = date('dmY');
+		$thn = $this->input->post('thn_anggaran');
+		$records = $this->mm->cetak_fokus_prioritas_reformasi_kesehatan($thn);
+		ini_set("memory_limit", "256M");
+		// set to excel
+		$this->load->library('excel');                 
+		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+		$this->excel = $objReader->load('file/cetak_reformasi_kesehatan.xlsx');
+		$this->excel->setActiveSheetIndex(0);
+		
+		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, 'Rekap Proposal Tahun Anggaran '.$thn); //print judul
+		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(2, 2, $tanggal_print); //print tanggal	
+		
+		$no = 0;
+		$awal_baris = 7; //awal baris
+		$baris = $awal_baris;
+
+		if($records->num_rows()>0){
+			foreach($records->result() as $row){
+				$no = $no + 1;
+
+				$tgl_asli = $row->TANGGAL_PEMBUATAN;
+				$tgl = date("d-m-Y", strtotime($tgl_asli));
+
+				//SetCellValue
+				$this->excel->getActiveSheet()->setCellValue('A'.$baris, $no);
+				$this->excel->getActiveSheet()->setCellValue('B'.$baris, $row->NamaProvinsi);
+				$this->excel->getActiveSheet()->setCellValue('C'.$baris, $row->nmsatker);
+				$this->excel->getActiveSheet()->setCellValue('D'.$baris, $row->JUDUL_PROPOSAL);
+				$this->excel->getActiveSheet()->setCellValue('E'.$baris, $row->NOMOR_SURAT);
+				$this->excel->getActiveSheet()->setCellValue('F'.$baris, '['.$row->KodeProgram.'] '.$row->NamaProgram);
+				$this->excel->getActiveSheet()->setCellValue('G'.$baris, '['.$row->KodeKegiatan.'] '.$row->NamaKegiatan);
+				$n=0;
+				$biaya;
+
+				foreach($this->pm->get('reformasi_kesehatan')->result() as $ref)
+				{
+					if($this->mm->cek2('data_reformasi_kesehatan', 'idReformasiKesehatan', $ref->idReformasiKesehatan, 'KD_PENGAJUAN', $row->KD_PENGAJUAN)) {
+					$biaya[$n] = $this->pm->get_biaya('data_reformasi_kesehatan','Biaya', 'KD_PENGAJUAN',$row->KD_PENGAJUAN,'idReformasiKesehatan',$ref->idReformasiKesehatan);
 					}
+					else $biaya[$n]='0';
+					$n++;
 				}
+				
+				$this->excel->getActiveSheet()->setCellValue('H'.$baris, "Rp.".number_format($biaya[0],2)); 
+				$this->excel->getActiveSheet()->setCellValue('I'.$baris, "Rp.".number_format($biaya[1],2));
+				$this->excel->getActiveSheet()->setCellValue('J'.$baris, "Rp.".number_format($biaya[2],2));
+				$this->excel->getActiveSheet()->setCellValue('K'.$baris, "Rp.".number_format($biaya[3],2));
+				$this->excel->getActiveSheet()->setCellValue('L'.$baris, "Rp.".number_format($biaya[4],2)); 
+				$this->excel->getActiveSheet()->setCellValue('M'.$baris, "Rp.".number_format($biaya[5],2)); 
+				$this->excel->getActiveSheet()->setCellValue('N'.$baris, "Rp.".number_format($biaya[6],2));  
+				$this->excel->getActiveSheet()->setCellValue('O'.$baris, "Rp.".number_format($biaya[7],2));
+				
+				if($this->mm->cek('data_reformasi_kesehatan','KD_PENGAJUAN',$row->KD_PENGAJUAN))
+					$biaya_total = $this->mm->sum('data_reformasi_kesehatan','Biaya','KD_PENGAJUAN',$row->KD_PENGAJUAN);
+				else 
+					$biaya_total=0;
+				$this->excel->getActiveSheet()->setCellValue('P'.$baris, "Rp. ".number_format($biaya_total,2));
+				$baris++;
 			}
-			$no++;
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':P'.($baris-1))->getBorders()->getInside()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':P'.($baris-1))->getBorders()->getBottom()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':P'.($baris-1))->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':P'.($baris-1))->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 		}
+		
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="DAFTAR PENGAJUAN '.$TAHUN_ANGGARAN.'.xlsx"');
+        header('Content-Disposition: attachment;filename="Rekap Pengajuan Proposal Reformasi Kesehatan.xlsx"');
         header('Cache-Control: max-age=0');
 
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
         $objWriter->save('php://output');
 	}
 	
-	function rekap_jenis_pembiayaan()
-	{
-		$TAHUN_ANGGARAN = $this->input->post('thn_anggaran');
-		$pilihan_rekap = $this->input->post('rekap');
+	// function rekap_jenis_pembiayaan()
+	// {
+	// 	$TAHUN_ANGGARAN = $this->input->post('thn_anggaran');
+	// 	$pilihan_rekap = $this->input->post('rekap');
 		
-		$this->load->library('excel');    
-		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-		$this->excel = $objReader->load('file/rekap_jenis_pembiayaan.xlsx');
-		$this->excel->setActiveSheetIndex(0);
-		$this->excel->getActiveSheet()->setCellValue('A1', 'REKAPITULASI USULAN PROPOSAL PER PROGRAM, PER KEGIATAN DAN PER SUMBER DAYA TAHUN '.$TAHUN_ANGGARAN);
-		$this->excel->getActiveSheet()->setCellValue('A3', 'NO')
-									  ->setCellValue('B3', 'SATKER PENGUSUL')
-									  ->setCellValue('C3', 'KAB/KOTA')
-									  ->setCellValue('D3', 'JUDUL PROPOSAL AKTIVITAS')
-									  ->setCellValue('E3', 'NO/TGL SURAT PENGANTAR')
-									  ->setCellValue('F3', 'PROGRAM')
-									  ->setCellValue('G3', 'INDIKATOR KINERJA UTAMA (IKU)')
-									  ->setCellValue('H3', 'KEGIATAN')
-									  ->setCellValue('I3', 'INDIKATOR KINERJA KEGIATAN (IKK)')
-									  ->setCellValue('J3', 'TARGET KINERJA NASIONAL')
-									  ->setCellValue('K3', 'TARGET KINERJA DAERAH')
-									  ->setCellValue('L3', 'USULAN')
-									  ->setCellValue('L4', 'RUPIAH MURNI (RM)')
-									  ->setCellValue('M4', 'P/HLN')
-									  ->setCellValue('M5', 'P/HLN')
-									  ->setCellValue('N5', 'RUPIAH MURNI PENDAMPING (RMP)')
-									  ->setCellValue('O4', 'PNBP')
-									  ->setCellValue('P4', 'BLU')
-									  ->setCellValue('Q4', 'TOTAL');
+	// 	$this->load->library('excel');    
+	// 	$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+	// 	$this->excel = $objReader->load('file/rekap_jenis_pembiayaan.xlsx');
+	// 	$this->excel->setActiveSheetIndex(0);
+	// 	$this->excel->getActiveSheet()->setCellValue('A1', 'REKAPITULASI USULAN PROPOSAL PER PROGRAM, PER KEGIATAN DAN PER SUMBER DAYA TAHUN '.$TAHUN_ANGGARAN);
+	// 	$this->excel->getActiveSheet()->setCellValue('A3', 'NO')
+	// 								  ->setCellValue('B3', 'SATKER PENGUSUL')
+	// 								  ->setCellValue('C3', 'KAB/KOTA')
+	// 								  ->setCellValue('D3', 'JUDUL PROPOSAL AKTIVITAS')
+	// 								  ->setCellValue('E3', 'NO/TGL SURAT PENGANTAR')
+	// 								  ->setCellValue('F3', 'PROGRAM')
+	// 								  ->setCellValue('G3', 'INDIKATOR KINERJA UTAMA (IKU)')
+	// 								  ->setCellValue('H3', 'KEGIATAN')
+	// 								  ->setCellValue('I3', 'INDIKATOR KINERJA KEGIATAN (IKK)')
+	// 								  ->setCellValue('J3', 'TARGET KINERJA NASIONAL')
+	// 								  ->setCellValue('K3', 'TARGET KINERJA DAERAH')
+	// 								  ->setCellValue('L3', 'USULAN')
+	// 								  ->setCellValue('L4', 'RUPIAH MURNI (RM)')
+	// 								  ->setCellValue('M4', 'P/HLN')
+	// 								  ->setCellValue('M5', 'P/HLN')
+	// 								  ->setCellValue('N5', 'RUPIAH MURNI PENDAMPING (RMP)')
+	// 								  ->setCellValue('O4', 'PNBP')
+	// 								  ->setCellValue('P4', 'BLU')
+	// 								  ->setCellValue('Q4', 'TOTAL');
 
-		$no=1;
-		$index=6;
+	// 	$no=1;
+	// 	$index=6;
 		
-		foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','4','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
-			$this->excel->getActiveSheet()->getStyle('A'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-			$this->excel->getActiveSheet()->getStyle('C'.$index.':J'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-			//$this->excel->getActiveSheet()->getStyle('A'.$index.':J'.$index)->getFont()->setBold(true);
-			$this->excel->getActiveSheet()->setCellValue('A'.$index, $no);
-			$this->excel->getActiveSheet()->setCellValue('B'.$index, $row->nmsatker);
+	// 	foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','1','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
+	// 		$this->excel->getActiveSheet()->getStyle('A'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	// 		$this->excel->getActiveSheet()->getStyle('C'.$index.':J'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	// 		//$this->excel->getActiveSheet()->getStyle('A'.$index.':J'.$index)->getFont()->setBold(true);
+	// 		$this->excel->getActiveSheet()->setCellValue('A'.$index, $no);
+	// 		$this->excel->getActiveSheet()->setCellValue('B'.$index, $row->nmsatker);
 
-			foreach($this->mm->get_where2_join('ref_satker','kdlokasi',$row->kdlokasi,'kdsatker',$row->kdsatker,'ref_kabupaten','ref_kabupaten.KodeKabupaten=ref_satker.kdkabkota')->result() as $tes){
-				foreach($this->mm->get_where2('ref_kabupaten','KodeProvinsi',$tes->kdlokasi,'KodeKabupaten',$tes->kdkabkota)->result() as $tes2)			
-				$this->excel->getActiveSheet()->setCellValue('C'.$index, $tes2->NamaKabupaten);			
-			}
-			$this->excel->getActiveSheet()->setCellValue('D'.$index, $row->JUDUL_PROPOSAL);			
-			$tanggal = explode('-', $row->TANGGAL_PENGAJUAN);
-			$this->excel->getActiveSheet()->setCellValue('E'.$index, $row->NOMOR_SURAT.'/'.$tanggal[2].'-'.$tanggal[1].'-'.$tanggal[0]);
-			/*if($row->ID_RENCANA_ANGGARAN == '1'){
-				$this->excel->getActiveSheet()->setCellValue('I'.$index, 'V');
-			}else{
-				$this->excel->getActiveSheet()->setCellValue('J'.$index, 'V');
-			}*/
-			//$index++;
-			$index2 = $index;
-			$index3 = $index;
-			foreach($this->mm->get_where('data_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $row2){
-				foreach($this->mm->get_where2('data_sub_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi)->result() as $row3){
-					foreach($this->mm->get_where3('data_program','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi)->result() as $row4){
-						$this->excel->getActiveSheet()->setCellValue('F'.$index2, $row4->NamaProgram);
-						foreach($this->mm->get_where4_join('data_iku','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'data_iku.KodeProgram',$row4->KodeProgram,'ref_iku','data_iku.KodeIku=ref_iku.KodeIku')->result() as $row5){
-							$this->excel->getActiveSheet()->setCellValue('G'.$index2, $row5->Iku);
-							$index2++;
-						}
-						foreach($this->mm->get_where4('data_kegiatan','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram)->result() as $row6){
-							$this->excel->getActiveSheet()->setCellValue('H'.$index3, $row6->NamaKegiatan);
-							foreach($this->mm->get_where5_join('data_ikk','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram,'data_ikk.KodeKegiatan',$row6->KodeKegiatan,'ref_ikk','data_ikk.KodeIkk=ref_ikk.KodeIkk')->result() as $row7){
-								$this->excel->getActiveSheet()->setCellValue('I'.$index3, $row7->Ikk);
-								if($this->mm->cek('target_ikk','KodeIkk',$row7->KodeIkk))
-								$target_nasional = $this->mm->get_where('target_ikk','KodeIkk',$row7->KodeIkk)->row()->TargetNasional;
-								else $target_nasional = '0';
-									$this->excel->getActiveSheet()->setCellValue('J'.$index3, $target_nasional.'%');
-								$jumlah_ikk = $this->mm->get_where('data_ikk','KodeIkk',$row7->KodeIkk)->row()->Jumlah;
-									$this->excel->getActiveSheet()->setCellValue('K'.$index3, $jumlah_ikk.'%');
+	// 		foreach($this->mm->get_where2_join('ref_satker','kdlokasi',$row->kdlokasi,'kdsatker',$row->kdsatker,'ref_kabupaten','ref_kabupaten.KodeKabupaten=ref_satker.kdkabkota')->result() as $tes){
+	// 			foreach($this->mm->get_where2('ref_kabupaten','KodeProvinsi',$tes->kdlokasi,'KodeKabupaten',$tes->kdkabkota)->result() as $tes2)			
+	// 			$this->excel->getActiveSheet()->setCellValue('C'.$index, $tes2->NamaKabupaten);			
+	// 		}
+	// 		$this->excel->getActiveSheet()->setCellValue('D'.$index, $row->JUDUL_PROPOSAL);			
+	// 		$tanggal = explode('-', $row->TANGGAL_PENGAJUAN);
+	// 		$this->excel->getActiveSheet()->setCellValue('E'.$index, $row->NOMOR_SURAT.'/'.$tanggal[2].'-'.$tanggal[1].'-'.$tanggal[0]);
+	// 		/*if($row->ID_RENCANA_ANGGARAN == '1'){
+	// 			$this->excel->getActiveSheet()->setCellValue('I'.$index, 'V');
+	// 		}else{
+	// 			$this->excel->getActiveSheet()->setCellValue('J'.$index, 'V');
+	// 		}*/
+	// 		//$index++;
+	// 		$index2 = $index;
+	// 		$index3 = $index;
+	// 		foreach($this->mm->get_where('data_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $row2){
+	// 			foreach($this->mm->get_where2('data_sub_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi)->result() as $row3){
+	// 				foreach($this->mm->get_where3('data_program','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi)->result() as $row4){
+	// 					$this->excel->getActiveSheet()->setCellValue('F'.$index2, $row4->NamaProgram);
+	// 					foreach($this->mm->get_where4_join('data_iku','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'data_iku.KodeProgram',$row4->KodeProgram,'ref_iku','data_iku.KodeIku=ref_iku.KodeIku')->result() as $row5){
+	// 						$this->excel->getActiveSheet()->setCellValue('G'.$index2, $row5->Iku);
+	// 						$index2++;
+	// 					}
+	// 					foreach($this->mm->get_where4('data_kegiatan','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram)->result() as $row6){
+	// 						$this->excel->getActiveSheet()->setCellValue('H'.$index3, $row6->NamaKegiatan);
+	// 						foreach($this->mm->get_where5_join('data_ikk','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram,'data_ikk.KodeKegiatan',$row6->KodeKegiatan,'ref_ikk','data_ikk.KodeIkk=ref_ikk.KodeIkk')->result() as $row7){
+	// 							$this->excel->getActiveSheet()->setCellValue('I'.$index3, $row7->Ikk);
+	// 							if($this->mm->cek('target_ikk','KodeIkk',$row7->KodeIkk))
+	// 							$target_nasional = $this->mm->get_where('target_ikk','KodeIkk',$row7->KodeIkk)->row()->TargetNasional;
+	// 							else $target_nasional = '0';
+	// 								$this->excel->getActiveSheet()->setCellValue('J'.$index3, $target_nasional.'%');
+	// 							$jumlah_ikk = $this->mm->get_where('data_ikk','KodeIkk',$row7->KodeIkk)->row()->Jumlah;
+	// 								$this->excel->getActiveSheet()->setCellValue('K'.$index3, $jumlah_ikk.'%');
 								
-								if($this->mm->cek2('aktivitas', 'KodeJenisPembiayaan', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
-								$biaya_rm = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisPembiayaan', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_rm = 0;
-								if($this->mm->cek2('aktivitas', 'KodeJenisPembiayaan', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
-								$biaya_phln = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisPembiayaan', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_phln = 0;
-								$biaya_rmp = 0;
-								if($this->mm->cek2('aktivitas', 'KodeJenisPembiayaan', '3', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
-								$biaya_pnbp = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisPembiayaan', '3', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_pnbp = 0;
-								if($this->mm->cek2('aktivitas', 'KodeJenisPembiayaan', '4', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
-								$biaya_blu = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisPembiayaan', '4', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_blu = 0;
-								$this->excel->getActiveSheet()->setCellValue('L'.$index3, "Rp.".$biaya_rm);
-								$this->excel->getActiveSheet()->setCellValue('M'.$index3, "Rp.".$biaya_phln);
-								$this->excel->getActiveSheet()->setCellValue('N'.$index3, "Rp.".$biaya_rmp);
-								$this->excel->getActiveSheet()->setCellValue('O'.$index3, "Rp.".$biaya_pnbp);
-								$this->excel->getActiveSheet()->setCellValue('P'.$index3, "Rp.".$biaya_blu); 
+	// 							if($this->mm->cek2('aktivitas', 'KodeJenisPembiayaan', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+	// 							$biaya_rm = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisPembiayaan', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_rm = 0;
+	// 							if($this->mm->cek2('aktivitas', 'KodeJenisPembiayaan', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+	// 							$biaya_phln = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisPembiayaan', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_phln = 0;
+	// 							$biaya_rmp = 0;
+	// 							if($this->mm->cek2('aktivitas', 'KodeJenisPembiayaan', '3', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+	// 							$biaya_pnbp = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisPembiayaan', '3', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_pnbp = 0;
+	// 							if($this->mm->cek2('aktivitas', 'KodeJenisPembiayaan', '4', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+	// 							$biaya_blu = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisPembiayaan', '4', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_blu = 0;
+	// 							$this->excel->getActiveSheet()->setCellValue('L'.$index3, "Rp.".$biaya_rm);
+	// 							$this->excel->getActiveSheet()->setCellValue('M'.$index3, "Rp.".$biaya_phln);
+	// 							$this->excel->getActiveSheet()->setCellValue('N'.$index3, "Rp.".$biaya_rmp);
+	// 							$this->excel->getActiveSheet()->setCellValue('O'.$index3, "Rp.".$biaya_pnbp);
+	// 							$this->excel->getActiveSheet()->setCellValue('P'.$index3, "Rp.".$biaya_blu); 
 								
-								if($this->mm->cek('aktivitas','KD_PENGAJUAN', $row->KD_PENGAJUAN)) $biaya_total = $this->mm->sum('aktivitas','Jumlah','KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_total=0;
-								$this->excel->getActiveSheet()->setCellValue('Q'.$index3, "Rp.".$biaya_total); 
-								$index3++;
-							}
+	// 							if($this->mm->cek('aktivitas','KD_PENGAJUAN', $row->KD_PENGAJUAN)) $biaya_total = $this->mm->sum('aktivitas','Jumlah','KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_total=0;
+	// 							$this->excel->getActiveSheet()->setCellValue('Q'.$index3, "Rp.".$biaya_total); 
+	// 							$index3++;
+	// 						}
 							
-						}
+	// 					}
 						
-						if($index3>=$index2){
-							$index=$index3;
-						}else{
-							$index=$index2;
-						}
-					}
-				}
+	// 					if($index3>=$index2){
+	// 						$index=$index3;
+	// 					}else{
+	// 						$index=$index2;
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 		$no++;
+	// 	}
+	// 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+ //        header('Content-Disposition: attachment;filename="DAFTAR PENGAJUAN '.$TAHUN_ANGGARAN.'.xlsx"');
+ //        header('Cache-Control: max-age=0');
+
+ //        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
+ //        $objWriter->save('php://output');
+	// }
+
+	function rekap_jenis_pembiayaan() {
+		$tanggal_print = date('d/m/Y');
+		$tanggal_judul = date('dmY');
+		$thn = $this->input->post('thn_anggaran');
+		$records = $this->mm->cetak_fokus_prioritas_reformasi_kesehatan($thn);
+		ini_set("memory_limit", "256M");
+		// set to excel
+		$this->load->library('excel');                 
+		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+		$this->excel = $objReader->load('file/cetak_jenis_pembiayaan.xlsx');
+		$this->excel->setActiveSheetIndex(0);
+		
+		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, 'Rekap Proposal Tahun Anggaran '.$thn); //print judul
+		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(2, 2, $tanggal_print); //print tanggal	
+		
+		$no = 0;
+		$awal_baris = 7; //awal baris
+		$baris = $awal_baris;
+
+		if($records->num_rows()>0){
+			foreach($records->result() as $row){
+				$no = $no + 1;
+
+				$tgl_asli = $row->TANGGAL_PEMBUATAN;
+				$tgl = date("d-m-Y", strtotime($tgl_asli));
+
+				//SetCellValue
+				$this->excel->getActiveSheet()->setCellValue('A'.$baris, $no);
+				$this->excel->getActiveSheet()->setCellValue('B'.$baris, $row->NamaProvinsi);
+				$this->excel->getActiveSheet()->setCellValue('C'.$baris, $row->nmsatker);
+				$this->excel->getActiveSheet()->setCellValue('D'.$baris, $row->JUDUL_PROPOSAL);
+				$this->excel->getActiveSheet()->setCellValue('E'.$baris, $row->NOMOR_SURAT);
+				$this->excel->getActiveSheet()->setCellValue('F'.$baris, '['.$row->KodeProgram.'] '.$row->NamaProgram);
+				$this->excel->getActiveSheet()->setCellValue('G'.$baris, '['.$row->KodeKegiatan.'] '.$row->NamaKegiatan);
+				$n=0;
+				$biaya;
+
+				if($this->mm->cek2('aktivitas', 'KodeJenisPembiayaan', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+					$biaya_phln = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisPembiayaan', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else 
+					$biaya_phln = 0;
+
+				if($this->mm->cek2('aktivitas', 'KodeJenisPembiayaan', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+					$biaya_rm = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisPembiayaan', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else
+					$biaya_rm = 0;
+				
+				if($this->mm->cek2('aktivitas', 'KodeJenisPembiayaan', '3', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+					$biaya_pnbp = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisPembiayaan', '3', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else 
+					$biaya_pnbp = 0;
+
+				if($this->mm->cek2('aktivitas', 'KodeJenisPembiayaan', '4', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+					$biaya_blu = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisPembiayaan', '4', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else 
+					$biaya_blu = 0;
+				
+				$this->excel->getActiveSheet()->setCellValue('H'.$baris, "Rp.".number_format($biaya_phln,2)); 
+				$this->excel->getActiveSheet()->setCellValue('I'.$baris, "Rp.".number_format($biaya_rm,2));
+				$this->excel->getActiveSheet()->setCellValue('J'.$baris, "Rp.".number_format($biaya_pnbp,2));
+				$this->excel->getActiveSheet()->setCellValue('K'.$baris, "Rp.".number_format($biaya_blu,2));
+				
+				if($this->mm->cek('data_reformasi_kesehatan','KD_PENGAJUAN',$row->KD_PENGAJUAN))
+					$biaya_total = $this->mm->sum('data_reformasi_kesehatan','Biaya','KD_PENGAJUAN',$row->KD_PENGAJUAN);
+				else 
+					$biaya_total=0;
+				$this->excel->getActiveSheet()->setCellValue('L'.$baris, "Rp. ".number_format($biaya_total,2));
+				$baris++;
 			}
-			$no++;
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':L'.($baris-1))->getBorders()->getInside()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':L'.($baris-1))->getBorders()->getBottom()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':L'.($baris-1))->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':L'.($baris-1))->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 		}
+		
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="DAFTAR PENGAJUAN '.$TAHUN_ANGGARAN.'.xlsx"');
+        header('Content-Disposition: attachment;filename="Rekap Pengajuan Proposal Jenis Pembiayaan.xlsx"');
         header('Cache-Control: max-age=0');
 
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
         $objWriter->save('php://output');
 	}
 	
-	function rekap_sumber_dana()
-	{
-		$TAHUN_ANGGARAN = $this->input->post('thn_anggaran');
-		$pilihan_rekap = $this->input->post('rekap');
+	// function rekap_sumber_dana()
+	// {
+	// 	$TAHUN_ANGGARAN = $this->input->post('thn_anggaran');
+	// 	$pilihan_rekap = $this->input->post('rekap');
 		
-		$this->load->library('excel');    
-		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-		$this->excel = $objReader->load('file/rekap_sumber_dana.xlsx');
-		$this->excel->setActiveSheetIndex(0);
-		$this->excel->getActiveSheet()->setCellValue('A1', 'REKAPITULASI USULAN PROPOSAL BERDASARKAN SUMBER DANA TAHUN '.$TAHUN_ANGGARAN);
-		$this->excel->getActiveSheet()->setCellValue('A3', 'NO')
-									  ->setCellValue('B3', 'SATKER PENGUSUL')
-									  ->setCellValue('C3', 'KAB/KOTA')
-									  ->setCellValue('D3', 'JUDUL PROPOSAL AKTIVITAS')
-									  ->setCellValue('E3', 'NO/TGL SURAT PENGANTAR')
-									  ->setCellValue('F3', 'PROGRAM')
-									  ->setCellValue('G3', 'INDIKATOR KINERJA UTAMA (IKU)')
-									  ->setCellValue('H3', 'KEGIATAN')
-									  ->setCellValue('I3', 'INDIKATOR KINERJA KEGIATAN (IKK)')
-									  ->setCellValue('J3', 'TARGET KINERJA NASIONAL')
-									  ->setCellValue('K3', 'TARGET KINERJA DAERAH')
-									  ->setCellValue('L3', 'USULAN')
-									  ->setCellValue('L4', 'APBN')
-									  ->setCellValue('M4', 'DAK');
+	// 	$this->load->library('excel');    
+	// 	$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+	// 	$this->excel = $objReader->load('file/rekap_sumber_dana.xlsx');
+	// 	$this->excel->setActiveSheetIndex(0);
+	// 	$this->excel->getActiveSheet()->setCellValue('A1', 'REKAPITULASI USULAN PROPOSAL BERDASARKAN SUMBER DANA TAHUN '.$TAHUN_ANGGARAN);
+	// 	$this->excel->getActiveSheet()->setCellValue('A3', 'NO')
+	// 								  ->setCellValue('B3', 'SATKER PENGUSUL')
+	// 								  ->setCellValue('C3', 'KAB/KOTA')
+	// 								  ->setCellValue('D3', 'JUDUL PROPOSAL AKTIVITAS')
+	// 								  ->setCellValue('E3', 'NO/TGL SURAT PENGANTAR')
+	// 								  ->setCellValue('F3', 'PROGRAM')
+	// 								  ->setCellValue('G3', 'INDIKATOR KINERJA UTAMA (IKU)')
+	// 								  ->setCellValue('H3', 'KEGIATAN')
+	// 								  ->setCellValue('I3', 'INDIKATOR KINERJA KEGIATAN (IKK)')
+	// 								  ->setCellValue('J3', 'TARGET KINERJA NASIONAL')
+	// 								  ->setCellValue('K3', 'TARGET KINERJA DAERAH')
+	// 								  ->setCellValue('L3', 'USULAN')
+	// 								  ->setCellValue('L4', 'APBN')
+	// 								  ->setCellValue('M4', 'DAK');
 
-		$no=1;
-		$index=5;
+	// 	$no=1;
+	// 	$index=5;
 		
-		foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','4','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
-			$this->excel->getActiveSheet()->getStyle('A'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-			$this->excel->getActiveSheet()->getStyle('C'.$index.':J'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-			//$this->excel->getActiveSheet()->getStyle('A'.$index.':J'.$index)->getFont()->setBold(true);
-			$this->excel->getActiveSheet()->setCellValue('A'.$index, $no);
-			$this->excel->getActiveSheet()->setCellValue('B'.$index, $row->nmsatker);
+	// 	foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','1','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
+	// 		$this->excel->getActiveSheet()->getStyle('A'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	// 		$this->excel->getActiveSheet()->getStyle('C'.$index.':J'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	// 		//$this->excel->getActiveSheet()->getStyle('A'.$index.':J'.$index)->getFont()->setBold(true);
+	// 		$this->excel->getActiveSheet()->setCellValue('A'.$index, $no);
+	// 		$this->excel->getActiveSheet()->setCellValue('B'.$index, $row->nmsatker);
 
-			foreach($this->mm->get_where2_join('ref_satker','kdlokasi',$row->kdlokasi,'kdsatker',$row->kdsatker,'ref_kabupaten','ref_kabupaten.KodeKabupaten=ref_satker.kdkabkota')->result() as $tes){
-				foreach($this->mm->get_where2('ref_kabupaten','KodeProvinsi',$tes->kdlokasi,'KodeKabupaten',$tes->kdkabkota)->result() as $tes2)			
-				$this->excel->getActiveSheet()->setCellValue('C'.$index, $tes2->NamaKabupaten);			
-			}
-			$this->excel->getActiveSheet()->setCellValue('D'.$index, $row->JUDUL_PROPOSAL);			
-			$tanggal = explode('-', $row->TANGGAL_PENGAJUAN);
-			$this->excel->getActiveSheet()->setCellValue('E'.$index, $row->NOMOR_SURAT.'/'.$tanggal[2].'-'.$tanggal[1].'-'.$tanggal[0]);
-			/*if($row->ID_RENCANA_ANGGARAN == '1'){
-				$this->excel->getActiveSheet()->setCellValue('I'.$index, 'V');
-			}else{
-				$this->excel->getActiveSheet()->setCellValue('J'.$index, 'V');
-			}*/
-			//$index++;
-			$index2 = $index;
-			$index3 = $index;
-			foreach($this->mm->get_where('data_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $row2){
-				foreach($this->mm->get_where2('data_sub_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi)->result() as $row3){
-					foreach($this->mm->get_where3('data_program','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi)->result() as $row4){
-						$this->excel->getActiveSheet()->setCellValue('F'.$index2, $row4->NamaProgram);
-						foreach($this->mm->get_where4_join('data_iku','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'data_iku.KodeProgram',$row4->KodeProgram,'ref_iku','data_iku.KodeIku=ref_iku.KodeIku')->result() as $row5){
-							$this->excel->getActiveSheet()->setCellValue('G'.$index2, $row5->Iku);
-							$index2++;
-						}
-						foreach($this->mm->get_where4('data_kegiatan','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram)->result() as $row6){
-							$this->excel->getActiveSheet()->setCellValue('H'.$index3, $row6->NamaKegiatan);
-								if($this->mm->cek2('aktivitas', 'idRencanaAnggaran', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
-								$biaya_apbn = $this->mm->sum2('aktivitas', 'Jumlah', 'idRencanaAnggaran', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_apbn= 0;
-								if($this->mm->cek2('aktivitas', 'idRencanaAnggaran', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
-								$biaya_dak = $this->mm->sum2('aktivitas', 'Jumlah', 'idRencanaAnggaran', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_dak= 0;
-								$this->excel->getActiveSheet()->setCellValue('L'.$index3, "Rp.".$biaya_apbn);
-								$this->excel->getActiveSheet()->setCellValue('M'.$index3, "Rp.".$biaya_dak);
-							foreach($this->mm->get_where5_join('data_ikk','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram,'data_ikk.KodeKegiatan',$row6->KodeKegiatan,'ref_ikk','data_ikk.KodeIkk=ref_ikk.KodeIkk')->result() as $row7){
-								$this->excel->getActiveSheet()->setCellValue('I'.$index3, $row7->Ikk);
-								if($this->mm->cek('target_ikk','KodeIkk',$row7->KodeIkk))
-								$target_nasional = $this->mm->get_where('target_ikk','KodeIkk',$row7->KodeIkk)->row()->TargetNasional;
-								else $target_nasional = '0';
-									$this->excel->getActiveSheet()->setCellValue('J'.$index3, $target_nasional.'%');
-								$jumlah_ikk = $this->mm->get_where('data_ikk','KodeIkk',$row7->KodeIkk)->row()->Jumlah;
-									$this->excel->getActiveSheet()->setCellValue('K'.$index3, $jumlah_ikk.'%');
+	// 		foreach($this->mm->get_where2_join('ref_satker','kdlokasi',$row->kdlokasi,'kdsatker',$row->kdsatker,'ref_kabupaten','ref_kabupaten.KodeKabupaten=ref_satker.kdkabkota')->result() as $tes){
+	// 			foreach($this->mm->get_where2('ref_kabupaten','KodeProvinsi',$tes->kdlokasi,'KodeKabupaten',$tes->kdkabkota)->result() as $tes2)			
+	// 			$this->excel->getActiveSheet()->setCellValue('C'.$index, $tes2->NamaKabupaten);			
+	// 		}
+	// 		$this->excel->getActiveSheet()->setCellValue('D'.$index, $row->JUDUL_PROPOSAL);			
+	// 		$tanggal = explode('-', $row->TANGGAL_PENGAJUAN);
+	// 		$this->excel->getActiveSheet()->setCellValue('E'.$index, $row->NOMOR_SURAT.'/'.$tanggal[2].'-'.$tanggal[1].'-'.$tanggal[0]);
+	// 		/*if($row->ID_RENCANA_ANGGARAN == '1'){
+	// 			$this->excel->getActiveSheet()->setCellValue('I'.$index, 'V');
+	// 		}else{
+	// 			$this->excel->getActiveSheet()->setCellValue('J'.$index, 'V');
+	// 		}*/
+	// 		//$index++;
+	// 		$index2 = $index;
+	// 		$index3 = $index;
+	// 		foreach($this->mm->get_where('data_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $row2){
+	// 			foreach($this->mm->get_where2('data_sub_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi)->result() as $row3){
+	// 				foreach($this->mm->get_where3('data_program','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi)->result() as $row4){
+	// 					$this->excel->getActiveSheet()->setCellValue('F'.$index2, $row4->NamaProgram);
+	// 					foreach($this->mm->get_where4_join('data_iku','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'data_iku.KodeProgram',$row4->KodeProgram,'ref_iku','data_iku.KodeIku=ref_iku.KodeIku')->result() as $row5){
+	// 						$this->excel->getActiveSheet()->setCellValue('G'.$index2, $row5->Iku);
+	// 						$index2++;
+	// 					}
+	// 					foreach($this->mm->get_where4('data_kegiatan','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram)->result() as $row6){
+	// 						$this->excel->getActiveSheet()->setCellValue('H'.$index3, $row6->NamaKegiatan);
+	// 							if($this->mm->cek2('aktivitas', 'idRencanaAnggaran', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+	// 							$biaya_apbn = $this->mm->sum2('aktivitas', 'Jumlah', 'idRencanaAnggaran', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_apbn= 0;
+	// 							if($this->mm->cek2('aktivitas', 'idRencanaAnggaran', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+	// 							$biaya_dak = $this->mm->sum2('aktivitas', 'Jumlah', 'idRencanaAnggaran', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_dak= 0;
+	// 							$this->excel->getActiveSheet()->setCellValue('L'.$index3, "Rp.".$biaya_apbn);
+	// 							$this->excel->getActiveSheet()->setCellValue('M'.$index3, "Rp.".$biaya_dak);
+	// 						foreach($this->mm->get_where5_join('data_ikk','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram,'data_ikk.KodeKegiatan',$row6->KodeKegiatan,'ref_ikk','data_ikk.KodeIkk=ref_ikk.KodeIkk')->result() as $row7){
+	// 							$this->excel->getActiveSheet()->setCellValue('I'.$index3, $row7->Ikk);
+	// 							if($this->mm->cek('target_ikk','KodeIkk',$row7->KodeIkk))
+	// 							$target_nasional = $this->mm->get_where('target_ikk','KodeIkk',$row7->KodeIkk)->row()->TargetNasional;
+	// 							else $target_nasional = '0';
+	// 								$this->excel->getActiveSheet()->setCellValue('J'.$index3, $target_nasional.'%');
+	// 							$jumlah_ikk = $this->mm->get_where('data_ikk','KodeIkk',$row7->KodeIkk)->row()->Jumlah;
+	// 								$this->excel->getActiveSheet()->setCellValue('K'.$index3, $jumlah_ikk.'%');
 								
 								
 								
-								$index3++;
-							}
+	// 							$index3++;
+	// 						}
 							
-						}
+	// 					}
 						
-						if($index3>=$index2){
-							$index=$index3;
-						}else{
-							$index=$index2;
-						}
-					}
-				}
+	// 					if($index3>=$index2){
+	// 						$index=$index3;
+	// 					}else{
+	// 						$index=$index2;
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 		$no++;
+	// 	}
+	// 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+ //        header('Content-Disposition: attachment;filename="DAFTAR PENGAJUAN '.$TAHUN_ANGGARAN.'.xlsx"');
+ //        header('Cache-Control: max-age=0');
+
+ //        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
+ //        $objWriter->save('php://output');
+	// }
+
+	function rekap_sumber_dana() {
+		$tanggal_print = date('d/m/Y');
+		$tanggal_judul = date('dmY');
+		$thn = $this->input->post('thn_anggaran');
+		$records = $this->mm->cetak_fokus_prioritas_reformasi_kesehatan($thn);
+		ini_set("memory_limit", "256M");
+		// set to excel
+		$this->load->library('excel');                 
+		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+		$this->excel = $objReader->load('file/cetak_sumber_dana.xlsx');
+		$this->excel->setActiveSheetIndex(0);
+		
+		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, 'Rekap Proposal Tahun Anggaran '.$thn); //print judul
+		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(2, 2, $tanggal_print); //print tanggal	
+		
+		$no = 0;
+		$awal_baris = 7; //awal baris
+		$baris = $awal_baris;
+
+		if($records->num_rows()>0){
+			foreach($records->result() as $row){
+				$no = $no + 1;
+
+				$tgl_asli = $row->TANGGAL_PEMBUATAN;
+				$tgl = date("d-m-Y", strtotime($tgl_asli));
+
+				//SetCellValue
+				$this->excel->getActiveSheet()->setCellValue('A'.$baris, $no);
+				$this->excel->getActiveSheet()->setCellValue('B'.$baris, $row->NamaProvinsi);
+				$this->excel->getActiveSheet()->setCellValue('C'.$baris, $row->nmsatker);
+				$this->excel->getActiveSheet()->setCellValue('D'.$baris, $row->JUDUL_PROPOSAL);
+				$this->excel->getActiveSheet()->setCellValue('E'.$baris, $row->NOMOR_SURAT);
+				$this->excel->getActiveSheet()->setCellValue('F'.$baris, '['.$row->KodeProgram.'] '.$row->NamaProgram);
+				$this->excel->getActiveSheet()->setCellValue('G'.$baris, '['.$row->KodeKegiatan.'] '.$row->NamaKegiatan);
+				
+				if($this->mm->cek2('aktivitas', 'idRencanaAnggaran', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+					$biaya_apbn = $this->mm->sum2('aktivitas', 'Jumlah', 'idRencanaAnggaran', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else
+					$biaya_apbn= 0;
+				if($this->mm->cek2('aktivitas', 'idRencanaAnggaran', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+					$biaya_dak = $this->mm->sum2('aktivitas', 'Jumlah', 'idRencanaAnggaran', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else 
+					$biaya_dak= 0;
+				
+				$this->excel->getActiveSheet()->setCellValue('H'.$baris, "Rp.".number_format($biaya_apbn,2)); 
+				$this->excel->getActiveSheet()->setCellValue('I'.$baris, "Rp.".number_format($biaya_dak,2));
+				$baris++;
 			}
-			$no++;
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':I'.($baris-1))->getBorders()->getInside()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':I'.($baris-1))->getBorders()->getBottom()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':I'.($baris-1))->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':I'.($baris-1))->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 		}
+		
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="DAFTAR PENGAJUAN '.$TAHUN_ANGGARAN.'.xlsx"');
+        header('Content-Disposition: attachment;filename="Rekap Pengajuan Proposal Sumber Dana.xlsx"');
         header('Cache-Control: max-age=0');
 
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
         $objWriter->save('php://output');
 	}
 	
-	function rekap_apbn()
-	{
-		$TAHUN_ANGGARAN = $this->input->post('thn_anggaran');
-		$pilihan_rekap = $this->input->post('rekap');
+	// function rekap_apbn()
+	// {
+	// 	$TAHUN_ANGGARAN = $this->input->post('thn_anggaran');
+	// 	$pilihan_rekap = $this->input->post('rekap');
 		
-		$this->load->library('excel');    
-		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-		$this->excel = $objReader->load('file/rekap_apbn.xlsx');
-		$this->excel->setActiveSheetIndex(0);
-		$this->excel->getActiveSheet()->setCellValue('A1', 'REKAPITULASI USULAN BERSUMBER APBN TAHUN '.$TAHUN_ANGGARAN);
-		$this->excel->getActiveSheet()->setCellValue('A3', 'NO')
-									  ->setCellValue('B3', 'SATKER PENGUSUL')
-									  ->setCellValue('C3', 'KAB/KOTA')
-									  ->setCellValue('D3', 'JUDUL PROPOSAL AKTIVITAS')
-									  ->setCellValue('E3', 'NO/TGL SURAT PENGANTAR')
-									  ->setCellValue('F3', 'PROGRAM')
-									  ->setCellValue('G3', 'INDIKATOR KINERJA UTAMA (IKU)')
-									  ->setCellValue('H3', 'KEGIATAN')
-									  ->setCellValue('I3', 'INDIKATOR KINERJA KEGIATAN (IKK)')
-									  ->setCellValue('J3', 'TARGET KINERJA NASIONAL')
-									  ->setCellValue('K3', 'TARGET KINERJA DAERAH')
-									  ->setCellValue('L3', 'USULAN')
-									  ->setCellValue('L4', 'BELANJA PEGAWAI')
-									  ->setCellValue('M4', 'BIAYA OPERASIONAL')
-									  ->setCellValue('N4', 'BIAYA PELAKSANAAN KEGIATAN/PROGRAM')
-									  ->setCellValue('O4', 'BIAYA OBAT')
-									  ->setCellValue('P4', 'BIAYA FISIK BANGUNAN')
-									  ->setCellValue('Q4', 'PENGADAAN ALKES')
-									  ->setCellValue('R4', 'PENGADAAN KENDARAAN');
+	// 	$this->load->library('excel');    
+	// 	$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+	// 	$this->excel = $objReader->load('file/rekap_apbn.xlsx');
+	// 	$this->excel->setActiveSheetIndex(0);
+	// 	$this->excel->getActiveSheet()->setCellValue('A1', 'REKAPITULASI USULAN BERSUMBER APBN TAHUN '.$TAHUN_ANGGARAN);
+	// 	$this->excel->getActiveSheet()->setCellValue('A3', 'NO')
+	// 								  ->setCellValue('B3', 'SATKER PENGUSUL')
+	// 								  ->setCellValue('C3', 'KAB/KOTA')
+	// 								  ->setCellValue('D3', 'JUDUL PROPOSAL AKTIVITAS')
+	// 								  ->setCellValue('E3', 'NO/TGL SURAT PENGANTAR')
+	// 								  ->setCellValue('F3', 'PROGRAM')
+	// 								  ->setCellValue('G3', 'INDIKATOR KINERJA UTAMA (IKU)')
+	// 								  ->setCellValue('H3', 'KEGIATAN')
+	// 								  ->setCellValue('I3', 'INDIKATOR KINERJA KEGIATAN (IKK)')
+	// 								  ->setCellValue('J3', 'TARGET KINERJA NASIONAL')
+	// 								  ->setCellValue('K3', 'TARGET KINERJA DAERAH')
+	// 								  ->setCellValue('L3', 'USULAN')
+	// 								  ->setCellValue('L4', 'BELANJA PEGAWAI')
+	// 								  ->setCellValue('M4', 'BIAYA OPERASIONAL')
+	// 								  ->setCellValue('N4', 'BIAYA PELAKSANAAN KEGIATAN/PROGRAM')
+	// 								  ->setCellValue('O4', 'BIAYA OBAT')
+	// 								  ->setCellValue('P4', 'BIAYA FISIK BANGUNAN')
+	// 								  ->setCellValue('Q4', 'PENGADAAN ALKES')
+	// 								  ->setCellValue('R4', 'PENGADAAN KENDARAAN');
 
-		$no=1;
-		$index=5;
+	// 	$no=1;
+	// 	$index=5;
 		
-		foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','4','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
-			$this->excel->getActiveSheet()->getStyle('A'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-			$this->excel->getActiveSheet()->getStyle('C'.$index.':J'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-			//$this->excel->getActiveSheet()->getStyle('A'.$index.':J'.$index)->getFont()->setBold(true);
-			$this->excel->getActiveSheet()->setCellValue('A'.$index, $no);
-			$this->excel->getActiveSheet()->setCellValue('B'.$index, $row->nmsatker);
+	// 	foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','1','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
+	// 		$this->excel->getActiveSheet()->getStyle('A'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	// 		$this->excel->getActiveSheet()->getStyle('C'.$index.':J'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	// 		//$this->excel->getActiveSheet()->getStyle('A'.$index.':J'.$index)->getFont()->setBold(true);
+	// 		$this->excel->getActiveSheet()->setCellValue('A'.$index, $no);
+	// 		$this->excel->getActiveSheet()->setCellValue('B'.$index, $row->nmsatker);
 
-			foreach($this->mm->get_where2_join('ref_satker','kdlokasi',$row->kdlokasi,'kdsatker',$row->kdsatker,'ref_kabupaten','ref_kabupaten.KodeKabupaten=ref_satker.kdkabkota')->result() as $tes){
-				foreach($this->mm->get_where2('ref_kabupaten','KodeProvinsi',$tes->kdlokasi,'KodeKabupaten',$tes->kdkabkota)->result() as $tes2)			
-				$this->excel->getActiveSheet()->setCellValue('C'.$index, $tes2->NamaKabupaten);			
-			}
-			$this->excel->getActiveSheet()->setCellValue('D'.$index, $row->JUDUL_PROPOSAL);			
-			$tanggal = explode('-', $row->TANGGAL_PENGAJUAN);
-			$this->excel->getActiveSheet()->setCellValue('E'.$index, $row->NOMOR_SURAT.'/'.$tanggal[2].'-'.$tanggal[1].'-'.$tanggal[0]);
-			/*if($row->ID_RENCANA_ANGGARAN == '1'){
-				$this->excel->getActiveSheet()->setCellValue('I'.$index, 'V');
-			}else{
-				$this->excel->getActiveSheet()->setCellValue('J'.$index, 'V');
-			}*/
-			//$index++;
-			$index2 = $index;
-			$index3 = $index;
-			foreach($this->mm->get_where('data_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $row2){
-				foreach($this->mm->get_where2('data_sub_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi)->result() as $row3){
-					foreach($this->mm->get_where3('data_program','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi)->result() as $row4){
-						$this->excel->getActiveSheet()->setCellValue('F'.$index2, $row4->NamaProgram);
-						foreach($this->mm->get_where4_join('data_iku','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'data_iku.KodeProgram',$row4->KodeProgram,'ref_iku','data_iku.KodeIku=ref_iku.KodeIku')->result() as $row5){
-							$this->excel->getActiveSheet()->setCellValue('G'.$index2, $row5->Iku);
-							$index2++;
-						}
-						foreach($this->mm->get_where4('data_kegiatan','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram)->result() as $row6){
-							$this->excel->getActiveSheet()->setCellValue('H'.$index3, $row6->NamaKegiatan);
-								if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
-								$biaya_bp = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_bp = 0;
-								if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
-								$biaya_op = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_op = 0;
-								if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '3', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
-								$biaya_pel = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '3', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_pel = 0;
-								if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '4', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
-								$biaya_ob = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '4', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_ob= 0;
-								if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '5', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
-								$biaya_fis = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '5', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_fis= 0;
-								if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '6', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
-								$biaya_alk = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '6', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_alk= 0;
-								if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '7', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
-								$biaya_kend = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '7', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_kend= 0;
-								$this->excel->getActiveSheet()->setCellValue('L'.$index3, "Rp.".$biaya_bp);
-								$this->excel->getActiveSheet()->setCellValue('M'.$index3, "Rp.".$biaya_op);
-								$this->excel->getActiveSheet()->setCellValue('N'.$index3, "Rp.".$biaya_pel);
-								$this->excel->getActiveSheet()->setCellValue('O'.$index3, "Rp.".$biaya_ob);
-								$this->excel->getActiveSheet()->setCellValue('P'.$index3, "Rp.".$biaya_fis); 
-								$this->excel->getActiveSheet()->setCellValue('Q'.$index3, "Rp.".$biaya_alk); 
-								$this->excel->getActiveSheet()->setCellValue('R'.$index3, "Rp.".$biaya_kend); 
+	// 		foreach($this->mm->get_where2_join('ref_satker','kdlokasi',$row->kdlokasi,'kdsatker',$row->kdsatker,'ref_kabupaten','ref_kabupaten.KodeKabupaten=ref_satker.kdkabkota')->result() as $tes){
+	// 			foreach($this->mm->get_where2('ref_kabupaten','KodeProvinsi',$tes->kdlokasi,'KodeKabupaten',$tes->kdkabkota)->result() as $tes2)			
+	// 			$this->excel->getActiveSheet()->setCellValue('C'.$index, $tes2->NamaKabupaten);			
+	// 		}
+	// 		$this->excel->getActiveSheet()->setCellValue('D'.$index, $row->JUDUL_PROPOSAL);			
+	// 		$tanggal = explode('-', $row->TANGGAL_PENGAJUAN);
+	// 		$this->excel->getActiveSheet()->setCellValue('E'.$index, $row->NOMOR_SURAT.'/'.$tanggal[2].'-'.$tanggal[1].'-'.$tanggal[0]);
+	// 		/*if($row->ID_RENCANA_ANGGARAN == '1'){
+	// 			$this->excel->getActiveSheet()->setCellValue('I'.$index, 'V');
+	// 		}else{
+	// 			$this->excel->getActiveSheet()->setCellValue('J'.$index, 'V');
+	// 		}*/
+	// 		//$index++;
+	// 		$index2 = $index;
+	// 		$index3 = $index;
+	// 		foreach($this->mm->get_where('data_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $row2){
+	// 			foreach($this->mm->get_where2('data_sub_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi)->result() as $row3){
+	// 				foreach($this->mm->get_where3('data_program','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi)->result() as $row4){
+	// 					$this->excel->getActiveSheet()->setCellValue('F'.$index2, $row4->NamaProgram);
+	// 					foreach($this->mm->get_where4_join('data_iku','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'data_iku.KodeProgram',$row4->KodeProgram,'ref_iku','data_iku.KodeIku=ref_iku.KodeIku')->result() as $row5){
+	// 						$this->excel->getActiveSheet()->setCellValue('G'.$index2, $row5->Iku);
+	// 						$index2++;
+	// 					}
+	// 					foreach($this->mm->get_where4('data_kegiatan','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram)->result() as $row6){
+	// 						$this->excel->getActiveSheet()->setCellValue('H'.$index3, $row6->NamaKegiatan);
+	// 							if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+	// 							$biaya_bp = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_bp = 0;
+	// 							if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+	// 							$biaya_op = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_op = 0;
+	// 							if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '3', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+	// 							$biaya_pel = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '3', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_pel = 0;
+	// 							if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '4', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+	// 							$biaya_ob = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '4', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_ob= 0;
+	// 							if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '5', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+	// 							$biaya_fis = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '5', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_fis= 0;
+	// 							if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '6', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+	// 							$biaya_alk = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '6', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_alk= 0;
+	// 							if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '7', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+	// 							$biaya_kend = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '7', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_kend= 0;
+	// 							$this->excel->getActiveSheet()->setCellValue('L'.$index3, "Rp.".$biaya_bp);
+	// 							$this->excel->getActiveSheet()->setCellValue('M'.$index3, "Rp.".$biaya_op);
+	// 							$this->excel->getActiveSheet()->setCellValue('N'.$index3, "Rp.".$biaya_pel);
+	// 							$this->excel->getActiveSheet()->setCellValue('O'.$index3, "Rp.".$biaya_ob);
+	// 							$this->excel->getActiveSheet()->setCellValue('P'.$index3, "Rp.".$biaya_fis); 
+	// 							$this->excel->getActiveSheet()->setCellValue('Q'.$index3, "Rp.".$biaya_alk); 
+	// 							$this->excel->getActiveSheet()->setCellValue('R'.$index3, "Rp.".$biaya_kend); 
 								
-								if($this->mm->cek('aktivitas','KD_PENGAJUAN', $row->KD_PENGAJUAN)) $biaya_total = $this->mm->sum('aktivitas','Jumlah','KD_PENGAJUAN', $row->KD_PENGAJUAN);
-								else $biaya_total=0;
-								$this->excel->getActiveSheet()->setCellValue('S'.$index3, "Rp.".$biaya_total); 
-							foreach($this->mm->get_where5_join('data_ikk','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram,'data_ikk.KodeKegiatan',$row6->KodeKegiatan,'ref_ikk','data_ikk.KodeIkk=ref_ikk.KodeIkk')->result() as $row7){
-								$this->excel->getActiveSheet()->setCellValue('I'.$index3, $row7->Ikk);
-								if($this->mm->cek('target_ikk','KodeIkk',$row7->KodeIkk))
-								$target_nasional = $this->mm->get_where('target_ikk','KodeIkk',$row7->KodeIkk)->row()->TargetNasional;
-								else $target_nasional = '0';
-									$this->excel->getActiveSheet()->setCellValue('J'.$index3, $target_nasional.'%');
-								$jumlah_ikk = $this->mm->get_where('data_ikk','KodeIkk',$row7->KodeIkk)->row()->Jumlah;
-									$this->excel->getActiveSheet()->setCellValue('K'.$index3, $jumlah_ikk.'%');
+	// 							if($this->mm->cek('aktivitas','KD_PENGAJUAN', $row->KD_PENGAJUAN)) $biaya_total = $this->mm->sum('aktivitas','Jumlah','KD_PENGAJUAN', $row->KD_PENGAJUAN);
+	// 							else $biaya_total=0;
+	// 							$this->excel->getActiveSheet()->setCellValue('S'.$index3, "Rp.".$biaya_total); 
+	// 						foreach($this->mm->get_where5_join('data_ikk','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram,'data_ikk.KodeKegiatan',$row6->KodeKegiatan,'ref_ikk','data_ikk.KodeIkk=ref_ikk.KodeIkk')->result() as $row7){
+	// 							$this->excel->getActiveSheet()->setCellValue('I'.$index3, $row7->Ikk);
+	// 							if($this->mm->cek('target_ikk','KodeIkk',$row7->KodeIkk))
+	// 							$target_nasional = $this->mm->get_where('target_ikk','KodeIkk',$row7->KodeIkk)->row()->TargetNasional;
+	// 							else $target_nasional = '0';
+	// 								$this->excel->getActiveSheet()->setCellValue('J'.$index3, $target_nasional.'%');
+	// 							$jumlah_ikk = $this->mm->get_where('data_ikk','KodeIkk',$row7->KodeIkk)->row()->Jumlah;
+	// 								$this->excel->getActiveSheet()->setCellValue('K'.$index3, $jumlah_ikk.'%');
 								
 								
-								$index3++;
-							}
+	// 							$index3++;
+	// 						}
 							
-						}
+	// 					}
 						
-						if($index3>=$index2){
-							$index=$index3;
-						}else{
-							$index=$index2;
-						}
-					}
-				}
+	// 					if($index3>=$index2){
+	// 						$index=$index3;
+	// 					}else{
+	// 						$index=$index2;
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 		$no++;
+	// 	}
+	// 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+ //        header('Content-Disposition: attachment;filename="DAFTAR PENGAJUAN '.$TAHUN_ANGGARAN.'.xlsx"');
+ //        header('Cache-Control: max-age=0');
+
+ //        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
+ //        $objWriter->save('php://output');
+	// }
+
+	function rekap_apbn() {
+		$tanggal_print = date('d/m/Y');
+		$tanggal_judul = date('dmY');
+		$thn = $this->session->userdata('thn_anggaran');
+		$records = $this->mm->cetak_apbn();
+		ini_set("memory_limit", "256M");
+		// set to excel
+		$this->load->library('excel');                 
+		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+		$this->excel = $objReader->load('file/cetak_apbn.xlsx');
+		$this->excel->setActiveSheetIndex(0);
+		
+		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, 'Rekap Proposal Tahun Anggaran '.$thn); //print judul
+		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(2, 2, $tanggal_print); //print tanggal	
+		
+		$no = 0;
+		$awal_baris = 7; //awal baris
+		$baris = $awal_baris;
+
+		if($records->num_rows()>0){
+			foreach($records->result() as $row){
+				$no = $no + 1;
+
+				$tgl_asli = $row->TANGGAL_PEMBUATAN;
+				$tgl = date("d-m-Y", strtotime($tgl_asli));
+
+				//SetCellValue
+				$this->excel->getActiveSheet()->setCellValue('A'.$baris, $no);
+				$this->excel->getActiveSheet()->setCellValue('B'.$baris, $row->NamaProvinsi);
+				$this->excel->getActiveSheet()->setCellValue('C'.$baris, $row->nmsatker);
+				$this->excel->getActiveSheet()->setCellValue('D'.$baris, $row->JUDUL_PROPOSAL);
+				$this->excel->getActiveSheet()->setCellValue('E'.$baris, $row->NOMOR_SURAT);
+				$this->excel->getActiveSheet()->setCellValue('F'.$baris, $row->TANGGAL_PENGAJUAN);
+				$this->excel->getActiveSheet()->setCellValue('G'.$baris, $row->NamaProgram);
+				$this->excel->getActiveSheet()->setCellValue('H'.$baris, $row->NamaKegiatan);
+
+				if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+				$biaya_bp = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '1', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else $biaya_bp = 0;
+				if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+				$biaya_op = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else $biaya_op = 0;
+				if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '3', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+				$biaya_pel = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '3', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else $biaya_pel = 0;
+				if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '4', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+				$biaya_ob = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '4', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else $biaya_ob= 0;
+				if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '5', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+				$biaya_fis = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '5', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else $biaya_fis= 0;
+				if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '6', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+				$biaya_alk = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '6', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else $biaya_alk= 0;
+				if($this->mm->cek2('aktivitas', 'KodeJenisUsulan', '7', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+				$biaya_kend = $this->mm->sum2('aktivitas', 'Jumlah', 'KodeJenisUsulan', '7', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else $biaya_kend= 0;
+				$this->excel->getActiveSheet()->setCellValue('I'.$baris, "Rp. ".number_format($biaya_bp,2));
+				$this->excel->getActiveSheet()->setCellValue('J'.$baris, "Rp. ".number_format($biaya_op,2));
+				$this->excel->getActiveSheet()->setCellValue('K'.$baris, "Rp. ".number_format($biaya_pel,2));
+				$this->excel->getActiveSheet()->setCellValue('L'.$baris, "Rp. ".number_format($biaya_ob,2));
+				$this->excel->getActiveSheet()->setCellValue('M'.$baris, "Rp. ".number_format($biaya_fis,2)); 
+				$this->excel->getActiveSheet()->setCellValue('N'.$baris, "Rp. ".number_format($biaya_alk,2)); 
+				$this->excel->getActiveSheet()->setCellValue('O'.$baris, "Rp. ".number_format($biaya_kend,2)); 
+				
+				if($this->mm->cek('aktivitas','KD_PENGAJUAN', $row->KD_PENGAJUAN)) $biaya_total = $this->mm->sum('aktivitas','Jumlah','KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else $biaya_total=0;
+				$this->excel->getActiveSheet()->setCellValue('P'.$baris, "Rp. ".number_format($biaya_total,2));
+				$baris++;
 			}
-			$no++;
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':P'.($baris-1))->getBorders()->getInside()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':P'.($baris-1))->getBorders()->getBottom()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':P'.($baris-1))->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':P'.($baris-1))->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 		}
+		
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="DAFTAR PENGAJUAN '.$TAHUN_ANGGARAN.'.xlsx"');
+        header('Content-Disposition: attachment;filename="Rekap Pengajuan Proposal.xlsx"');
         header('Cache-Control: max-age=0');
 
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
         $objWriter->save('php://output');
 	}
 	
+	// function rekap_dak()
+	// {
+	// 	$TAHUN_ANGGARAN = $this->input->post('thn_anggaran');
+	// 	$pilihan_rekap = $this->input->post('rekap');
+		
+	// 	$this->load->library('excel');    
+	// 	$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+	// 	$this->excel = $objReader->load('file/rekap_dak.xlsx');
+	// 	$this->excel->setActiveSheetIndex(0);
+		
+	// 	$no=1;
+	// 	$index=5;
+		
+	// 	foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','1','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
+	// 		$this->excel->getActiveSheet()->getStyle('A'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	// 		$this->excel->getActiveSheet()->getStyle('C'.$index.':J'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	// 		//$this->excel->getActiveSheet()->getStyle('A'.$index.':J'.$index)->getFont()->setBold(true);
+	// 		$this->excel->getActiveSheet()->setCellValue('A'.$index, $no);
+	// 		$this->excel->getActiveSheet()->setCellValue('B'.$index, $row->nmsatker);
+
+	// 		foreach($this->mm->get_where2_join('ref_satker','kdlokasi',$row->kdlokasi,'kdsatker',$row->kdsatker,'ref_kabupaten','ref_kabupaten.KodeKabupaten=ref_satker.kdkabkota')->result() as $tes){
+	// 			foreach($this->mm->get_where2('ref_kabupaten','KodeProvinsi',$tes->kdlokasi,'KodeKabupaten',$tes->kdkabkota)->result() as $tes2)			
+	// 			$this->excel->getActiveSheet()->setCellValue('C'.$index, $tes2->NamaKabupaten);			
+	// 		}
+	// 		$this->excel->getActiveSheet()->setCellValue('D'.$index, $row->JUDUL_PROPOSAL);			
+	// 		$tanggal = explode('-', $row->TANGGAL_PENGAJUAN);
+	// 		$this->excel->getActiveSheet()->setCellValue('E'.$index, $row->NOMOR_SURAT.'/'.$tanggal[2].'-'.$tanggal[1].'-'.$tanggal[0]);
+	// 		/*if($row->ID_RENCANA_ANGGARAN == '1'){
+	// 			$this->excel->getActiveSheet()->setCellValue('I'.$index, 'V');
+	// 		}else{
+	// 			$this->excel->getActiveSheet()->setCellValue('J'.$index, 'V');
+	// 		}*/
+	// 		//$index++;
+	// 		$index2 = $index;
+	// 		$index3 = $index;
+	// 		foreach($this->mm->get_where('data_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $row2){
+	// 			foreach($this->mm->get_where2('data_sub_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi)->result() as $row3){
+	// 				foreach($this->mm->get_where3('data_program','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi)->result() as $row4){
+	// 					$this->excel->getActiveSheet()->setCellValue('F'.$index2, $row4->NamaProgram);
+	// 					foreach($this->mm->get_where4_join('data_iku','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'data_iku.KodeProgram',$row4->KodeProgram,'ref_iku','data_iku.KodeIku=ref_iku.KodeIku')->result() as $row5){
+	// 						$this->excel->getActiveSheet()->setCellValue('G'.$index2, $row5->Iku);
+	// 						$index2++;
+	// 					}
+	// 					foreach($this->mm->get_where4('data_kegiatan','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram)->result() as $row6){
+	// 						$this->excel->getActiveSheet()->setCellValue('H'.$index3, $row6->NamaKegiatan);
+	// 						foreach($this->mm->get_where5_join('data_ikk','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram,'data_ikk.KodeKegiatan',$row6->KodeKegiatan,'ref_ikk','data_ikk.KodeIkk=ref_ikk.KodeIkk')->result() as $row7){
+	// 							$this->excel->getActiveSheet()->setCellValue('I'.$index3, $row7->Ikk);
+	// 							if($this->mm->cek('target_ikk','KodeIkk',$row7->KodeIkk))
+	// 							$target_nasional = $this->mm->get_where('target_ikk','KodeIkk',$row7->KodeIkk)->row()->TargetNasional;
+	// 							else $target_nasional = '0';
+	// 								$this->excel->getActiveSheet()->setCellValue('J'.$index3, $target_nasional.'%');
+	// 							$jumlah_ikk = $this->mm->get_where('data_ikk','KodeIkk',$row7->KodeIkk)->row()->Jumlah;
+	// 								$this->excel->getActiveSheet()->setCellValue('K'.$index3, $jumlah_ikk.'%');
+								
+	// 							foreach($this->pm->get('reformasi_kesehatan')->result() as $ref)
+	// 							{
+	// 								if($this->pm->cek('data_reformasi_kesehatan', 'idReformasiKesehatan', $ref->idReformasiKesehatan, 'KD_PENGAJUAN', $row->KD_PENGAJUAN)) {
+	// 								$biaya = $this->pm->get_biaya('data_reformasi_kesehatan','Biaya', 'KD_PENGAJUAN',$row->KD_PENGAJUAN,'idReformasiKesehatan',$ref->idReformasiKesehatan);
+	// 								$this->excel->getActiveSheet()->setCellValue('L'.$index3, "Rp.".$biaya);
+	// 								$this->excel->getActiveSheet()->setCellValue('M'.$index3, "Rp.".$biaya);
+	// 								$this->excel->getActiveSheet()->setCellValue('N'.$index3, "Rp.".$biaya);
+	// 								$this->excel->getActiveSheet()->setCellValue('O'.$index3, "Rp.".$biaya);
+	// 								$this->excel->getActiveSheet()->setCellValue('P'.$index3, "Rp.".$biaya); 
+	// 								$this->excel->getActiveSheet()->setCellValue('Q'.$index3, "Rp.".$biaya); 
+	// 								$this->excel->getActiveSheet()->setCellValue('R'.$index3, "Rp.".$biaya);
+	// 								$this->excel->getActiveSheet()->setCellValue('S'.$index3, "Rp.".$biaya);
+	// 								$this->excel->getActiveSheet()->setCellValue('T'.$index3, "Rp.".$biaya);
+	// 								$this->excel->getActiveSheet()->setCellValue('U'.$index3, "Rp.".$biaya);
+	// 								$this->excel->getActiveSheet()->setCellValue('V'.$index3, "Rp.".$biaya);
+	// 								$this->excel->getActiveSheet()->setCellValue('W'.$index3, "Rp.".$biaya); 
+	// 								$this->excel->getActiveSheet()->setCellValue('X'.$index3, "Rp.".$biaya); 
+	// 								$this->excel->getActiveSheet()->setCellValue('Y'.$index3, "Rp.".$biaya);
+	// 								$this->excel->getActiveSheet()->setCellValue('Z'.$index3, "Rp.".$biaya);
+	// 								$this->excel->getActiveSheet()->setCellValue('AA'.$index3, "Rp.".$biaya);
+	// 								$this->excel->getActiveSheet()->setCellValue('AB'.$index3, "Rp.".$biaya);
+	// 								$this->excel->getActiveSheet()->setCellValue('AC'.$index3, "Rp.".$biaya);
+	// 								$this->excel->getActiveSheet()->setCellValue('AD'.$index3, "Rp.".$biaya); 
+	// 								$this->excel->getActiveSheet()->setCellValue('AE'.$index3, "Rp.".$biaya); 
+	// 								$this->excel->getActiveSheet()->setCellValue('AF'.$index3, "Rp.".$biaya);
+	// 								}
+	// 							}
+	// 							$index3++;
+	// 						}
+							
+	// 					}
+						
+	// 					if($index3>=$index2){
+	// 						$index=$index3;
+	// 					}else{
+	// 						$index=$index2;
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 		$no++;
+	// 	}
+	// 	header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+ //        header('Content-Disposition: attachment;filename="DAFTAR PENGAJUAN '.$TAHUN_ANGGARAN.'.xlsx"');
+ //        header('Cache-Control: max-age=0');
+
+ //        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
+ //        $objWriter->save('php://output');
+	// }
+
 	function rekap_dak()
 	{
-		$TAHUN_ANGGARAN = $this->input->post('thn_anggaran');
-		$pilihan_rekap = $this->input->post('rekap');
-		
-		$this->load->library('excel');    
+		$tanggal_print = date('d/m/Y');
+		$tanggal_judul = date('dmY');
+		$thn = $this->input->post('thn_anggaran');
+		$records = $this->mm->cetak_dak($thn);
+		ini_set("memory_limit", "256M");
+		// set to excel
+		$this->load->library('excel');                 
 		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-		$this->excel = $objReader->load('file/rekap_dak.xlsx');
+		$this->excel = $objReader->load('file/cetak_dak.xlsx');
 		$this->excel->setActiveSheetIndex(0);
 		
-		$no=1;
-		$index=5;
+		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, 'Rekap Proposal Tahun Anggaran '.$thn); //print judul
+		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(2, 2, $tanggal_print); //print tanggal	
 		
-		foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','4','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
-			$this->excel->getActiveSheet()->getStyle('A'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-			$this->excel->getActiveSheet()->getStyle('C'.$index.':J'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-			//$this->excel->getActiveSheet()->getStyle('A'.$index.':J'.$index)->getFont()->setBold(true);
-			$this->excel->getActiveSheet()->setCellValue('A'.$index, $no);
-			$this->excel->getActiveSheet()->setCellValue('B'.$index, $row->nmsatker);
+		$no = 0;
+		$awal_baris = 7; //awal baris
+		$baris = $awal_baris;
 
-			foreach($this->mm->get_where2_join('ref_satker','kdlokasi',$row->kdlokasi,'kdsatker',$row->kdsatker,'ref_kabupaten','ref_kabupaten.KodeKabupaten=ref_satker.kdkabkota')->result() as $tes){
-				foreach($this->mm->get_where2('ref_kabupaten','KodeProvinsi',$tes->kdlokasi,'KodeKabupaten',$tes->kdkabkota)->result() as $tes2)			
-				$this->excel->getActiveSheet()->setCellValue('C'.$index, $tes2->NamaKabupaten);			
+		if($records->num_rows()>0){
+			foreach($records->result() as $row){
+				$no = $no + 1;
+
+				$tgl_asli = $row->TANGGAL_PEMBUATAN;
+				$tgl = date("d-m-Y", strtotime($tgl_asli));
+
+				//SetCellValue
+				$this->excel->getActiveSheet()->setCellValue('A'.$baris, $no);
+				$this->excel->getActiveSheet()->setCellValue('B'.$baris, $row->NamaProvinsi);
+				$this->excel->getActiveSheet()->setCellValue('C'.$baris, $row->nmsatker);
+				$this->excel->getActiveSheet()->setCellValue('D'.$baris, $row->JUDUL_PROPOSAL);
+				$this->excel->getActiveSheet()->setCellValue('E'.$baris, $row->NOMOR_SURAT);
+				$this->excel->getActiveSheet()->setCellValue('F'.$baris, '['.$row->KodeProgram.'] '.$row->NamaProgram);
+				$this->excel->getActiveSheet()->setCellValue('G'.$baris, '['.$row->KodeKegiatan.'] '.$row->NamaKegiatan);
+				
+				if($this->mm->cek2('aktivitas', 'idRencanaAnggaran', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN))
+					$biaya_dak = $this->mm->sum2('aktivitas', 'Jumlah', 'idRencanaAnggaran', '2', 'KD_PENGAJUAN', $row->KD_PENGAJUAN);
+				else 
+					$biaya_dak= 0;
+				
+				$this->excel->getActiveSheet()->setCellValue('H'.$baris, "Rp.".number_format($biaya_dak,2));
+				$baris++;
 			}
-			$this->excel->getActiveSheet()->setCellValue('D'.$index, $row->JUDUL_PROPOSAL);			
-			$tanggal = explode('-', $row->TANGGAL_PENGAJUAN);
-			$this->excel->getActiveSheet()->setCellValue('E'.$index, $row->NOMOR_SURAT.'/'.$tanggal[2].'-'.$tanggal[1].'-'.$tanggal[0]);
-			/*if($row->ID_RENCANA_ANGGARAN == '1'){
-				$this->excel->getActiveSheet()->setCellValue('I'.$index, 'V');
-			}else{
-				$this->excel->getActiveSheet()->setCellValue('J'.$index, 'V');
-			}*/
-			//$index++;
-			$index2 = $index;
-			$index3 = $index;
-			foreach($this->mm->get_where('data_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $row2){
-				foreach($this->mm->get_where2('data_sub_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi)->result() as $row3){
-					foreach($this->mm->get_where3('data_program','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi)->result() as $row4){
-						$this->excel->getActiveSheet()->setCellValue('F'.$index2, $row4->NamaProgram);
-						foreach($this->mm->get_where4_join('data_iku','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'data_iku.KodeProgram',$row4->KodeProgram,'ref_iku','data_iku.KodeIku=ref_iku.KodeIku')->result() as $row5){
-							$this->excel->getActiveSheet()->setCellValue('G'.$index2, $row5->Iku);
-							$index2++;
-						}
-						foreach($this->mm->get_where4('data_kegiatan','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram)->result() as $row6){
-							$this->excel->getActiveSheet()->setCellValue('H'.$index3, $row6->NamaKegiatan);
-							foreach($this->mm->get_where5_join('data_ikk','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram,'data_ikk.KodeKegiatan',$row6->KodeKegiatan,'ref_ikk','data_ikk.KodeIkk=ref_ikk.KodeIkk')->result() as $row7){
-								$this->excel->getActiveSheet()->setCellValue('I'.$index3, $row7->Ikk);
-								if($this->mm->cek('target_ikk','KodeIkk',$row7->KodeIkk))
-								$target_nasional = $this->mm->get_where('target_ikk','KodeIkk',$row7->KodeIkk)->row()->TargetNasional;
-								else $target_nasional = '0';
-									$this->excel->getActiveSheet()->setCellValue('J'.$index3, $target_nasional.'%');
-								$jumlah_ikk = $this->mm->get_where('data_ikk','KodeIkk',$row7->KodeIkk)->row()->Jumlah;
-									$this->excel->getActiveSheet()->setCellValue('K'.$index3, $jumlah_ikk.'%');
-								
-								foreach($this->pm->get('reformasi_kesehatan')->result() as $ref)
-								{
-									if($this->pm->cek('data_reformasi_kesehatan', 'idReformasiKesehatan', $ref->idReformasiKesehatan, 'KD_PENGAJUAN', $row->KD_PENGAJUAN)) {
-									$biaya = $this->pm->get_biaya('data_reformasi_kesehatan','Biaya', 'KD_PENGAJUAN',$row->KD_PENGAJUAN,'idReformasiKesehatan',$ref->idReformasiKesehatan);
-									$this->excel->getActiveSheet()->setCellValue('L'.$index3, "Rp.".$biaya);
-									$this->excel->getActiveSheet()->setCellValue('M'.$index3, "Rp.".$biaya);
-									$this->excel->getActiveSheet()->setCellValue('N'.$index3, "Rp.".$biaya);
-									$this->excel->getActiveSheet()->setCellValue('O'.$index3, "Rp.".$biaya);
-									$this->excel->getActiveSheet()->setCellValue('P'.$index3, "Rp.".$biaya); 
-									$this->excel->getActiveSheet()->setCellValue('Q'.$index3, "Rp.".$biaya); 
-									$this->excel->getActiveSheet()->setCellValue('R'.$index3, "Rp.".$biaya);
-									$this->excel->getActiveSheet()->setCellValue('S'.$index3, "Rp.".$biaya);
-									$this->excel->getActiveSheet()->setCellValue('T'.$index3, "Rp.".$biaya);
-									$this->excel->getActiveSheet()->setCellValue('U'.$index3, "Rp.".$biaya);
-									$this->excel->getActiveSheet()->setCellValue('V'.$index3, "Rp.".$biaya);
-									$this->excel->getActiveSheet()->setCellValue('W'.$index3, "Rp.".$biaya); 
-									$this->excel->getActiveSheet()->setCellValue('X'.$index3, "Rp.".$biaya); 
-									$this->excel->getActiveSheet()->setCellValue('Y'.$index3, "Rp.".$biaya);
-									$this->excel->getActiveSheet()->setCellValue('Z'.$index3, "Rp.".$biaya);
-									$this->excel->getActiveSheet()->setCellValue('AA'.$index3, "Rp.".$biaya);
-									$this->excel->getActiveSheet()->setCellValue('AB'.$index3, "Rp.".$biaya);
-									$this->excel->getActiveSheet()->setCellValue('AC'.$index3, "Rp.".$biaya);
-									$this->excel->getActiveSheet()->setCellValue('AD'.$index3, "Rp.".$biaya); 
-									$this->excel->getActiveSheet()->setCellValue('AE'.$index3, "Rp.".$biaya); 
-									$this->excel->getActiveSheet()->setCellValue('AF'.$index3, "Rp.".$biaya);
-									}
-								}
-								$index3++;
-							}
-							
-						}
-						
-						if($index3>=$index2){
-							$index=$index3;
-						}else{
-							$index=$index2;
-						}
-					}
-				}
-			}
-			$no++;
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':H'.($baris-1))->getBorders()->getInside()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':H'.($baris-1))->getBorders()->getBottom()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':H'.($baris-1))->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+			$this->excel->getActiveSheet()->getStyle('A'.$awal_baris.':H'.($baris-1))->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 		}
+		
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="DAFTAR PENGAJUAN '.$TAHUN_ANGGARAN.'.xlsx"');
+        header('Content-Disposition: attachment;filename="Rekap Pengajuan Proposal DAK.xlsx"');
         header('Cache-Control: max-age=0');
 
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
@@ -1087,7 +1526,7 @@ class utility extends CI_Controller
 		$no=1;
 		$index=5;
 		
-		foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','4','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
+		foreach($this->mm->get_where2_join('pengajuan','TAHUN_ANGGARAN',$TAHUN_ANGGARAN,'STATUS','1','ref_satker','ref_satker.kdsatker=pengajuan.NO_REG_SATKER')->result() as $row){
 			$this->excel->getActiveSheet()->getStyle('A'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 			$this->excel->getActiveSheet()->getStyle('C'.$index.':J'.$index)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 			//$this->excel->getActiveSheet()->getStyle('A'.$index.':J'.$index)->getFont()->setBold(true);

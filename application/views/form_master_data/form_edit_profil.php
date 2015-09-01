@@ -87,22 +87,22 @@ function validate_form()
 	<?php // } ?>
 		<tr>
 			<td width="15%">Username*</td>
-			<td width="85%"><input name="username" id="username" type="text"value="<?php echo $username; ?>" onchange="cek_username(this.value)" onfocusout="cek_username(this.value)"/></td>
+			<td width="85%"><input name="username" id="username" disabled="disabled" style="padding:8px; width:25%" type="text" value="<?php echo $username; ?>" onchange="cek_username(this.value)" onfocusout="cek_username(this.value)"/></td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
 		<tr>
 			<td width="15%">Nama*</td>
-			<td width="85%"><input name="nama" id="nama" type="text"value="<?php echo $nama; ?>" /></td>
+			<td width="85%"><input name="nama" id="nama" disabled="disabled" style="padding:8px; width:25%" type="text" value="<?php echo $nama; ?>" /></td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
 		<tr>
 			<td width="15%">Email*</td>
-			<td width="85%"><input name="email" id="email" type="text" value="<?php echo $email; ?>"/></td>
+			<td width="85%"><input name="email" id="email" style="padding:8px; width:25%" type="text" value="<?php echo $email; ?>"/></td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
 		<tr>
 			<td width="15%">Telepon*</td>
-			<td width="85%"><input name="telp" id="telp" type="text" value="<?php echo $telp; ?>"/></td>
+			<td width="85%"><input name="telp" id="telp" type="text" style="padding:8px; width:25%" value="<?php echo $telp; ?>"/></td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
 		<tr>

@@ -269,20 +269,22 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td align="center">-</td>
 				<?php } else { ?>
 				<?php
-					foreach($dataikk as $row) { 
+					foreach($dataikk as $row2) { 
 				?>
 					<tr>
-						<td>(<?php	echo $row->KodeIkk; ?>) <?php echo $row->Ikk; ?></td>
-						<td align="center" width="14%"><?php foreach($this->pm->get_where_double('target_ikk',  $row->KodeIkk, 'KodeIkk',$idTahun, 'idThnAnggaran')->result() as $r) echo $r->TargetNasional; ?></td>
-						<td align="center" width="14%"><?php echo $row->Jumlah=="" ? "0" : $row->Jumlah; ?></td>
+						<td>(<?php	echo $row2->KodeIkk; ?>) <?php echo $row2->Ikk; ?></td>
+						<td align="center" width="14%"><?php foreach($this->pm->get_where_double('target_ikk',  $row2->KodeIkk, 'KodeIkk',$idTahun, 'idThnAnggaran')->result() as $r) echo $r->TargetNasional=="" ? "0" : $r->TargetNasional; ?></td>
+						<td align="center" width="14%"><?php echo $row2->Jumlah=="" ? "0" : $row2->Jumlah; ?></td>
 						<?php
-							foreach($this->pm->get_where_double('target_ikk',  $row->KodeIkk, 'KodeIkk',$idTahun, 'idThnAnggaran')->result() as $r)
+							$targetIkk = $this->pm->get_where_double('target_ikk',  $row2->KodeIkk, 'KodeIkk',$idTahun, 'idThnAnggaran');
+							foreach($targetIkk->result() as $r)
 							{
-								$target_nasional = $r->TargetNasional;
-								if ($row->Jumlah < $target_nasional) {
+								$target_nasional = $r->TargetNasional=="" ? "0" : $r->TargetNasional;
+								$target_ikk = $row2->Jumlah=="" ? "0" : $row2->Jumlah;
+								if ($target_ikk < $target_nasional) {
 							 		$warning_icon_target_ikk = '<img border=\'0\' src=\''.base_url().'images/flexigrid/tolak.png\'>';
 								}
-								elseif ($row->Jumlah >= $target_nasional) {
+								elseif ($target_ikk >= $target_nasional) {
 									$warning_icon_target_ikk = '<img border=\'0\' src=\''.base_url().'images/flexigrid/setujui.png\'>';
 								}
 							}
@@ -378,6 +380,50 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 			</td>
 		</tr>
 		<?php } ?>
+	</table>
+	<h3>Telaah Staff</h3>
+	<table width="100%" height="auto">
+		<tr>
+			<td width="15%">Data Telaah</td>
+			<td width="85%">
+				<table class="myTable">
+				<tr>
+					<td class="tes">Satker</td>
+					<td class="tes">Jabatan</td>
+					<td class="tes">Status Telaah</td>
+				</tr>
+				<?php
+					$cek_telaah = count($data_telaah);
+					if($cek_telaah == 0) {
+				?>
+				<tr>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+				<?php } else { ?>
+				<?php foreach ($data_telaah as $row) {
+					if($row->STATUS == '1') {$status = 'Telah ditelaah staf';  $posisi = 'Kasubag';}
+					elseif($row->STATUS == '2') {$status = 'Perlu koreksi staf'; $posisi = 'Staf';}
+					elseif($row->STATUS == '3') {$status = 'Telah ditelaah Kasubag'; $posisi = 'Kabag';}
+					elseif($row->STATUS == '4') {$status = 'Perlu koreksi Kasubag'; $posisi = 'Kasubag';}
+					elseif($row->STATUS == '5') {$status = 'Telah ditelaah Kabag'; $posisi = 'Kabiro';}
+					elseif($row->STATUS == '6') {$status = 'Perlu koreksi Kabag'; $posisi = 'Kabag';}
+					elseif($row->STATUS == '7') {$status = 'Telah ditelaah Kabiro'; $posisi = 'Proses Penelaahan Selesai';}
+					elseif($row->STATUS == '8') {$status = 'Telah ditelaah Administrator'; $posisi = 'Proses Penelaahan Selesai';}
+					elseif($row->STATUS == '9') {$status = 'Telah ditelaah Direktorat'; $posisi = 'Proses Penelaahan Selesai';}
+					elseif($row->STATUS == '10') {$status = 'Telah ditelaah Verifikator'; $posisi = 'Proses Penelaahan Selesai';}
+					else {$status = 'Draft'; $posisi = 'Staf';}
+				?>
+				<tr>
+					<td><?php echo $row->STATUS;?></td>
+					<td><?php echo $status;?></td>
+					<td><?php echo $posisi;?></td>
+				</tr>
+				<?php } } ?>
+				</table>
+			</td>
+		</tr>
 		<tr>
 			<td></td>
 			<td>

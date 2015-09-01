@@ -236,6 +236,41 @@ class Dashboard_unit_model extends CI_Model {
 		$this->db->where('kdsatker', $kdsatker);
 		return $this->db->get();
 	}
+
+	function get_kegiatan_by_satker($kdunit, $kdlokasi, $kdsatker, $thang)
+	{
+		$this->db->select('*');
+		$this->db->from('d_soutput d');
+		$this->db->join('t_giat g', 'g.kddept=d.kddept AND g.kdunit=d.kdunit AND g.kdprogram=d.kdprogram AND d.kdgiat=g.kdgiat');
+		$this->db->where('d.thang', $thang);
+		$this->db->where('d.kdunit', $kdunit);
+		$this->db->where('d.kdlokasi', $kdlokasi);
+		$this->db->where('d.kdsatker', $kdsatker);
+		//$this->db->order_by('g.kdgiat DESC');
+		$this->db->group_by('g.kdgiat');
+		return $this->db->get();
+	}
+
+	function get_output_by_satker($kdgiat, $kdoutput)
+	{
+		$this->db->select('*');
+		$this->db->from('t_output t');
+		$this->db->where('t.kdgiat', $kdgiat);
+		$this->db->where('t.kdoutput', $kdoutput);
+		return $this->db->get();
+	}
+
+	function get_suboutput_by_satker($kdgiat, $kdunit, $kdlokasi, $kdsatker, $thang)
+	{
+		$this->db->select('*');
+		$this->db->from('d_soutput d');
+		$this->db->where('d.thang', $thang);
+		$this->db->where('d.kdunit', $kdunit);
+		$this->db->where('d.kdlokasi', $kdlokasi);
+		$this->db->where('d.kdsatker', $kdsatker);
+		$this->db->where('d.kdgiat', $kdgiat);
+		return $this->db->get();
+	}
 	
     function get_pagu_skmp_swakelola($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdsoutput, $kdkmpnen, $kdskmpnen){
 		$this->db->select('*');
@@ -303,6 +338,39 @@ class Dashboard_unit_model extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('d_skmpnen');
+		$this->db->where('thang',$thang);
+		$this->db->where('kdunit',$kdunit);
+		$this->db->where('kdlokasi',$kdlokasi);
+		$this->db->where('kdsatker',$kdsatker);
+		return $this->db->count_all_results();
+	}
+
+	function count_output_by_prov($kdunit, $kdlokasi, $thang)
+	{
+		$this->db->select('*');
+		$this->db->from('d_soutput');
+		$this->db->where('thang',$thang);
+		$this->db->where('kdunit',$kdunit);
+		$this->db->where('kdlokasi',$kdlokasi);
+		return $this->db->count_all_results();
+	}
+	
+	function count_output_by_jnssat($kdunit, $kdlokasi, $kdjnssat, $thang)
+	{
+		$this->db->select('*');
+		$this->db->from('d_soutput d');
+		$this->db->join('ref_satker k', 'k.kdsatker = d.kdsatker');
+		$this->db->where('d.thang',$thang);
+		$this->db->where('d.kdunit',$kdunit);
+		$this->db->where('d.kdlokasi',$kdlokasi);
+		$this->db->where('k.kdjnssat',$kdjnssat);
+		return $this->db->count_all_results();
+	}
+	
+	function count_output_by_satker($kdunit, $kdlokasi, $kdsatker, $thang)
+	{
+		$this->db->select('*');
+		$this->db->from('d_soutput');
 		$this->db->where('thang',$thang);
 		$this->db->where('kdunit',$kdunit);
 		$this->db->where('kdlokasi',$kdlokasi);

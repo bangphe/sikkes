@@ -50,6 +50,22 @@ class model_sinonim extends CI_Model {
         return $ret;
     }
 
+    public function add_sinonim_negatif($sinonim) {
+        $kdsatker = $this->session->userdata('kdsatker');
+        
+        $ret = "0";
+        $sql = "SELECT * FROM sinonim_negatif WHERE nmsinonim='$sinonim' AND kdsatker='$kdsatker'";
+        $result = mysql_query($sql) or die (mysql_error());
+        if (mysql_num_rows($result) == 0) {
+            $sql = "INSERT INTO sinonim_negatif (nmsinonim, kdsatker) VALUES ('$sinonim', '$kdsatker')";
+            mysql_query($sql);
+        }
+        else {
+            $ret = "1";
+        }
+        return $ret;
+    }
+
     public function add_sinonim_akun($idsinonim, $akun) {
         if (!is_array($akun)) {
             return;
@@ -86,6 +102,11 @@ class model_sinonim extends CI_Model {
         mysql_query($sql);
     }
 
+    public function delete_sinonim_negatif($idsinonim) {
+        $sql = "DELETE FROM sinonim_negatif WHERE id='$idsinonim'";
+        mysql_query($sql);
+    }
+
     public function delete_sinonim_akun($idsinonim, $akun) {
         $sql = "DELETE FROM sinonimakun WHERE id_sinonim='$idsinonim' and kdakun='$akun'";
         mysql_query($sql);
@@ -119,6 +140,16 @@ class model_sinonim extends CI_Model {
             $akun[] = $row['kdakun'];
         }
         return $akun;
+    }
+
+    public function get_sinonim_negatif($id) {
+        $sinonim_negatif = array();
+        $sql = "SELECT * FROM sinonim_negatif WHERE id='$id' ORDER BY id";
+        $result = mysql_query($sql) or die (mysql_error());
+        while ($row = mysql_fetch_array($result, MYSQL_BOTH)) {
+            $sinonim_negatif[] = $row['nmsinonim'];
+        }
+        return $sinonim_negatif;
     }
 
     function get_nama_akun($kdakun) {
@@ -170,11 +201,39 @@ class model_sinonim extends CI_Model {
         $query['record_count'] = $this->db->count_all_results();
         return $query;
     }
+
+    public function list_sinonim_negatif() {
+        $kdsatker = $this->session->userdata('kdsatker');
+        
+        $this->db->select('*');
+        $this->db->from('sinonim_negatif');
+        $this->db->where('kdsatker',$kdsatker);
+        $this->CI->flexigrid->build_query();
+        $query['records'] = $this->db->get();
+
+        $this->db->select('*');
+        $this->db->from('sinonim_negatif');
+        $this->db->where('kdsatker',$kdsatker);
+        $this->CI->flexigrid->build_query(FALSE);
+        $query['record_count'] = $this->db->count_all_results();
+        return $query;
+    }
     
     public function list_sinonim_pencarian() {
         $kdsatker = $this->session->userdata('kdsatker');
         $sinonim = array();
         $sql = "SELECT * FROM sinonim WHERE kdsatker='$kdsatker' ORDER BY id";
+        $result = mysql_query($sql) or die (mysql_error());
+        while ($row = mysql_fetch_array($result, MYSQL_BOTH)) {
+            $sinonim[] = array($row['id'],$row['nmsinonim']);
+        }
+        return $sinonim;
+    }
+
+    public function list_sinonim_negatif_pencarian() {
+        $kdsatker = $this->session->userdata('kdsatker');
+        $sinonim = array();
+        $sql = "SELECT * FROM sinonim_negatif WHERE kdsatker='$kdsatker' ORDER BY id";
         $result = mysql_query($sql) or die (mysql_error());
         while ($row = mysql_fetch_array($result, MYSQL_BOTH)) {
             $sinonim[] = array($row['id'],$row['nmsinonim']);

@@ -92,6 +92,27 @@ class Referensi_model extends CI_Model {
 		$return['record_count'] = $this->db->count_all_results();
 		return $return;
 	}
+
+	function where_join_triple_flexigrid($tabel,$param,$kolom,$tabel1,$parameter,$tabel2,$parameter2,$tabel3,$parameter3){
+		$this->db->select('*');
+		$this->db->from($tabel);
+		$this->db->where($kolom,$param);
+		$this->db->join($tabel1,$parameter);
+		$this->db->join($tabel2,$parameter2);
+		$this->db->join($tabel3,$parameter3);
+		$this->CI->flexigrid->build_query();		
+		$return['records'] = $this->db->get();
+		
+		$this->db->select('*');
+		$this->db->from($tabel);
+		$this->db->where($kolom,$param);
+		$this->db->join($tabel1,$parameter);
+		$this->db->join($tabel2,$parameter2);
+		$this->db->join($tabel3,$parameter3);
+		$this->CI->flexigrid->build_query(FALSE);
+		$return['record_count'] = $this->db->count_all_results();
+		return $return;
+	}
 	
 	function join_where_flexigrid($tabel,$kolom,$parameter,$tabel2,$parameter2){
 		$this->db->select('*');

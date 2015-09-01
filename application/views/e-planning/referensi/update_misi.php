@@ -5,15 +5,23 @@
 	<form name="form_update_misi" method="POST" id="form_update_misi" action="#">
 	<table width="100%" height="100%">
 		<tr>
-				<td>Tahun</td>
-				<td>
-					<?php echo form_dropdown('tahun', $tahun, $selected_tahun); ?>
-				</td>
-			</tr>
+			<td>Periode</td>
+			<td>
+				<?php $js = 'id="periode" style="width:15%; padding:3px;"'; 
+				echo form_dropdown('periode',$periode,$selected_periode,$js); ?>
+			</td>
+		</tr>
+		<tr>
+			<td>Tahun</td>
+			<td>
+				<?php $js = 'id="tahun" style="width:15%; padding:3px;"'; 
+				echo form_dropdown('tahun',$tahun,$selected_tahun,$js); ?>
+			</td>
+		</tr>
 		<tr>
 			<td>Misi</td>
 			<td>
-				<textarea name="misi" id="misi" cols=100><?php echo $misi; ?></textarea>
+				<textarea name="misi" id="misi" rows="4" cols="60"><?php echo $misi; ?></textarea>
 			</td>
 		</tr>
 		<tr>

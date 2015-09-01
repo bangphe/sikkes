@@ -10,6 +10,7 @@ class Laporan_monitoring extends CI_Controller
 		$this->load->model('e-monev/laporan_monitoring_model2','lmm2');
 		$this->load->model('e-monev/bank_model','bm');
 		$this->load->model('e-monev/feedback_emonev_model','fm');
+		$this->load->model('e-monev/dashboard_unit_model', 'dum');
 		$this->load->model('role_model');
 	}
 	
@@ -32,12 +33,15 @@ class Laporan_monitoring extends CI_Controller
 	{
 		$kode_role = $this->session->userdata('kd_role');
 		$colModel['no'] = array('No',20,TRUE,'center',0);
-		if($kode_role != Role_model::PEMBUAT_LAPORAN) $colModel['t_satker.nmsatker'] = array('Nama Satker',300,TRUE,'center',1);
-		$colModel['d_kmpnen.urkmpnen'] = array('Komponen',350,TRUE,'center',1);
-		$colModel['d.urskmpnen'] = array('Sub Komponen',330,TRUE,'center',1);
-		$colModel['realisasi_fisik_kontrak'] = array('Realisasi Fisik Kontraktual',135,TRUE,'center',0);
-		$colModel['realisasi_fisik_swakelola'] = array('Realisasi Fisik Swakelola',135,TRUE,'center',0);
-		$colModel['PERMASALAHAN'] = array('Permasalahan',80,FALSE,'center',0);
+		if($kode_role != Role_model::PEMBUAT_LAPORAN) $colModel['t_satker.nmsatker'] = array('Nama Satker',260,TRUE,'center',1);
+		$colModel['GIAT'] = array('Kegiatan',350,TRUE,'center',1);
+		$colModel['OUTPUT'] = array('Output',330,TRUE,'center',1);
+		$colModel['alokasi'] = array('Alokasi',120,TRUE,'center',0);
+		$colModel['rencana_fisik'] = array('Rencana Fisik',90,TRUE,'center',0);
+		$colModel['progress_fisik'] = array('Progress Fisik',90,TRUE,'center',0);
+		$colModel['realisasi_fisik'] = array('Realisasi Fisik',90,TRUE,'center',0);
+		$colModel['realisasi_keuangan'] = array('Realisasi Keuangan',90,TRUE,'center',0);
+		//$colModel['PERMASALAHAN'] = array('Permasalahan',80,FALSE,'center',0);
 		$colModel['LAPORAN'] = array('Laporan',50,FALSE,'center',0);
 		$colModel['GRAFIK'] = array('Grafik',50,FALSE,'center',0);
 		$colModel['UNGGAH_DOK'] = array('Unggah Dokumen',90,FALSE,'center',0);
@@ -171,7 +175,7 @@ class Laporan_monitoring extends CI_Controller
 		$kd_role = $this->session->userdata('kd_role');
 		$valid_fields = array('d.urskmpnen','t_satker.nmsatker','d_kmpnen.urkmpnen');
 		$this->flexigrid->validate_post('d.kdsatker','asc',$valid_fields);
-		$records = $this->lmm->get_sub_komponen();	
+		$records = $this->lmm->get_output();	
 		$this->output->set_header($this->config->item('json_header'));
 		$no = 0;
 		foreach ($records['records']->result() as $row){
@@ -188,128 +192,105 @@ class Laporan_monitoring extends CI_Controller
 				$kdkabkota = $row->kdkabkota;
 				$kddekon = $row->kddekon;
 				$kdsoutput = $row->kdsoutput;
-				$kdkmpnen = $row->kdkmpnen;
-				//db lokal
-				//$kdskmpnen_ = $row->kdskmpnen;
 
-				//db server
-				$kdskmpnen_ = $row->kdskmpnen;
-				$kdskmpnen = str_replace(' ', '', $kdskmpnen_);
-				
-				// $realisasi_fisik = 0;
-				// $warning_icon = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_red.png\'>';
+				$alokasi = $this->lmm->get_sum_d_item($thang,$kdjendok,$kdsatker,$kddept,$kdunit,$kdprogram,$kdgiat,$kdoutput,$kdlokasi,$kdkabkota,$kddekon,$kdsoutput);
+				if($alokasi->num_rows() > 0) {
+					$alokasi = $this->lmm->get_sum_d_item($thang,$kdjendok,$kdsatker,$kddept,$kdunit,$kdprogram,$kdgiat,$kdoutput,$kdlokasi,$kdkabkota,$kddekon,$kdsoutput)->row()->jumlah;
+				} else {
+					$alokasi = 0;
+				}
+
+				//inisialisasi rencana, progress dan realisasi
+				$rencana_fisik = 0;
+				$progress_fisik = 0;
+				$realisasi_fisik = 0;
 
 				//ngecek apakah input laporan sudah diisi atau belom
-				$cek_paket = $this->lmm->cek_paket_by_idskmpnen($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen);
+				$cek_paket = $this->lmm->cek_paket_by_kdoutput($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput);
 				//jika uda ngisi paket, bisa milih link lainnya
 				if($cek_paket->num_rows > 0) {
 					foreach ($cek_paket->result() as $row2) {
 						$idpaket = $row2->idpaket;
 					}
 					//ini buat linknya coy
-					$unggah = '<a href='.base_url().'index.php/e-monev/laporan_monitoring/daftar_dokumen/'.$idpaket.'><img border=\'0\' src=\''.base_url().'images/icon/upload2.png\'></a>';
-					$masalah = '<a href='.base_url().'index.php/e-monev/laporan_monitoring/input_masalah/'.$idpaket.'><img border=\'0\' src=\''.base_url().'images/icon/lihat.png\'></a>';
+					$unggah ='<a href='.base_url().'index.php/e-monev/laporan_monitoring/daftar_dokumen/'.$idpaket.'><img border=\'0\' src=\''.base_url().'images/icon/upload2.png\'></a>';
+					//$masalah = '<a href='.base_url().'index.php/e-monev/laporan_monitoring/input_masalah/'.$idpaket.'><img border=\'0\' src=\''.base_url().'images/icon/lihat.png\'></a>';
 					$grafik = '<a href='.base_url().'index.php/e-monev/laporan_monitoring/main_grafik/'.$idpaket.'><img border=\'0\' src=\''.base_url().'images/icon/grafik.png\'></a>';
 				
-					//ngecek progress fisik kontrak & swakelola dari idpaket
+					//RENCANA FISIK
+					if($this->lmm->get_rencana_by_idpaket($idpaket)->num_rows() > 0) {
+						$rencana_fisik = $this->lmm->get_rencana_by_idpaket_and_month($idpaket,date("m")-1)->row()->rencana;
+					}
+					else {
+						$rencana_fisik = 0;
+					}
+
+					//PROGRESS FISIK
+					if($this->lmm->get_progress_by_idpaket($idpaket)->num_rows() > 0) {
+						$progress_fisik = $this->lmm->get_progress_by_idpaket_and_month($idpaket,date("m"))->row()->progress;
+					}
+					else {
+						$progress_fisik = 0;
+					}
+
+					//REALISASI FISIK
 					if($this->lmm->get_progress_by_idpaket($idpaket)->num_rows() > 0)
 					{
 						//jika tahun anggaran sekarang > dari tahun pada saat login (session)
 						if(date("Y") > $this->session->userdata('thn_anggaran')){ //jika tahun anggaran sudah lewat
-							$realisasi_fisik_kontrak = $this->lmm->get_progress_by_idpaket_and_month($idpaket,11)->row()->realisasi_fisik_kontrak;
-							$realisasi_fisik_swakelola = $this->lmm->get_progress_by_idpaket_and_month($idpaket,11)->row()->realisasi_fisik_swakelola;
+							$realisasi_fisik = $this->lmm->get_progress_by_idpaket_and_month($idpaket,11)->row()->realisasi_fisik;
 						}else{ //jika kondisi salah
 							if(date("m") == 1 ){ //realisasi fisik pada bulan 1 
-								$realisasi_fisik_kontrak = $this->lmm->get_progress_by_year($idpaket,12,$this->session->userdata('thn_anggaran')-1)->row()->realisasi_fisik_kontrak;
-								$realisasi_fisik_swakelola = $this->lmm->get_progress_by_year($idpaket,12,$this->session->userdata('thn_anggaran')-1)->row()->realisasi_fisik_swakelola;
+								$realisasi_fisik = $this->lmm->get_progress_by_year($idpaket,12,$this->session->userdata('thn_anggaran')-1)->row()->realisasi_fisik;
 							}else{ //realisasi fisik pada bulan x-1
-								$realisasi_fisik_kontrak = $this->lmm->get_progress_by_idpaket_and_month($idpaket,date("m")-1)->row()->realisasi_fisik_kontrak;
-								$realisasi_fisik_swakelola = $this->lmm->get_progress_by_idpaket_and_month($idpaket,date("m")-1)->row()->realisasi_fisik_swakelola;
+								$realisasi_fisik = $this->lmm->get_progress_by_idpaket_and_month($idpaket,date("m")-1)->row()->realisasi_fisik;
 							}
 						}
 					}
 					else
 					{
-						$realisasi_fisik_kontrak = 0;
-						$realisasi_fisik_swakelola = 0;
+						$realisasi_fisik = 0;
 					}
 					
 					//warning icon realisasi fisik kontrak
-					if($realisasi_fisik_kontrak < 50)
+					if($realisasi_fisik < 50)
 					{
 						$warning_icon_kontrak = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_red.png\'>';
 					}
-					else if($realisasi_fisik_kontrak >= 50 && $realisasi_fisik_kontrak < 75)
+					else if($realisasi_fisik >= 50 && $realisasi_fisik < 75)
 					{
 						$warning_icon_kontrak = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_yellow.png\'>';
 					}
-					else if($realisasi_fisik_kontrak >= 75 && $realisasi_fisik_kontrak <= 100)
+					else if($realisasi_fisik >= 75 && $realisasi_fisik <= 100)
 					{
 						$warning_icon_kontrak = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_green.png\'>';
 					}
-					else if($realisasi_fisik_kontrak > 100)
+					else if($realisasi_fisik > 100)
 					{
 						$warning_icon_kontrak = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_blue.png\'>';
-					}
-
-					//warning icon realisasi fisik swakelola
-					if($realisasi_fisik_swakelola < 50)
-					{
-						$warning_icon_swakelola = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_red.png\'>';
-					}
-					else if($realisasi_fisik_swakelola >= 50 && $realisasi_fisik_swakelola < 75)
-					{
-						$warning_icon_swakelola = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_yellow.png\'>';
-					}
-					else if($realisasi_fisik_swakelola >= 75 && $realisasi_fisik_swakelola <= 100)
-					{
-						$warning_icon_swakelola = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_green.png\'>';
-					}
-					else if($realisasi_fisik_swakelola > 100)
-					{
-						$warning_icon_swakelola = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_blue.png\'>';
 					}
 				}
 				//kalo belom ya ngisi laporan dulu euy!
 				else  {
 					$unggah = '<a href="#" onclick="alert(\'Anda harus mengisi Laporan terlebih dahulu\')"><img border=\'0\' src=\''.base_url().'images/icon/upload2.png\'></a>';
-					$masalah = '<a href="#" onclick="alert(\'Anda harus mengisi Laporan terlebih dahulu\')"><img border=\'0\' src=\''.base_url().'images/icon/lihat.png\'></a>';
+					//$masalah = '<a href="#" onclick="alert(\'Anda harus mengisi Laporan terlebih dahulu\')"><img border=\'0\' src=\''.base_url().'images/icon/lihat.png\'></a>';
 					$grafik = '<a href="#" onclick="alert(\'Anda harus mengisi Laporan terlebih dahulu\')"><img border=\'0\' src=\''.base_url().'images/icon/grafik.png\'></a>';
 
-					//warning icon realisasi fisik kontrak
-					if($realisasi_fisik_kontrak < 50)
+					if($realisasi_fisik < 50)
 					{
 						$warning_icon_kontrak = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_red.png\'>';
 					}
-					else if($realisasi_fisik_kontrak >= 50 && $realisasi_fisik_kontrak < 75)
+					else if($realisasi_fisik >= 50 && $realisasi_fisik < 75)
 					{
 						$warning_icon_kontrak = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_yellow.png\'>';
 					}
-					else if($realisasi_fisik_kontrak >= 75 && $realisasi_fisik_kontrak <= 100)
+					else if($realisasi_fisik >= 75 && $realisasi_fisik <= 100)
 					{
 						$warning_icon_kontrak = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_green.png\'>';
 					}
-					else if($realisasi_fisik_kontrak > 100)
+					else if($realisasi_fisik > 100)
 					{
 						$warning_icon_kontrak = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_blue.png\'>';
-					}
-
-					//warning icon realisasi fisik swakelola
-					if($realisasi_fisik_swakelola < 50)
-					{
-						$warning_icon_swakelola = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_red.png\'>';
-					}
-					else if($realisasi_fisik_swakelola >= 50 && $realisasi_fisik_swakelola < 75)
-					{
-						$warning_icon_swakelola = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_yellow.png\'>';
-					}
-					else if($realisasi_fisik_swakelola >= 75 && $realisasi_fisik_swakelola <= 100)
-					{
-						$warning_icon_swakelola = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_green.png\'>';
-					}
-					else if($realisasi_fisik_swakelola > 100)
-					{
-						$warning_icon_swakelola = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_blue.png\'>';
 					}
 				}
 
@@ -319,12 +300,15 @@ class Laporan_monitoring extends CI_Controller
 						$no,
 						$no,
 						'<div style=\'text-align:left\'>'.$row->nmsatker.'</div>',
-						'<div style=\'text-align:left\'>'.$row->urkmpnen.'</div>',
-						'<div style=\'text-align:left\'>'.$row->urskmpnen.'</div>',
-						$realisasi_fisik_kontrak.' % '.$warning_icon_kontrak,
-						$realisasi_fisik_swakelola.' % '.$warning_icon_swakelola,
-						$masalah,
-						'<a href='.base_url().'index.php/e-monev/laporan_monitoring/input_laporan/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput.'/'.$kdkmpnen.'/'.$kdskmpnen.'><img border=\'0\' src=\''.base_url().'images/icon/input.png\'></a>',
+						'<div style=\'text-align:left\'>'.$row->nmgiat.'</div>',
+						'<div style=\'text-align:left\'>'.$row->nmoutput.'</div>',
+						'Rp '.number_format($alokasi),
+						$rencana_fisik.' % ',
+						$progress_fisik.' % ',
+						$realisasi_fisik.' % '.$warning_icon_kontrak,
+						'0 %'.'<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_red.png\'>',
+						//$masalah,
+						'<a href='.base_url().'index.php/e-monev/laporan_monitoring/input_laporan/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput.'><img border=\'0\' src=\''.base_url().'images/icon/input.png\'></a>',
 						$grafik,			
 						$unggah
 					);
@@ -334,25 +318,99 @@ class Laporan_monitoring extends CI_Controller
 					$record_items[] = array(
 						$no,
 						$no,
-						'<div style=\'text-align:left\'>'.$row->urkmpnen.'</div>',
-						'<div style=\'text-align:left\'>'.$row->urskmpnen.'</div>',
-						$realisasi_fisik_kontrak.' % '.$warning_icon_kontrak,
-						$realisasi_fisik_swakelola.' % '.$warning_icon_swakelola,
-						$masalah,
-						'<a href='.base_url().'index.php/e-monev/laporan_monitoring/input_laporan/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput.'/'.$kdkmpnen.'/'.$kdskmpnen.'><img border=\'0\' src=\''.base_url().'images/icon/input.png\'></a>',
+						'<div style=\'text-align:left\'>'.$row->nmgiat.'</div>',
+						'<div style=\'text-align:left\'>'.$row->nmoutput.'</div>',
+						'Rp '.number_format($alokasi),
+						$rencana_fisik.' % ',
+						$progress_fisik.' % ',
+						$realisasi_fisik.' % '.$warning_icon_kontrak,
+						'0 %'.'<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_red.png\'>',
+						//$masalah,
+						'<a href='.base_url().'index.php/e-monev/laporan_monitoring/input_laporan/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput.'><img border=\'0\' src=\''.base_url().'images/icon/input.png\'></a>',
 						$grafik,
 						$unggah
 					);
 				}
-				$realisasi_fisik_kontrak = 0;
-				$realisasi_fisik_swakelola = 0;
+				$rencana_fisik = 0;
+				$realisasi_fisik = 0;
 		}
 		if(isset($record_items))
 			$this->output->set_output($this->flexigrid->json_build($records['record_count'],$record_items));
 		else
 			$this->output->set_output('{"page":"1","total":"0","rows":[]}');
 	}
+
+	function tree($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput)
+	{
+		$data['thang'] = $thang;
+		$data['kdjendok'] = $kdjendok;
+		$data['kdsatker'] = $kdsatker;
+		$data['kddept'] = $kddept;
+		$data['kdunit'] = $kdunit;
+		$data['kdprogram'] = $kdprogram;
+		$data['kdgiat'] = $kdgiat;
+		$data['kdoutput'] = $kdoutput;
+		$data['kdlokasi'] = $kdlokasi;
+		$data['kdkabkota'] = $kdkabkota;
+		$data['kddekon'] = $kddekon;
+		$data['kdsoutput'] = $kdsoutput;
+
+		$data['content'] = $this->load->view('e-monev/main_tree',$data,true);
+		$this->load->view('main',$data);
+	}
+
+	function data_tree()
+	{
+		$data['thang'] = $this->session->userdata('thn_anggaran');
+		$this->load->view('e-monev/tree',$data);
+	}
+
+	function treeList($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput)
+	{
+		$thang = $this->session->userdata('thn_anggaran');
+		if(isset($_POST['id'])) {
+		 $kode = explode('#',$_POST['id']);
+		 if($kode[0] == 'satker'){
+		 	$this->getKegiatan($kode[1], $kode[2], $kode[3], $kode[4]);
+		 }
+		 if($kode[0] == 'kegiatan'){
+			 $this->getOutput($kode[1], $kode[2], $kode[3], $kode[4], $kode[5]);
+		 }
+		}
+		else
+		{
+			$result = array();
+			//$records = $this->dum->get_provinsi();
+			$records = $this->lmm->get_output_tree($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput);
+			foreach($records->result_array() as $row){
+				$row['id'] = 'satker#'.$kddept.'#'.$kdunit.'#'.$kdprogram.'#'.$kdgiat;
+				$row['name'] = $row['nmsatker'];
+				$row['state'] = $this->has_kegiatan($kdgiat, $kddept, $kdunit, $kdprogram) ? 'closed' : 'open';
+				array_push($result, $row);
+			}
+		}
+		echo json_encode($result);
+	}
+
+	function has_kegiatan($kdgiat, $kddept, $kdunit, $kdprogram)
+	{
+		$rs =  $this->lmm->get_kegiatan_tree($kdgiat, $kddept, $kdunit, $kdprogram);
+		return $rs->num_rows() > 0 ? true : false;
+	}
 	
+	function getKegiatan($kdgiat, $kddept, $kdunit, $kdprogram)
+	{
+		$result = array();
+		$records = $this->lmm->get_kegiatan_tree($kdgiat, $kddept, $kdunit, $kdprogram);
+		foreach($records->result_array() as $row){
+			$row['id'] = 'kegiatan#'.$row['kdgiat'].'#'.$row['kdunit'].'#'.$row['kddept'].'#'.$row['kdprogram'];
+			$row['name'] = '['.$row['kdgiat'].'] '.strtoupper($row['nmgiat']);
+			$row['state'] = 'open';
+			array_push($result, $row);
+		}
+		echo json_encode($result);
+	}
+
 	function bulan()
 	{
 		$bulan = array(
@@ -390,7 +448,7 @@ class Laporan_monitoring extends CI_Controller
 	function grafik($idpaket)
 	{
 		$strXML = '';
-		$strXML .= '<graph yAxisName=\'Presentase\' caption=\'Grafik Progress Fisik Pelaksanaan Paket\' subcaption=\'Tahun '.$this->session->userdata('thn_anggaran').'\' hovercapbg=\'FFECAA\' hovercapborder=\'F47E00\' formatNumberScale=\'0\' decimalPrecision=\'0\' showvalues=\'0\' numdivlines=\'5\' numVdivlines=\'0\' yaxisminvalue=\'1000\' yaxismaxvalue=\'100\'  rotateNames=\'1\' NumberSuffix=\'%25\'>
+		$strXML .= '<graph yAxisName=\'Presentase\' caption=\'Grafik Progress Fisik Pelaksanaan Output\' subcaption=\'Tahun '.$this->session->userdata('thn_anggaran').'\' hovercapbg=\'FFECAA\' hovercapborder=\'F47E00\' formatNumberScale=\'0\' decimalPrecision=\'0\' showvalues=\'0\' numdivlines=\'5\' numVdivlines=\'0\' yaxisminvalue=\'1000\' yaxismaxvalue=\'100\'  rotateNames=\'1\' NumberSuffix=\'%25\'>
 					<categories >
 						<category name=\'Jan\' />
 						<category name=\'Feb\' />
@@ -406,30 +464,18 @@ class Laporan_monitoring extends CI_Controller
 						<category name=\'Des\' />
 					</categories>';
 		//grafik data rencana fisik
-		$strXML .= '<dataset seriesName=\'Rencana Kontraktual\' color=\'1D8BD1\' anchorBorderColor=\'1D8BD1\' anchorBgColor=\'1D8BD1\'>';
-		foreach($this->lmm->get_rencana_by_idpaket($idpaket) as $row)
+		$strXML .= '<dataset seriesName=\'Rencana Fisik\' color=\'1D8BD1\' anchorBorderColor=\'1D8BD1\' anchorBgColor=\'1D8BD1\'>';
+		foreach($this->lmm->get_rencana_fisik_by_idpaket($idpaket) as $row)
 		{
 			$strXML .= '<set value="'.$row->rencana_kontraktual.'" />';
 		}
 		$strXML .= '</dataset>';
-		$strXML .= '<dataset seriesName=\'Rencana Swakelola\' color=\'F1683C\' anchorBorderColor=\'F1683C\' anchorBgColor=\'F1683C\'>';
-		foreach($this->lmm->get_rencana_by_idpaket($idpaket) as $row)
-		{
-			$strXML .= '<set value="'.$row->rencana_swakelola.'" />';
-		}
-		$strXML .= '</dataset>';
 
 		//grafik data progress fisik
-		$strXML .= '<dataset seriesName=\'Progress Kontraktual\' color=\'9ae5f1\' anchorBorderColor=\'9ae5f1\' anchorBgColor=\'9ae5f1\'>';
-		foreach($this->lmm->get_progress_by_idpaket($idpaket)->result() as $row)
+		$strXML .= '<dataset seriesName=\'Progress Fisik\' color=\'9ae5f1\' anchorBorderColor=\'9ae5f1\' anchorBgColor=\'9ae5f1\'>';
+		foreach($this->lmm->get_progress_fisik_by_idpaket($idpaket)->result() as $row)
 		{
 			$strXML .= '<set value="'.$row->progress_kontraktual.'" />';
-		}
-		$strXML .= '</dataset>';
-		$strXML .= '<dataset seriesName=\'Progress Swakelola\' color=\'f1c23c\' anchorBorderColor=\'f1c23c\' anchorBgColor=\'f1c23c\'>';
-		foreach($this->lmm->get_progress_by_idpaket($idpaket)->result() as $row)
-		{
-			$strXML .= '<set value="'.$row->progress_swakelola.'" />';
 		}
 		$strXML .= '</dataset>';
 		$strXML .= '</graph>';
@@ -446,7 +492,7 @@ class Laporan_monitoring extends CI_Controller
 	}
 
 	//input laporan
-	function input_laporan($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen)
+	function input_laporan($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput)
 	{
 		$data['thang'] = $thang;
 		$data['kdjendok'] = $kdjendok;
@@ -460,81 +506,86 @@ class Laporan_monitoring extends CI_Controller
 		$data['kdkabkota'] = $kdkabkota;
 		$data['kddekon'] = $kddekon;
 		$data['kdsoutput'] = $kdsoutput;
-		$data['kdkmpnen'] = $kdkmpnen;
-		$data['kdskmpnen'] = $kdskmpnen;
 
 		$data['content'] = $this->load->view('e-monev/main_laporan',$data,true);
 		$this->load->view('main',$data);
 	}
 	
 	//form tampilan awal paket
-	function form_paket($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen)
+	function form_paket($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput)
 	{
 		$data['nmsatker'] = $this->lmm->get_satker_by_idskmpnen($kdsatker);
 		$data['nmprogram'] = $this->lmm->get_program_by_idskmpnen($kdprogram, $kddept, $kdunit);
 		$data['nmgiat'] = $this->lmm->get_kegiatan_by_idskmpnen($kdprogram, $kddept, $kdunit, $kdgiat);
 		$data['nmoutput'] = $this->lmm->get_output_by_idskmpnen($kdoutput, $kdgiat);
 		$data['ursoutput'] = $this->lmm->get_soutput_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdjendok, $kddekon);
-		$data['urkmpnen'] = $this->lmm->get_komponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdjendok, $kddekon);
+		// $data['urkmpnen'] = $this->lmm->get_komponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdjendok, $kddekon);
 		
+		// //cek subkomponen terdapat datanya atau tidak
+		// $cek_skomponen = $this->lmm->cek_skomponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdskmpnen, $kdjendok, $kddekon);
+		// if($cek_skomponen == TRUE) {
+		// 	$data['sub_komponen'] = $this->lmm->get_skomponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdskmpnen, $kdjendok, $kddekon);
+		// }
+		// else {
+		// 	$data['sub_komponen'] = '-';
+		// }
+
 		//cek subkomponen terdapat datanya atau tidak
-		$cek_skomponen = $this->lmm->cek_skomponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdskmpnen, $kdjendok, $kddekon);
-		if($cek_skomponen == TRUE) {
-			$data['sub_komponen'] = $this->lmm->get_skomponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdskmpnen, $kdjendok, $kddekon);
-		}
-		else {
-			$data['sub_komponen'] = '-';
-		}
+		// $cek_soutput = $this->lmm->cek_soutput_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdjendok, $kddekon);
+		// if($cek_soutput == TRUE) {
+		// 	$data['ursoutput'] = $this->lmm->get_soutput_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdjendok, $kddekon);
+		// }
+		// else {
+		// 	$data['ursoutput'] = '-';
+		// }
 		
 		//ngecek paket uda ada di table 'paket', jika sudah ada redirect detail paket
-		if($this->lmm->get_paket_by_idskmpnen($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen)->num_rows > 0)
+		if($this->lmm->get_paket_by_output($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput)->num_rows > 0)
 		{
 			$this->load->view('e-monev/info_paket',$data);
 		}
 		//jika belum ada data, di masukkan ke table 'paket' terlebih dahulu
 		else
 		{
-			$this->save_paket($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen);
+			$this->save_paket($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput);
 			$this->load->view('e-monev/info_paket',$data);
 		}
 	}
 
 	//simpan data ke table paket
-	function save_paket($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen)
+	function save_paket($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput)
 	{
 		$data = array(
-					'thang' => $thang,
-					'kdjendok' => $kdjendok,
-					'kdsatker' => $kdsatker,
-					'kddept' => $kddept,
-					'kdunit' => $kdunit,
-					'kdprogram' => $kdprogram,
-					'kdgiat' => $kdgiat,
-					'kdoutput' => $kdoutput,
-					'kdlokasi' => $kdlokasi,
-					'kdkabkota' => $kdkabkota,
-					'kddekon' => $kddekon,
-					'kdsoutput' => $kdsoutput,
-					'kdkmpnen' => $kdkmpnen,
-					'kdskmpnen' => $kdskmpnen,
-					);
-		$this->lmm->add_paket_by_idskmpnen($data);
+			'thang' => $thang,
+			'kdjendok' => $kdjendok,
+			'kdsatker' => $kdsatker,
+			'kddept' => $kddept,
+			'kdunit' => $kdunit,
+			'kdprogram' => $kdprogram,
+			'kdgiat' => $kdgiat,
+			'kdoutput' => $kdoutput,
+			'kdlokasi' => $kdlokasi,
+			'kdkabkota' => $kdkabkota,
+			'kddekon' => $kddekon,
+			'kdsoutput' => $kdsoutput,
+		);
+		$this->lmm->add_paket_by_output($data);
 	}
 
 	//grid menampilkan alokasi
-	function daftar_alokasi($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen)
+	function daftar_alokasi($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput)
 	{
 		$alokasi = 0;
-		$d_item = $this->lmm->get_d_item($thang,$kdjendok,$kdsatker,$kddept,$kdunit,$kdprogram,$kdgiat,$kdoutput,$kdlokasi,$kdkabkota,$kddekon,$kdsoutput,$kdkmpnen,$kdskmpnen);
+		$d_item = $this->lmm->get_d_item_by_output($thang,$kdjendok,$kdsatker,$kddept,$kdunit,$kdprogram,$kdgiat,$kdoutput,$kdlokasi,$kdkabkota,$kddekon,$kdsoutput);
 
 		//ngecek paket
-		$cek_paket = $this->lmm->get_paket_by_idskmpnen($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen);
+		$cek_paket = $this->lmm->get_paket_by_output($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput);
 		foreach ($cek_paket->result() as $row) {
 			$idpaket = $row->idpaket;
 		}
 
 		$data['alokasi'] = 0;
-		$data['alokasi'] = $this->lmm->get_sum_d_item($thang,$kdjendok,$kdsatker,$kddept,$kdunit,$kdprogram,$kdgiat,$kdoutput,$kdlokasi,$kdkabkota,$kddekon,$kdsoutput,$kdkmpnen,$kdskmpnen)->row()->jumlah;
+		$data['alokasi'] = $this->lmm->get_sum_d_item($thang,$kdjendok,$kdsatker,$kddept,$kdunit,$kdprogram,$kdgiat,$kdoutput,$kdlokasi,$kdkabkota,$kddekon,$kdsoutput)->row()->jumlah;
 		$data['d_item'] = $d_item;
 		$data['option_jenis_item'] = $this->lmm->get_jenis_item();
 		$data['idpaket'] = $idpaket;
@@ -607,7 +658,7 @@ class Laporan_monitoring extends CI_Controller
 	}
 	
 	//proses input rencana
-	function input_rencana($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen)
+	function input_rencana($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput)
 	{
 		$data['thang'] = $thang;
 		$data['kdjendok'] = $kdjendok;
@@ -621,33 +672,26 @@ class Laporan_monitoring extends CI_Controller
 		$data['kdkabkota'] = $kdkabkota;
 		$data['kddekon'] = $kddekon;
 		$data['kdsoutput'] = $kdsoutput;
-		$data['kdkmpnen'] = $kdkmpnen;
-		$data['kdskmpnen'] = $kdskmpnen;
 
 		$data['content'] = $this->load->view('e-monev/main_rencana',$data,true);
 		$this->load->view('main',$data);
 	}
 
 	//tampilan awal table rencana
-	function daftar_rencana($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen)
+	function daftar_rencana($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput)
 	{
 		//ngecek paket dan table data jenis item
-		$cek_paket = $this->lmm->get_paket_by_idskmpnen($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen);
+		$cek_paket = $this->lmm->get_paket_by_output($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput);
 		//id paket
 		$idpaket = $cek_paket->row()->idpaket;
-		//cek jenis item berdasarkan idpaket
-		$jnsitem = $this->lmm->cek_jnsitem_by_idpaket($idpaket);
 		
 		//cek paket, jika ada lanjut
-		if($cek_paket->num_rows > 0 && $jnsitem == TRUE)
+		if($cek_paket->num_rows > 0)
 		{
-			//cek data di table dm_rencana_kontraktual
-			$cek_rencana_kontrak = $this->lmm->cek_rencana_kontrak_by_idpaket($idpaket);
+			//cek data di tabel dm_rencana_fisik
+			$cek_rencana_fisik = $this->lmm->cek_rencana_fisik_by_idpaket($idpaket);
 
-			//cek data di table dm_rencana_swakelola
-			$cek_rencana_swakelola = $this->lmm->cek_rencana_swakelola_by_idpaket($idpaket);
-
-			if ($cek_rencana_kontrak == FALSE && $cek_rencana_swakelola == FALSE) {
+			if ($cek_rencana_fisik == FALSE) {
 				foreach($this->bulan() as $key=>$value)
 				{
 					//masukkan data ke table dm_rencana_kontraktual
@@ -657,35 +701,25 @@ class Laporan_monitoring extends CI_Controller
 						'rencana' => '0',
 						'tahun' => $this->session->userdata('thn_anggaran')
 						);
-					$this->lmm->add_rencana_kontrak_by_idpaket($data);
-
-					//masukkan data ke table dm_rencana_kontraktual
-					$data2 = array(
-						'idpaket' => $idpaket,
-						'bulan' => $key,
-						'rencana' => '0',
-						'tahun' => $this->session->userdata('thn_anggaran')
-						);
-					$this->lmm->add_rencana_swakelola_by_idpaket($data2);
+					$this->lmm->add_rencana_fisik_by_idpaket($data);
 				}
 			}
 
 			$data['bulan'] = $this->bulan();
 			$data['idpaket'] = $idpaket;
-			$data['komponen'] = $this->lmm->get_komponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdjendok, $kddekon);
+			//$data['komponen'] = $this->lmm->get_komponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdjendok, $kddekon);
 			
 			//cek subkomponen terdapat datanya atau tidak
-			$cek_skomponen = $this->lmm->cek_skomponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdskmpnen, $kdjendok, $kddekon);
-			if($cek_skomponen == TRUE) {
-				$data['sub_komponen'] = $this->lmm->get_skomponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdskmpnen, $kdjendok, $kddekon);
-			}
-			else {
-				$data['sub_komponen'] = '-';
-			}
-			$data['daftar_rencana'] = $this->lmm->get_rencana_by_idpaket($idpaket);
-			$data['dana_kontrak'] = $this->lmm->get_kontrak_by_idpaket($idpaket)->row()->nilaikontrak;
-			$data['dana_swakelola'] = $this->lmm->get_swakelola_by_idpaket($idpaket)->row()->nilaikontrak;
-			//$data['dana_swakelola'] = $this->lmm->get_jumlah_swakelola($thang,$kdjendok,$kdsatker,$kddept,$kdunit,$kdprogram,$kdgiat,$kdoutput,$kdlokasi,$kdkabkota,$kddekon,$kdsoutput,$kdkmpnen,$kdskmpnen,$idpaket);
+			// $cek_skomponen = $this->lmm->cek_skomponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdskmpnen, $kdjendok, $kddekon);
+			// if($cek_skomponen == TRUE) {
+			// 	$data['sub_komponen'] = $this->lmm->get_skomponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdskmpnen, $kdjendok, $kddekon);
+			// }
+			// else {
+			// 	$data['sub_komponen'] = '-';
+			// }
+			$data['nmoutput'] = $this->lmm->get_output_by_idskmpnen($kdoutput, $kdgiat);
+			$data['ursoutput'] = $this->lmm->get_soutput_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdjendok, $kddekon);
+			$data['daftar_rencana'] = $this->lmm->get_rencana_fisik_by_idpaket($idpaket);
 			$this->load->view('e-monev/grid_rencana',$data);
 		}
 		else
@@ -697,11 +731,11 @@ class Laporan_monitoring extends CI_Controller
 	//form input rencana kontraktual
 	function form_input_rencana_kontrak($rencana_id, $idpaket, $bulan)
 	{
-		$result = $this->lmm->get_rencana_kontrak_by_id($rencana_id)->row();
+		$result = $this->lmm->get_rencana_kontrak_fisik_by_id($rencana_id)->row();
 		$array_bulan = $this->bulan();
 		$data['rencana_kontrak'] = $result->rencana;
 		if($bulan > 1){
-			$data['rencana_kontrak_sebelum'] = $this->lmm->get_rencana_kontrak_by_id($rencana_id-1)->row()->rencana;
+			$data['rencana_kontrak_sebelum'] = $this->lmm->get_rencana_kontrak_fisik_by_id($rencana_id-1)->row()->rencana;
 		}else{
 			$data['rencana_kontrak_sebelum'] = 0;
 		}
@@ -804,118 +838,8 @@ class Laporan_monitoring extends CI_Controller
 		echo json_encode($arr);
 	}
 
-	//form input rencana kontraktual
-	function form_input_rencana_swakelola($rencana_id, $idpaket, $bulan)
-	{
-		$result = $this->lmm->get_rencana_swakelola_by_id($rencana_id)->row();
-		$array_bulan = $this->bulan();
-		$data['rencana_swakelola'] = $result->rencana;
-		if($bulan > 1){
-			$data['rencana_swakelola_sebelum'] = $this->lmm->get_rencana_swakelola_by_id($rencana_id-1)->row()->rencana;
-		}else{
-			$data['rencana_swakelola_sebelum'] = 0;
-		}
-		$data['rencana_id'] = $rencana_id;
-		$data['idpaket'] = $idpaket;
-		$data['bulan'] = $array_bulan[$bulan];
-
-		$this->load->view('e-monev/form_input_rencana_swakelola',$data);
-	}
-
-	//simpan data rencana swakelola ke dalam database
-	function save_rencana_swakelola($rencana_id, $idpaket)
-	{
-		$arr = '';
-		$cek = null;
-		$rencana_swakelola = $this->input->post('rencana_swakelola');
-		$data = array(
-				'rencana'=> $rencana_swakelola
-					);
-
-		$tgl_tengah = $this->lmm->get_referensi_by_id(1)->row()->tanggal;
-		$tahun = $this->session->userdata('thn_anggaran');
-
-		foreach ($this->lmm->get_rencana_swakelola_after_rencana_id($rencana_id,$idpaket) as $row)
-		{
-			//update tabel rencana kontraktual
-			$this->lmm->update_rencana_swakelola($row->rencana_id,$data);
-			$bulan = $row->bulan;
-			$idpaket = $row->idpaket;
-			if ($this->lmm->cek_progress_swakelola_by_idpaket($idpaket) == TRUE)
-			{
-				//jika rencana yang diubah bulan ke-1
-				if ($bulan == 1)
-				{
-					$data_progress = $this->lmm->get_progress_swakelola_per_bulan($idpaket, $bulan);
-					$batasan_tanggal = $tahun.'-'.($bulan+1).'-'.$tgl_tengah; //batas tanggal pengisian progres
-					if($data_progress->tanggal != null && $data_progress->tanggal != '' && $data_progress->tanggal <= $batasan_tanggal)
-					{
-						if($rencana_swakelola == 0){
-							$realisasi_fisik = 0;
-						}else{
-							$realisasi_fisik = round($data_progress->progress / $rencana_swakelola * 100,2);
-						}
-						$real = array(
-							'realisasi_fisik' 	=> $realisasi_fisik
-						);
-						//update realisasi fisik ke database
-						$this->lmm->update_progress_swakelola($data_progress->progress_id, $real);
-					}
-				}
-				else
-				{
-					//update progres bulan x-1
-					$data_progress1 = $this->lmm->get_progress_swakelola_per_bulan($idpaket,($bulan-1));
-					$batasan_tanggal1 = $tahun.'-'.$bulan.'-'.$tgl_tengah; //batas tanggal pengisian progres
-					if($data_progress1->tanggal != null && $data_progress1->tanggal != '' && $data_progress1->tanggal > $batasan_tanggal1){
-						if($rencana_swakelola == 0){
-							$realisasi_fisik = 0;
-						}else{
-							$realisasi_fisik = round($data_progress1->progress / $rencana_swakelola * 100,2);
-						}
-						$real = array(
-							'realisasi_fisik' 	=> $realisasi_fisik
-						);
-						$this->lmm->update_progress_swakelola($data_progress1->progress_id, $real);
-					}
-
-					//update progres bulan x
-					$data_progress2 = $this->lmm->get_progress_swakelola_per_bulan($idpaket,$bulan);
-					$batasan_tanggal2 = $tahun.'-'.($bulan+1).'-'.$tgl_tengah; //batas tanggal pengisian progres
-					if($bulan == 12){
-						if($rencana_swakelola == 0){
-							$realisasi_fisik = 0;
-						}else{
-							$realisasi_fisik = round($data_progress2->progress / $rencana_swakelola * 100,2);
-						}
-						$real = array(
-							'realisasi_fisik' 	=> $realisasi_fisik
-						);
-						$this->lmm->update_progress_swakelola($data_progress2->progress_id, $real);
-					}else{
-						if($data_progress2->tanggal != null && $data_progress2->tanggal != '' && $data_progress2->tanggal <= $batasan_tanggal2){
-							if($rencana_swakelola == 0){
-								$realisasi_fisik = 0;
-							}else{
-								$realisasi_fisik = round($data_progress2->progress / $rencana_swakelola * 100,2);
-							}
-							$real = array(
-								'realisasi_fisik' 	=> $realisasi_fisik
-							);
-							$this->lmm->update_progress_swakelola($data_progress2->progress_id, $real);
-						}
-					}
-				}
-			}
-		}
-
-		$arr = array("result" => "true");
-		
-		echo json_encode($arr);
-	}
-
 	//proses input progress swakelola dan kontraktual
-	function input_progress($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen)
+	function input_progress($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput)
 	{
 		$data['thang'] = $thang;
 		$data['kdjendok'] = $kdjendok;
@@ -929,39 +853,16 @@ class Laporan_monitoring extends CI_Controller
 		$data['kdkabkota'] = $kdkabkota;
 		$data['kddekon'] = $kddekon;
 		$data['kdsoutput'] = $kdsoutput;
-		$data['kdkmpnen'] = $kdkmpnen;
-		$data['kdskmpnen'] = $kdskmpnen;
 
 		$data['content'] = $this->load->view('e-monev/main_progress',$data,true);
 		$this->load->view('main',$data);
 	}
 
-	function input_progress_swa($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen)
-	{
-		$data['thang'] = $thang;
-		$data['kdjendok'] = $kdjendok;
-		$data['kdsatker'] = $kdsatker;
-		$data['kddept'] = $kddept;
-		$data['kdunit'] = $kdunit;
-		$data['kdprogram'] = $kdprogram;
-		$data['kdgiat'] = $kdgiat;
-		$data['kdoutput'] = $kdoutput;
-		$data['kdlokasi'] = $kdlokasi;
-		$data['kdkabkota'] = $kdkabkota;
-		$data['kddekon'] = $kddekon;
-		$data['kdsoutput'] = $kdsoutput;
-		$data['kdkmpnen'] = $kdkmpnen;
-		$data['kdskmpnen'] = $kdskmpnen;
-
-		$data['content'] = $this->load->view('e-monev/main_progress2',$data,true);
-		$this->load->view('main',$data);
-	}
-
 	//proses tampilan awal table progres kontraktual
-	function daftar_progress_kontraktual($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen)
+	function daftar_progress_fisik($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput)
 	{
 		//ngecek paket
-		$cek_paket = $this->lmm->get_paket_by_idskmpnen($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen);
+		$cek_paket = $this->lmm->get_paket_by_output($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput);
 		//id paket
 		$idpaket = $cek_paket->row()->idpaket;
 
@@ -997,54 +898,14 @@ class Laporan_monitoring extends CI_Controller
 			$data['bulan'] = $this->bulan();
 			$data['idpaket'] = $idpaket;
 			$data['daftar_progress'] = $this->lmm->get_prog_renc_kontrak_by_idpaket($idpaket);
-			$data['komponen'] = $this->lmm->get_komponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdjendok, $kddekon);
-			//cek subkomponen terdapat datanya atau tidak
-			$cek_skomponen = $this->lmm->cek_skomponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdskmpnen, $kdjendok, $kddekon);
-			if($cek_skomponen == TRUE) {
-				$data['sub_komponen'] = $this->lmm->get_skomponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdskmpnen, $kdjendok, $kddekon);
-			}
-			else {
-				$data['sub_komponen'] = '-';
-			}
+			$data['nmoutput'] = $this->lmm->get_output_by_idskmpnen($kdoutput, $kdgiat);
+			$data['ursoutput'] = $this->lmm->get_soutput_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdjendok, $kddekon);
+			
 			$this->load->view('e-monev/grid_progress_kontraktual',$data);
 		}
 		else
 		{
 			echo 'Data alokasi dan data rencana fisik kontraktual harus diisi terlebih dahulu.';
-		}
-	}
-
-	//proses tampilan awal table progres daftar_progress_swakelola
-	function daftar_progress_swakelola($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen)
-	{
-		//ngecek paket
-		$cek_paket = $this->lmm->get_paket_by_idskmpnen($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen);
-		//id paket
-		$idpaket = $cek_paket->row()->idpaket;
-
-		if($cek_paket->num_rows() > 0 && $this->lmm->cek_rencana_swakelola_terisi_by_idpaket($idpaket) == TRUE)
-		{
-			//proses ambil data progress kontraktual & swakelola
-			//$data['data_progress'] = $this->lmm->get_progress_by_idpaket($idpaket);
-
-			//proses ambil data progres per kontraktual (dm_progress_kontraktual)
-			$data['bulan'] = $this->bulan();
-			$data['idpaket'] = $idpaket;
-			$data['daftar_progress'] = $this->lmm->get_prog_renc_swakelola_by_idpaket($idpaket);
-			$data['komponen'] = $this->lmm->get_komponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdjendok, $kddekon);
-			//cek subkomponen terdapat datanya atau tidak
-			$cek_skomponen = $this->lmm->cek_skomponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdskmpnen, $kdjendok, $kddekon);
-			if($cek_skomponen == TRUE) {
-				$data['sub_komponen'] = $this->lmm->get_skomponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdskmpnen, $kdjendok, $kddekon);
-			}
-			else {
-				$data['sub_komponen'] = '-';
-			}
-			$this->load->view('e-monev/grid_progress_swakelola',$data);
-		}
-		else
-		{
-			echo 'Data alokasi dan data rencana fisik swakelola harus diisi terlebih dahulu.';
 		}
 	}
 
@@ -1060,48 +921,8 @@ class Laporan_monitoring extends CI_Controller
 		echo json_encode($arr);
 	}
 
-	//ngecek rencana swakelola ada isinya atau belum
-	function cek_rencana_swakelola($idpaket, $bulan)
-	{
-		$cek_rencana = $this->lmm->get_rencana_swakelola_per_bulan($idpaket,$bulan);
-		if($cek_rencana == 0){
-			$arr = array("result" => "rencana_0");
-		}else{
-			$arr = array("result" => "true");
-		}
-		echo json_encode($arr);
-	}
-
-	//form input progress swakelola
-	function form_input_progress_swakelola($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen, $progress_id, $idpaket, $bulan)
-	{
-		$result = $this->lmm->get_progress_swakelola_by_id($progress_id)->row();
-		$array_bulan = $this->bulan();
-		
-		$data['thang'] = $thang;
-		$data['kdjendok'] = $kdjendok;
-		$data['kdsatker'] = $kdsatker;
-		$data['kddept'] = $kddept;
-		$data['kdunit'] = $kdunit;
-		$data['kdprogram'] = $kdprogram;
-		$data['kdgiat'] = $kdgiat;
-		$data['kdoutput'] = $kdoutput;
-		$data['kdlokasi'] = $kdlokasi;
-		$data['kdkabkota'] = $kdkabkota;
-		$data['kddekon'] = $kddekon;
-		$data['kdsoutput'] = $kdsoutput;
-		$data['kdkmpnen'] = $kdkmpnen;
-		$data['kdskmpnen'] = $kdskmpnen;
-
-		$data['progress'] = $result->progress; 
-		$data['progress_id'] = $progress_id;
-		$data['idpaket'] = $idpaket;
-		$data['bulan'] = $array_bulan[$bulan];
-		$this->load->view('e-monev/form_input_progress_swakelola',$data);
-	}
-
 	//form input progress kontraktual
-	function form_input_progress_kontraktual($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen, $progress_id, $idpaket, $bulan)
+	function form_input_progress_fisik($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $progress_id, $idpaket, $bulan)
 	{
 		$result = $this->lmm->get_progress_kontrak_by_id($progress_id)->row();
 		$array_bulan = $this->bulan();
@@ -1118,8 +939,6 @@ class Laporan_monitoring extends CI_Controller
 		$data['kdkabkota'] = $kdkabkota;
 		$data['kddekon'] = $kddekon;
 		$data['kdsoutput'] = $kdsoutput;
-		$data['kdkmpnen'] = $kdkmpnen;
-		$data['kdskmpnen'] = $kdskmpnen;
 
 		$data['progress'] = $result->progress; 
 		$data['progress_id'] = $progress_id;
@@ -1129,120 +948,8 @@ class Laporan_monitoring extends CI_Controller
 		$this->load->view('e-monev/form_input_progress_kontrak',$data);
 	}
 
-	//fungsi untuk menyimpan data progress fisik swakelola
-	function save_progress_swakelola($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen, $progress_id, $idpaket)
-	{
-		$bulan_ini = $this->lmm->get_progress_swakelola_by_id($progress_id)->row()->bulan;
-		$tahun = $this->session->userdata('thn_anggaran');
-		$tgl_atas = $this->lmm->get_referensi_by_id(2)->row()->tanggal;
-		$tgl_tengah = $this->lmm->get_referensi_by_id(1)->row()->tanggal;
-		$tgl_bawah = $this->lmm->get_referensi_by_id(3)->row()->tanggal;
-		$batasan_tanggal = $tahun.'-'.($bulan_ini+1).'-'.$tgl_tengah; //batas tanggal pengisian progres
-		$config['upload_path'] = './file/';
-		$config['allowed_types'] = 'doc|docx|pdf|txt|jpg|jpeg';
-		$config['max_size']  = '10240';
-
-		$this->load->library('upload', $config);
-		
-		// create directory if doesn't exist
-		if(!is_dir($config['upload_path']))	mkdir($config['upload_path'], 0777);
-		
-		$file='';
-		if(!empty($_FILES['file']['name']))
-		{	
-			if($this->lmm->is_exist_progres_swa_more_than_100_bef($progress_id, $idpaket) == TRUE)
-			{
-				$this->session->set_flashdata('error_progres', '<div align="center" class="errorbox">Progres pada bulan sebelumnya telah mencapai 100 %</div>');
-			}
-			else
-			{
-				$upload = $this->upload->do_upload('file');
-				$data = $this->upload->data('file');
-				if($data['file_size'] > 0) $file = $data['file_name'];
-				$data_file = array(
-					'tanggal' 	=> date('Y-m-d'),
-					'progress' 	=> $this->input->post('progress'),
-					'dokumen' 	=> $file
-				);
-
-				foreach($this->lmm->get_progress_swakelola_after_progress_id($progress_id, $idpaket) as $row)
-				{
-					//update progres dan upload data ke database
-					$this->lmm->update_progress_swakelola($progress_id,$data_file);
-					//melakukan penghitungan untuk realisasi fisik progres swakelola
-					$batas_tanggal = $tahun.'-'.($row->bulan+1).'-'.$tgl_tengah;
-					//cek tanggal sekarang apakah lebih dari batas tanggal yg telah ditentukan
-					if(date('Y-m-d') > $batas_tanggal){
-						//jika iya, rencana fisik diambil dari satu bulan setelah sekarang
-						$rencana_fisik = $this->lmm->get_rencana_swakelola_per_bulan($idpaket,$row->bulan+1);
-					}else{
-						//jika tidak, rencana fisik diambil bulan sekarang
-						$rencana_fisik = $this->lmm->get_rencana_swakelola_per_bulan($idpaket,$row->bulan);
-					}
-					//jika rencana fisik nya 0, realisasi fisik nya juga 0
-					if($rencana_fisik == 0){
-						$realisasi_fisik = 0;
-					}
-					//jika ada nilainya, maka rumusnya dibawah ini coy
-					else{
-						$realisasi_fisik = round($this->input->post('progress') / $rencana_fisik * 100,2);
-					}				
-					$data = array(
-							'realisasi_fisik' 	=> $realisasi_fisik
-					);
-					//update realisasi fisik ke database
-					$this->lmm->update_progress_swakelola($row->progress_id,$data);
-				}
-			}
-		}
-		else
-		{
-			if($this->lmm->is_exist_progres_kont_more_than_100_bef($progress_id, $idpaket) == TRUE)
-			{
-				$this->session->set_flashdata('error_progres', '<div align="center" class="errorbox">Progres pada bulan sebelumnya telah mencapai 100 %</div>');
-			}
-			else
-			{
-				$data_file = array(
-				'tanggal' 	=> date('Y-m-d'),
-				'progress' 	=> $this->input->post('progress')
-				);
-
-				foreach($this->lmm->get_progress_swakelola_after_progress_id($progress_id, $idpaket) as $row)
-				{
-					//update progres dan upload data ke database
-					$this->lmm->update_progress_swakelola($row->progress_id,$data_file);
-					//melakukan penghitungan untuk realisasi fisik progres swakelola
-					$batas_tanggal = $tahun.'-'.($row->bulan+1).'-'.$tgl_tengah;
-					//cek tanggal sekarang apakah lebih dari batas tanggal yg telah ditentukan
-					if(date('Y-m-d') > $batas_tanggal){
-						//jika iya, rencana fisik diambil dari satu bulan setelah sekarang
-						$rencana_fisik = $this->lmm->get_rencana_swakelola_per_bulan($idpaket,$row->bulan+1);
-					}else{
-						//jika tidak, rencana fisik diambil bulan sekarang
-						$rencana_fisik = $this->lmm->get_rencana_swakelola_per_bulan($idpaket,$row->bulan);
-					}
-					//jika rencana fisik nya 0, realisasi fisik nya juga 0
-					if($rencana_fisik == 0){
-						$realisasi_fisik = 0;
-					}
-					//jika ada nilainya, maka rumusnya dibawah ini coy
-					else{
-						$realisasi_fisik = round($this->input->post('progress') / $rencana_fisik * 100,2);
-					}				
-					$data = array(
-							'realisasi_fisik' 	=> $realisasi_fisik
-					);
-					//update realisasi fisik ke database
-					$this->lmm->update_progress_swakelola($row->progress_id,$data);
-				}
-			}
-		}
-		redirect('e-monev/laporan_monitoring/input_progress_swa/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput.'/'.$kdkmpnen.'/'.$kdskmpnen);
-	}
-
 	//fungsi untuk menyimpan data progress fisik kontraktual
-	function save_progress_kontrak($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen, $progress_id, $idpaket)
+	function save_progress_fisik($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $progress_id, $idpaket)
 	{
 		$bulan_ini = $this->lmm->get_progress_kontrak_by_id($progress_id)->row()->bulan;
 		$tahun = $this->session->userdata('thn_anggaran');
@@ -1399,7 +1106,7 @@ class Laporan_monitoring extends CI_Controller
 	function grafik_rencana($idpaket)
 	{
 		$strXML = '';
-		$strXML .= '<graph yAxisName=\'Presentase\' caption=\'Grafik Rencana Fisik Pelaksanaan Paket\' subcaption=\'Tahun '.$this->session->userdata('thn_anggaran').'\' hovercapbg=\'FFECAA\' hovercapborder=\'F47E00\' formatNumberScale=\'0\' decimalPrecision=\'0\' showvalues=\'0\' numdivlines=\'5\' numVdivlines=\'0\' yaxisminvalue=\'1000\' yaxismaxvalue=\'100\'  rotateNames=\'1\' NumberSuffix=\'%25\'>
+		$strXML .= '<graph yAxisName=\'Presentase\' caption=\'Grafik Rencana Fisik Pelaksanaan Output\' subcaption=\'Tahun '.$this->session->userdata('thn_anggaran').'\' hovercapbg=\'FFECAA\' hovercapborder=\'F47E00\' formatNumberScale=\'0\' decimalPrecision=\'0\' showvalues=\'0\' numdivlines=\'5\' numVdivlines=\'0\' yaxisminvalue=\'1000\' yaxismaxvalue=\'100\'  rotateNames=\'1\' NumberSuffix=\'%25\'>
 					<categories >
 						<category name=\'Jan\' />
 						<category name=\'Feb\' />
@@ -1414,16 +1121,10 @@ class Laporan_monitoring extends CI_Controller
 						<category name=\'Nop\' />
 						<category name=\'Des\' />
 					</categories>';
-		$strXML .= '<dataset seriesName=\'Rencana Kontraktual\' color=\'1D8BD1\' anchorBorderColor=\'1D8BD1\' anchorBgColor=\'1D8BD1\'>';
-		foreach($this->lmm->get_rencana_by_idpaket($idpaket) as $row)
+		$strXML .= '<dataset seriesName=\'Rencana Fisik\' color=\'1D8BD1\' anchorBorderColor=\'1D8BD1\' anchorBgColor=\'1D8BD1\'>';
+		foreach($this->lmm->get_rencana_fisik_by_idpaket($idpaket) as $row)
 		{
 			$strXML .= '<set value="'.$row->rencana_kontraktual.'" />';
-		}
-		$strXML .= '</dataset>';
-		$strXML .= '<dataset seriesName=\'Rencana Swakelola\' color=\'F1683C\' anchorBorderColor=\'F1683C\' anchorBgColor=\'F1683C\'>';
-		foreach($this->lmm->get_rencana_by_idpaket($idpaket) as $row)
-		{
-			$strXML .= '<set value="'.$row->rencana_swakelola.'" />';
 		}
 		$strXML .= '</dataset>';
 		$strXML .= '</graph>';
@@ -1445,7 +1146,7 @@ class Laporan_monitoring extends CI_Controller
 	function grafik_progress($idpaket)
 	{
 		$strXML = '';
-		$strXML .= '<graph yAxisName=\'Presentase\' caption=\'Grafik Progress Fisik Pelaksanaan Paket\' subcaption=\'Tahun '.$this->session->userdata('thn_anggaran').'\' hovercapbg=\'FFECAA\' hovercapborder=\'F47E00\' formatNumberScale=\'0\' decimalPrecision=\'0\' showvalues=\'0\' numdivlines=\'5\' numVdivlines=\'0\' yaxisminvalue=\'1000\' yaxismaxvalue=\'100\'  rotateNames=\'1\' NumberSuffix=\'%25\'>
+		$strXML .= '<graph yAxisName=\'Presentase\' caption=\'Grafik Progress Fisik Pelaksanaan Output\' subcaption=\'Tahun '.$this->session->userdata('thn_anggaran').'\' hovercapbg=\'FFECAA\' hovercapborder=\'F47E00\' formatNumberScale=\'0\' decimalPrecision=\'0\' showvalues=\'0\' numdivlines=\'5\' numVdivlines=\'0\' yaxisminvalue=\'1000\' yaxismaxvalue=\'100\'  rotateNames=\'1\' NumberSuffix=\'%25\'>
 					<categories >
 						<category name=\'Jan\' />
 						<category name=\'Feb\' />
@@ -1461,30 +1162,18 @@ class Laporan_monitoring extends CI_Controller
 						<category name=\'Des\' />
 					</categories>';
 		//grafik data rencana fisik
-		$strXML .= '<dataset seriesName=\'Rencana Kontraktual\' color=\'1D8BD1\' anchorBorderColor=\'1D8BD1\' anchorBgColor=\'1D8BD1\'>';
-		foreach($this->lmm->get_rencana_by_idpaket($idpaket) as $row)
+		$strXML .= '<dataset seriesName=\'Rencana Fisik\' color=\'1D8BD1\' anchorBorderColor=\'1D8BD1\' anchorBgColor=\'1D8BD1\'>';
+		foreach($this->lmm->get_rencana_fisik_by_idpaket($idpaket) as $row)
 		{
 			$strXML .= '<set value="'.$row->rencana_kontraktual.'" />';
 		}
 		$strXML .= '</dataset>';
-		$strXML .= '<dataset seriesName=\'Rencana Swakelola\' color=\'F1683C\' anchorBorderColor=\'F1683C\' anchorBgColor=\'F1683C\'>';
-		foreach($this->lmm->get_rencana_by_idpaket($idpaket) as $row)
-		{
-			$strXML .= '<set value="'.$row->rencana_swakelola.'" />';
-		}
-		$strXML .= '</dataset>';
 
 		//grafik data progress fisik
-		$strXML .= '<dataset seriesName=\'Progress Kontraktual\' color=\'9ae5f1\' anchorBorderColor=\'9ae5f1\' anchorBgColor=\'9ae5f1\'>';
-		foreach($this->lmm->get_progress_by_idpaket($idpaket)->result() as $row)
+		$strXML .= '<dataset seriesName=\'Progress Fisik\' color=\'9ae5f1\' anchorBorderColor=\'9ae5f1\' anchorBgColor=\'9ae5f1\'>';
+		foreach($this->lmm->get_progress_fisik_by_idpaket($idpaket)->result() as $row)
 		{
 			$strXML .= '<set value="'.$row->progress_kontraktual.'" />';
-		}
-		$strXML .= '</dataset>';
-		$strXML .= '<dataset seriesName=\'Progress Swakelola\' color=\'f1c23c\' anchorBorderColor=\'f1c23c\' anchorBgColor=\'f1c23c\'>';
-		foreach($this->lmm->get_progress_by_idpaket($idpaket)->result() as $row)
-		{
-			$strXML .= '<set value="'.$row->progress_swakelola.'" />';
 		}
 		$strXML .= '</dataset>';
 		$strXML .= '</graph>';

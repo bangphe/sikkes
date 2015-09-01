@@ -22,7 +22,7 @@
         <thead frozen="true">  
             <tr>  
                 <th field="name" width="600">Nama</th>  
-                <th field="paket" align="center">Jumlah Paket / <p>Kode Program</th>  
+                <th field="paket" align="center">Jumlah Output / <p>Kode Kegiatan</th>  
             </tr>  
         </thead>  
         <thead>  

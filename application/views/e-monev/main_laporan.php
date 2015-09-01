@@ -22,81 +22,16 @@ var kdlokasi = "<?php echo $kdlokasi;?>";
 var kdkabkota = "<?php echo $kdkabkota;?>";
 var kddekon = "<?php echo $kddekon;?>";
 var kdsoutput = "<?php echo $kdsoutput;?>";
-var kdkmpnen = "<?php echo $kdkmpnen;?>";
-var kdskmpnen = "<?php echo $kdskmpnen;?>";
 
 $(document).ready(function(){
-  get_html_data(base_url+"index.php/e-monev/laporan_monitoring/form_paket/"+thang+"/"+kdjendok+"/"+kdsatker+"/"+kddept+"/"+kdunit+"/"+kdprogram+"/"+kdgiat+"/"+kdoutput+"/"+kdlokasi+"/"+kdkabkota+"/"+kddekon+"/"+kdsoutput+"/"+kdkmpnen+"/"+kdskmpnen,'','profile_detail_loading', 'content_tengah');
-  get_html_data(base_url+"index.php/e-monev/laporan_monitoring/daftar_alokasi/"+thang+"/"+kdjendok+"/"+kdsatker+"/"+kddept+"/"+kdunit+"/"+kdprogram+"/"+kdgiat+"/"+kdoutput+"/"+kdlokasi+"/"+kdkabkota+"/"+kddekon+"/"+kdsoutput+"/"+kdkmpnen+"/"+kdskmpnen,'','profile_detail_loading', 'daftar_alokasi');
+  get_html_data(base_url+"index.php/e-monev/laporan_monitoring/form_paket/"+thang+"/"+kdjendok+"/"+kdsatker+"/"+kddept+"/"+kdunit+"/"+kdprogram+"/"+kdgiat+"/"+kdoutput+"/"+kdlokasi+"/"+kdkabkota+"/"+kddekon+"/"+kdsoutput,'','profile_detail_loading', 'content_tengah');
+  get_html_data(base_url+"index.php/e-monev/laporan_monitoring/daftar_alokasi/"+thang+"/"+kdjendok+"/"+kdsatker+"/"+kddept+"/"+kdunit+"/"+kdprogram+"/"+kdgiat+"/"+kdoutput+"/"+kdlokasi+"/"+kdkabkota+"/"+kddekon+"/"+kdsoutput,'','profile_detail_loading', 'daftar_alokasi');
 });
 
 function form_paket(){
-	get_html_data(base_url+"index.php/e-monev/laporan_monitoring/form_paket/"+thang+"/"+kdjendok+"/"+kdsatker+"/"+kddept+"/"+kdunit+"/"+kdprogram+"/"+kdgiat+"/"+kdoutput+"/"+kdlokasi+"/"+kdkabkota+"/"+kddekon+"/"+kdsoutput+"/"+kdkmpnen+"/"+kdskmpnen,'','profile_detail_loading', 'content_tengah');
+	get_html_data(base_url+"index.php/e-monev/laporan_monitoring/form_paket/"+thang+"/"+kdjendok+"/"+kdsatker+"/"+kddept+"/"+kdunit+"/"+kdprogram+"/"+kdgiat+"/"+kdoutput+"/"+kdlokasi+"/"+kdkabkota+"/"+kddekon+"/"+kdsoutput,'','profile_detail_loading', 'content_tengah');
 }
 
-function simpanJenisItem(noitem)
-{
-	var kdjnsitem = $('#idjnsitem_'+noitem).val();
-	var nilaikontrak = $('#nilai_kontrak_'+noitem).val();
-	var alokasi = $('#alokasi_'+noitem).val();
-	var no_item = $('#noitem_'+noitem).val();
-	var kdakun = $('#kdakun_'+noitem).val();
-
-	if(kdjnsitem == '' || nilaikontrak == '') {
-		alert('Semua field harus diisi');
-	}
-	else {
-		$.ajax({
-	        url: '<?php echo base_url()?>index.php/e-monev/laporan_monitoring/simpanitem/'+thang+'/'+kdjendok+'/'+kdsatker+'/'+kddept+'/'+kdunit+'/'+kdprogram+'/'+kdgiat+'/'+kdoutput+'/'+kdlokasi+'/'+kdkabkota+'/'+kddekon+'/'+kdsoutput+'/'+kdkmpnen+'/'+kdskmpnen+'/'+noitem+'/'+kdjnsitem+'/'+nilaikontrak+'/'+alokasi+'/'+no_item+'/'+kdakun,
-	        data:'',
-	        type: 'post',
-	        beforeSend: function(){
-	            $("#idjnsitem_"+noitem).attr('disabled',false);
-	        },
-	        success:function(data)
-	        {
-	        	var response = $.parseJSON(data);
-	        	if (response.result == 'true') {
-	        		$("#idjnsitem_"+noitem).removeAttr('disabled');
-	        		//$("#nilaikontrak").val(data);
-
-	        		//apabila paketnya swakelola, nilai kontrak = alokasi
-	        		// if (kdjnsitem == 1) {
-	        		// 	//$('#nilai_kontrak_'+noitem).val('0');
-	        		// 	$('#nilai_kontrak_'+noitem).val(alokasi);
-	        		// }
-	        		// //apabila paketnya kontrak, nginputin sendiri nilainya
-	        		// else {
-	        		// 	$('#nilai_kontrak_'+noitem).val(nilaikontrak);
-	        		// }
-	        		$('#nilai_kontrak_'+noitem).val(nilaikontrak);
-	            	$.jGrowl("Data berhasil disimpan!");
-	        	}
-	        	else if(response.result == 'false')
-				{
-					$('#nilai_kontrak_'+noitem).val(nilaikontrak);
-					alert("Isian nilai kontrak tidak boleh melebihi alokasi akun.");
-				}
-	        }
-	    });
-	    return false;
-	}
-}
-
-function get_alokasi_akun(noitem){
-	$.ajax({
-		url: '<?php echo base_url()?>index.php/e-monev/laporan_monitoring/alokasi/'+thang+'/'+kdjendok+'/'+kdsatker+'/'+kddept+'/'+kdunit+'/'+kdprogram+'/'+kdgiat+'/'+kdoutput+'/'+kdlokasi+'/'+kdkabkota+'/'+kddekon+'/'+kdsoutput+'/'+kdkmpnen+'/'+kdskmpnen+'/'+noitem,
-		global: false,
-		type: 'POST',
-		async: false,
-		dataType: 'html',
-		data:{
-		},
-		success: function (response) {
-			$("#nilaikontrak").val(response);
-		}
-	});
-}
 </script>
 
 <div id="tengah">
@@ -113,9 +48,10 @@ function get_alokasi_akun(noitem){
 	<td>
 		<div id="breadcrumb">
 			<ul class="crumbs">
-				<li class="first"><a href="#" onclick="form_paket();" style="z-index:9;"><span></span>Paket</a></li>
-				<li><a href="<?php echo base_url().'index.php/e-monev/laporan_monitoring/input_rencana/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput.'/'.$kdkmpnen.'/'.$kdskmpnen;?>" style="z-index:8;">Rencana Fisik</a></li>
-				<li><a href="<?php echo base_url().'index.php/e-monev/laporan_monitoring/input_progress/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput.'/'.$kdkmpnen.'/'.$kdskmpnen;;?>" style="z-index:7;">Progress Fisik</a></li>
+				<li class="first"><a href="#" onclick="form_paket();" style="z-index:9;"><span></span>Output</a></li>
+				<li><a href="<?php echo base_url().'index.php/e-monev/laporan_monitoring/input_rencana/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput;?>" style="z-index:8;">Rencana Fisik</a></li>
+				<li><a href="<?php echo base_url().'index.php/e-monev/laporan_monitoring/input_progress/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput;?>" style="z-index:7;">Progress Fisik</a></li>
+				<!-- <li><a href="<?php //echo base_url().'index.php/e-monev/laporan_monitoring/tree/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput;?>" style="z-index:6;">Tree</a></li> -->
 			</ul>
 		</div>
 	</td>

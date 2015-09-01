@@ -7,13 +7,21 @@
 			<tr>
 				<td>Periode</td>
 				<td>
-					<?php echo form_dropdown('tahun', $tahun, $selected_tahun); ?>
+					<?php $js = 'id="periode" style="width:15%; padding:3px;"'; 
+					echo form_dropdown('periode',$periode,$selected_periode,$js); ?>
+				</td>
+			</tr>
+			<tr>
+				<td>Tahun</td>
+				<td>
+					<?php $js = 'id="tahun" style="width:15%; padding:3px;"'; 
+					echo form_dropdown('tahun',$tahun,$selected_tahun,$js); ?>
 				</td>
 			</tr>
 			<tr>
 				<td>Visi</td>
 				<td>
-					<textarea id="visi" name="visi" cols=100><?php echo $visi; ?></textarea>
+					<textarea id="visi" name="visi" rows="4" cols="60"><?php echo $visi; ?></textarea>
 				</td>
 			</tr>
 			<tr>

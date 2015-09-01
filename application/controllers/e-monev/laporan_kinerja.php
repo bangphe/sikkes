@@ -36,7 +36,7 @@ class Laporan_kinerja extends CI_Controller {
 			$colModel['ExistingSatker'] = array('Capaian Satker Tahun Lalu', 130, TRUE, 'left', 0);
 			$colModel['TargetSatker'] = array('Target Satker Tahun Berjalan', 140, TRUE, 'left', 0);
 			$colModel['jumlah'] = array('Alokasi DIPA', 130, TRUE, 'left', 0);
-			$colModel['keuangan'] = array('Alokasi Swakelola dan Nilai Kontrak', 170, TRUE, 'left', 0);
+			//$colModel['keuangan'] = array('Alokasi Swakelola dan Nilai Kontrak', 170, TRUE, 'left', 0);
 			$colModel['nominal'] = array('Realisasi Keuangan', 120, TRUE, 'left', 0);
 			$colModel['PersenRealisasiSPM'] = array('%Realisasi Keuangan SPM', 130, TRUE, 'left', 0);
 			$colModel['PersenRealisasiSP2D'] = array('%Realisasi Keuangan SP2D', 133, TRUE, 'left', 0);
@@ -56,7 +56,7 @@ class Laporan_kinerja extends CI_Controller {
 			$colModel['ExistingSatker'] = array('Capaian Satker Tahun Lalu', 130, TRUE, 'left', 0);
 			$colModel['TargetSatker'] = array('Target Satker Tahun Berjalan', 140, TRUE, 'left', 0);
 			$colModel['jumlah'] = array('Alokasi DIPA', 130, TRUE, 'left', 0);
-			$colModel['keuangan'] = array('Alokasi Swakelola dan Nilai Kontrak', 170, TRUE, 'left', 0);
+			//$colModel['keuangan'] = array('Alokasi Swakelola dan Nilai Kontrak', 170, TRUE, 'left', 0);
 			$colModel['nominal'] = array('Realisasi Keuangan', 120, TRUE, 'left', 0);
 			$colModel['PersenRealisasiSPM'] = array('%Realisasi Keuangan SPM', 130, TRUE, 'left', 0);
 			$colModel['PersenRealisasiSP2D'] = array('%Realisasi Keuangan SP2D', 133, TRUE, 'left', 0);
@@ -134,7 +134,8 @@ class Laporan_kinerja extends CI_Controller {
             //capaian nasional tahun lalu
             $extNas = $this->lkm->get_previous_existing_nasional($row->KodeIkk);
             //capaian satker tahun lalu
-            $extSatker = $this->lkm->get_previous_existing_satker($row->KodeIkk);
+            // $extSatker = $this->lkm->get_previous_existing_satker($row->KodeIkk);
+            $extSatker = 0;
             //target nasional tahun berjalan
             $targetNas = $this->lkm->get_target_nasional($row->KodeIkk);
             //target satker tahun berjalan
@@ -142,7 +143,7 @@ class Laporan_kinerja extends CI_Controller {
             //ambil alokasi dipa dari table d_item_spm
 			$alokasiDipa = $this->lkm->get_alokasi_dipa($row->KodeIkk);
 			//alokasi swakelola dan nilai kontrak
-			$alokasiSwaKontrak = $this->lkm->get_alokasi_swakelola_dan_kontrak($row->KodeIkk);
+			//$alokasiSwaKontrak = $this->lkm->get_alokasi_swakelola_dan_kontrak($row->KodeIkk);
 			
 			$nilai_keu = 0;
 			$realisasiSpm = 0;
@@ -167,6 +168,24 @@ class Laporan_kinerja extends CI_Controller {
 			{
 				$capaianKinerja = 0;
 			}
+
+			//warning icon capaian kinerja
+			if($capaianKinerja < 50)
+			{
+				$warna_icon_capaian_kinerja = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_red.png\'>';
+			}
+			else if($capaianKinerja >= 50 && $capaianKinerja < 75)
+			{
+				$warna_icon_capaian_kinerja = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_yellow.png\'>';
+			}
+			else if($capaianKinerja >= 75 && $capaianKinerja <= 100)
+			{
+				$warna_icon_capaian_kinerja = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_green.png\'>';
+			}
+			else if($capaianKinerja > 100)
+			{
+				$warna_icon_capaian_kinerja = '<img border=\'0\' src=\''.base_url().'images/flexigrid/bulb_blue.png\'>';
+			}
 							
 			if($kd_role != Role_model::PEMBUAT_LAPORAN) {
 				$record_items[] = array(
@@ -177,11 +196,11 @@ class Laporan_kinerja extends CI_Controller {
 					$extSatker,
 					$targetSatker,
 					'Rp '.number_format($alokasiDipa, 2), // alokasi dipa
-					'Rp '.number_format($alokasiSwaKontrak, 2), //alokasi swakelola
+					//'Rp '.number_format($alokasiSwaKontrak, 2), //alokasi swakelola
 					'Rp '.number_format(0, 2), // realisasi keu
 					number_format($realisasiSpm, 2).' %',
 					number_format($realisasiSp2d, 2).' %',
-					number_format($capaianKinerja, 2).' %',
+					number_format($capaianKinerja, 2).' %'.$warna_icon_capaian_kinerja,
 					'<a href='.base_url().'index.php/e-monev/laporan_kinerja/indikator_grid/'.$row->KodeIkk.'/'.$row->idThnAnggaran.'><img border=\'0\' src=\''.base_url().'images/icon/lihat.png\'></a>',
 					number_format($realisasiKinerja, 2).' %',
 					'<a href='.base_url().'index.php/e-monev/laporan_kinerja/komponenGrid/'.$row->KodeIkk.'/'.$pilihan_prioritas.'><img border=\'0\' src=\''.base_url().'images/icon/lihat.png\'></a>'
@@ -196,11 +215,11 @@ class Laporan_kinerja extends CI_Controller {
 					$extSatker,
 					$targetSatker,
 					'Rp '.number_format($alokasiDipa, 2), // alokasi dipa
-					'Rp '.number_format($alokasiSwaKontrak, 2), //alokasi swakelola
+					//'Rp '.number_format($alokasiSwaKontrak, 2), //alokasi swakelola
 					'Rp '.number_format(0, 2), // realisasi keu
 					number_format($realisasiSpm, 2).' %',
 					number_format($realisasiSp2d, 2).' %',
-					number_format($capaianKinerja, 2).' %',
+					number_format($capaianKinerja, 2).' %'.$warna_icon_capaian_kinerja,
 					'<a href='.base_url().'index.php/e-monev/laporan_kinerja/input_rencana/'.$row->KodeIkk.'/'.$row->idThnAnggaran.'><img border=\'0\' src=\''.base_url().'images/icon/upload2.png\'></a>',
 					'<a href='.base_url().'index.php/e-monev/laporan_kinerja/input_realisasi/'.$row->KodeIkk.'/'.$row->idThnAnggaran.'><img border=\'0\' src=\''.base_url().'images/icon/upload2.png\'></a>',
 					number_format($realisasiKinerja, 2).' %',

@@ -195,12 +195,16 @@ class Master_model extends CI_Model {
 	function get_tupoksi($kdsatker){
 		$this->db->select('*');
 		$this->db->from('ref_tupoksi');
+		$this->db->join('ref_tahun_anggaran','ref_tupoksi.idThnAnggaran=ref_tahun_anggaran.idThnAnggaran');
+		$this->db->join('ref_periode','ref_tupoksi.idPeriode=ref_periode.idPeriode');
 		$this->db->where('kdsatker',$kdsatker);
 		$this->CI->flexigrid->build_query();		
 		$return['records'] = $this->db->get();
 		
 		$this->db->select('*');
 		$this->db->from('ref_tupoksi');
+		$this->db->join('ref_tahun_anggaran','ref_tupoksi.idThnAnggaran=ref_tahun_anggaran.idThnAnggaran');
+		$this->db->join('ref_periode','ref_tupoksi.idPeriode=ref_periode.idPeriode');
 		$this->db->where('kdsatker',$kdsatker);
 		$this->CI->flexigrid->build_query(FALSE);
 		$return['record_count'] = $this->db->count_all_results();

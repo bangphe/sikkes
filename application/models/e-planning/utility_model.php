@@ -183,4 +183,38 @@ class Utility_model extends CI_Model {
 		}
 		return $Biaya;
 	}
+
+	function get_provinsi(){
+		$this->db->select('*');
+		$this->db->from('ref_provinsi');
+		return $this->db->get();
+	}
+
+	function get_satker($arg){
+		$this->db->select('nmsatker, ref_satker.kdsatker')->distinct();
+		$this->db->from('ref_satker');
+		if($arg == 'skpd'){
+			$this->db->where('kdjnssat', '4');
+			$this->db->not_like('nmsatker', 'dinas kesehatan pro');
+		}
+		elseif($arg == 'kpkd'){
+			$this->db->where('kdjnssat !=', '3');
+			$this->db->where('kdjnssat !=', '4');
+			$this->db->where('kdjnssat !=', '5');
+			$this->db->where('kdjnssat !=', '6');
+			$this->db->where('kdjnssat !=', '7');
+			$this->db->where('kdjnssat !=', '8');
+		}
+		else{
+			if($this->session->userdata('kd_role') == 3 && $this->session->userdata('kodejenissatker') == 3){
+				$this->db->join('pengajuan', 'pengajuan.NO_REG_SATKER = ref_satker.kdsatker');
+				$this->db->join('data_program', 'data_program.KD_PENGAJUAN = pengajuan.KD_PENGAJUAN');
+				$this->db->like('KodeProgram','024.'. $arg, 'after');
+			}
+			else $this->db->where('kdlokasi', $arg);
+		}
+		$this->db->where('kdsatker = kdinduk');
+		$this->db->order_by('nmsatker', 'asc');
+		return $this->db->get();
+	}
 }

@@ -60,7 +60,7 @@ function whenkeydown(max_length)
 }
 </script>
 
-<?php echo form_open_multipart('e-monev/laporan_monitoring/save_progress_kontrak/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput.'/'.$kdkmpnen.'/'.$kdskmpnen.'/'.$progress_id.'/'.$idpaket); ?>
+<?php echo form_open_multipart('e-monev/laporan_monitoring/save_progress_fisik/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput.'/'.$progress_id.'/'.$idpaket); ?>
 <table class="tablecloth" width="50%">
 		<tr>
 			<td><b>Bulan</b></td>

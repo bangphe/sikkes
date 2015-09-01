@@ -73,6 +73,15 @@ class Dashboard_satker_model extends CI_Model {
 		$this->db->where('thang',$thang);
 		return $this->db->get();
 	}
+
+	function get_soutput_by_satker($kdsatker, $thang)
+	{
+		$this->db->select('*');
+		$this->db->from('d_soutput');
+		$this->db->where('kdsatker',$kdsatker);
+		$this->db->where('thang',$thang);
+		return $this->db->get();
+	}
 	
 	function get_skmpnen_by_satkers($kdsatker, $thang)
 	{

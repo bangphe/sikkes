@@ -3,17 +3,13 @@
 		<img src="<?php echo base_url(); ?>images/icon/grafik.png" alt=""/>
 		Grafik
 	</button>
-	<button type="submit" class="regular" name="progress_swakelola" onclick="daftar_progress_swakelola()">
-		<img src="<?php echo base_url(); ?>images/icon/money.png" alt=""/>
-		Progress Fisik Swakelola
-	</button>
 </div>
 <div class="buttons">
 <p align="center"><b>Tahun Anggaran : </b><?php echo $this->session->userdata('thn_anggaran');?></p>
 <br />
-<p align="center"><b>Komponen : </b><?php echo $komponen;?></p>
+<p align="center"><b>Output : </b><?php echo $nmoutput;?></p>
 <br />
-<p align="center"><b>Sub Komponen : </b><?php echo $sub_komponen;?></p>
+<p align="center"><b>Sub Output : </b><?php echo $ursoutput;?></p>
 
 <br />
 </div>
@@ -21,8 +17,8 @@
 	<tr>
 		<th>Bulan</th>
 		<th>Tanggal</th>
-		<th>Rencana Fisik Kontraktual (%)</th>
-		<th>Progress Fisik Kontraktual (%)</th>
+		<th>Rencana Fisik (%)</th>
+		<th>Progress Fisik (%)</th>
 		<th>File Bukti Fisik</th>
 		<th>Input</th>
 
@@ -37,7 +33,7 @@
 		<td><?php echo $row->rencana;?></td>
 		<td><?php echo $row->progress;?></td>
 		<td><?php echo '<a href=\''.base_url().'index.php/e-monev/laporan_monitoring/download_file_kontrak/'.$row->progress_id.'\'>'.$row->dokumen.'</a></td>'; ?></td>
-		<td><?php echo '<a href=\'#\'><img border=\'0\' onclick="update_progress_kontraktual('.$row->progress_id.','.$row->idpaket.','.$row->bulan.');" src=\''.base_url().'images/icons/edit_icon(16x16).png\'></a></td>'; ?></td>
+		<td><?php echo '<a href=\'#\'><img border=\'0\' onclick="update_progress_fisik('.$row->progress_id.','.$row->idpaket.','.$row->bulan.');" src=\''.base_url().'images/icons/edit_icon(16x16).png\'></a></td>'; ?></td>
 	</tr>
 	<?php } ?>																									
 </table>

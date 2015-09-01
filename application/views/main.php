@@ -28,6 +28,7 @@
         
         
 		<!-- JAVASCRIPT -->
+
         <!-- TREEGRID-->
         <script type="text/javascript" src="<?= base_url() ?>js/jquery-1.8.0.min.js"></script>
 		<script type="text/javascript" src="<?= base_url() ?>js/jquery.easyui.min.js"></script>
@@ -65,6 +66,7 @@
 		<script type="text/javascript" src="<?php echo base_url() ?>js/chosen.jquery_non_add.js"></script>
 		<script type="text/javascript" src="<?php echo base_url() ?>js/chosen.proto.js"></script>
 		<script type="text/javascript" src="<?php echo base_url() ?>js/chosen.proto.min.js"></script>
+		<!--<script type="text/javascript" src="<?= base_url() ?>js/jquery.gdocsviewer.js"></script>-->
 		
 		<script type="text/javascript">
 			<!-- <MENU_KANAN>
@@ -113,15 +115,27 @@
 
 <!--Start of Zopim Live Chat Script-->
 <script type="text/javascript">
-window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-$.src='//cdn.zopim.com/?oeof3Wn11uwTYwpP4TQ15Gzd0UOFQ2t9';z.t=+new Date;$.
-type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+// window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+// d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+// _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+// $.src='//cdn.zopim.com/?oeof3Wn11uwTYwpP4TQ15Gzd0UOFQ2t9';z.t=+new Date;$.
+// type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
 </script>
 <!--End of Zopim Live Chat Script-->
 
+<!-- Google Analytic -->
+<script>
+  // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  // (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  // m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  // })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  // ga('create', 'UA-52356451-1', 'auto');
+  // ga('send', 'pageview');
+
 </script>
+<!-- End -->
+
 </head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <meta content="utf-8" http-equiv="encoding">
@@ -129,7 +143,7 @@ type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
 		<div class="ui-layout-north">
 			<table class="header" width="100%" height ="65" border="0">
 			  <tr>
-				<td width="65"><img src="<?=base_url();?>images/icons/erenggar.png" height="65px" /></td>
+				<td width="65"><img src="<?=base_url();?>images/icons/erenggar_old.png" height="65px" /></td>
 			    <td align="right" style="font-size: 18px; font-family: 'Courier New', Courier, monospace; vertical-align:middle; color: #FFF; ">
                   <p>Selamat Datang <a href="<?php echo site_url().'/master_data/master_user/detail_user'; ?>"><b><u><?php echo $this->session->userdata('username'); ?></u></b></a></p>
                 <p>Tahun <span style="text-align: right"></span>Anggaran Login: <b><?php echo $this->session->userdata('thn_anggaran'); ?></b> | <a href="<?php echo site_url().'/login/logout'; ?>"><b><u>Logout</u></b></a></p></td>

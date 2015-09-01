@@ -20,11 +20,9 @@ var kdlokasi = "<?php echo $kdlokasi;?>";
 var kdkabkota = "<?php echo $kdkabkota;?>";
 var kddekon = "<?php echo $kddekon;?>";
 var kdsoutput = "<?php echo $kdsoutput;?>";
-var kdkmpnen = "<?php echo $kdkmpnen;?>";
-var kdskmpnen = "<?php echo $kdskmpnen;?>";
 
 $(document).ready(function(){
-  get_html_data(base_url+"index.php/e-monev/laporan_monitoring/daftar_rencana/"+thang+"/"+kdjendok+"/"+kdsatker+"/"+kddept+"/"+kdunit+"/"+kdprogram+"/"+kdgiat+"/"+kdoutput+"/"+kdlokasi+"/"+kdkabkota+"/"+kddekon+"/"+kdsoutput+"/"+kdkmpnen+"/"+kdskmpnen,'', 'profile_detail_loading', 'content_tengah');
+  get_html_data(base_url+"index.php/e-monev/laporan_monitoring/daftar_rencana/"+thang+"/"+kdjendok+"/"+kdsatker+"/"+kddept+"/"+kdunit+"/"+kdprogram+"/"+kdgiat+"/"+kdoutput+"/"+kdlokasi+"/"+kdkabkota+"/"+kddekon+"/"+kdsoutput,'', 'profile_detail_loading', 'content_tengah');
 });
 
 function update_rencana_kontrak(rencanaid, idpaket, bulan){
@@ -40,7 +38,7 @@ function grafik_rencana(idpaket){
 }
 
 function daftar_rencana(){
-    get_html_data(base_url+"index.php/e-monev/laporan_monitoring/daftar_rencana/"+thang+"/"+kdjendok+"/"+kdsatker+"/"+kddept+"/"+kdunit+"/"+kdprogram+"/"+kdgiat+"/"+kdoutput+"/"+kdlokasi+"/"+kdkabkota+"/"+kddekon+"/"+kdsoutput+"/"+kdkmpnen+"/"+kdskmpnen,'', 'profile_detail_loading', 'content_tengah');
+    get_html_data(base_url+"index.php/e-monev/laporan_monitoring/daftar_rencana/"+thang+"/"+kdjendok+"/"+kdsatker+"/"+kddept+"/"+kdunit+"/"+kdprogram+"/"+kdgiat+"/"+kdoutput+"/"+kdlokasi+"/"+kdkabkota+"/"+kddekon+"/"+kdsoutput,'', 'profile_detail_loading', 'content_tengah');
 }
 
 // function reset()
@@ -63,36 +61,7 @@ function save_rencana_kontrak(rencana_id, idpaket){
 		success: function (response) {
 			if(response.result == 'true')
 			{
-				daftar_rencana(thang, kdjendok, kdsatker, kddept, kdunit, kdprogram, kdgiat, kdoutput, kdlokasi, kdkabkota, kddekon, kdsoutput, kdkmpnen, kdskmpnen);
-			}
-			else if(response.result == 'false')
-			{
-				alert("Presentase sudah 100 %");
-			}
-			else if(response.result == 'exc_100')
-			{
-				alert("Presentase tidak boleh melebihi 100 %");
-			}
-		}
-	});
-	return false;
-}
-
-function save_rencana_swakelola(rencana_id, idpaket){
-	var rencana_swakelola = $("#rencana_swakelola").val();
-	$.ajax({
-		url: '<?=base_url()?>index.php/e-monev/laporan_monitoring/save_rencana_swakelola/'+rencana_id+'/'+idpaket,
-		global: false,
-		type: 'POST',
-		async: false,
-		dataType: 'json',
-		data:{
-			rencana_swakelola:rencana_swakelola
-		},
-		success: function (response) {
-			if(response.result == 'true')
-			{
-				daftar_rencana(thang, kdjendok, kdsatker, kddept, kdunit, kdprogram, kdgiat, kdoutput, kdlokasi, kdkabkota, kddekon, kdsoutput, kdkmpnen, kdskmpnen);
+				daftar_rencana(thang, kdjendok, kdsatker, kddept, kdunit, kdprogram, kdgiat, kdoutput, kdlokasi, kdkabkota, kddekon, kdsoutput);
 			}
 			else if(response.result == 'false')
 			{
@@ -119,9 +88,9 @@ function save_rencana_swakelola(rencana_id, idpaket){
 <div>
 	<div id="breadcrumb">
 		<ul class="crumbs">
-			<li class="first"><a href="<?php echo base_url().'index.php/e-monev/laporan_monitoring/input_laporan/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput.'/'.$kdkmpnen.'/'.$kdskmpnen;?>" style="z-index:9;"><span></span>Paket</a></li>
+			<li class="first"><a href="<?php echo base_url().'index.php/e-monev/laporan_monitoring/input_laporan/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput;?>" style="z-index:9;"><span></span>Output</a></li>
 			<li><a href="#" onClick="daftar_rencana();" style="z-index:8;">Rencana Fisik</a></li>
-			<li><a href="<?php echo base_url().'index.php/e-monev/laporan_monitoring/input_progress/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput.'/'.$kdkmpnen.'/'.$kdskmpnen;?>" style="z-index:7;">Progress Fisik</a></li>
+			<li><a href="<?php echo base_url().'index.php/e-monev/laporan_monitoring/input_progress/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput;?>" style="z-index:7;">Progress Fisik</a></li>
 		</ul>
 	</div>
 </div>

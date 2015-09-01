@@ -7,6 +7,7 @@ class Dashboard_satker extends CI_Controller
 		$this->cek_session();
 		$this->load->model('e-planning/Manajemen_model','mm');
 		$this->load->model('e-monev/dashboard_satker_model','dsm');
+		$this->load->model('e-monev/laporan_monitoring_model','lmm');
 	}
 	
 	function cek_session()
@@ -34,7 +35,8 @@ class Dashboard_satker extends CI_Controller
 	function gridSatker()
 	{
 		$result = array();
-		$records = $this->dsm->get_skmpnen_by_satker($this->session->userdata('kdsatker'), $this->session->userdata('thn_anggaran'));
+		//$records = $this->dsm->get_skmpnen_by_satker($this->session->userdata('kdsatker'), $this->session->userdata('thn_anggaran'));
+		$records = $this->dsm->get_soutput_by_satker($this->session->userdata('kdsatker'), $this->session->userdata('thn_anggaran'));
 		$bulan = date("n")-1;
 		
 		//total anggaran semua paket satker
@@ -48,41 +50,45 @@ class Dashboard_satker extends CI_Controller
 			$soutput = $this->dsm->get_suboutput($row['kdprogram'],$row['kdgiat'],$row['kdoutput'],$row['kdsoutput']);
 			$fisik = 0;
 			
-			$pagu_swakelola = 0;
-			$pagu_kontraktual = 0;
-			$prog_fis_swakelola = 0;
-			$prog_fis_kontraktual = 0;
-			// mengambil nilai anggaran per paket
-			$paket = $this->dsm->get_paket($row['thang'], $row['kdjendok'], $row['kdsatker'], $row['kddept'], $row['kdunit'], $row['kdprogram'], $row['kdgiat'], $row['kdoutput'], $row['kdsoutput'], $row['kdkmpnen'], $row['kdskmpnen']);
-			if($paket->num_rows > 0){
-				foreach($paket->result() as $pk){
-					$pagu_swakelola = $this->dsm->get_swakelola($pk->idpaket)->row()->jumlah;
-					$pagu_kontraktual = $this->dsm->get_kontraktual($pk->idpaket)->row()->nilaikontrak;
-					
-					//mengambil nilai progress fisik paket per bulan
-					if(isset($this->dsm->get_progres_fisik_swakelola_per_bulan($pk->idpaket, $bulan)->row()->progress))
-						$prog_fis_swakelola = $this->dsm->get_progres_fisik_swakelola_per_bulan($pk->idpaket, $bulan)->row()->progress;
-					if(isset($this->dsm->get_progres_fisik_kontraktual_per_bulan($pk->idpaket, $bulan)->row()->progress))
-						$prog_fis_kontraktual = $this->dsm->get_progres_fisik_kontraktual_per_bulan($pk->idpaket, $bulan)->row()->progress;
+			$thang = $row['thang'];
+			$kdjendok = $row['kdjendok'];
+			$kdsatker = $row['kdsatker'];
+			$kddept = $row['kddept'];
+			$kdunit = $row['kdunit'];
+			$kdprogram = $row['kdprogram'];
+			$kdgiat = $row['kdgiat'];
+			$kdoutput = $row['kdoutput'];
+			$kdlokasi = $row['kdlokasi'];
+			$kdkabkota = $row['kdkabkota'];
+			$kddekon = $row['kddekon'];
+			$kdsoutput = $row['kdsoutput'];
+
+			$progress_fisik = 0;
+			//ngecek apakah input laporan sudah diisi atau belom
+			$cek_paket = $this->lmm->cek_paket_by_kdoutput($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput);
+			if ($cek_paket->num_rows > 0) {
+				foreach ($cek_paket->result() as $row2) {
+					$idpaket = $row2->idpaket;
+					//PROGRESS FISIK
+					if($this->lmm->get_progress_by_idpaket($idpaket)->num_rows() > 0) {
+						$progress_fisik = $this->lmm->get_progress_by_idpaket_and_month($idpaket,date("m"))->row()->progress;
+					}
+					else {
+						$progress_fisik = 0;
+					}
 				}
-			}
-			if($prog_fis_swakelola > 0 && $prog_fis_kontraktual > 0) {
-				$pagu_progress += $prog_fis_swakelola*$pagu_swakelola + $prog_fis_kontraktual*$pagu_kontraktual;
-				// realisasi fisik unit utama per provinsi
-				if($pagu_progress > 0 && $pagu_total > 0) {
-					$fisik = $pagu_progress / $pagu_total;
-				}
+				
 			}
 
 			// $row['komponen'] = $row['urkmpnen'];
 			// $row['subkomponen'] = $row['urskmpnen'];
-			$row['paket'] = '['.$row['kdgiat'].'.'.$row['kdoutput'].'.'.$row['kdsoutput'].'.'.$row['kdkmpnen'].'.'.$row['kdskmpnen'].'] '.$row['urskmpnen'];
+			$row['paket'] = '['.$row['kdgiat'].'.'.$row['kdoutput'].'.'.$row['kdsoutput'].'] '.$row['ursoutput'];
 			//$row['program'] = $row['kdprogram'];
-			$row['keg'] = $giat->row()->nmgiat;
-			$row['output'] = $output->row()->nmoutput;
-			$row['suboutput'] = $soutput->row()->ursoutput;
+			$row['keg'] = '['.$row['kdgiat'].'] '.$giat->row()->nmgiat;
+			$row['output'] = '['.$row['kdoutput'].'] '.$output->row()->nmoutput;
+			$row['suboutput'] = '['.$row['kdsoutput'].'] '.$soutput->row()->ursoutput;
 			// $progress = $this->get_progress_skmpnen_by_kmpnen($row['d_skmpnen_id'],$row['thang']);
-			$row['fisik']= round($fisik,2).'%';
+			$row['fisik']= $progress_fisik.'%';
 			$row['state'] = 'open';
 			array_push($result, $row);
 		}
@@ -125,13 +131,16 @@ class Dashboard_satker extends CI_Controller
 		foreach($records->result_array() as $row)
 		{
 			$fisik = 0;
-			
+			//db server
+			$kdskmpnen_ = $row['kdskmpnen'];
+			$kdskmpnen = str_replace(' ', '', $kdskmpnen_);
 			$pagu_swakelola = 0;
 			$pagu_kontraktual = 0;
 			$prog_fis_swakelola = 0;
 			$prog_fis_kontraktual = 0;
+			$pagu_progress = 0;
 			// mengambil nilai anggaran per paket
-			$paket = $this->dsm->get_paket($row['thang'], $row['kdjendok'], $row['kdsatker'], $row['kddept'], $row['kdunit'], $row['kdprogram'], $row['kdgiat'], $row['kdoutput'], $row['kdsoutput'], $row['kdkmpnen'], $row['kdskmpnen']);
+			$paket = $this->dsm->get_paket($row['thang'], $row['kdjendok'], $row['kdsatker'], $row['kddept'], $row['kdunit'], $row['kdprogram'], $row['kdgiat'], $row['kdoutput'], $row['kdsoutput'], $row['kdkmpnen'], $kdskmpnen);
 			if($paket->num_rows > 0)
 			{
 				foreach($paket->result() as $pk)
@@ -145,16 +154,18 @@ class Dashboard_satker extends CI_Controller
 					if(isset($this->dsm->get_progres_fisik_kontraktual_per_bulan($pk->idpaket, $bulan)->row()->progress))
 						$prog_fis_kontraktual = $this->dsm->get_progres_fisik_kontraktual_per_bulan($pk->idpaket, $bulan)->row()->progress;
 				}
+				$fisik = $prog_fis_kontraktual;
 			}
 			if($prog_fis_swakelola > 0 && $prog_fis_kontraktual > 0) {
 				$pagu_progress += $prog_fis_swakelola*$pagu_swakelola + $prog_fis_kontraktual*$pagu_kontraktual;
 				// realisasi fisik unit utama per provinsi
 				if($pagu_progress > 0 && $pagu_total > 0) {
-					$fisik = $pagu_progress / $pagu_total;
+					//$fisik = $pagu_progress / $pagu_total;
+					$fisik = $prog_fis_kontraktual;
 				}
 			}
-
-
+			$fisik = $prog_fis_kontraktual;
+			
 			$strXML .= '<set value="'.$fisik.'" />';
 		}
 			

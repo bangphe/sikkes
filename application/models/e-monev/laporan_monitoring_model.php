@@ -84,11 +84,68 @@ class Laporan_monitoring_model extends CI_Model {
 		$this->db->where($kolom, $parameter);
 		return $this->db->get();
 	}
-	function get_sub_komponen(){
-		$kdinduk = $this->get_where($this->db->database.'.ref_satker', 'kdsatker', $this->session->userdata('kdsatker'))->row()->kdinduk;
+	// function get_sub_komponen(){
+	// 	$kdinduk = $this->get_where($this->db->database.'.ref_satker', 'kdsatker', $this->session->userdata('kdsatker'))->row()->kdinduk;
+	// 	$this->db->select('*');
+	// 	$this->db->from($this->db->database.'.d_skmpnen d');
+	// 	$this->db->join($this->db->database.'.d_kmpnen', $this->db->database.'.d_kmpnen.thang = d.thang AND '.$this->db->database.'.d_kmpnen.kdsatker = d.kdsatker AND '.$this->db->database.'.d_kmpnen.kddept = d.kddept AND '.$this->db->database.'.d_kmpnen.kdunit = d.kdunit AND '.$this->db->database.'.d_kmpnen.kdprogram = d.kdprogram AND '.$this->db->database.'.d_kmpnen.kdgiat = d.kdgiat AND '.$this->db->database.'.d_kmpnen.kdoutput = d.kdoutput AND '.$this->db->database.'.d_kmpnen.kdlokasi = d.kdlokasi AND '.$this->db->database.'.d_kmpnen.kdkabkota = d.kdkabkota AND '.$this->db->database.'.d_kmpnen.kdsoutput = d.kdsoutput AND '.$this->db->database.'.d_kmpnen.kdkmpnen = d.kdkmpnen AND '.$this->db->database.'.d_kmpnen.kdjendok = d.kdjendok  AND '.$this->db->database.'.d_kmpnen.kddekon = d.kddekon', 'left');
+	// 	$this->db->join($this->db->database.'.t_output', $this->db->database.'.t_output.kdgiat = d.kdgiat AND '.$this->db->database.'.t_output.kdoutput = d.kdoutput');
+	// 	$this->db->join($this->db->database.'.t_giat', $this->db->database.'.t_giat.kdgiat = d.kdgiat');
+	// 	$this->db->join($this->db->database.'.t_satker', $this->db->database.'.t_satker.kdsatker = d.kdsatker');
+	// 	if($this->session->userdata('kd_role') == Role_model::PEMBUAT_LAPORAN)
+	// 	{
+	// 		$this->db->join($this->db->database.'.ref_satker', $this->db->database.'.ref_satker.kdsatker = d.kdsatker');
+	// 		$this->db->where($this->db->database.'.ref_satker.kdinduk', $this->session->userdata('kdinduk'));
+	// 	}
+	// 	elseif($this->session->userdata('kd_role') == Role_model::VERIFIKATOR && $this->session->userdata('kodejenissatker') == 2)
+	// 	{
+	// 		$this->db->where('d.kdlokasi',$this->session->userdata('kodeprovinsi'));
+	// 		$this->db->where($this->db->database.'.t_satker.kdjnssat','4');
+	// 	}
+	// 	elseif($this->session->userdata('kd_role') == Role_model::VERIFIKATOR && $this->session->userdata('kodejenissatker') == 3)
+	// 	{
+	// 		$this->db->where('d.kdunit',$this->session->userdata('kdunit'));
+	// 	}
+	// 	$this->db->where('d.thang',$this->session->userdata('thn_anggaran'));
+	// 	$this->CI->flexigrid->build_query();
+	// 	$return['records'] = $this->db->get();
+		
+	// 	$this->db->select('*');
+	// 	$this->db->from($this->db->database.'.d_skmpnen d');
+	// 	$this->db->join($this->db->database.'.d_kmpnen', $this->db->database.'.d_kmpnen.thang = d.thang AND '.$this->db->database.'.d_kmpnen.kdsatker = d.kdsatker AND '.$this->db->database.'.d_kmpnen.kddept = d.kddept AND '.$this->db->database.'.d_kmpnen.kdunit = d.kdunit AND '.$this->db->database.'.d_kmpnen.kdprogram = d.kdprogram AND '.$this->db->database.'.d_kmpnen.kdgiat = d.kdgiat AND '.$this->db->database.'.d_kmpnen.kdoutput = d.kdoutput AND '.$this->db->database.'.d_kmpnen.kdlokasi = d.kdlokasi AND '.$this->db->database.'.d_kmpnen.kdkabkota = d.kdkabkota AND '.$this->db->database.'.d_kmpnen.kdsoutput = d.kdsoutput AND '.$this->db->database.'.d_kmpnen.kdkmpnen = d.kdkmpnen AND '.$this->db->database.'.d_kmpnen.kdjendok = d.kdjendok  AND '.$this->db->database.'.d_kmpnen.kddekon = d.kddekon', 'left');
+	// 	$this->db->join($this->db->database.'.t_output', $this->db->database.'.t_output.kdgiat = d.kdgiat AND '.$this->db->database.'.t_output.kdoutput = d.kdoutput');
+	// 	$this->db->join($this->db->database.'.t_giat', $this->db->database.'.t_giat.kdgiat = d.kdgiat');
+	// 	$this->db->join($this->db->database.'.t_satker', $this->db->database.'.t_satker.kdsatker = d.kdsatker');
+	// 	if($this->session->userdata('kd_role') == Role_model::PEMBUAT_LAPORAN)
+	// 	{
+	// 		if($this->session->userdata('kdinduk')== ''){
+	// 		$this->db->where('d.kdsatker',$this->session->userdata('kdsatker'));
+	// 		}
+	// 		else {
+	// 			$this->db->join($this->db->database.'.ref_satker', $this->db->database.'.ref_satker.kdsatker = d.kdsatker');
+	// 			$this->db->where($this->db->database.'.ref_satker.kdinduk', $this->session->userdata('kdinduk'));
+	// 		}
+	// 	}
+	// 	elseif($this->session->userdata('kd_role') == Role_model::VERIFIKATOR && $this->session->userdata('kodejenissatker') == 2)
+	// 	{
+	// 		$this->db->where('d.kdlokasi',$this->session->userdata('kodeprovinsi'));
+	// 		$this->db->where($this->db->database.'.t_satker.kdjnssat','4');
+	// 	}
+	// 	elseif($this->session->userdata('kd_role') == Role_model::VERIFIKATOR && $this->session->userdata('kodejenissatker') == 3)
+	// 	{
+	// 		$this->db->where('d.kdunit',$this->session->userdata('kdunit'));
+	// 	}
+	// 	$this->db->where('d.thang',$this->session->userdata('thn_anggaran'));
+	// 	$this->CI->flexigrid->build_query(FALSE);
+	// 	$return['record_count'] = $this->db->count_all_results();
+	// 	return $return;
+	// }
+
+	function get_output(){
 		$this->db->select('*');
-		$this->db->from($this->db->database.'.d_skmpnen d');
-		$this->db->join($this->db->database.'.d_kmpnen', $this->db->database.'.d_kmpnen.thang = d.thang AND '.$this->db->database.'.d_kmpnen.kdsatker = d.kdsatker AND '.$this->db->database.'.d_kmpnen.kddept = d.kddept AND '.$this->db->database.'.d_kmpnen.kdunit = d.kdunit AND '.$this->db->database.'.d_kmpnen.kdprogram = d.kdprogram AND '.$this->db->database.'.d_kmpnen.kdgiat = d.kdgiat AND '.$this->db->database.'.d_kmpnen.kdoutput = d.kdoutput AND '.$this->db->database.'.d_kmpnen.kdlokasi = d.kdlokasi AND '.$this->db->database.'.d_kmpnen.kdkabkota = d.kdkabkota AND '.$this->db->database.'.d_kmpnen.kdsoutput = d.kdsoutput AND '.$this->db->database.'.d_kmpnen.kdkmpnen = d.kdkmpnen AND '.$this->db->database.'.d_kmpnen.kdjendok = d.kdjendok  AND '.$this->db->database.'.d_kmpnen.kddekon = d.kddekon', 'left');
+		$this->db->from($this->db->database.'.d_soutput d');
+		$this->db->join($this->db->database.'.t_output', $this->db->database.'.t_output.kdgiat = d.kdgiat AND '.$this->db->database.'.t_output.kdoutput = d.kdoutput');
+		$this->db->join($this->db->database.'.t_giat', $this->db->database.'.t_giat.kdgiat = d.kdgiat');
 		$this->db->join($this->db->database.'.t_satker', $this->db->database.'.t_satker.kdsatker = d.kdsatker');
 		if($this->session->userdata('kd_role') == Role_model::PEMBUAT_LAPORAN)
 		{
@@ -109,8 +166,9 @@ class Laporan_monitoring_model extends CI_Model {
 		$return['records'] = $this->db->get();
 		
 		$this->db->select('*');
-		$this->db->from($this->db->database.'.d_skmpnen d');
-		$this->db->join($this->db->database.'.d_kmpnen', $this->db->database.'.d_kmpnen.thang = d.thang AND '.$this->db->database.'.d_kmpnen.kdsatker = d.kdsatker AND '.$this->db->database.'.d_kmpnen.kddept = d.kddept AND '.$this->db->database.'.d_kmpnen.kdunit = d.kdunit AND '.$this->db->database.'.d_kmpnen.kdprogram = d.kdprogram AND '.$this->db->database.'.d_kmpnen.kdgiat = d.kdgiat AND '.$this->db->database.'.d_kmpnen.kdoutput = d.kdoutput AND '.$this->db->database.'.d_kmpnen.kdlokasi = d.kdlokasi AND '.$this->db->database.'.d_kmpnen.kdkabkota = d.kdkabkota AND '.$this->db->database.'.d_kmpnen.kdsoutput = d.kdsoutput AND '.$this->db->database.'.d_kmpnen.kdkmpnen = d.kdkmpnen AND '.$this->db->database.'.d_kmpnen.kdjendok = d.kdjendok  AND '.$this->db->database.'.d_kmpnen.kddekon = d.kddekon', 'left');
+		$this->db->from($this->db->database.'.d_soutput d');
+		$this->db->join($this->db->database.'.t_output', $this->db->database.'.t_output.kdgiat = d.kdgiat AND '.$this->db->database.'.t_output.kdoutput = d.kdoutput');
+		$this->db->join($this->db->database.'.t_giat', $this->db->database.'.t_giat.kdgiat = d.kdgiat');
 		$this->db->join($this->db->database.'.t_satker', $this->db->database.'.t_satker.kdsatker = d.kdsatker');
 		if($this->session->userdata('kd_role') == Role_model::PEMBUAT_LAPORAN)
 		{
@@ -135,6 +193,41 @@ class Laporan_monitoring_model extends CI_Model {
 		$this->CI->flexigrid->build_query(FALSE);
 		$return['record_count'] = $this->db->count_all_results();
 		return $return;
+	}
+
+	function get_output_tree($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput)
+	{
+		$this->db->select('*');
+		$this->db->from($this->db->database.'.d_soutput d');
+		$this->db->join($this->db->database.'.t_output', $this->db->database.'.t_output.kdgiat = d.kdgiat AND '.$this->db->database.'.t_output.kdoutput = d.kdoutput');
+		$this->db->join($this->db->database.'.t_giat', $this->db->database.'.t_giat.kdgiat = d.kdgiat');
+		$this->db->join($this->db->database.'.t_satker', $this->db->database.'.t_satker.kdsatker = d.kdsatker');
+		$this->db->where($this->db->database.'.d.thang',$thang);
+		$this->db->where($this->db->database.'.d.kdjendok',$kdjendok);
+		$this->db->where($this->db->database.'.d.kdsatker',$kdsatker);
+		$this->db->where($this->db->database.'.d.kddept',$kddept);
+		$this->db->where($this->db->database.'.d.kdunit',$kdunit);
+		$this->db->where($this->db->database.'.d.kdprogram',$kdprogram);
+		$this->db->where($this->db->database.'.d.kdgiat',$kdgiat);
+		$this->db->where($this->db->database.'.d.kdoutput',$kdoutput);
+		$this->db->where($this->db->database.'.d.kdlokasi',$kdlokasi);
+		$this->db->where($this->db->database.'.d.kdkabkota',$kdkabkota);
+		$this->db->where($this->db->database.'.d.kddekon',$kddekon);
+		$this->db->where($this->db->database.'.d.kdsoutput',$kdsoutput);
+
+		return $this->db->get();
+	}
+
+	function get_kegiatan_tree($kdgiat, $kddept, $kdunit, $kdprogram)
+	{
+		$this->db->select('*');
+		$this->db->from($this->db->database.'.t_giat d');
+		$this->db->where($this->db->database.'.d.kdgiat',$kdgiat);
+		$this->db->where($this->db->database.'.d.kddept',$kddept);
+		$this->db->where($this->db->database.'.d.kdunit',$kdunit);
+		$this->db->where($this->db->database.'.d.kdprogram',$kdprogram);
+
+		return $this->db->get();
 	}
 	
 	function cek_permasalahan_by_d_skmpnen_id($d_skmpnen_id)
@@ -600,6 +693,58 @@ class Laporan_monitoring_model extends CI_Model {
 		return $this->db->get();
 	}
 
+	function cek_paket_by_kegiatan($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat)
+	{
+		$this->db->select();
+		$this->db->from($this->db->database.'.paket_output paket');
+		$this->db->where($this->db->database.'.paket.thang',$thang);
+		$this->db->where($this->db->database.'.paket.kdjendok',$kdjendok);
+		$this->db->where($this->db->database.'.paket.kdsatker',$kdsatker);
+		$this->db->where($this->db->database.'.paket.kddept',$kddept);
+		$this->db->where($this->db->database.'.paket.kdunit',$kdunit);
+		$this->db->where($this->db->database.'.paket.kdprogram',$kdprogram);
+		$this->db->where($this->db->database.'.paket.kdgiat',$kdgiat);
+
+		return $this->db->get();
+	}
+
+	function cek_kegiatan_terisi($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram)
+	{
+		$this->db->select('COUNT(DISTINCT kdgiat) AS JUMLAH');
+		$this->db->from($this->db->database.'.paket_output paket');
+		$this->db->where($this->db->database.'.paket.thang',$thang);
+		$this->db->where($this->db->database.'.paket.kdjendok',$kdjendok);
+		$this->db->where($this->db->database.'.paket.kdsatker',$kdsatker);
+		$this->db->where($this->db->database.'.paket.kddept',$kddept);
+		$this->db->where($this->db->database.'.paket.kdunit',$kdunit);
+		$this->db->where($this->db->database.'.paket.kdprogram',$kdprogram);
+		$this->db->group_by($this->db->database.'.paket.kdprogram',$kdprogram);
+		$query = $this->db->get();
+		foreach ($query->result() as $data) {
+			return $data->JUMLAH;
+		}
+	}
+
+	function cek_paket_by_kdoutput($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput)
+	{
+		$this->db->select();
+		$this->db->from($this->db->database.'.paket_output paket');
+		$this->db->where($this->db->database.'.paket.thang',$thang);
+		$this->db->where($this->db->database.'.paket.kdjendok',$kdjendok);
+		$this->db->where($this->db->database.'.paket.kdsatker',$kdsatker);
+		$this->db->where($this->db->database.'.paket.kddept',$kddept);
+		$this->db->where($this->db->database.'.paket.kdunit',$kdunit);
+		$this->db->where($this->db->database.'.paket.kdprogram',$kdprogram);
+		$this->db->where($this->db->database.'.paket.kdgiat',$kdgiat);
+		$this->db->where($this->db->database.'.paket.kdoutput',$kdoutput);
+		$this->db->where($this->db->database.'.paket.kdlokasi',$kdlokasi);
+		$this->db->where($this->db->database.'.paket.kdkabkota',$kdkabkota);
+		$this->db->where($this->db->database.'.paket.kddekon',$kddekon);
+		$this->db->where($this->db->database.'.paket.kdsoutput',$kdsoutput);
+
+		return $this->db->get();
+	}
+
 	function cek_paket_by_idskmpnen($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen)
 	{
 		$this->db->select();
@@ -622,10 +767,10 @@ class Laporan_monitoring_model extends CI_Model {
 		return $this->db->get();
 	}
 
-	function get_paket_by_idskmpnen($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput, $kdkmpnen, $kdskmpnen)
+	function get_paket_by_output($thang, $kdjendok, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kddekon, $kdsoutput)
 	{
 		$this->db->select();
-		$this->db->from($this->db->database.'.paket');
+		$this->db->from($this->db->database.'.paket_output paket');
 		$this->db->where($this->db->database.'.paket.thang',$thang);
 		$this->db->where($this->db->database.'.paket.kdjendok',$kdjendok);
 		$this->db->where($this->db->database.'.paket.kdsatker',$kdsatker);
@@ -638,8 +783,6 @@ class Laporan_monitoring_model extends CI_Model {
 		$this->db->where($this->db->database.'.paket.kdkabkota',$kdkabkota);
 		$this->db->where($this->db->database.'.paket.kddekon',$kddekon);
 		$this->db->where($this->db->database.'.paket.kdsoutput',$kdsoutput);
-		$this->db->where($this->db->database.'.paket.kdkmpnen',$kdkmpnen);
-		$this->db->like($this->db->database.'.paket.kdskmpnen',$kdskmpnen, 'before');
 
 		return $this->db->get();
 	}
@@ -651,6 +794,16 @@ class Laporan_monitoring_model extends CI_Model {
 		$this->db->where($this->db->database.'.t_satker.kdsatker',$kdsatker);
 
 		return $this->db->get()->row()->nmsatker;
+	}
+
+	function get_unit_by_idskmpnen($kddept, $kdunit)
+	{
+		$this->db->select($this->db->database.'.t_unit.nmunit');
+		$this->db->from($this->db->database.'.t_unit');
+		$this->db->where($this->db->database.'.t_unit.kddept',$kddept);
+		$this->db->where($this->db->database.'.t_unit.kdunit',$kdunit);
+
+		return $this->db->get()->row()->nmunit;
 	}
 
 	function get_program_by_idskmpnen($kdprogram, $kddept, $kdunit)
@@ -703,6 +856,38 @@ class Laporan_monitoring_model extends CI_Model {
 		$this->db->where($this->db->database.'.d_soutput.kddekon',$kddekon);
 
 		return $this->db->get()->row()->ursoutput;
+		// if($this->db->get()->num_rows() > 0 ) {
+		// 	return $this->db->get()->row()->ursoutput;
+		// }
+		// else {
+		// 	return '-';
+		// }
+	}
+
+	function cek_soutput_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdjendok, $kddekon)
+	{
+		$this->db->select($this->db->database.'.d_soutput.ursoutput');
+		$this->db->from($this->db->database.'.d_soutput');
+		$this->db->where($this->db->database.'.d_soutput.thang',$thang);
+		$this->db->where($this->db->database.'.d_soutput.kdsatker',$kdsatker);
+		$this->db->where($this->db->database.'.d_soutput.kddept',$kddept);
+		$this->db->where($this->db->database.'.d_soutput.kdunit',$kdunit);
+		$this->db->where($this->db->database.'.d_soutput.kdprogram',$kdprogram);
+		$this->db->where($this->db->database.'.d_soutput.kdgiat',$kdgiat);
+		$this->db->where($this->db->database.'.d_soutput.kdoutput',$kdoutput);
+		$this->db->where($this->db->database.'.d_soutput.kdlokasi',$kdlokasi);
+		$this->db->where($this->db->database.'.d_soutput.kdkabkota',$kdkabkota);
+		$this->db->where($this->db->database.'.d_soutput.kdjendok',$kdjendok);
+		$this->db->where($this->db->database.'.d_soutput.kddekon',$kddekon);
+
+		if($this->db->get()->num_rows() > 0 )
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
 	}
 
 	function get_komponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdjendok, $kddekon)
@@ -783,11 +968,10 @@ class Laporan_monitoring_model extends CI_Model {
 		return $this->db->get()->row()->urskmpnen;
 	}
 
-	function get_rencana_by_idpaket($idpaket)
+	function get_rencana_fisik_by_idpaket($idpaket)
 	{
-		$this->db->select('k.bulan, k.rencana_id, k.idpaket, k.rencana AS rencana_kontraktual, s.rencana AS rencana_swakelola');
-		$this->db->from('dm_rencana_kontraktual k');
-		$this->db->join('dm_rencana_swakelola s', 's.idpaket=k.idpaket AND s.rencana_id=k.rencana_id');
+		$this->db->select('k.bulan, k.rencana_id, k.idpaket, k.rencana AS rencana_kontraktual');
+		$this->db->from('dm_rencana_fisik k');
 		$this->db->where('k.idpaket',$idpaket);
 		$this->db->where('k.tahun',$this->session->userdata('thn_anggaran'));
 		$this->db->order_by('k.rencana_id','asc');
@@ -795,11 +979,43 @@ class Laporan_monitoring_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
+	function get_progress_fisik_by_idpaket($idpaket)
+	{
+		$this->db->select('k.bulan, k.idpaket, k.progress_id, k.progress AS progress_kontraktual');
+		$this->db->from('dm_progress_fisik k');
+		$this->db->where('k.idpaket',$idpaket);
+		$this->db->where('k.tahun',$this->session->userdata('thn_anggaran'));
+		$this->db->order_by('k.progress_id','asc');
+
+		return $this->db->get();
+	}
+
+	function get_rencana_by_idpaket($idpaket)
+	{
+		$this->db->select('k.*');
+		$this->db->from('dm_rencana_fisik k');
+		$this->db->where('k.idpaket',$idpaket);
+		$this->db->where('k.tahun',$this->session->userdata('thn_anggaran'));
+		$this->db->order_by('k.rencana_id','asc');
+
+		return $this->db->get();
+	}
+
+	function get_rencana_by_idpaket_and_month($idpaket,$bulan)
+	{
+		$this->db->select('k.*');
+		$this->db->from('dm_rencana_fisik k');
+		$this->db->where('k.idpaket',$idpaket);
+		$this->db->where('k.bulan',$bulan);
+		$this->db->where('k.tahun',$this->session->userdata('thn_anggaran'));
+
+		return $this->db->get();
+	}
+
 	function get_progress_by_idpaket($idpaket)
 	{
-		$this->db->select('k.bulan, k.idpaket, k.progress_id, k.progress AS progress_kontraktual, s.progress AS progress_swakelola');
-		$this->db->from('dm_progress_kontraktual k');
-		$this->db->join('dm_progress_swakelola s', 's.idpaket=k.idpaket AND s.progress_id=k.progress_id');
+		$this->db->select('k.*');
+		$this->db->from('dm_progress_fisik k');
 		$this->db->where('k.idpaket',$idpaket);
 		$this->db->where('k.tahun',$this->session->userdata('thn_anggaran'));
 		$this->db->order_by('k.progress_id','asc');
@@ -809,9 +1025,8 @@ class Laporan_monitoring_model extends CI_Model {
 
 	function get_progress_by_idpaket_and_month($idpaket,$bulan)
 	{
-		$this->db->select('k.realisasi_fisik AS realisasi_fisik_kontrak, s.realisasi_fisik AS realisasi_fisik_swakelola');
-		$this->db->from('dm_progress_kontraktual k');
-		$this->db->join('dm_progress_swakelola s', 's.idpaket=k.idpaket AND s.progress_id=k.progress_id');
+		$this->db->select('k.*');
+		$this->db->from('dm_progress_fisik k');
 		$this->db->where('k.idpaket',$idpaket);
 		$this->db->where('k.bulan',$bulan);
 		$this->db->where('k.tahun',$this->session->userdata('thn_anggaran'));
@@ -822,9 +1037,8 @@ class Laporan_monitoring_model extends CI_Model {
 
 	function get_progress_by_year($idpaket,$bulan,$tahun)
 	{
-		$this->db->select('k.realisasi_fisik AS realisasi_fisik_kontrak, s.realisasi_fisik AS realisasi_fisik_swakelola');
-		$this->db->from('dm_progress_kontraktual k');
-		$this->db->join('dm_progress_swakelola s', 's.idpaket=k.idpaket AND s.progress_id=k.progress_id');
+		$this->db->select('k.*');
+		$this->db->from('dm_progress_fisik k');
 		$this->db->where('k.idpaket',$idpaket);
 		$this->db->where('k.bulan',$bulan);
 		$this->db->where('k.tahun',$tahun);
@@ -836,7 +1050,7 @@ class Laporan_monitoring_model extends CI_Model {
 	function get_progress_kontrak_by_idpaket($idpaket)
 	{
 		$this->db->select();
-		$this->db->from('dm_progress_kontraktual');
+		$this->db->from('dm_progress_fisik');
 		$this->db->where('idpaket',$idpaket);
 		$this->db->where('tahun',$this->session->userdata('thn_anggaran'));
 		$this->db->order_by('progress_id','asc');
@@ -847,7 +1061,7 @@ class Laporan_monitoring_model extends CI_Model {
 	function get_progress_kontrak_by_id($progress_id)
 	{
 		$this->db->select('');
-		$this->db->from('dm_progress_kontraktual');
+		$this->db->from('dm_progress_fisik');
 		$this->db->where('progress_id',$progress_id);
 
 		return $this->db->get();
@@ -865,8 +1079,8 @@ class Laporan_monitoring_model extends CI_Model {
 	function get_prog_renc_kontrak_by_idpaket($idpaket)
 	{
 		$this->db->select();
-		$this->db->from('dm_progress_kontraktual d');
-		$this->db->join('dm_rencana_kontraktual k', 'k.idpaket=d.idpaket AND k.bulan=d.bulan AND k.tahun=d.tahun');
+		$this->db->from('dm_progress_fisik d');
+		$this->db->join('dm_rencana_fisik k', 'k.idpaket=d.idpaket AND k.bulan=d.bulan AND k.tahun=d.tahun');
 		$this->db->where('d.idpaket',$idpaket);
 		$this->db->where('d.tahun',$this->session->userdata('thn_anggaran'));
 
@@ -925,10 +1139,10 @@ class Laporan_monitoring_model extends CI_Model {
 		return $this->db->get();
 	}
 
-	function get_rencana_kontrak_by_id($id)
+	function get_rencana_kontrak_fisik_by_id($id)
 	{
 		$this->db->select('');
-		$this->db->from('dm_rencana_kontraktual');
+		$this->db->from('dm_rencana_fisik');
 		$this->db->where('rencana_id',$id);
 
 		return $this->db->get();
@@ -937,7 +1151,7 @@ class Laporan_monitoring_model extends CI_Model {
 	function get_rencana_kontrak_per_bulan($idpaket, $bulan)
 	{
 		$this->db->select('rencana');
-		$this->db->from('dm_rencana_kontraktual');
+		$this->db->from('dm_rencana_fisik');
 		$this->db->where('idpaket',$idpaket);
 		$this->db->where('bulan', $bulan);
 		$this->db->where('tahun', $this->session->userdata('thn_anggaran'));
@@ -959,7 +1173,7 @@ class Laporan_monitoring_model extends CI_Model {
 	function get_progress_kontrak_per_bulan($idpaket, $bulan)
 	{
 		$this->db->select('*');
-		$this->db->from('dm_progress_kontraktual');
+		$this->db->from('dm_progress_fisik');
 		$this->db->where('idpaket',$idpaket);
 		$this->db->where('bulan', $bulan);
 		$this->db->where('tahun', $this->session->userdata('thn_anggaran'));
@@ -981,7 +1195,7 @@ class Laporan_monitoring_model extends CI_Model {
 	function get_rencana_kontrak_after_rencana_id($rencana_id,$idpaket)
 	{
 		$this->db->select();
-		$this->db->from('dm_rencana_kontraktual');
+		$this->db->from('dm_rencana_fisik');
 		$this->db->where('rencana_id >=',$rencana_id);
 		$this->db->where('idpaket',$idpaket);
 		$this->db->where('tahun', $this->session->userdata('thn_anggaran'));
@@ -1003,7 +1217,7 @@ class Laporan_monitoring_model extends CI_Model {
 	function get_progress_kontrak_after_progress_id($progress_id,$idpaket)
 	{
 		$this->db->select();
-		$this->db->from('dm_progress_kontraktual');
+		$this->db->from('dm_progress_fisik');
 		$this->db->where('progress_id >=',$progress_id);
 		$this->db->where('idpaket',$idpaket);
 		$this->db->where('tahun', $this->session->userdata('thn_anggaran'));
@@ -1025,7 +1239,7 @@ class Laporan_monitoring_model extends CI_Model {
 	function update_rencana_kontrak($rencana_id, $data)
 	{
 		$this->db->where('rencana_id', $rencana_id);
-		$this->db->update('dm_rencana_kontraktual', $data);
+		$this->db->update('dm_rencana_fisik', $data);
 	}
 
 	function update_rencana_swakelola($rencana_id, $data)
@@ -1037,7 +1251,7 @@ class Laporan_monitoring_model extends CI_Model {
 	function update_progress_kontrak($progress_id, $data)
 	{
 		$this->db->where('progress_id', $progress_id);
-		$this->db->update('dm_progress_kontraktual', $data);
+		$this->db->update('dm_progress_fisik', $data);
 	}
 
 	function update_progress_swakelola($progress_id, $data)
@@ -1054,9 +1268,9 @@ class Laporan_monitoring_model extends CI_Model {
 		$this->db->update('dm_jns_item', $data);
 	}
 
-	function add_paket_by_idskmpnen($data)
+	function add_paket_by_output($data)
 	{
-		$this->db->insert('paket', $data);
+		$this->db->insert('paket_output', $data);
 	}
 
 	function add_kontrak_by_jenis_item($data)
@@ -1064,9 +1278,14 @@ class Laporan_monitoring_model extends CI_Model {
 		$this->db->insert('dm_jns_item', $data);
 	}
 
+	function add_rencana_fisik_by_idpaket($data)
+	{
+		$this->db->insert('dm_rencana_fisik', $data);
+	}
+
 	function add_rencana_kontrak_by_idpaket($data)
 	{
-		$this->db->insert('dm_rencana_kontraktual', $data);
+		$this->db->insert('dm_rencana_fisik', $data);
 	}
 
 	function add_rencana_swakelola_by_idpaket($data)
@@ -1076,7 +1295,7 @@ class Laporan_monitoring_model extends CI_Model {
 
 	function add_progress_kontrak_by_idpaket($data)
 	{
-		$this->db->insert('dm_progress_kontraktual', $data);
+		$this->db->insert('dm_progress_fisik', $data);
 	}
 
 	function add_progress_swakelola_by_idpaket($data)
@@ -1105,7 +1324,7 @@ class Laporan_monitoring_model extends CI_Model {
 	function is_exist_progres_kont_more_than_100_bef($progress_id,$idpaket)
 	{
 		$this->db->select();
-		$this->db->from('dm_progress_kontraktual');
+		$this->db->from('dm_progress_fisik');
 		$this->db->where('idpaket',$idpaket);
 		$this->db->where('tahun',$this->session->userdata('thn_anggaran'));
 		$this->db->where('progress_id <',$progress_id);
@@ -1134,10 +1353,25 @@ class Laporan_monitoring_model extends CI_Model {
 		}
 	}
 
+	function cek_rencana_fisik_by_idpaket($idpaket)
+	{
+		$this->db->select('');
+		$this->db->from('dm_rencana_fisik');
+		$this->db->where('idpaket',$idpaket);
+		$this->db->where('tahun',$this->session->userdata('thn_anggaran'));
+
+		if ($this->db->get()->num_rows > 0) {
+			return TRUE;
+		}
+		else {
+			return FALSE;
+		}
+	}
+
 	function cek_rencana_kontrak_by_idpaket($idpaket)
 	{
 		$this->db->select('');
-		$this->db->from('dm_rencana_kontraktual');
+		$this->db->from('dm_rencana_fisik');
 		$this->db->where('idpaket',$idpaket);
 		$this->db->where('tahun',$this->session->userdata('thn_anggaran'));
 
@@ -1152,7 +1386,7 @@ class Laporan_monitoring_model extends CI_Model {
 	function cek_rencana_kontrak_terisi_by_idpaket($idpaket)
 	{
 		$this->db->select('');
-		$this->db->from('dm_rencana_kontraktual');
+		$this->db->from('dm_rencana_fisik');
 		$this->db->where('idpaket',$idpaket);
 		$this->db->where('rencana >=', 0);
 		$this->db->where('tahun',$this->session->userdata('thn_anggaran'));
@@ -1184,7 +1418,7 @@ class Laporan_monitoring_model extends CI_Model {
 	function cek_rencana_swakelola_by_idpaket($idpaket)
 	{
 		$this->db->select('');
-		$this->db->from('dm_rencana_kontraktual');
+		$this->db->from('dm_rencana_fisik');
 		$this->db->where('idpaket',$idpaket);
 		$this->db->where('tahun',$this->session->userdata('thn_anggaran'));
 
@@ -1199,7 +1433,7 @@ class Laporan_monitoring_model extends CI_Model {
 	function cek_progress_kontraktual_by_idpaket($idpaket)
 	{
 		$this->db->select('');
-		$this->db->from('dm_progress_kontraktual');
+		$this->db->from('dm_progress_fisik');
 		$this->db->where('idpaket',$idpaket);
 		$this->db->where('tahun',$this->session->userdata('thn_anggaran'));
 
@@ -1330,48 +1564,46 @@ class Laporan_monitoring_model extends CI_Model {
 		return $monev->get();
 	}
 	
-	function get_d_item($thang,$kdjendok,$kdsatker,$kddept,$kdunit,$kdprogram,$kdgiat,$kdoutput,$kdlokasi,$kdkabkota,$kddekon,$kdsoutput,$kdkmpnen,$kdskmpnen)
+	function get_d_item_by_output($thang,$kdjendok,$kdsatker,$kddept,$kdunit,$kdprogram,$kdgiat,$kdoutput,$kdlokasi,$kdkabkota,$kddekon,$kdsoutput)
 	{
 		$this->db->select('*');
-		$this->db->from($this->db->database.'.d_item');
-		$this->db->join($this->db->database.'.t_akun',$this->db->database.'.d_item.kdakun = '.$this->db->database.'.t_akun.kdakun');
-		$this->db->where('thang',$thang);
-		$this->db->where('kdjendok',$kdjendok);
-		$this->db->where('kdsatker',$kdsatker);
-		$this->db->where('kddept',$kddept);
-		$this->db->where('kdunit',$kdunit);
-		$this->db->where('kdprogram',$kdprogram);
-		$this->db->where('kdgiat',$kdgiat);
-		$this->db->where('kdoutput',$kdoutput);
-		$this->db->where('kdlokasi',$kdlokasi);
-		$this->db->where('kdkabkota',$kdkabkota);
-		$this->db->where('kddekon',$kddekon);
-		$this->db->where('kdsoutput',$kdsoutput);
-		$this->db->where('kdkmpnen',$kdkmpnen);
-		$this->db->like('kdskmpnen',$kdskmpnen, 'before');
+		$this->db->from($this->db->database.'.d_soutput d');
+		$this->db->join($this->db->database.'.d_item i','i.thang=d.thang AND i.kdjendok=d.kdjendok AND i.kdsatker=d.kdsatker AND i.kddept=d.kddept AND i.kdunit=d.kdunit AND i.kdprogram=d.kdprogram AND i.kdgiat=d.kdgiat AND i.kdoutput=d.kdoutput AND i.kdlokasi=d.kdlokasi AND i.kdkabkota=d.kdkabkota AND i.kdsoutput=d.kdsoutput');
+		$this->db->join($this->db->database.'.t_akun t','i.kdakun = t.kdakun');
+		$this->db->where('d.thang',$thang);
+		$this->db->where('d.kdjendok',$kdjendok);
+		$this->db->where('d.kdsatker',$kdsatker);
+		$this->db->where('d.kddept',$kddept);
+		$this->db->where('d.kdunit',$kdunit);
+		$this->db->where('d.kdprogram',$kdprogram);
+		$this->db->where('d.kdgiat',$kdgiat);
+		$this->db->where('d.kdoutput',$kdoutput);
+		$this->db->where('d.kdlokasi',$kdlokasi);
+		$this->db->where('d.kdkabkota',$kdkabkota);
+		$this->db->where('d.kddekon',$kddekon);
+		$this->db->where('d.kdsoutput',$kdsoutput);
 		return $this->db->get();
 	}
 	
 	//jumlah rincian biaya
-	function get_sum_d_item($thang,$kdjendok,$kdsatker,$kddept,$kdunit,$kdprogram,$kdgiat,$kdoutput,$kdlokasi,$kdkabkota,$kddekon,$kdsoutput,$kdkmpnen,$kdskmpnen)
+	function get_sum_d_item($thang,$kdjendok,$kdsatker,$kddept,$kdunit,$kdprogram,$kdgiat,$kdoutput,$kdlokasi,$kdkabkota,$kddekon,$kdsoutput)
 	{
 		$this->db->select_sum('jumlah');
-		$this->db->from($this->db->database.'.d_item');
-		$this->db->join($this->db->database.'.t_akun',$this->db->database.'.d_item.kdakun = '.$this->db->database.'.t_akun.kdakun');
-		$this->db->where('thang',$thang);
-		$this->db->where('kdjendok',$kdjendok);
-		$this->db->where('kdsatker',$kdsatker);
-		$this->db->where('kddept',$kddept);
-		$this->db->where('kdunit',$kdunit);
-		$this->db->where('kdprogram',$kdprogram);
-		$this->db->where('kdgiat',$kdgiat);
-		$this->db->where('kdoutput',$kdoutput);
-		$this->db->where('kdlokasi',$kdlokasi);
-		$this->db->where('kdkabkota',$kdkabkota);
-		$this->db->where('kddekon',$kddekon);
-		$this->db->where('kdsoutput',$kdsoutput);
-		$this->db->where('kdkmpnen',$kdkmpnen);
-		$this->db->like('kdskmpnen',$kdskmpnen, 'before');
+		$this->db->from($this->db->database.'.d_soutput d');
+		$this->db->join($this->db->database.'.d_item i','i.thang=d.thang AND i.kdjendok=d.kdjendok AND i.kdsatker=d.kdsatker AND i.kddept=d.kddept AND i.kdunit=d.kdunit AND i.kdprogram=d.kdprogram AND i.kdgiat=d.kdgiat AND i.kdoutput=d.kdoutput AND i.kdlokasi=d.kdlokasi AND i.kdkabkota=d.kdkabkota AND i.kdsoutput=d.kdsoutput');
+		$this->db->join($this->db->database.'.t_akun t','i.kdakun = t.kdakun');
+		$this->db->where('d.thang',$thang);
+		$this->db->where('d.kdjendok',$kdjendok);
+		$this->db->where('d.kdsatker',$kdsatker);
+		$this->db->where('d.kddept',$kddept);
+		$this->db->where('d.kdunit',$kdunit);
+		$this->db->where('d.kdprogram',$kdprogram);
+		$this->db->where('d.kdgiat',$kdgiat);
+		$this->db->where('d.kdoutput',$kdoutput);
+		$this->db->where('d.kdlokasi',$kdlokasi);
+		$this->db->where('d.kdkabkota',$kdkabkota);
+		$this->db->where('d.kddekon',$kddekon);
+		$this->db->where('d.kdsoutput',$kdsoutput);
 		return $this->db->get();
 	}
 

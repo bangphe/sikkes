@@ -20,12 +20,12 @@
             rownumbers="true" showFooter="true" 
             idField="id" treeField="" nowrap="false">  
         <thead> 
-            <tr>  
-                <th field="paket" width="300">Paket</th>  
+            <tr>
+                <th field="keg" width="350" align="left">Kegiatan</th>
+                <th field="output" width="320" align="left">Output</th>
+                <th field="paket" width="300">Sub Output</th>  
                 <!--<th field="program" width="100" align="center">Program</th>  -->
-                <th field="keg" width="230" align="left">Kegiatan</th>
-                <th field="output" width="240" align="left">Output</th>
-                <th field="suboutput" width="240" align="left">Sub Output</th>
+                <!-- <th field="suboutput" width="240" align="left">Sub Output</th> -->
                 <th field="fisik" width="85" align="center">Progress Fisik</th>  
             </tr>  
         </thead>  

@@ -831,13 +831,13 @@ class Laporan_kinerja_model extends CI_Model {
         $this->db->where('KodeIkk', $kode);
 		$this->db->join($this->db->database.'.ref_tahun_anggaran', $this->db->database.'.ref_tahun_anggaran.idThnAnggaran = '.$this->db->database.'.realisasi_satker_ikk.idThnAnggaran');
         $this->db->where($this->db->database.'.ref_tahun_anggaran.thn_anggaran', $thn);
-        if ($this->session->userdata('kd_role') != 8 && $this->session->userdata('kd_role') != 12) {
-			$this->db->join('monev.d_skmpnen d', 'd.Ikk = realisasi_satker_ikk.KodeIkk and d.kdsatker=realisasi_satker_ikk.kdSatker');
+        //if ($this->session->userdata('kd_role') != 8 && $this->session->userdata('kd_role') != 12) {
+			//$this->db->join('monev.d_skmpnen d', 'd.Ikk = realisasi_satker_ikk.KodeIkk and d.kdsatker=realisasi_satker_ikk.kdSatker');
 			if($this->session->userdata('kd_role') == 5){
-            	$this->db->where('d.kdsatker', $this->session->userdata('kdsatker'));
-				$this->db->group_by('d.ikk');
+            	$this->db->where('kdsatker', $this->session->userdata('kdsatker'));
+				$this->db->group_by('KodeIkk');
 			}
-        }
+        //}
         return $this->db->get();
 	}
 	
@@ -850,13 +850,13 @@ class Laporan_kinerja_model extends CI_Model {
         $this->db->where('KodeIkk', $kode);
 		$this->db->join($this->db->database.'.ref_tahun_anggaran', $this->db->database.'.ref_tahun_anggaran.idThnAnggaran = '.$this->db->database.'.rencana_satker_ikk.idThnAnggaran');
         $this->db->where($this->db->database.'.ref_tahun_anggaran.thn_anggaran', $thn);
-        if ($this->session->userdata('kd_role') != 8 && $this->session->userdata('kd_role') != 12) {
-			$this->db->join('monev.d_skmpnen d', 'd.Ikk = rencana_satker_ikk.KodeIkk and d.kdsatker=rencana_satker_ikk.kdSatker');
+        //if ($this->session->userdata('kd_role') != 8 && $this->session->userdata('kd_role') != 12) {
+			//$this->db->join('monev.d_skmpnen d', 'd.Ikk = rencana_satker_ikk.KodeIkk and d.kdsatker=rencana_satker_ikk.kdSatker');
 			if($this->session->userdata('kd_role') == 5){
-            	$this->db->where('d.kdsatker', $this->session->userdata('kdsatker'));
-				$this->db->group_by('d.ikk');
+            	$this->db->where('kdsatker', $this->session->userdata('kdsatker'));
+				$this->db->group_by('KodeIkk');
 			}
-        }
+        //}
         return $this->db->get();
 	}
 	

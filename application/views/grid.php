@@ -11,9 +11,18 @@ $(document).ready(function(){
 		autoOpen: false,
 		resizable: false,
 		draggable: false,
-		height:375,
+		height:350,
 		maxHeight:600,
 		width:700,
+		show: { effect: "fade", duration: 350 },
+		modal: true,
+	});
+	$("#konfirmasi").dialog({
+		autoOpen: false,
+		resizable: false,
+		draggable: false,
+		height:200,
+		width:350,
 		show: { effect: "fade", duration: 350 },
 		modal: true,
 	});
@@ -26,7 +35,7 @@ function ikk(kdpengajuan){
 		data:'',
 		beforeSend:function(){
 			$("#dialog").dialog("open");
-			$("#dialog-body").html('loading...');
+			$("#dialog-body").html('Sedang memuat...');
 		},
 		success: function(data){
 			$("#dialog-body").html(data);
@@ -42,17 +51,32 @@ function iku(kdpengajuan){
 		data:'',
 		beforeSend:function(){
 			$("#dialog").dialog("open");
-			$("#dialog-body").html('loading...');
+			$("#dialog-body").html('Sedang memuat...');
 		},
 		success: function(data){
 			$("#dialog-body").html(data);
 		}
 	});
 }
+function setStatus(val,kdpengajuan){
+	//alert(val);
+	var path = '<?php echo base_url();?>index.php/e-planning/manajemen/check_status/'+val+'/'+kdpengajuan;
+	$.ajax({
+		url:path,
+        type:'get',
+        data:'',
+        beforeSend: function(){
+        },
+        success: function(data){
+        	$("#konfirmasi").dialog("open");
+        }
+	});
+}
 </script>
 
+<!-- TARGET NASIONAL - RENJA K/L -->
 <div id="dialog" title="Target Nasional - Renja KL">
-  <p id="dialog-body">This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+  <p id="dialog-body"></p>
 </div>
 
 <div id="tengah">

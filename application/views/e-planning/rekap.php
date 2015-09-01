@@ -25,12 +25,12 @@ function setFungsi(no)
 		case '5':
 			fungsi = 'rekap_dak';
 			break;
-		case '6':
-			fungsi = 'rekap_lengkap';
-			break;
-		case '7':
-			fungsi = 'rekap_daerah';
-			break;
+		// case '6':
+		// 	fungsi = 'rekap_lengkap';
+		// 	break;
+		// case '7':
+		// 	fungsi = 'rekap_daerah';
+		// 	break;
 	}
 	document.getElementById('form_rekap').action = fungsi;
 }
@@ -54,8 +54,8 @@ function setFungsi(no)
 				  <option value="3">Sumber Dana</option>
 				  <option value="4">APBN</option>
 				  <option value="5">DAK</option>
-				  <option value="6">Lengkap</option>
-				  <option value="7">Proposal Daerah</option>
+				  <!-- <option value="6">Lengkap</option>
+				  <option value="7">Proposal Daerah</option> -->
 				</select></td>
 			</tr>
 			<tr>

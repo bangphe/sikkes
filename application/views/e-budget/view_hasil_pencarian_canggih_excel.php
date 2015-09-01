@@ -190,7 +190,7 @@
                 ->setCellValue('G'.$count, '')
                 ->setCellValue('H'.$count, '')
                 ->setCellValue('I'.$count, '')
-                ->setCellValue('J'.$count, $total_unit[$countunit]);
+                ->setCellValue('J'.$count, number_format($total_unit[$countunit], 0, ',', ','));
                 
                 $objPHPExcel->getActiveSheet()->getStyle('A'.$count)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
                 $objPHPExcel->getActiveSheet()->getStyle('B'.$count)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
@@ -227,7 +227,7 @@
                 ->setCellValue('F'.$count, '')
                 ->setCellValue('G'.$count, '')
                 ->setCellValue('H'.$count, '')
-                ->setCellValue('I'.$count, $total_satker[$countunit][$countsatker])
+                ->setCellValue('I'.$count, number_format($total_satker[$countunit][$countsatker], 0, ',', ','))
                 ->setCellValue('J'.$count, '');
                 
                 $objPHPExcel->getActiveSheet()->getStyle('A'.$count)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
@@ -290,7 +290,7 @@
                 ->setCellValue('E'.$count, '')
                 ->setCellValue('F'.$count, '')
                 ->setCellValue('G'.$count, '')
-                ->setCellValue('H'.$count, $total_kegiatan[$countunit][$countsatker][$key])
+                ->setCellValue('H'.$count, number_format($total_kegiatan[$countunit][$countsatker][$key], 0, ',', ','))
                 ->setCellValue('I'.$count, '')
                 ->setCellValue('J'.$count, '');
                 
@@ -309,9 +309,9 @@
             ->setCellValue('B'.$count, '')
             ->setCellValue('C'.$count, $akun)
             ->setCellValue('D'.$count, $nmitem)
-            ->setCellValue('E'.$count, $volkeg. " " . $satkeg)
-            ->setCellValue('F'.$count, $hargasat)
-            ->setCellValue('G'.$count, $jumlah)
+            ->setCellValue('E'.$count, number_format($volkeg, 0, ',', ',') . " " . $satkeg)
+            ->setCellValue('F'.$count, number_format($hargasat, 0, ',', ','))
+            ->setCellValue('G'.$count, number_format($jumlah, 0, ',', ','))
             ->setCellValue('H'.$count, '')
             ->setCellValue('I'.$count, '')
             ->setCellValue('J'.$count, '');
@@ -330,7 +330,7 @@
   
     $objPHPExcel->getActiveSheet()
     ->setCellValue('A'.$count, 'Jumlah')
-    ->setCellValue('J'.$count, $total);
+    ->setCellValue('J'.$count, number_format($total, 0, ',', ','));
     $objPHPExcel->getActiveSheet()->getStyle('A'.$count)->getFont()->setBold(true)->setSize(18);
     $objPHPExcel->getActiveSheet()->getStyle('J'.$count)->getFont()->setBold(true)->setSize(18);
     $objPHPExcel->getActiveSheet()->getStyle('J'.$count)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
@@ -340,8 +340,9 @@
     $objPHPExcel->setActiveSheetIndex(0);
     
     header('Content-type: application/ms-excel');
-    header('Content-Disposition: attachment; filename="RekapRincian.xls"');
+    header('Content-Disposition: attachment; filename="Rekap Rincian - '.$nmunit.'.xls"');
     $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+    //ob_end_clean();
     $objWriter->save('php://output');
     
 //    $date = new DateTime();

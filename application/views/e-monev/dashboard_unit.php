@@ -21,7 +21,7 @@
         <thead frozen="true">  
             <tr>  
                 <th field="name" width="600">Nama</th>  
-                <th field="paket" align="center">Jumlah Paket</th>  
+                <th field="paket" align="center">Jumlah Output</th>  
             </tr>  
         </thead>  
         <thead>  

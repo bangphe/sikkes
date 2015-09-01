@@ -1,37 +1,55 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Sistem Informasi Kementrian Kesehatan</title>
 	<link rel="icon" type="image/x-icon" href="<?php echo base_url() ?>images/icons/depkes.png" />
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/style.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/login/style.css">
+	<link rel="stylesheet" type="text/css" href="http://e-renggar.depkes.go.id/css/bootstrap.min.css">
 </head>
 
 <body>
-	<img src="<?php echo base_url() ?>images/login/background.jpg" class="bg">
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-7">
+        	<div class="formLogin">
+        		<div class="col-md-offset-3 mgBtm20">
+        			<img src="<?php echo base_url() ?>images/login/logoerenggar_old.png" class="img-responsive">
+        		</div>
+        		 <form id="lupa-password" class="form-horizontal" role="form" method="post" action="<?php echo base_url().'index.php/login/recovery_password'; ?>" onsubmit="return validasi(email.value)">
+        		 	<div class="tahun_anggaran">
+						<h3 class="text-center col-md-offset-3">MASUKKAN EMAIL</h3> <br>					
+					</div>
+					<div class="login">
+					<div style="color:red;" align="center"><p><?php if(isset($notification1)) echo $notification1; ?></p></div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <!-- <input type="email" class="form-control inputCustom" id="inputEmail3" placeholder="Email" required> -->
+                            <input class="form-control inputCustom" name="email" type="text" placeholder="Email" <?php if(isset($email)) echo 'value="'.$email.'"'; ?> />
+                        </div>
+                    </div>
+                    <div class="form-group last">
+                        <div class="col-sm-6">
+	                         <button name="login" type="button" value="Login" style="margin-top:0px;outline:none;" class="customBtnLogin pull-right" onClick="window.location.href='<?php echo base_url(); ?>'">
+								<img src="<?php echo base_url() ?>css/login/batal-btn.png" />
+							</button>
+						</div>
+						<div class="col-sm-6">
+							<button type="submit" name="login" value="Login" style="margin-top:0px;outline:none;" class="customBtnLogin pull-right">
+								<img src="<?php echo base_url() ?>css/login/reset-btn.png" />
+							</button>
+                    	</div>
+                    </div>
+                </form>
+        	</div>
+        </div>
+    </div>
+</div>
 
-	<div id="page-wrap">
-		<form id="form_lupa_password" name="form_lupa_password" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/login/recovery_password'; ?>" onsubmit="return validasi(email.value)">
-		<div class="logo"><img src="<?php echo base_url() ?>images/login/logokementrian.png"></br>
-		<?php echo $title; ?>
-		</div>
-		<div class="content">
-			<div style="color:red;" align="center"><?php if(isset($notification1)) echo $notification1; ?></div>
-			<div class="login" align="center">
-				
-					E-MAIL  <input class="span2" name="email" type="text" size="50" <?php if(isset($email)) echo 'value="'.$email.'"'; ?> /> </br></br></br>
-					<input id="cancel-button" class="btn btn-info" type="button" name="batal" value="BATAL" onClick="window.location.href='<?php echo base_url(); ?>'"/> <input id="submit-button" class="btn btn-info" type="submit" name="login" value="RESET PASSWORD" />
-				
-			</div>
-		</div>
-		<div class="logo_erenggar"></div>
-		</form>
-	</div>
-	<div class="footer_"><img src="<?php echo base_url() ?>images/login/logoerenggar.png"></div>
-	
 <script type="text/javascript">
  function validasi(x,y)
 	{
-	var a=document.forms["form_lupa_password"]["email"].value;
+	var a=document.forms["lupa-password"]["email"].value;
 	if (a==null || a=="")
 	  {
 	  alert("Anda harus mengisi alamat e-mail.");
@@ -42,5 +60,6 @@
 	
 	};
 </script>
+
 </body>
 </html>

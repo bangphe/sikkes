@@ -32,7 +32,7 @@ class model_ebudget extends CI_Model {
         $this->db->select('*');
         $this->db->from($tabel);
         $this->db->where($kolom, $parameter);
-        return $this->db->get->result();
+        return $this->db->get();
     }
     
     public function get_feedback_status($key) {
@@ -275,7 +275,7 @@ class model_ebudget extends CI_Model {
         return $data;
     }
 
-    public function get_belanja_data_pencarian_canggih($tahun, $unit, $satker, $lokasi, $program, $kegiatan, $beban, $jenissat, $sinonim, $akun, $katakunci, $akungroup, $akungroupakun, $tsinonim, $ikk, $reformasi_kesehatan, $fokus_prioritas) {
+    public function get_belanja_data_pencarian_canggih($tahun, $unit, $satker, $lokasi, $program, $kegiatan, $beban, $jenissat, $sinonim, $akun, $katakunci, $akungroup, $akungroupakun, $tsinonim, $ikk, $reformasi_kesehatan, $fokus_prioritas, $sinonim_negatif, $data_sinonim_negatif) {
         $separator = "-|;|-";
         
         ini_set("memory_limit", "200M");
@@ -283,7 +283,7 @@ class model_ebudget extends CI_Model {
         $sql = "SELECT d.kdakun, unit.nmunit, satker.nmsatker, d.nmitem, d.volkeg, d.satkeg, d.hargasat, d.jumlah, akun.nmakun, komponen.urkmpnen, skomponen.urskmpnen,
                 d.thang, d.kdjendok, d.kdsatker, d.kddept, d.kdunit, d.kdprogram, d.kdgiat, d.kdoutput, d.kdlokasi, d.kdkabkota, d.kddekon, d.kdsoutput, d.kdkmpnen, d.kdskmpnen
                 FROM d_item d
-                LEFT JOIN t_satker satker ON satker.kdsatker=d.kdsatker
+                LEFT JOIN ref_satker satker ON satker.kdsatker=d.kdsatker
                 LEFT JOIN t_unit unit ON unit.kdunit=d.kdunit AND unit.kddept=d.kddept
                 LEFT JOIN t_akun akun ON akun.kdakun = d.kdakun
                 LEFT JOIN t_jnsban jnsban ON (jnsban.kdbeban = d.kdbeban AND jnsban.kdjnsban=d.kdjnsban)
@@ -426,6 +426,20 @@ class model_ebudget extends CI_Model {
             }
         }
 
+        if ($tsinonim[0] == "0") {
+            if (count($data_sinonim_negatif) > 0) {
+                $sql = $sql . " AND (";
+                foreach ($data_sinonim_negatif as $key => $value) {
+                    $value = $this->db->escape_like_str($value);
+                    $sql = $sql . " d.nmitem NOT LIKE '%$value%' OR";
+                    $sql = $sql . " skomponen.urskmpnen NOT LIKE '%$value%' OR";
+                    $sql = $sql . " komponen.urkmpnen NOT LIKE '%$value%' OR";
+                }
+                $sql = substr_replace($sql, "", -3);
+                $sql = $sql . ")";
+            }
+        }
+
         if ($tsinonim[0] == "1") {
             if (count($katakunci) > 0) {
                 $sql = $sql . " AND (";
@@ -437,6 +451,19 @@ class model_ebudget extends CI_Model {
                 $sql = $sql . ")";
             }
         }
+
+        if ($tsinonim[0] == "1") {
+            if (count($data_sinonim_negatif) > 0) {
+                $sql = $sql . " AND (";
+                foreach ($data_sinonim_negatif as $key => $value) {
+                    $value = $this->db->escape_like_str($value);
+                    $sql = $sql . " d.nmitem NOT LIKE '%$value%' OR";
+                }
+                $sql = substr_replace($sql, "", -3);
+                $sql = $sql . ")";
+            }
+        }
+
         if ($tsinonim[0] == "2") {
             if (count($katakunci) > 0) {
                 $sql = $sql . " AND (";
@@ -444,6 +471,19 @@ class model_ebudget extends CI_Model {
                     $value = $this->db->escape_like_str($value);
                     $sql = $sql . " skomponen.urskmpnen LIKE '%$value%' OR";
                     $sql = $sql . " komponen.urkmpnen LIKE '%$value%' OR";
+                }
+                $sql = substr_replace($sql, "", -3);
+                $sql = $sql . ")";
+            }
+        }
+
+        if ($tsinonim[0] == "2") {
+            if (count($data_sinonim_negatif) > 0) {
+                $sql = $sql . " AND (";
+                foreach ($data_sinonim_negatif as $key => $value) {
+                    $value = $this->db->escape_like_str($value);
+                    $sql = $sql . " skomponen.urskmpnen NOT LIKE '%$value%' OR";
+                    $sql = $sql . " komponen.urkmpnen NOT LIKE '%$value%' OR";
                 }
                 $sql = substr_replace($sql, "", -3);
                 $sql = $sql . ")";
@@ -461,7 +501,7 @@ class model_ebudget extends CI_Model {
 
         $sql = $sql . " AND d.kddept='024' ORDER BY d.kdunit, d.kdsatker, d.kdprogram, d.kdgiat, d.kdoutput, d.kdsoutput, d.kdkmpnen, d.kdskmpnen, d.kdakun, d.noitem";
         //die($sql);
-
+        //var_dump($sql);
         $result = mysql_query($sql) or die(mysql_error());
         $data = array();
         while ($row = mysql_fetch_array($result, MYSQL_BOTH)) {
@@ -495,7 +535,7 @@ class model_ebudget extends CI_Model {
         $sql = "SELECT d.kdakun, unit.nmunit, satker.nmsatker, d.nmitem, d.volkeg, d.satkeg, d.hargasat, d.jumlah, akun.nmakun, komponen.urkmpnen, skomponen.urskmpnen,
                 d.thang, d.kdjendok, d.kdsatker, d.kddept, d.kdunit, d.kdprogram, d.kdgiat, d.kdoutput, d.kdlokasi, d.kdkabkota, d.kddekon, d.kdsoutput, d.kdkmpnen, d.kdskmpnen, d.vol1, d.sat1, d.vol2, d.sat2, d.vol3, d.sat3, d.vol4, d.sat4
                 FROM d_item d
-                LEFT JOIN t_satker satker ON satker.kdsatker=d.kdsatker
+                LEFT JOIN ref_satker satker ON satker.kdsatker=d.kdsatker
                 LEFT JOIN t_unit unit ON unit.kdunit=d.kdunit AND unit.kddept=d.kddept
                 LEFT JOIN t_akun akun ON akun.kdakun = d.kdakun
                 LEFT JOIN t_jnsban jnsban ON (jnsban.kdbeban = d.kdbeban AND jnsban.kdjnsban=d.kdjnsban)
@@ -1060,6 +1100,16 @@ class model_ebudget extends CI_Model {
         return $dataView;
     }
 
+    function get_all_sinonim_negatif() {
+        $sql = "SELECT id, nmsinonim FROM sinonim_negatif ORDER BY id";
+        $result = mysql_query($sql) or die(mysql_error());
+        $dataView = array();
+        while ($row = mysql_fetch_array($result, MYSQL_BOTH)) {
+            $dataView[$row['id']] = $row['nmsinonim'];
+        }
+        return $dataView;
+    }
+
     function get_fokus_prioritas_ikk($key) {
         //d.thang, d.kdsatker, d.kdunit, d.kdprogram, d.kdgiat, d.kdoutput, d.kdsoutput, d.kdkmpnen, skomponen.kdskmpnen, d.kdjendok, d.kddekon,
         $keys = explode("-", $key);
@@ -1249,6 +1299,186 @@ class model_ebudget extends CI_Model {
         $this->CI->flexigrid->build_query(FALSE);
         $query['record_count'] = $this->db->count_all_results();
         //die (var_dump($query['record_count']));
+        return $query;
+    }
+
+    function get_view_db_output($tahun, $unit, $satker) {
+        $this->db->select('*');
+        $this->db->from('t_giat d');
+        $this->db->join('t_output output', 'output.kdgiat = d.kdgiat AND output.kdoutput = d.kdoutput', 'left');
+        $this->db->join('t_satker satker', 'satker.kdsatker=d.kdsatker', 'inner');
+        if($this->session->userdata('kd_role') == '4')
+        {
+            $this->db->join($this->db->database.'.ref_satker', $this->db->database.'.ref_satker.kdsatker = d.kdsatker');
+            $this->db->where($this->db->database.'.ref_satker.kdinduk', $this->session->userdata('kdinduk'));
+        }
+        $this->db->where('d.thang', $tahun);
+
+        if ($satker != "0") {
+            $this->db->where('d.kdsatker', $satker);
+        }
+
+        $ret = $this->check_authorized_satker_unit();
+
+        if ($unit != "0") {
+            $this->db->where('d.kdunit', $unit);
+        } else {
+            if ($ret['type'] != "roren") {
+                $unit_ = $ret['unit'];
+                $this->db->where_in('d.kdunit', $unit_);
+            }
+        }
+
+        if ($satker != "0") {
+            $this->db->where('d.kdsatker', $satker);
+        } else {
+            if ($ret['type'] == "roren") {
+                
+            }
+            if ($ret['type'] == "unit") {
+                if ($unit == "0") {
+                    $unit_ = $ret['unit'];
+                    $kdsatker_ = array();
+                    foreach ($unit_ as $key => $value) {
+                        $sql2 = "SELECT * FROM t_satker WHERE kdunit='$value'";
+                        $result2 = mysql_query($sql2) or die(mysql_error());
+                        //die($sql2);
+                        while ($row2 = mysql_fetch_array($result2, MYSQL_BOTH)) {
+                            $kdsatker_[] = $row2['kdsatker'];
+                        }
+                    }
+                    $this->db->where_in('d.kdsatker', $kdsatker_);
+                } else {
+                    $sql2 = "SELECT * FROM t_satker WHERE kdunit='$unit'";
+                    $result2 = mysql_query($sql2) or die(mysql_error());
+                    $kdsatker_ = array();
+                    while ($row2 = mysql_fetch_array($result2, MYSQL_BOTH)) {
+                        $kdsatker_[] = $row2['kdsatker'];
+                    }
+                    $this->db->where_in('d.kdsatker', $kdsatker_);
+                }
+            }
+            if ($ret['type'] == "propinsi" || $ret['type'] == "biasa") {
+                $satker_ = $ret['satker'];
+                $kdsatker_ = array();
+                if ($unit == "0") {
+                    foreach ($satker_ as $key => $value) {
+                        foreach ($value as $key2 => $value2) {
+                            $kdsatker_[] = $value2;
+                        }
+                    }
+                } else {
+                    foreach ($satker_[$unit] as $key => $value) {
+                        $kdsatker_[] = $value;
+                    }
+                }
+                $this->db->where_in('d.kdsatker', $kdsatker_);
+            }
+        }
+
+        $this->CI->flexigrid->build_query();
+        $query['records'] = $this->db->get();
+
+        $this->db->select('*');
+        $this->db->from('t_giat d');
+        $this->db->join('t_output output', 'output.kdgiat = d.kdgiat AND output.kdoutput = d.kdoutput', 'left');
+        $this->db->join('t_satker satker', 'satker.kdsatker=d.kdsatker', 'inner');
+        if($this->session->userdata('kd_role') == '4')
+        {
+            $this->db->join($this->db->database.'.ref_satker', $this->db->database.'.ref_satker.kdsatker = d.kdsatker');
+            $this->db->where($this->db->database.'.ref_satker.kdinduk', $this->session->userdata('kdinduk'));
+        }
+        $this->db->where('d.thang', $tahun);
+
+        if ($unit != "0") {
+            $this->db->where('d.kdunit', $unit);
+        } else {
+            if ($ret['type'] != "roren") {
+                $unit_ = $ret['unit'];
+                $this->db->where_in('d.kdunit', $unit_);
+            }
+        }
+
+        if ($satker != "0") {
+            $this->db->where('d.kdsatker', $satker);
+        } else {
+            if ($ret['type'] == "roren") {
+                
+            }
+            if ($ret['type'] == "unit") {
+                if ($unit == "0") {
+                    $unit_ = $ret['unit'];
+                    $kdsatker_ = array();
+                    foreach ($unit_ as $key => $value) {
+                        $sql2 = "SELECT * FROM t_satker WHERE kdunit='$value'";
+                        $result2 = mysql_query($sql2) or die(mysql_error());
+                        //die($sql2);
+                        while ($row2 = mysql_fetch_array($result2, MYSQL_BOTH)) {
+                            $kdsatker_[] = $row2['kdsatker'];
+                        }
+                    }
+                    $this->db->where_in('d.kdsatker', $kdsatker_);
+                } else {
+                    $sql2 = "SELECT * FROM t_satker WHERE kdunit='$unit'";
+                    $result2 = mysql_query($sql2) or die(mysql_error());
+                    $kdsatker_ = array();
+                    while ($row2 = mysql_fetch_array($result2, MYSQL_BOTH)) {
+                        $kdsatker_[] = $row2['kdsatker'];
+                    }
+                    $this->db->where_in('d.kdsatker', $kdsatker_);
+                }
+            }
+            if ($ret['type'] == "propinsi" || $ret['type'] == "biasa") {
+                $satker_ = $ret['satker'];
+                $kdsatker_ = array();
+                if ($unit == "0") {
+                    foreach ($satker_ as $key => $value) {
+                        foreach ($value as $key2 => $value2) {
+                            $kdsatker_[] = $value2;
+                        }
+                    }
+                } else {
+                    foreach ($satker_[$unit] as $key => $value) {
+                        $kdsatker_[] = $value;
+                    }
+                }
+                $this->db->where_in('d.kdsatker', $kdsatker_);
+            }
+        }
+        $this->CI->flexigrid->build_query(FALSE);
+        $query['record_count'] = $this->db->count_all_results();
+        return $query;
+    }
+
+    function get_view_data_output($tahun, $unit, $satker) {
+        $records = $this->get_view_db_output($tahun, $unit, $satker);
+        $dataView = array();
+        foreach ($records['records']->result() as $row) {
+            $kdskmpnen_ = $row->kdskmpnen;
+            $kdskmpnen = str_replace(' ', '', $kdskmpnen_);
+
+            $key = $row->thang . "-" . $row->kdsatker . "-" . $row->kdunit . "-" . $row->kdprogram . "-" . $row->kdgiat . "-" . $row->kdoutput . "-" . $row->kdsoutput . "-" . $row->kdkmpnen . "-" . $kdskmpnen . "-" . $row->kdjendok . "-" . $row->kddekon;
+            $dataView[$key][] = $row->urkmpnen;
+            $dataView[$key][] = $row->urskmpnen;
+            $dataView[$key][] = $row->nmsatker;
+
+            $sql = "SELECT fokus_prioritas, ikk, fokus_prioritas_utama, reformasi_kesehatan_utama, reformasi_kesehatan FROM d_ikk_fokus WHERE thang='$tahun' AND kdsatker='$row->kdsatker'
+                    AND kdunit='$row->kdunit' AND kdprogram='$row->kdprogram' AND kdgiat='$row->kdgiat' AND kdoutput='$row->kdoutput'
+                    AND kdsoutput='$row->kdsoutput' AND kdkmpnen='$row->kdkmpnen' AND kdskmpnen LIKE '$kdskmpnen'
+                    AND kdjendok='$row->kdjendok' AND kddekon='$row->kddekon'";
+            //$dataView[$key][] = $sql;
+            $result2 = mysql_query($sql) or die(mysql_error());
+            if (mysql_num_rows($result2) > 0) {
+                $dataView[$key][] = 1;
+            } else {
+                $dataView[$key][] = 0;
+            }
+            $sts_komponen = $this->get_feedback_status($key);
+            $dataView[$key][] = $sts_komponen;
+        }
+        $query['records'] = $dataView;
+        $query['record_count'] = $records['record_count'];
+        //die (var_dump($dataView));
         return $query;
     }
 

@@ -287,9 +287,12 @@ class Aktivitas extends CI_Controller {
 		else {
 			$usulan = $this->input->post('judul_usulan');
 		}
-		
+		//cek periode pengajuan
+		$periode_pengajuan = $this->am->cek_aktif_periode_pengajuan();
+
 		$data = array(
 			'KD_PENGAJUAN' => $KD_PENGAJUAN,
+			'KODE_PERIODE_PENGAJUAN' => $periode_pengajuan,
 			'idRencanaAnggaran' => $idRencanaAnggaran,
 			'KodeJenisUsulan' => $this->input->post('jenis_usulan'),
 			'JudulUsulan' => $usulan,
@@ -358,7 +361,8 @@ class Aktivitas extends CI_Controller {
 				$this->pm->update2('data_reformasi_kesehatan', $datark, 'KD_PENGAJUAN', $KD_PENGAJUAN, 'idReformasiKesehatan', $reformasi_kesehatan[$i]);
 			}
 		}
-		redirect('e-planning/aktivitas/grid_aktivitas/'.$KD_PENGAJUAN.'/'.$KodeFungsi.'/'.$KodeSubFungsi.'/'.$KodeProgram.'/'.$KodeKegiatan);
+		// redirect('e-planning/aktivitas/grid_aktivitas/'.$KD_PENGAJUAN.'/'.$KodeFungsi.'/'.$KodeSubFungsi.'/'.$KodeProgram.'/'.$KodeKegiatan);
+		redirect('e-planning/manajemen/grid_aktivitas/'.$KD_PENGAJUAN.'/'.$KodeFungsi.'/'.$KodeSubFungsi.'/'.$KodeProgram.'/'.$KodeKegiatan);
 	// }
 	}
 	
@@ -714,7 +718,8 @@ class Aktivitas extends CI_Controller {
 				$this->pm->update2('data_reformasi_kesehatan', $datark, 'KD_PENGAJUAN', $KD_PENGAJUAN, 'idReformasiKesehatan', $reformasi_kesehatan[$i]);
 					}
 				}
-				redirect('e-planning/aktivitas/grid_aktivitas/'.$KD_PENGAJUAN.'/'.$KodeFungsi.'/'.$KodeSubFungsi.'/'.$KodeProgram.'/'.$KodeKegiatan);
+				// redirect('e-planning/aktivitas/grid_aktivitas/'.$KD_PENGAJUAN.'/'.$KodeFungsi.'/'.$KodeSubFungsi.'/'.$KodeProgram.'/'.$KodeKegiatan);
+				redirect('e-planning/manajemen/grid_aktivitas/'.$KD_PENGAJUAN.'/'.$KodeFungsi.'/'.$KodeSubFungsi.'/'.$KodeProgram.'/'.$KodeKegiatan);
 			}
 	}
 	
@@ -729,7 +734,8 @@ class Aktivitas extends CI_Controller {
 		$this->pm->update2('data_fokus_prioritas', $datafp, 'KD_PENGAJUAN', $KD_PENGAJUAN, 'idFokusPrioritas', $fp);
 		$datark= array('Biaya' => $this->pm->get_biaya_rk($KD_PENGAJUAN,$rk));
 		$this->pm->update2('data_reformasi_kesehatan', $datark, 'KD_PENGAJUAN', $KD_PENGAJUAN, 'idReformasiKesehatan', $rk);
-		redirect('e-planning/aktivitas/grid_aktivitas/'.$KD_PENGAJUAN.'/'.$KodeFungsi.'/'.$KodeSubFungsi.'/'.$KodeProgram.'/'.$KodeKegiatan);
+		//redirect('e-planning/aktivitas/grid_aktivitas/'.$KD_PENGAJUAN.'/'.$KodeFungsi.'/'.$KodeSubFungsi.'/'.$KodeProgram.'/'.$KodeKegiatan);
+		redirect('e-planning/manajemen/grid_aktivitas/'.$KD_PENGAJUAN.'/'.$KodeFungsi.'/'.$KodeSubFungsi.'/'.$KodeProgram.'/'.$KodeKegiatan);
 	}
 	
 	function get_fp($kd_pengajuan, $jns_usulan)

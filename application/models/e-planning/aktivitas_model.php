@@ -133,15 +133,17 @@ class Aktivitas_model extends CI_Model {
 		else
 			return false;
 	}
-	
+
 	function get_aktivitas($KD_PENGAJUAN){
+		$periode = $this->cek_aktif_periode_pengajuan();
+
 		$this->db->select('*');
 		$this->db->from('aktivitas');
 		$this->db->join('ref_jenis_pembiayaan','aktivitas.KodeJenisPembiayaan=ref_jenis_pembiayaan.KodeJenisPembiayaan');
 		$this->db->join('ref_jenis_usulan','aktivitas.KodeJenisUsulan=ref_jenis_usulan.KodeJenisUsulan');
 		$this->db->join('ref_satuan','aktivitas.KodeSatuan=ref_satuan.KodeSatuan');
 		$this->db->where('KD_PENGAJUAN',$KD_PENGAJUAN);
-		$this->CI->flexigrid->build_query();
+		$this->db->where('KODE_PERIODE_PENGAJUAN',$periode);
 		$return['records'] = $this->db->get();
 		
 		$this->db->select('*');
@@ -150,10 +152,46 @@ class Aktivitas_model extends CI_Model {
 		$this->db->join('ref_jenis_usulan','aktivitas.KodeJenisUsulan=ref_jenis_usulan.KodeJenisUsulan');
 		$this->db->join('ref_satuan','aktivitas.KodeSatuan=ref_satuan.KodeSatuan');
 		$this->db->where('KD_PENGAJUAN',$KD_PENGAJUAN);
+		$this->db->where('KODE_PERIODE_PENGAJUAN',$periode);
 		$this->CI->flexigrid->build_query(FALSE);
 		$return['record_count'] = $this->db->count_all_results();
 		return $return;
 	}
+	
+	function get_aktivitas_1($KD_PENGAJUAN){
+		$this->db->select('*');
+		$this->db->from('aktivitas');
+		$this->db->join('ref_jenis_pembiayaan','aktivitas.KodeJenisPembiayaan=ref_jenis_pembiayaan.KodeJenisPembiayaan');
+		$this->db->join('ref_jenis_usulan','aktivitas.KodeJenisUsulan=ref_jenis_usulan.KodeJenisUsulan');
+		$this->db->join('ref_satuan','aktivitas.KodeSatuan=ref_satuan.KodeSatuan');
+		$this->db->where('KD_PENGAJUAN',$KD_PENGAJUAN);
+		$this->db->where('KODE_PERIODE_PENGAJUAN',1);
+		return $this->db->get();
+	}
+
+	const PERIODE_1 = '1', PERIODE_2 = '2', PERIODE_3 = '3';
+	function periode_pengajuan($periode)
+	{
+		$this->db->select('*');
+		$this->db->from('periode_pengajuan');
+		$this->db->where('KODE_PERIODE_PENGAJUAN', $periode);
+
+		return $this->db->get()->row();
+	}
+
+	function cek_aktif_periode_pengajuan()
+    {
+        $today=date('Y-m-d');
+        //$today = '2015-04-03';
+        if($today>=self::periode_pengajuan(self::PERIODE_1)->TANGGAL_AWAL && $today<=self::periode_pengajuan(self::PERIODE_1)->TANGGAL_AKHIR)
+            return self::PERIODE_1;
+        elseif ($today>=self::periode_pengajuan(self::PERIODE_2)->TANGGAL_AWAL && $today<=self::periode_pengajuan(self::PERIODE_2)->TANGGAL_AKHIR) {
+        	return self::PERIODE_2;
+        }
+        elseif ($today>=self::periode_pengajuan(self::PERIODE_3)->TANGGAL_AWAL && $today<=self::periode_pengajuan(self::PERIODE_3)->TANGGAL_AKHIR) {
+        	return self::PERIODE_3;
+        }
+    }
 
 	function cek_aktivitas_update($KD_PENGAJUAN,$KodeAktivitas) {
 		$this->db->select('*');

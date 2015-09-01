@@ -56,6 +56,12 @@ h3 {
   margin-left: 90px;
   width: 435px;
 }
+.tahun_anggaran h3 {
+  color: #3399cc;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: normal;
+}
 .login {
 	color: #3399cc;
 	text-transform: uppercase;
@@ -158,8 +164,8 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input {
   display: inline-block;
-  height: 20px;
-  padding: 4px 6px;
+/*  height: 20px;
+*/  padding: 4px 6px;
   margin-bottom: 10px;
   font-size: 14px;
   line-height: 20px;

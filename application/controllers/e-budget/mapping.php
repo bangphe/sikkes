@@ -108,6 +108,88 @@ class mapping extends CI_Controller {
             $this->output->set_output('{"page":"1","total":"0","rows":[]}');
     }
 
+    function grid_output($kdunit_back, $kdsatker_back, $page) {
+        $kdunit = $this->input->post('unit');
+        $kdsatker = $this->input->post('satker');
+        
+        if ((!$kdunit || !$kdsatker) && $kdsatker_back!=-1 && $kdunit_back!=-1) {
+            $kdunit = $kdunit_back;
+            $kdsatker = $kdsatker_back;
+        }
+
+        $colModel['NO'] = array('NO', 20, TRUE, 'center', 0);
+        $colModel['kegiatan'] = array('KEGIATAN', 300, FALSE, 'left', 1);
+        $colModel['output'] = array('OUTPUT', 300, FALSE, 'left', 1);
+        $colModel['satker.nmsatker'] = array('SATKER', 300, FALSE, 'left', 1);
+        $colModel['MAPPINGOK'] = array('SUDAH DIMAPPING', 100, FALSE, 'left', 0);
+        $colModel['MAPPING'] = array('MAPPING', 50, FALSE, 'left', 0);
+
+        //setting konfigurasi pada bottom tool bar flexigrid
+        $gridParams = array(
+                            'width' => 'auto',
+                            'height' => 330,
+                            'rp' => 15,
+                            'rpOptions' => '[15,30,50,100]',
+                            'pagestat' => 'Menampilkan : {from} ke {to} dari {total} data.',
+                            'blockOpacity' => 0,
+                            'title' => '',
+                            'showTableToggleBtn' => false,
+                                                        'newp' => $page
+                            );
+
+        $url = base_url() . "index.php/e-budget/mapping/grid_list_output/$kdunit/$kdsatker";
+
+        $grid_js = build_grid_js('user', $url, $colModel, 'NO', 'asc', $gridParams);
+        $data['js_grid'] = $grid_js;
+        $data['notification'] = "";
+        $data['judul'] = 'Daftar Output';
+        $data['content'] = $this->load->view('grid', $data, true);
+        $this->load->view('main', $data);
+    }
+
+    function grid_list_output($kdunit, $kdsatker) {
+        $valid_fields = array('nmgiat','nmoutput','satker.nmsatker');
+        $this->flexigrid->validate_post('', 'asc', $valid_fields);
+        $this->output->set_header($this->config->item('json_header'));
+        $thang =  $this->session->userdata('thn_anggaran');
+        $return = $this->mm->get_view_data($thang, $kdunit, $kdsatker);
+
+        $page = $this->flexigrid->post_info['page'];
+        $rp = $this->flexigrid->post_info['rp'];
+        $count = 0 + ($rp*($page-1));
+        $record_items = array();
+        foreach ($return['records'] as $key => $row) {
+            $count = $count + 1;
+            $komponen = $row[0];
+            $skomponen = $row[1];
+            $satker = $row[2];
+            $mappingok = $row[3];
+            $mappingmark = "";
+            if ($mappingok == 1) {
+                $mappingmark = '<a href=\'#\'><img border=\'0\' src=\'' . base_url() . 'images/flexigrid/setujui.png\'></a>';
+            }
+            
+            $url = site_url()."/e-budget/mapping/edit_mapping/$kdunit/$key/$kdsatker/$page";
+            $url = str_replace(' ', '', $url);
+            
+            $record_items[] = array(
+                $key,
+                $count,
+                $komponen,
+                $skomponen,
+                $satker,
+                $mappingmark,
+                //$key."T".$url
+                '<a href='.$url.'><img border=\'0\' src=\'' . base_url() . 'images/flexigrid/edit.png\'></a>',
+            );
+        }
+
+        if (isset($record_items))
+            $this->output->set_output($this->flexigrid->json_build($return['record_count'], $record_items));
+        else
+            $this->output->set_output('{"page":"1","total":"0","rows":[]}');
+    }
+
     function form_mapping() {
         $data2 = array();
         $data2['search'] = $this->mm->get_all_unit();

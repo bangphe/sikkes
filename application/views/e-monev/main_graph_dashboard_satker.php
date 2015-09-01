@@ -12,7 +12,7 @@ $(document).ready(function(){
 </script>
 <div id="tengah">
 <div id="judul" class="title">
-	GRAFIK LAPORAN MONITORING <?php echo $nmsatker;?> <?php echo $this->general->konversi_bulan($bulan).' '.$thang; ?>
+	GRAFIK LAPORAN MONITORINGs <?php echo $nmsatker;?> <?php echo $this->general->konversi_bulan($bulan).' '.$thang; ?>
 </div>
 <br />
 <div class="buttons">

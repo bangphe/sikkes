@@ -290,7 +290,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td width="15%">Pilih Sinonim</td>
+                        <td width="15%">Pilih Sinonim Positif</td>
                         <td width="85%">
                             <select id="sinonim" name="sinonim">
                                 <option value=""></option>
@@ -303,6 +303,33 @@
                                 ?>
                             </select>
                         </td>
+                    </tr>
+                    <tr>
+                        <td width="15%">Pilih Sinonim Negatif</td>
+                        <td width="85%">
+                            <select id="sinonim_negatif" name="sinonim_negatif">
+                                <option value=""></option>
+                                <?php
+                                foreach ($sinonim_negatif as $key => $value) {
+                                    ?>
+                                    <option value="<?php echo $value[0]; ?>"><?php echo $value[1]; ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </td>
+                        <!-- <td width="15%">Pilih Sinonim Negatif</td>
+                        <td width="85%">
+                            <div class="container" style="border:2px solid #ccc; width:1000px; height: 80px; overflow-y: scroll;">
+                                <?php
+                                //foreach ($sinonim_negatifs as $key => $value) {
+                                    ?>
+                                    <input type="checkbox" name="sinonim_negatifs[]" value="<?php //echo $key; ?>" /><?php //echo $value; ?><br />
+                                    <?php
+                                //}
+                                ?>
+                            </div>
+                        </td> -->
                     </tr>
                     <tr>
                         <td width="15%">Pilih Target Sinonim</td>

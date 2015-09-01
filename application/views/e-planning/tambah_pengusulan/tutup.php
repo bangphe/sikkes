@@ -8,6 +8,6 @@
 </div>
 <div id="content_tengah">
 	<br><br><br><br>
-	<h1 style="font-size:28px; color:red;"><center>Pengajuan proposal telah ditutup per tanggal 31 Maret 2014.</center></h1>
+	<h1 style="font-size:28px; color:red;"><center>Periode Pagu Indikatif 2016 (01 Januari 2015 - 30 April 2015) telah ditutup per tanggal 30 April 2015.</center></h1>
 </div>
 </div>

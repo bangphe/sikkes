@@ -70,6 +70,7 @@ class Login extends CI_Controller {
 					$this->session->set_userdata('nama_user', $row->NAMA_USER);
 					$this->session->set_userdata('alamat_user', $row->ALAMAT_USER);
 					$this->session->set_userdata('telp_user', $row->TELP_USER);
+					$this->session->set_userdata('email', $row->EMAIL_USER);
 					$this->session->set_userdata('id_user', $row->USER_ID);
 					$this->session->set_userdata('kdsatker', $row->kdsatker);
 					$kdinduk = $this->lm->get_where('ref_satker', 'kdsatker', $row->kdsatker)->row()->kdinduk;
@@ -108,6 +109,7 @@ class Login extends CI_Controller {
 		$this->session->unset_userdata('nama_user');
 		$this->session->unset_userdata('alamat_user');
 		$this->session->unset_userdata('telp_user');
+		$this->session->unset_userdata('email');
 		$this->session->unset_userdata('id_user');
 		$this->session->unset_userdata('kdsatker');
 		$this->session->unset_userdata('kdinduk', $kdinduk);
@@ -124,19 +126,20 @@ class Login extends CI_Controller {
 	}
 	
 	function lupa_password(){
-		$data['title'] = 'Lupa Password';
+		$data['title'] = 'Lupa Password?';
 		if(isset($_POST['email'])){
 			$data['email'] = $_POST['email'];
 			if (valid_email($_POST['email']) == FALSE){
-				$data['notification1'] = '*Format e-mail yang Anda masukkan salah.';
+				$data['notification1'] = '*Format alamat e-mail yang Anda masukkan salah.';
 			}
 			elseif($_POST['email'] != null && $this->lm->get_user_by_email($_POST['email'])->num_rows < 1){
-				$data['notification1'] = '*E-mail tidak terdaftar sebagai user.';
+				$data['notification1'] = '*Alamat e-mail yang Anda masukkan tidak terdaftar sebagai user di database kami.';
 			}
 		}
 		$this->load->view('lupa_password', $data);
 	}
 	
+	// tanpa konfirmasi email ke user
 	function recovery_password(){
 		$user = $this->lm->get_user_by_email($_POST['email']);
 		$this->load->helper('email');
@@ -148,35 +151,7 @@ class Login extends CI_Controller {
 		}
 		else{
 			$this->lm->reset_password_by_email($_POST['email']);
-			$config = Array(
-				'protocol' => 'smtp',
-				'smtp_host' => 'ssl://smtp.googlemail.com',
-				'smtp_port' => 465,
-				'smtp_user' => 'erenggar.helpdesk@gmail.com',
-				'smtp_pass' => '1qaz2wsxa',
-				'mailtype'  => 'html', 
-				'charset' => 'utf-8',
-				'wordwrap' => TRUE
-
-			);
-			$this->load->library('email', $config);
-			$this->email->set_newline("\r\n");
-			$email_body ="Anda terdaftar di E-RENGGAR menggunakan ".$_POST['email'].", sebagai user berikut.<div>&nbsp;</div>";
-			foreach($user->result() as $row){
-				$email_body .= "<div>- Username: ".$row->USERNAME." , dengan Password di-reset menjadi: users</div>";
-			}
-			$email_body .= "<div>&nbsp;</div><div>&nbsp;</div><div>Segera ganti password Anda setelah Anda melakukan login.</div>";
-			$this->email->from('erenggar.helpdesk@gmail.com', 'Helpdesk E-RENGGAR');
-
-			$to = $_POST['email'];
-			$list = array($to);
-			$this->email->to($list);
-			$this->email->subject("Reset Password E-RENGGAR");
-			$this->email->message($email_body);
-
-			$this->email->send();
-			// echo $this->email->print_debugger();
-			$data['notification3'] = 'Reset password telah diproses. Silakan mengecek e-mail yang Anda daftarkan.';
+			$data['notification3'] = 'Reset password telah diproses. Password telah di-reset menjadi : users';
 			$option_thn_anggaran;
 			foreach($this->lm->get('ref_tahun_anggaran')->result() as $row){
 				$option_thn_anggaran[$row->thn_anggaran] = $row->thn_anggaran;
@@ -185,6 +160,56 @@ class Login extends CI_Controller {
 			$this->load->view('login',$data);
 		}
 	}
+
+	// Recovery password dengan mengirimkan konfirmasi email ke user
+	// function recovery_password(){
+	// 	$user = $this->lm->get_user_by_email($_POST['email']);
+	// 	$this->load->helper('email');
+	// 	if (valid_email($_POST['email']) == FALSE){
+	// 		$this->lupa_password();
+	// 	}
+	// 	elseif($_POST['email'] != null &&  $user->num_rows < 1 ){
+	// 		$this->lupa_password();
+	// 	}
+	// 	else{
+	// 		$this->lm->reset_password_by_email($_POST['email']);
+	// 		$config = Array(
+	// 			'protocol' => 'smtp',
+	// 			'smtp_host' => 'ssl://smtp.googlemail.com',
+	// 			'smtp_port' => 465,
+	// 			'smtp_user' => 'erenggar.helpdesk@gmail.com',
+	// 			'smtp_pass' => '1qaz2wsxa',
+	// 			'mailtype'  => 'html', 
+	// 			'charset' => 'utf-8',
+	// 			'wordwrap' => TRUE
+
+	// 		);
+	// 		$this->load->library('email', $config);
+	// 		$this->email->set_newline("\r\n");
+	// 		$email_body ="Anda terdaftar di E-RENGGAR menggunakan ".$_POST['email'].", sebagai user berikut.<div>&nbsp;</div>";
+	// 		foreach($user->result() as $row){
+	// 			$email_body .= "<div>- Username: ".$row->USERNAME." , dengan Password di-reset menjadi: users</div>";
+	// 		}
+	// 		$email_body .= "<div>&nbsp;</div><div>&nbsp;</div><div>Segera ganti password Anda setelah Anda melakukan login.</div>";
+	// 		$this->email->from('erenggar.helpdesk@gmail.com', 'Helpdesk E-RENGGAR');
+
+	// 		$to = $_POST['email'];
+	// 		$list = array($to);
+	// 		$this->email->to($list);
+	// 		$this->email->subject("Reset Password E-RENGGAR");
+	// 		$this->email->message($email_body);
+
+	// 		$this->email->send();
+	// 		// echo $this->email->print_debugger();
+	// 		$data['notification3'] = 'Reset password telah diproses. Silakan mengecek e-mail yang Anda daftarkan.';
+	// 		$option_thn_anggaran;
+	// 		foreach($this->lm->get('ref_tahun_anggaran')->result() as $row){
+	// 			$option_thn_anggaran[$row->thn_anggaran] = $row->thn_anggaran;
+	// 		}
+	// 		$data['thn_anggaran'] = $option_thn_anggaran;
+	// 		$this->load->view('login',$data);
+	// 	}
+	// }
 	
 	function chart(){			
 		$this->load->library('FusionCharts');

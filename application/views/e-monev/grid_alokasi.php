@@ -48,8 +48,6 @@ function unformat_kontrak(no){
 		<th>Nama Akun</th>
 		<th>Nama Item</th>
 		<th>Jumlah</th>
-		<th>Paket Pengerjaan</th>
-		<th>Nilai Kontrak</th>
 	</tr>
 	<?php
 		$no = 1;
@@ -57,7 +55,7 @@ function unformat_kontrak(no){
 	?>
 	<tr>
 		<td><?php echo $no;?></td>
-		<td><?php echo $row->nmakun.'-'.$row->kdakun;?></td>
+		<td><?php echo $row->kdakun.'-'.$row->nmakun;?></td>
 		<td><?php echo $row->nmitem;
 		if($row->vol1 !=0){
 			echo ' ['.$row->vol1.' '.$row->sat1;
@@ -79,50 +77,7 @@ function unformat_kontrak(no){
 		}
 		?></td>
 		<td>Rp. <?=number_format($row->jumlah,2,',','.');?></td>
-		<td>
-		<select id="idjnsitem_<?php echo $no?>" name="idjnsitem_<?php echo $no?>" style="width:95%; padding:3px" onchange="getNilaiKontrak(this.value, <?php echo $no; ?>), simpanJenisItem(<?php echo $no; ?>)" >
-			<option value="0">- Pilih Paket -</option>
-			<?php
-				foreach ($option_jenis_item->result() as $opt) {
-					//ngecek data di dm_jns_item
-					$get_jnsitem = $this->lmm->get_jnsitem_by_idpaket($idpaket,$row->noitem,$row->kdakun);
-					if ($get_jnsitem->num_rows()) 
-					{
-						foreach ($get_jnsitem->result() as $get) 
-						{
-							if($get->kdjnsitem == $opt->idjnsitem) 
-							{
-								echo '<option value="'.$opt->idjnsitem.'" selected="selected">'.$opt->nmjnsitem.'</option>';
-							}
-							else {
-								echo '<option value="'.$opt->idjnsitem.'">'.$opt->nmjnsitem.'</option>';
-							}
-						}
-					}
-					else {
-						echo '<option value="'.$opt->idjnsitem.'">'.$opt->nmjnsitem.'</option>';
-					}
-				}
-			?>
-		</select>
-		</td>
-		<td>
-			<?php 
-				$cek_jnsitem = $this->lmm->get_jnsitem_by_idpaket($idpaket, $row->noitem, $row->kdakun);
-				if ($cek_jnsitem->num_rows > 0) {
-					$_nilaikontrak = $this->lmm->get_jnsitem_by_idpaket($idpaket, $row->noitem, $row->kdakun)->row()->nilaikontrak;
-				}
-				else {
-					$_nilaikontrak = 0;
-				}
-				
-				$nilai_kontrak = number_format($_nilaikontrak,2,',','.')
-			?>
-			<input type="text" disabled=<?php echo $_nilaikontrak==0 ? "true" : "false"; ?> name="nilai_kontrak_<?php echo $no;?>" id="nilai_kontrak_<?php echo $no;?>" style="padding:3px; width:75%" onchange="simpanJenisItem(<?php echo $no;?>)" onfocus="unformat_kontrak(<?php echo $no;?>)" value="<?php echo $cek_jnsitem->num_rows() ? $_nilaikontrak : 0; ?>" />
-			<input type="hidden" name="alokasi_<?php echo $no;?>" id="alokasi_<?php echo $no;?>" value="<?php echo $row->jumlah ;?>" />
-			<input type="hidden" name="noitem_<?php echo $no;?>" id="noitem_<?php echo $no;?>" value="<?php echo $row->noitem?>" />
-			<input type="hidden" name="kdakun_<?php echo $no;?>" id="kdakun_<?php echo $no;?>" value="<?php echo $row->kdakun?>" />
-		</td>
+		
 	</tr>
 		<?php $no++; ?>
 	<?php } ?>																							

@@ -7,7 +7,7 @@
         -->
     </div>
     <div id="content_tengah">
-        <form class="appnitro" name="mapping" enctype="multipart/form-data" method="post" action="<?php echo base_url() . 'index.php/e-budget/mapping/grid_komponen/-1/-1/1'; ?>">
+        <form class="appnitro" name="mapping" enctype="multipart/form-data" method="post" action="<?php echo base_url() . 'index.php/e-budget/mapping/grid_output/-1/-1/1'; ?>">
             <script language="JavaScript">
                 function unitChanged() {
                     var unit = document.mapping.unit;

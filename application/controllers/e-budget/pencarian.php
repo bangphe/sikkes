@@ -101,8 +101,10 @@ class pencarian extends CI_Controller {
         $jenissats = $this->mm->get_all_dekon();
         $reformasi_kesehatans = $this->mm->get_all_reformasi_kesehatan();
         $fokus_prioritass = $this->mm->get_all_fokus_prioritas();        
-        
+        $sinonim_negatifs = $this->mm->get_all_sinonim_negatif();
+
         $sinonims = $this->ms->list_sinonim_pencarian();
+        $sinonim_negatif = $this->ms->list_sinonim_negatif_pencarian();
         $akungroups = $this->ma->list_akungroup_pencarian();
 
         $data['units'] = $units;
@@ -111,6 +113,8 @@ class pencarian extends CI_Controller {
         $data['bebans'] = $bebans;
         $data['jenissats'] = $jenissats;
         $data['sinonims'] = $sinonims;
+        $data['sinonim_negatifs'] = $sinonim_negatifs;
+        $data['sinonim_negatif'] = $sinonim_negatif;
         $data['akungroups'] = $akungroups;
 
         $data['reformasi_kesehatans'] = $reformasi_kesehatans;
@@ -142,12 +146,14 @@ class pencarian extends CI_Controller {
         $beban = $this->input->post('beban');
         $jenissat = $this->input->post('jenissat');
         $sinonim = $this->input->post('sinonim');
+        $sinonim_negatif = $this->input->post('sinonim_negatif');
         $tsinonim = $this->input->post('tsinonim');
         $akungroup = $this->input->post('akungroup');
         $ikk = $this->input->post('ikk');
         $reformasi_kesehatan = $this->input->post('reformasi_kesehatan');
         $fokus_prioritas = $this->input->post('fokus_prioritas');
 
+        $data_sinonim_negatif = $this->ms->get_sinonim_negatif($sinonim_negatif);
         $akun = $this->ms->get_sinonim_akun2($sinonim);
         $katakunci = $this->ms->get_sinonim_katakunci2($sinonim);
         $akungroupakun = $this->ma->get_akungroup_akun2($akungroup);
@@ -157,7 +163,7 @@ class pencarian extends CI_Controller {
             $view = $this->mm->get_belanja_data_pencarian_canggih_volume($thang, $unit, $satker, $lokasi, $program, $kegiatan, $beban, $jenissat, $sinonim, $akun, $katakunci, $akungroup, $akungroupakun, $tsinonim, $ikk, $reformasi_kesehatan, $fokus_prioritas, $volume); 
         }
         else {
-            $view = $this->mm->get_belanja_data_pencarian_canggih($thang, $unit, $satker, $lokasi, $program, $kegiatan, $beban, $jenissat, $sinonim, $akun, $katakunci, $akungroup, $akungroupakun, $tsinonim, $ikk, $reformasi_kesehatan, $fokus_prioritas);        
+            $view = $this->mm->get_belanja_data_pencarian_canggih($thang, $unit, $satker, $lokasi, $program, $kegiatan, $beban, $jenissat, $sinonim, $akun, $katakunci, $akungroup, $akungroupakun, $tsinonim, $ikk, $reformasi_kesehatan, $fokus_prioritas, $sinonim_negatif, $data_sinonim_negatif);        
         }
         
         $data['judul'] = 'HASIL PENCARIAN CANGGIH';
@@ -175,7 +181,12 @@ class pencarian extends CI_Controller {
             $this->load->view('e-budget/view_hasil_pencarian_rekap_excel', $data);
         }     
         if ($type == "2") {  
+            foreach($this->mm->get_where('ref_unit', 'KDUNIT', $unit)->result() as $rw) {
+                $nmunit = $rw->NMUNIT;
+            }
+
             $data['judul'] = 'REKAP PENCARIAN';
+            $data['unit'] = $nmunit;
             $data['content'] = $this->load->view('e-budget/view_hasil_pencarian_canggih_excel', $data);
 //            $this->load->view('main', $data);
         }
