@@ -28,22 +28,40 @@ class Buka extends CI_Controller {
         // jadikan judul tabel sebagai key array
         $jumlah_kolom = count($result[$selector_header]);
         
+        $table = $this->addHeader($result[$selector_header]);
+        
         $data = array();
         foreach ($result[$selector_body] as $cell => $isi) {
             $data[$result[$selector_header][$cell%$jumlah_kolom]][] = $isi;
+            $table .= $this->addCell($isi, $cell%$jumlah_kolom, $jumlah_kolom);
         }
         
-        var_dump($data);
+        echo "<table>$table</table>";
+        
+        // var_dump($data);
     }
 
-    function jelajah() {
-        $html = new Simple_html_dom();
-
-        $html->load_file('http://www.google.com');
-
-        foreach ($html->find('img') as $element) {
-            echo $element->src . '<br>';
+    private function addCell($data, $index, $max) {
+        if (empty($index)) {
+            $td = "<tr><td>$data</td>";
+        } else {
+            $td = "<td>$data</td>";
         }
+        
+        if ($index == $max) {
+            return $td . '</tr>';
+        } else {
+            return $td;
+        }
+    }
+    
+    private function addHeader($header) {
+        $tr = '<tr>';
+        foreach ($header as $head) {
+            $tr .= "<th>$head</th>";
+        }
+        
+        return $tr . '</tr>';
     }
 
 }
