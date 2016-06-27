@@ -3,7 +3,7 @@
 	Tambah Fungsi
 </div>
 <div id="content">
-		<form id="form_cari_fungsi" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-planning/pendaftaran/cari_fungsi/'.$KodePengajuan; ?>">
+		<form id="form_cari_fungsi" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-planning/pendaftaran/cari_fungsi/'.$KodePengajuan; ?>">
 			<p>search </p>
 			<input id="keyword" name="keyword" /> 
 			<select name="kategori" id="kategori">
@@ -25,11 +25,11 @@
 				$kode = $row->KodeFungsi;
 				$nama = $row->NamaFungsi; 
 			?>
-			<tr onmouseover="this.style.backgroundColor='#ffff00';" onmouseout="this.style.backgroundColor='#ffffff';" onclick="window.opener.document.getElementById('detail1').value=<?php echo $kode; ?>; window.opener.document.getElementById('detail2').value='<?php echo $nama; ?>'; window.close();">
-				<form id="form_tambah_fungsi" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-planning/pendaftaran/save_fungsi/'.$KodePengajuan; ?>">
-				<td><?php echo $no; ?></td>
-				<td><?php echo $kode; ?><input type="hidden" id="kode" name="kode" value="<?php echo $kode; ?>" /></td>
-				<td><?php echo $nama; ?><input type="hidden" id="nama" name="nama" value="<?php echo $nama; ?>" /></td>
+			<tr onmouseover="this.style.backgroundColor='#ffff00';" onmouseout="this.style.backgroundColor='#ffffff';" onclick="window.opener.document.getElementById('detail1').value=<?php echo  $kode; ?>; window.opener.document.getElementById('detail2').value='<?php echo  $nama; ?>'; window.close();">
+				<form id="form_tambah_fungsi" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-planning/pendaftaran/save_fungsi/'.$KodePengajuan; ?>">
+				<td><?php echo  $no; ?></td>
+				<td><?php echo  $kode; ?><input type="hidden" id="kode" name="kode" value="<?php echo  $kode; ?>" /></td>
+				<td><?php echo  $nama; ?><input type="hidden" id="nama" name="nama" value="<?php echo  $nama; ?>" /></td>
 				<td><input type="submit" value="Tambah" /></td>
 				</form>
 			</tr>

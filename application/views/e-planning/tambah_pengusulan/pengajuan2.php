@@ -2,17 +2,17 @@
 <div id="judul" class="title">
 	Detail Usulan
 	<!--
-	<label class="edit"><a href="#"><img src="<?php echo base_url(); ?>images/icons/Edit_icon.png" /></a></label>
-	<label class="detail"><a href="#"><img src="<?php echo base_url(); ?>images/icons/detail.png" /></a></label>
+	<label class="edit"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/Edit_icon.png" /></a></label>
+	<label class="detail"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/detail.png" /></a></label>
 	-->
 </div>
 <div id="content_tengah">
-	<form class="appnitro" name="form_pengusulan" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-planning/pendaftaran/pengajuan_step3'; ?>" onsubmit="return validateForm()">
+	<form class="appnitro" name="form_pengusulan" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-planning/pendaftaran/pengajuan_step3'; ?>" onsubmit="return validateForm()">
 	<ul id="tt" class="easyui-tree"
-			url="<?php echo base_url(); ?>index.php/e-planning/pendaftaran/json"
+			url="<?php echo  base_url(); ?>index.php/e-planning/pendaftaran/json"
 			checkbox="true">
 	</ul>
-	<input type="hidden" name="kd_pengajuan" id="kd_pengajuan" value="<?php echo $kd_pengajuan; ?>" /></td>
+	<input type="hidden" name="kd_pengajuan" id="kd_pengajuan" value="<?php echo  $kd_pengajuan; ?>" /></td>
 	
 	<h3>Ringkasan Proposal</h3>
 	<table width="100%" height="16%">
@@ -73,11 +73,11 @@
 				<div class="buttons">
 					
 					<button type="button" class="negative" name="sebelumnya" onClick="history.go(-1);">
-						<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 						Sebelumnya
 					</button>
 					<button type="submit" class="regular" name="save" id="save">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Lanjut
 					</button>
 				</div>
@@ -87,7 +87,7 @@
 	</form>
 </div>
 </div>
-<!--<input id="submit-button" type="submit" name="lanjut" value="program" onclick="window.open('<?php echo base_url(); ?>index.php/e-planning/Filtering/program',null,'height=500,width=550,status=yes,toolbar=no,menubar=no,location=no,scrollbars=yes,left=0,top=0,screenX=0,screenY=0');"/> -->
+<!--<input id="submit-button" type="submit" name="lanjut" value="program" onclick="window.open('<?php echo  base_url(); ?>index.php/e-planning/Filtering/program',null,'height=500,width=550,status=yes,toolbar=no,menubar=no,location=no,scrollbars=yes,left=0,top=0,screenX=0,screenY=0');"/> -->
 <script type="text/javascript">
 function validateForm()
 	{

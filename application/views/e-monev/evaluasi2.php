@@ -1,6 +1,6 @@
 <div id="content">
 		<table id="tt" title="Laporan Evaluasi" class="easyui-treegrid" style="width:1170px;height:540px"
-			data-options="url:'<?= base_url() ?>index.php/e-monev/laporan_evaluasi/treeGrid',idField:'id',treeField:'name',
+			data-options="url:'<?php echo  base_url() ?>index.php/e-monev/laporan_evaluasi/treeGrid',idField:'id',treeField:'name',
 					rownumbers:true,fitColumns:true,autoRowHeight:false,animate:true,nowrap:true">
 		<thead>
 			<tr>

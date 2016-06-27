@@ -2,12 +2,12 @@
     <div id="judul" class="title">
         Tambah Akun
         <!--
-        <label class="edit"><a href="#"><img src="<?php echo base_url(); ?>images/icons/Edit_icon.png" /></a></label>
-        <label class="detail"><a href="#"><img src="<?php echo base_url(); ?>images/icons/detail.png" /></a></label>
+        <label class="edit"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/Edit_icon.png" /></a></label>
+        <label class="detail"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/detail.png" /></a></label>
         -->
     </div>
     <div id="content_tengah">
-        <form class="appnitro" name="addakungroup" enctype="multipart/form-data" method="post" action="<?php echo base_url() . 'index.php/e-budget/akungroup/edit_akun_action/'.$id.'/'.$page; ?>">
+        <form class="appnitro" name="addakungroup" enctype="multipart/form-data" method="post" action="<?php echo  base_url() . 'index.php/e-budget/akungroup/edit_akun_action/'.$id.'/'.$page; ?>">
             <script>
                 function createChecks(){
                     var belanja = document.addakungroup.belanja;
@@ -44,7 +44,7 @@
                     <tr>
                         <td width="15%">Nama Akun Group</td>
                         <td width="85%">
-                            <?php echo $nmakungroup;?>
+                            <?php echo  $nmakungroup;?>
                         </td>
                     </tr>
                     <tr>
@@ -79,14 +79,14 @@
                         <td width="85%">  
                             <div class="buttons">
                                 <button type="submit" class="regular" name="submit">
-                                    <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+                                    <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
                                     Tambah
                                 </button>
                             </div>
-                            <a href='<?php echo site_url()."/e-budget/akungroup/grid_akun/$id/$page" ;?>'>
+                            <a href='<?php echo  site_url()."/e-budget/akungroup/grid_akun/$id/$page" ;?>'>
                                 <div class="buttons">
                                     <button type="button" class="regular" name="submit">
-                                        <img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>
+                                        <img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>
                                         Kembali
                                     </button>
                                 </div>
@@ -95,7 +95,7 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td width="15%"><?php echo $error; ?></td>
+                        <td width="15%"><?php echo  $error; ?></td>
                         <td width="85%">
                             
                         </td>

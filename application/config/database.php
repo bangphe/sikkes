@@ -50,9 +50,9 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'akom';
-$db['default']['dbdriver'] = 'mysql';
+$db['default']['password'] = 'root';
+$db['default']['database'] = 'depkesgabungan';
+$db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
@@ -63,22 +63,22 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
-
-// $db['monev']['hostname'] = 'localhost';
-// $db['monev']['username'] = 'root';
-// $db['monev']['password'] = 'root';
-// $db['monev']['database'] = 'monev';
-// $db['monev']['dbdriver'] = 'mysql';
-// $db['monev']['dbprefix'] = '';
-// $db['monev']['pconnect'] = TRUE;
-// $db['monev']['db_debug'] = TRUE;
-// $db['monev']['cache_on'] = FALSE;
-// $db['monev']['cachedir'] = '';
-// $db['monev']['char_set'] = 'utf8';
-// $db['monev']['dbcollat'] = 'utf8_general_ci';
-// $db['monev']['swap_pre'] = '';
-// $db['monev']['autoinit'] = TRUE;
-// $db['monev']['stricton'] = FALSE;
+/*
+$db['monev']['hostname'] = 'localhost';
+$db['monev']['username'] = 'root';
+$db['monev']['password'] = 'root';
+$db['monev']['database'] = 'monev';
+$db['monev']['dbdriver'] = 'mysqli';
+$db['monev']['dbprefix'] = '';
+$db['monev']['pconnect'] = TRUE;
+$db['monev']['db_debug'] = TRUE;
+$db['monev']['cache_on'] = FALSE;
+$db['monev']['cachedir'] = '';
+$db['monev']['char_set'] = 'utf8';
+$db['monev']['dbcollat'] = 'utf8_general_ci';
+$db['monev']['swap_pre'] = '';
+$db['monev']['autoinit'] = TRUE;
+$db['monev']['stricton'] = FALSE;*/
 
 
 /* End of file database.php */

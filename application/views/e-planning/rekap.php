@@ -63,7 +63,7 @@ function setFungsi(no)
 				<td>
 					<div class="buttons">
 						<button type="submit" class="positive" name="cetak">
-							<img src="<?php echo base_url(); ?>images/main/excel.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/excel.png" alt=""/>
 							Cetak
 						</button>
 					</div>

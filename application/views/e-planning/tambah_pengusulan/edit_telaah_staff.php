@@ -3,7 +3,7 @@
 	Telaah Staff
 </div>
 <div id="content">
-	<form id="form_edit_telaah_staff" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-planning/telaah/proses_update_telaah_staff/'.$kd_pengajuan.'/'.$kode_telaah_staff; ?>"><!-- onsubmit="return validate_form()"-->
+	<form id="form_edit_telaah_staff" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-planning/telaah/proses_update_telaah_staff/'.$kd_pengajuan.'/'.$kode_telaah_staff; ?>"><!-- onsubmit="return validate_form()"-->
 	<?php if(isset($tanggapan)){?>
 	<table>
 		<tr><td>
@@ -11,8 +11,8 @@
 		<legend class="legend" >| Tanggapan |</legend>
 		<table>
 		<tr><td>
-		<p>Dari: <?php echo $tertanda; ?></p>
-		<p><?php echo $tanggapan; ?></p>
+		<p>Dari: <?php echo  $tertanda; ?></p>
+		<p><?php echo  $tanggapan; ?></p>
 		</td></tr>
 		</table>
 		</fieldset>
@@ -25,68 +25,68 @@
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td width="20%" style="padding-left:10px;vertical-align:top;"><p>Tanggal</p></td>
-				<td><p><input name="tanggal" id="tanggal" type="text" value="<?php echo $TANGGAL; ?>" /> (hh-bb-tttt)</p></td>
+				<td><p><input name="tanggal" id="tanggal" type="text" value="<?php echo  $TANGGAL; ?>" /> (hh-bb-tttt)</p></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;" ><p>Persoalan</p></td>
-				<td><p><textarea name="persoalan" id="persoalan" cols="100" rows="7"><?php echo $PERSOALAN; ?></textarea></p></td>
+				<td><p><textarea name="persoalan" id="persoalan" cols="100" rows="7"><?php echo  $PERSOALAN; ?></textarea></p></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;"><p>Praanggapan</p></td>
-				<td><p><textarea name="praanggapan" id="praanggapan" cols="100" rows="7"><?php echo $PRAANGGAPAN; ?></textarea></p></td>
+				<td><p><textarea name="praanggapan" id="praanggapan" cols="100" rows="7"><?php echo  $PRAANGGAPAN; ?></textarea></p></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;"><p>Fakta yang mempengaruhi</p></td>
-				<td><p><textarea name="fakta_yang_mempengaruhi" id="fakta_yang_mempengaruhi" cols="100" rows="7"><?php echo $FAKTA_YANG_MEMPENGARUHI; ?></textarea></p></td>
+				<td><p><textarea name="fakta_yang_mempengaruhi" id="fakta_yang_mempengaruhi" cols="100" rows="7"><?php echo  $FAKTA_YANG_MEMPENGARUHI; ?></textarea></p></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;"><p>Penggunaan sumber daya yang cost efektif</p></td>
-				<td><p><textarea name="cost_efektif" id="cost_efektif" cols="100" rows="7"><?php echo $COST_EFEKTIF; ?></textarea></p></td>
+				<td><p><textarea name="cost_efektif" id="cost_efektif" cols="100" rows="7"><?php echo  $COST_EFEKTIF; ?></textarea></p></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;"><p>Efisien</p></td>
-				<td><p><textarea name="efisien" id="efisien" cols="100" rows="7"><?php echo $EFISIEN; ?></textarea></p></td>
+				<td><p><textarea name="efisien" id="efisien" cols="100" rows="7"><?php echo  $EFISIEN; ?></textarea></p></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;"><p>Feasibilitas (secara teknis, politis dan kendala sosial)</p></td>
-				<td><p><textarea name="feasibilitas" id="feasibilitas" cols="100" rows="7"><?php echo $FEASIBILITAS; ?></textarea></p></td>
+				<td><p><textarea name="feasibilitas" id="feasibilitas" cols="100" rows="7"><?php echo  $FEASIBILITAS; ?></textarea></p></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;"><p>Equity (keadilan)</p></td>
-				<td><p><textarea name="equity" id="equity" cols="100" rows="7"><?php echo $EQUITY; ?></textarea></p></td>
+				<td><p><textarea name="equity" id="equity" cols="100" rows="7"><?php echo  $EQUITY; ?></textarea></p></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;"><p>Menutup gap yang ada di daerah</p></td>
-				<td><p><textarea name="gap_daerah" id="gap_daerah" cols="100" rows="7"><?php echo $GAP_DAERAH; ?></textarea></p></td>
+				<td><p><textarea name="gap_daerah" id="gap_daerah" cols="100" rows="7"><?php echo  $GAP_DAERAH; ?></textarea></p></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;"><p>Analisis</p></td>
-				<td><p><textarea name="analisis" id="analisis" cols="100" rows="7"><?php echo $ANALISIS; ?></textarea></p></td>
+				<td><p><textarea name="analisis" id="analisis" cols="100" rows="7"><?php echo  $ANALISIS; ?></textarea></p></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;"><p>Simpulan</p></td>
-				<td><p><textarea name="simpulan" id="simpulan" cols="100" rows="7"><?php echo $SIMPULAN; ?></textarea></p></td>
+				<td><p><textarea name="simpulan" id="simpulan" cols="100" rows="7"><?php echo  $SIMPULAN; ?></textarea></p></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr><td></td>
 			<td>
 					<div class="buttons">
 						<button type="submit" class="positive" name="save">
-							<img src="<?php echo base_url(); ?>images/main/update.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/update.png" alt=""/>
 							Simpan
 						</button>
-						  <a href="<?php echo site_url(); ?>/e-planning/telaah/grid_telaah_staff/<?php echo $kd_pengajuan; ?>" class="negative">
-						<img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>
+						  <a href="<?php echo  site_url(); ?>/e-planning/telaah/grid_telaah_staff/<?php echo  $kd_pengajuan; ?>" class="negative">
+						<img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>
 						Batal
 					 </a>
 					</div>

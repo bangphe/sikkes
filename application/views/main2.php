@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>Welcome to CodeIgniter</title>
 
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/flexigrid.css" media="screen, tv, projection" title="Default" />
+	<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/flexigrid.css" media="screen, tv, projection" title="Default" />
 	<style type="text/css">
 
 	::selection{ background-color: #E13300; color: white; }
@@ -64,18 +64,18 @@
 		-webkit-box-shadow: 0 0 8px #D0D0D0;
 	}
 	</style>
-	<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.js"></script>
-	<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.ui.all.js"></script>
-	<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.layout.js"></script>
-	<script type="text/javascript" src="<?php echo base_url() ?>js/flexigrid.pack.js"></script>
+	<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.ui.all.js"></script>
+	<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.layout.js"></script>
+	<script type="text/javascript" src="<?php echo  base_url() ?>js/flexigrid.pack.js"></script>
 	<script src="http://yui.yahooapis.com/2.2.2/build/yahoo/yahoo-min.js" type="text/javascript"></script>
 	<script src="http://yui.yahooapis.com/2.2.2/build/connection/connection-min.js" type="text/javascript"></script>
-	<?if (isset($added_js)){echo $added_js;}?> <!-- attach js flexigrid (jika ada) -->
+	<?phpif (isset($added_js)){echo $added_js;}?> <!-- attach js flexigrid (jika ada) -->
 	
 </head>
 <body>
 	<div id="container">
-	<?php echo $content ?>
+	<?php echo  $content ?>
 	</div>
 </body>
 </html>

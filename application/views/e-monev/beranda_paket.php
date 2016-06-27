@@ -28,19 +28,19 @@
 </style>
 
     <div id="tengah">
-        <div id="judul" class="title">Progress Satker <?php echo ucwords(strtolower($satkers->nmsatker)); ?></div>
+        <div id="judul" class="title">Progress Satker <?php echo  ucwords(strtolower($satkers->nmsatker)); ?></div>
         <br />
     <div>
 </div>
 	<div id="content_tengah">
 	    <table id="ver-minimalist" cellpadding="0" cellspacing="0">
           <tr>
-            <td colspan="12" class="text-bold text-title">PROGRES SATKER <?php echo $satkers->nmsatker; ?></td>
+            <td colspan="12" class="text-bold text-title">PROGRES SATKER <?php echo  $satkers->nmsatker; ?></td>
           </tr>
           <tr>
             <td rowspan="3" class="text-bold">No</td>
             <td rowspan="3" class="text-bold">NAMA PAKET</td>
-            <td width="15" rowspan="<?php echo $skmpnen->num_rows()+5; ?>">&nbsp;</td>
+            <td width="15" rowspan="<?php echo  $skmpnen->num_rows()+5; ?>">&nbsp;</td>
             <td colspan="6" class="text-bold">
                 <?php 
                     $bulan_angka = $this->uri->segment(5);
@@ -69,11 +69,11 @@
                     $bulan_huruf = $this->general->konversi_bulan($bulan_angka);
 					$kodeunit = $this->uri->segment(6);
                 ?>
-                <a href="<?php echo base_url();?>index.php/e-monev/beranda/detail_paket/<?php echo $idsatker; ?>/<?=$bulan_angka_minus;?>/<?=$kodeunit;?>"><<</a> 
-                &nbsp; <? echo $bulan_huruf; ?> &nbsp; 
-                <a href="<?php echo base_url();?>index.php/e-monev/beranda/detail_paket/<?php echo $idsatker; ?>/<?=$bulan_angka_plus;?>/<?=$kodeunit;?>">>></a>
+                <a href="<?php echo  base_url();?>index.php/e-monev/beranda/detail_paket/<?php echo  $idsatker; ?>/<?php echo $bulan_angka_minus;?>/<?php echo $kodeunit;?>"><<</a> 
+                &nbsp; <?php echo  $bulan_huruf; ?> &nbsp; 
+                <a href="<?php echo  base_url();?>index.php/e-monev/beranda/detail_paket/<?php echo  $idsatker; ?>/<?php echo $bulan_angka_plus;?>/<?php echo $kodeunit;?>">>></a>
                 </td>
-            <td width="15" rowspan="<?php echo $skmpnen->num_rows()+5; ?>">&nbsp;</td>
+            <td width="15" rowspan="<?php echo  $skmpnen->num_rows()+5; ?>">&nbsp;</td>
           </tr>
           <tr>
             <td colspan="3" class="text-bold">KEUANGAN</td>
@@ -85,21 +85,21 @@
             <td class="text-bold">PROGRES</td>
             <td colspan="2" class="text-bold">KETIDAKSESUAIAN</td>    
           </tr>
-          <?php echo $list_paket; ?>
+          <?php echo  $list_paket; ?>
           <tr>
             <td colspan="2" align="right" class="text-bold">TOTAL</td>
-            <td><? echo round($total_keseluruhan_progres_keuangan); ?></td>
-            <td><? echo round($total_keseluruhan_ketidaksesuaian_keuangan_plus); ?>%</td>
-            <td><?php echo round($total_keseluruhan_ketidaksesuaian_keuangan_minus); ?>%</td>
-            <td><?php echo round($total_keseluruhan_progres_fisik); ?>%</td>
-            <td><?php echo round($total_keseluruhan_ketidaksesuaian_fisik_plus); ?>%</td>
-            <td><?php echo round($total_keseluruhan_ketidaksesuaian_fisik_minus); ?>%</td>
+            <td><?php echo  round($total_keseluruhan_progres_keuangan); ?></td>
+            <td><?php echo  round($total_keseluruhan_ketidaksesuaian_keuangan_plus); ?>%</td>
+            <td><?php echo  round($total_keseluruhan_ketidaksesuaian_keuangan_minus); ?>%</td>
+            <td><?php echo  round($total_keseluruhan_progres_fisik); ?>%</td>
+            <td><?php echo  round($total_keseluruhan_ketidaksesuaian_fisik_plus); ?>%</td>
+            <td><?php echo  round($total_keseluruhan_ketidaksesuaian_fisik_minus); ?>%</td>
           </tr>
         </table>
         
         <br /><br />
         <div class="buttons">
-            <a href="<?php echo base_url();?>index.php/e-monev/beranda/detail_satker/<?php echo $satkers->kdlokasi.'/'.$bulan_angka.'/'.$kodeunit; ?>"><img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>Back</a>
+            <a href="<?php echo  base_url();?>index.php/e-monev/beranda/detail_satker/<?php echo  $satkers->kdlokasi.'/'.$bulan_angka.'/'.$kodeunit; ?>"><img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>Back</a>
         </div>
         <?php if($jumlahno > 15){
                 echo '&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tengah">^ scroll ke Atas</a>';

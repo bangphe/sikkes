@@ -1,5 +1,5 @@
 <div>
-    <?= anchor(site_url('e-monev/laporan_kinerja/'), img(array('src' => 'images/flexigrid/prev.gif', 'border' => '0', 'alt' => '')) . 'Kembali Ke Laporan Kinerja'); ?>
+    <?php echo  anchor(site_url('e-monev/laporan_kinerja/'), img(array('src' => 'images/flexigrid/prev.gif', 'border' => '0', 'alt' => '')) . 'Kembali Ke Laporan Kinerja'); ?>
 </div>
 <br />
 <?php
@@ -9,13 +9,13 @@ echo form_open($post_action);
     <tr>
         <td width="15%"><b>Kode</b></td>
         <td>
-            <?php echo $ikk[0]->KodeIkk; ?>
+            <?php echo  $ikk[0]->KodeIkk; ?>
         </td>
     </tr>    
     <tr>
         <td><b>Nama IKK </b></td>
         <td>
-            <?php echo $ikk[0]->Ikk; ?>
+            <?php echo  $ikk[0]->Ikk; ?>
         </td>
     </tr>
     <tr>
@@ -26,12 +26,12 @@ echo form_open($post_action);
     </tr>
     <?php foreach ($bulan as $id => $val): ?>
         <tr>
-            <td align="right"><b><?php echo $val; ?></b>&nbsp;&nbsp;</td>
+            <td align="right"><b><?php echo  $val; ?></b>&nbsp;&nbsp;</td>
             <td>
                 <?php $str = "bulan_$id"; if (isset($rencana[0]) && $rencana[0]->$str != NULL): ?>
-                <input type="text" id="<?php echo "bulan_$id"; ?>" name="<?php echo "bulan_$id"; ?>" value="<?php echo $rencana[0]->$str;?>" onChange="set_rencana(<?php echo $id; ?>)"/>
+                <input type="text" id="<?php echo  "bulan_$id"; ?>" name="<?php echo  "bulan_$id"; ?>" value="<?php echo  $rencana[0]->$str;?>" onChange="set_rencana(<?php echo  $id; ?>)"/>
                 <?php else :?>
-                <input type="text" id="<?php echo "bulan_$id"; ?>"name="<?php echo "bulan_$id"; ?>" value="<?php echo set_value("bulan_$id"); ?>" onChange="set_rencana(<?php echo $id; ?>)" />
+                <input type="text" id="<?php echo  "bulan_$id"; ?>"name="<?php echo  "bulan_$id"; ?>" value="<?php echo  set_value("bulan_$id"); ?>" onChange="set_rencana(<?php echo  $id; ?>)" />
                 <?php endif; echo form_error("bulan_$id"); ?>
             </td>
         </tr>
@@ -41,11 +41,11 @@ echo form_open($post_action);
         <td>
             <div class="buttons">
                 <button type="submit" class="regular" name="save" id="submit">
-                    <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+                    <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
                     Save
                 </button>
                 <button type="reset" class="negative" name="reset">
-                    <img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+                    <img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
                     Cancel
                 </button>
             </div>

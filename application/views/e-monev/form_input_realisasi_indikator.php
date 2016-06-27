@@ -1,5 +1,5 @@
 <div>
-	<?= anchor(site_url('e-monev/laporan_kinerja/input_indikator/'.$kodeikk.'/'.$thn.'#'),img(array('src'=>'images/flexigrid/prev.gif','border'=>'0','alt'=>'')).'Kembali Ke Daftar Indikator',array('onclick' => 'daftar_indikator('.$kodeikk.','.$thn.');;return false;')); ?>
+	<?php echo  anchor(site_url('e-monev/laporan_kinerja/input_indikator/'.$kodeikk.'/'.$thn.'#'),img(array('src'=>'images/flexigrid/prev.gif','border'=>'0','alt'=>'')).'Kembali Ke Daftar Indikator',array('onclick' => 'daftar_indikator('.$kodeikk.','.$thn.');;return false;')); ?>
 </div>
 <br />
 <?php if (isset($noRencana)): echo "<h1>$noRencana</h1>";?>
@@ -10,15 +10,15 @@
         </tr>
         <?php foreach ($bulan as $id => $val): $str="bulan_$id"; ?>
 		<tr>
-			<td align="right" width="5%"><b><?php echo $val; ?></b>&nbsp;&nbsp;</td>
+			<td align="right" width="5%"><b><?php echo  $val; ?></b>&nbsp;&nbsp;</td>
             <td>
-                <input type="text" name="<?php echo "bulan_$id"; ?>" value="<?php echo $rencana[0]->$str;?>" disabled="disabled" />
+                <input type="text" name="<?php echo  "bulan_$id"; ?>" value="<?php echo  $rencana[0]->$str;?>" disabled="disabled" />
             </td>
             <td>
                 <?php if (isset($realisasi[0]) && $realisasi[0]->$str != NULL): ?>
-                <input type="text" id="<?php echo "bulan_$id"; ?>" name="<?php echo "bulan_$id"; ?>" value="<?php echo $realisasi[0]->$str;?>" onChange="set_realisasi(<?php echo $id; ?>)"/>
+                <input type="text" id="<?php echo  "bulan_$id"; ?>" name="<?php echo  "bulan_$id"; ?>" value="<?php echo  $realisasi[0]->$str;?>" onChange="set_realisasi(<?php echo  $id; ?>)"/>
                 <?php else :?>
-                <input type="text" id="<?php echo "bulan_$id"; ?>" name="<?php echo "bulan_$id"; ?>" value="<?php echo set_value("bulan_$id"); ?>" onChange="set_realisasi(<?php echo $id; ?>)" />
+                <input type="text" id="<?php echo  "bulan_$id"; ?>" name="<?php echo  "bulan_$id"; ?>" value="<?php echo  set_value("bulan_$id"); ?>" onChange="set_realisasi(<?php echo  $id; ?>)" />
                 <?php endif; echo form_error("bulan_$id"); ?>
             </td>
 		</tr>
@@ -28,18 +28,18 @@
 			<td>
 				<div class="buttons">
 					<button type="submit" class="regular" name="save" id="submit">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Save
 					</button>
-					<button type="reset" class="negative" name="reset" onClick="daftar_indikator(<?php echo $kodeikk.','.$thn?>);">
-						<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+					<button type="reset" class="negative" name="reset" onClick="daftar_indikator(<?php echo  $kodeikk.','.$thn?>);">
+						<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 						Cancel
 					</button>
 				</div>
 			</td>
 		</tr>
 	</table>
-<?php echo form_close(); endif; ?>
+<?php echo  form_close(); endif; ?>
 <script>
 	function set_realisasi(bulan){
 		//var rencana = document.getElementsByName("bulan_"+bulan);

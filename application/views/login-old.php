@@ -2,17 +2,17 @@
 <html>
 <head>
 	<title>Sistem Informasi Kementrian Kesehatan</title>
-	<link rel="icon" type="image/x-icon" href="<?php echo base_url() ?>images/icons/depkes.png" />
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/style.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/bootstrap.min.css">
+	<link rel="icon" type="image/x-icon" href="<?php echo  base_url() ?>images/icons/depkes.png" />
+	<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/style.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/bootstrap.min.css">
 </head>
 
 <body>
-	<img src="<?php echo base_url() ?>images/login/background.jpg" class="bg">
+	<img src="<?php echo  base_url() ?>images/login/background.jpg" class="bg">
 
 	<div id="page-wrap">
-		<form id="form_135599 form_login" name="form_135599" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/login/login_proses'; ?>" onsubmit="return validasi(username.value, password.value)">
-		<div class="logo"><img src="<?php echo base_url() ?>images/login/logokementrian_old.png"></div>
+		<form id="form_135599 form_login" name="form_135599" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/login/login_proses'; ?>" onsubmit="return validasi(username.value, password.value)">
+		<div class="logo"><img src="<?php echo  base_url() ?>images/login/logokementrian_old.png"></div>
 		<br>
 		<!-- <div class="alert alert-danger text-center">
 			<h4>INFORMASI</h4>
@@ -23,7 +23,7 @@
 			<div class="tahun_anggaran">
 				<h3>TAHUN ANGGARAN</h3>
 				<div class="styled-select">
-					<?php echo form_dropdown('thn_anggaran',$thn_anggaran,date("Y")); ?>
+					<?php echo  form_dropdown('thn_anggaran',$thn_anggaran,date("Y")); ?>
 				</div>
 			</div>
 			<div class="login">
@@ -34,12 +34,12 @@
 				
 			</div>
 			<div style="color:blue;" align="center"><?php if(isset($notification3)) echo $notification3; ?></div>
-					<div align="center" ><a href="<?php echo site_url().'/login/lupa_password'; ?>"></br>Lupa password?</a></div>
+					<div align="center" ><a href="<?php echo  site_url().'/login/lupa_password'; ?>"></br>Lupa password?</a></div>
 		</div>
 		<div class="logo_erenggar"></div>
 		</form>
 	</div>
-	<div class="footer_"><img src="<?php echo base_url() ?>images/login/logoerenggar_old.png"></div>
+	<div class="footer_"><img src="<?php echo  base_url() ?>images/login/logoerenggar_old.png"></div>
 	
 <script type="text/javascript">
  function validasi(x,y)
@@ -56,7 +56,7 @@
 	  alert("Password belum diisi.");
 	  return false;
 	  }
-	var url = '<?php echo base_url()?>index.php/login/validate/'+x+'/'+y;
+	var url = '<?php echo  base_url()?>index.php/login/validate/'+x+'/'+y;
 	//alert(v)
 	
 	};

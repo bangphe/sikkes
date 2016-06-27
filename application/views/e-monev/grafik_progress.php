@@ -1,11 +1,11 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 ?>
-<script type="text/javascript" src="<?= base_url(); ?>js/FusionCharts.js"></script>
+<script type="text/javascript" src="<?php echo  base_url(); ?>js/FusionCharts.js"></script>
 
 <div class="buttons">
 	<button type="submit" class="regular" name="daftar_progress_kontraktual" onclick="daftar_progress_fisik()">
-		<img src="<?php echo base_url(); ?>images/icon/doc.png" alt=""/>
+		<img src="<?php echo  base_url(); ?>images/icon/doc.png" alt=""/>
 		Daftar Progress
 	</button>
 </div>
@@ -15,4 +15,4 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 	</div>
 </div>
 
-<?php echo $graph;?>
+<?php echo  $graph;?>

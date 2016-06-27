@@ -1,13 +1,13 @@
-<?php echo form_open_multipart('e-monev/laporan_monitoring/save_progres/'.$d_skmpnen_id.'/'.$progres_id); ?>
+<?php echo  form_open_multipart('e-monev/laporan_monitoring/save_progres/'.$d_skmpnen_id.'/'.$progres_id); ?>
 <table class="tablecloth" width=auto>
 		<div>
-		<?= anchor(site_url('e-monev/laporan_monitoring/input_progres_fisik/'.$d_skmpnen_id.'#'),img(array('src'=>'images/flexigrid/prev.gif','border'=>'0','alt'=>'')).'Kembali Ke Daftar Progres',array('onclick' => 'daftar_progres('.$d_skmpnen_id.');;return false;')); ?>
+		<?php echo  anchor(site_url('e-monev/laporan_monitoring/input_progres_fisik/'.$d_skmpnen_id.'#'),img(array('src'=>'images/flexigrid/prev.gif','border'=>'0','alt'=>'')).'Kembali Ke Daftar Progres',array('onclick' => 'daftar_progres('.$d_skmpnen_id.');;return false;')); ?>
 		</div>
 		<br />
 		<tr>
 			<td><b>Bulan</b></td>
 			<td>
-				<?php echo $bulan;?>
+				<?php echo  $bulan;?>
 			</td>
 		</tr>
 		<tr>
@@ -43,12 +43,12 @@
 			<td>
 				<div>
 					<input id="submit-button" type="submit" name="daftar_warna" value="Save" />
-					<input id="submit-button" type="button" name="batal" value="Cancel" onClick="daftar_progres(<?php echo $d_skmpnen_id;?>);;return false;"/>
+					<input id="submit-button" type="button" name="batal" value="Cancel" onClick="daftar_progres(<?php echo  $d_skmpnen_id;?>);;return false;"/>
 				</div>
 			</td>
 		</tr>
 	</table>
-<?php echo form_close();?>
+<?php echo  form_close();?>
 <script type="text/javascript">	
 /*
 $(document).ready(function()

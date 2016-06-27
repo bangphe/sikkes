@@ -41,7 +41,7 @@ function unformat_kontrak(no){
 <br />
 <fieldset>
 <legend>Daftar Alokasi</legend>
-<h2>Alokasi : Rp. <?=number_format($alokasi,2,',','.');?></h2>
+<h2>Alokasi : Rp. <?php echo number_format($alokasi,2,',','.');?></h2>
 <table class="tablecloth" cellspacing="0" cellpadding="0" width="100%">
 	<tr>
 		<th>No</th>
@@ -54,9 +54,9 @@ function unformat_kontrak(no){
 		foreach($d_item->result() as $row){
 	?>
 	<tr>
-		<td><?php echo $no;?></td>
-		<td><?php echo $row->kdakun.'-'.$row->nmakun;?></td>
-		<td><?php echo $row->nmitem;
+		<td><?php echo  $no;?></td>
+		<td><?php echo  $row->kdakun.'-'.$row->nmakun;?></td>
+		<td><?php echo  $row->nmitem;
 		if($row->vol1 !=0){
 			echo ' ['.$row->vol1.' '.$row->sat1;
 			if($row->vol2 ==0){
@@ -76,7 +76,7 @@ function unformat_kontrak(no){
 			}
 		}
 		?></td>
-		<td>Rp. <?=number_format($row->jumlah,2,',','.');?></td>
+		<td>Rp. <?php echo number_format($row->jumlah,2,',','.');?></td>
 		
 	</tr>
 		<?php $no++; ?>

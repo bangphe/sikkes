@@ -2,7 +2,7 @@
 function validasiNama(nama)
 {
 	$.ajax({
-		url: '<?php echo base_url()?>index.php/master_data/master_kabupaten/valid/',
+		url: '<?php echo  base_url()?>index.php/master_data/master_kabupaten/valid/',
 		data: 'nama='+nama,
 		type: 'GET',
 		beforeSend: function()
@@ -31,7 +31,7 @@ function validasiKode(kode){
 	 var x = document.getElementById("provinsi");
 	 getVal = x.value;
 	 $.ajax({
-		 url: '<?php echo base_url()?>index.php/master_data/master_kabupaten/validKode/'+kode,
+		 url: '<?php echo  base_url()?>index.php/master_data/master_kabupaten/validKode/'+kode,
 		 data: 'x='+getVal,
 		 type: 'GET',
 		 beforeSend: function()
@@ -68,7 +68,7 @@ function validate_form()
 	Kabupaten
 </div>
 <div id="content_tengah">
-	<form name="form_kabupaten" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/master_data/master_kabupaten/save_kabupaten'; ?>" onsubmit="return validate_form()">
+	<form name="form_kabupaten" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/master_data/master_kabupaten/save_kabupaten'; ?>" onsubmit="return validate_form()">
 		<table width="80%" height="25%">
 			<tr>
 				<td width="10%">Provinsi</td>
@@ -76,22 +76,22 @@ function validate_form()
 			</tr>
             <tr>
 				<td width="10%">Kode Kabupaten</td>
-				<td width="70%"><input type="text" name="kdkab" id="kdkab" style="width:24%; padding:3px" onchange="validasiKode(this.value)" /><?php echo form_error('kdkab'); ?></td>
+				<td width="70%"><input type="text" name="kdkab" id="kdkab" style="width:24%; padding:3px" onchange="validasiKode(this.value)" /><?php echo  form_error('kdkab'); ?></td>
 			</tr>
 			<tr>
 				<td width="10%">Kabupaten</td>
-				<td width="70%"><input type="text" name="kabupaten" id="kabupaten" style="width:24%; padding:3px" onchange="validasiNama(this.value)" /><?php echo form_error('kabupaten'); ?></td>
+				<td width="70%"><input type="text" name="kabupaten" id="kabupaten" style="width:24%; padding:3px" onchange="validasiNama(this.value)" /><?php echo  form_error('kabupaten'); ?></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>
 					<div class="buttons">
 						<button type="submit" class="regular" name="save" id="submit">
-							<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 							Save
 						</button>
 						<button type="reset" class="negative" name="reset">
-							<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 							Reset
 						</button>
 					</div>
@@ -100,7 +100,7 @@ function validate_form()
             <tr>
                 <td>
                     <div class="buttons">
-                        <a href="<?php echo base_url();?>index.php/master_data/master_kabupaten/grid_kabupaten"><img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>Back</a>
+                        <a href="<?php echo  base_url();?>index.php/master_data/master_kabupaten/grid_kabupaten"><img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>Back</a>
                     </div>
                 </td>
             </tr>

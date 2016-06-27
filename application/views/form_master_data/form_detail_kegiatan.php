@@ -3,7 +3,7 @@
 	Kegiatan
 </div>
 <div id="content_tengah">
-	<form name="form_kegiatan" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/master_data/master_kegiatan/detail_kegiatan/'.$KodeKegiatan; ?>">
+	<form name="form_kegiatan" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/master_data/master_kegiatan/detail_kegiatan/'.$KodeKegiatan; ?>">
 		<table width="80%" height="25%">
 			<tr>
 				<td width="10%">Unit Organisasi</td>
@@ -33,7 +33,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td width="10%">Sub Fungsi <?php echo $selected_subfungsi; ?></td>
+				<td width="10%">Sub Fungsi <?php echo  $selected_subfungsi; ?></td>
 				<td>
 					<?php
 						$js = 'id="subfungsi" class="dyamic2" style="width:75%; padding:3px;" disabled="disabled"'; 
@@ -43,12 +43,12 @@
 			</tr> */ ?>
 			<tr>
 				<td width="10%">Kegiatan</td>
-				<td width="70%"><textarea name="kegiatan" id="kegiatan" style="padding:3px;" cols="60" rows="4" readonly="TRUE"><?php echo $kegiatan; ?></textarea></td>
+				<td width="70%"><textarea name="kegiatan" id="kegiatan" style="padding:3px;" cols="60" rows="4" readonly="TRUE"><?php echo  $kegiatan; ?></textarea></td>
 			</tr>
             <tr>
                 <td>
                     <div class="buttons">
-                        <a href="<?php echo base_url();?>index.php/master_data/master_kegiatan/grid_kegiatan"><img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>Back</a>
+                        <a href="<?php echo  base_url();?>index.php/master_data/master_kegiatan/grid_kegiatan"><img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>Back</a>
                     </div>
                 </td>
             </tr>

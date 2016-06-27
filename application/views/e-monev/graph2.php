@@ -7,8 +7,8 @@ echo $graph;
 ?>
 <?php if($kembali == 1){?>
 <div class="buttons">
-	<button type="submit" class="regular" name="kembali" onClick="daftar_progres(<?php echo $d_skmpnen_id;?>);">
-		<img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>
+	<button type="submit" class="regular" name="kembali" onClick="daftar_progres(<?php echo  $d_skmpnen_id;?>);">
+		<img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>
 		Kembali
 	</button>
 </div>

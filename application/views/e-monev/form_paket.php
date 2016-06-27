@@ -5,43 +5,43 @@
 		<tr>
 			<td width="60%">Nama Satker :</td>
 			<td width="40%">
-				<?php echo $nmsatker;?>
+				<?php echo  $nmsatker;?>
 			</td>
 		</tr>
 		<tr>
 			<td width="60%">Program :</td>
 			<td width="40%">
-				<?php echo $nmprogram;?>
+				<?php echo  $nmprogram;?>
 			</td>
 		</tr>
 		<tr>
 			<td width="60%">Kegiatan :</td>
 			<td width="40%">
-				<?php echo $nmgiat;?>
+				<?php echo  $nmgiat;?>
 			</td>
 		</tr>
 		<tr>
 			<td width="60%">Output :</td>
 			<td width="40%">
-				<?php echo $nmoutput;?>
+				<?php echo  $nmoutput;?>
 			</td>
 		</tr>
 		<tr>
 			<td width="60%">Suboutput :</td>
 			<td width="40%">
-				<?php echo $ursoutput;?>
+				<?php echo  $ursoutput;?>
 			</td>
 		</tr>
 		<tr>
 			<td width="60%">Nama Komponen :</td>
 			<td width="40%">
-				<?php echo $urkmpnen;?>
+				<?php echo  $urkmpnen;?>
 			</td>
 		</tr>
 		<tr>
 			<td width="60%">Nama Sub Komponen :</td>
 			<td width="40%">
-				<?php echo $sub_komponen;?>
+				<?php echo  $sub_komponen;?>
 			</td>
 		</tr>
 		<tr>
@@ -49,11 +49,11 @@
 			<td>
 				<div class="buttons">
 					<button type="submit" class="regular" name="save" id="submit" onClick="save_data_paket();">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Save
 					</button>
 					<button type="reset" class="negative" name="reset">
-						<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 						Reset
 					</button>
 				</div>

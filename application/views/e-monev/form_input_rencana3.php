@@ -39,20 +39,20 @@ function validasi_rencana(n){
 </script>
 <table width=auto>
 		<div>
-		<?= anchor(site_url('e-monev/laporan_monitoring/input_rencana/'.$d_skmpnen_id.'#'),img(array('src'=>'images/flexigrid/prev.gif','border'=>'0','alt'=>'')).'Kembali Ke Daftar Rencana Fisik',array('onclick' => 'rencana_fisik('.$d_skmpnen_id.');;return false;')); ?>
+		<?php echo  anchor(site_url('e-monev/laporan_monitoring/input_rencana/'.$d_skmpnen_id.'#'),img(array('src'=>'images/flexigrid/prev.gif','border'=>'0','alt'=>'')).'Kembali Ke Daftar Rencana Fisik',array('onclick' => 'rencana_fisik('.$d_skmpnen_id.');;return false;')); ?>
 		</div>
 		<br />
 		<tr>
 			<td><b>Bulan</b></td>
 			<td>
-				<?php echo $bulan;?>
+				<?php echo  $bulan;?>
 			</td>
 		</tr>
-		<input type="hidden" name="bulan_hidden" id="bulan_hidden" value=<?php echo $bulan; ?> />
-		<input type="hidden" name="persiapan_hidden" id="persiapan_hidden" value=<?php echo $persiapan_sebelum; ?> />
-		<input type="hidden" name="pelaksanaan_hidden" id="pelaksanaan_hidden" value=<?php echo $pelaksanaan_sebelum; ?> />
-		<input type="hidden" name="pembuatan_laporan_hidden" id="pembuatan_laporan_hidden" value=<?php echo $pembuatan_sebelum; ?> />
-		<input type="hidden" name="dokumen_laporan_hidden" id="dokumen_laporan_hidden" value=<?php echo $dokumen_sebelum; ?> />
+		<input type="hidden" name="bulan_hidden" id="bulan_hidden" value=<?php echo  $bulan; ?> />
+		<input type="hidden" name="persiapan_hidden" id="persiapan_hidden" value=<?php echo  $persiapan_sebelum; ?> />
+		<input type="hidden" name="pelaksanaan_hidden" id="pelaksanaan_hidden" value=<?php echo  $pelaksanaan_sebelum; ?> />
+		<input type="hidden" name="pembuatan_laporan_hidden" id="pembuatan_laporan_hidden" value=<?php echo  $pembuatan_sebelum; ?> />
+		<input type="hidden" name="dokumen_laporan_hidden" id="dokumen_laporan_hidden" value=<?php echo  $dokumen_sebelum; ?> />
 		<tr>
 			<td><b>Persiapan (%)</b></td>
 			<td>
@@ -141,12 +141,12 @@ function validasi_rencana(n){
 			<td></td>
 			<td>
 				<div class="buttons">
-					<button type="submit" class="regular" name="save" onClick="save_data3(<?php echo $d_skmpnen_id.','.$rencana_id;?>);">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+					<button type="submit" class="regular" name="save" onClick="save_data3(<?php echo  $d_skmpnen_id.','.$rencana_id;?>);">
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Save
 					</button>
-					<button type="reset" class="negative" name="reset" onClick="rencana_fisik(<?php echo $d_skmpnen_id;?>);">
-						<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+					<button type="reset" class="negative" name="reset" onClick="rencana_fisik(<?php echo  $d_skmpnen_id;?>);">
+						<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 						Cancel
 					</button>
 				</div>

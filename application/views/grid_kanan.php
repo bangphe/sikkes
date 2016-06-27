@@ -1,9 +1,9 @@
 <div id="kanan">
 <div id="judul">
-	<?php echo $judul; ?>
+	<?php echo  $judul; ?>
 	<!--
-	<label class="edit"><a href="#"><img src="<?php echo base_url(); ?>images/icons/Edit_icon.png" /></a></label>
-	<label class="detail"><a href="#"><img src="<?php echo base_url(); ?>images/icons/detail.png" /></a></label>
+	<label class="edit"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/Edit_icon.png" /></a></label>
+	<label class="detail"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/detail.png" /></a></label>
 	-->
 </div>
 <div id="content">

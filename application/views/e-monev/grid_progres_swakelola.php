@@ -1,13 +1,13 @@
 <div class="buttons">
-	<button type="submit" class="regular" name="grafik" onClick="grafik(<?php echo $d_skmpnen_id;?>);">
-		<img src="<?php echo base_url(); ?>images/icon/grafik.png" alt=""/>
+	<button type="submit" class="regular" name="grafik" onClick="grafik(<?php echo  $d_skmpnen_id;?>);">
+		<img src="<?php echo  base_url(); ?>images/icon/grafik.png" alt=""/>
 		Grafik
 	</button>
 </div>
 
-<p align="center"><b>Tahun Anggaran : </b><?php echo $this->session->userdata('thn_anggaran');?></p>
+<p align="center"><b>Tahun Anggaran : </b><?php echo  $this->session->userdata('thn_anggaran');?></p>
 <br />
-<p align="center"><b>Nama Komponen/Sub Komponen : </b><?php echo $sub_komponen;?></p>
+<p align="center"><b>Nama Komponen/Sub Komponen : </b><?php echo  $sub_komponen;?></p>
 
 <br />
 <table class="tablecloth" cellspacing="0" cellpadding="0" width="100%">
@@ -21,10 +21,10 @@
 	</tr>
 	<tr>
 		<td>Bobot</td>
-		<td colspan="2"><?php echo $b_persiapan;?></td>
-		<td colspan="2"><?php echo $b_pelaksanaan;?></td>
-		<td colspan="2"><?php echo $b_pembuatan;?></td>
-		<td colspan="2"><?php echo $b_dokumen;?></td>
+		<td colspan="2"><?php echo  $b_persiapan;?></td>
+		<td colspan="2"><?php echo  $b_pelaksanaan;?></td>
+		<td colspan="2"><?php echo  $b_pembuatan;?></td>
+		<td colspan="2"><?php echo  $b_dokumen;?></td>
 		<td></td>
 	</tr>
 	<?php
@@ -32,8 +32,8 @@
 		foreach($daftar_progres as $row){
 	?>
 	<tr>
-		<td><?php echo $bulan[$row->bulan];?></td>
-		<td><?php echo $row->persiapan;?></td>
+		<td><?php echo  $bulan[$row->bulan];?></td>
+		<td><?php echo  $row->persiapan;?></td>
 		<?php 
 		if($total_bobot != 0){
 			$persiapanx = round($b_persiapan/$total_bobot*$row->persiapan,2);
@@ -41,8 +41,8 @@
 			$persiapanx = 0;
 		}
 		?>
-		<td><?php echo $persiapanx;?></td>
-		<td><?php echo $row->pelaksanaan;?></td>
+		<td><?php echo  $persiapanx;?></td>
+		<td><?php echo  $row->pelaksanaan;?></td>
 		<?php 
 		if($total_bobot != 0){
 			$pelaksanaanx = round($b_pelaksanaan/$total_bobot*$row->pelaksanaan,2);
@@ -50,8 +50,8 @@
 			$pelaksanaanx = 0;
 		}
 		?>
-		<td><?php echo $pelaksanaanx;?></td>
-		<td><?php echo $row->pembuatan_laporan;?></td>
+		<td><?php echo  $pelaksanaanx;?></td>
+		<td><?php echo  $row->pembuatan_laporan;?></td>
 		<?php 
 		if($total_bobot != 0){
 			$pembuatanx = round($b_pembuatan/$total_bobot*$row->pembuatan_laporan,2);
@@ -59,8 +59,8 @@
 			$pembuatanx = 0;
 		}
 		?>
-		<td><?php echo $pembuatanx;?></td>
-		<td><?php echo $row->dokumen_laporan;?></td>
+		<td><?php echo  $pembuatanx;?></td>
+		<td><?php echo  $row->dokumen_laporan;?></td>
 		<?php 
 		if($total_bobot != 0){
 			$dokumenx = round($b_dokumen/$total_bobot*$row->dokumen_laporan,2);
@@ -68,17 +68,17 @@
 			$dokumenx = 0;
 		}
 		?>
-		<td><?php echo $dokumenx;?></td>
-		<td><?php echo '<a href=\'#\'><img border=\'0\' onclick="update3('.$d_skmpnen_id.','.$row->progres_id.','.$row->bulan.');" src=\''.base_url().'images/icons/edit_icon(16x16).png\'></a></td>'; ?></td>
+		<td><?php echo  $dokumenx;?></td>
+		<td><?php echo  '<a href=\'#\'><img border=\'0\' onclick="update3('.$d_skmpnen_id.','.$row->progres_id.','.$row->bulan.');" src=\''.base_url().'images/icons/edit_icon(16x16).png\'></a></td>'; ?></td>
 	</tr>
 	<?php } ?>	
 	<!--
 	<tr>
 		<td><b>Presentase Total : </b></td>
-		<td><b><?php echo $nilai_persiapan;?></b></td>
-		<td><b><?php echo $nilai_pelaksanaan;?></b></td>
-		<td><b><?php echo $nilai_pembuatan_laporan;?></b></td>
-		<td><b><?php echo $nilai_dokumen_laporan;?></b></td>
+		<td><b><?php echo  $nilai_persiapan;?></b></td>
+		<td><b><?php echo  $nilai_pelaksanaan;?></b></td>
+		<td><b><?php echo  $nilai_pembuatan_laporan;?></b></td>
+		<td><b><?php echo  $nilai_dokumen_laporan;?></b></td>
 		<td></td>
 	</tr>
 -->	

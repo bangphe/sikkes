@@ -10,10 +10,10 @@
 		foreach($daftar_rencana as $row){
 	?>
 	<tr>
-		<td><?php echo $bulan[$row->bulan];?></td>
-		<td><?php echo $row->keuangan;?></td>
-		<td>Rp. <?=number_format($row->keuangan_rp,2,',','.');?></td>
-		<td><?php echo '<a href=\'#\'><img border=\'0\' onclick="update2('.$d_skmpnen_id.','.$row->rencana_id.','.$row->bulan.');" src=\''.base_url().'images/icons/edit_icon(16x16).png\'></a></td>'; ?></td>
+		<td><?php echo  $bulan[$row->bulan];?></td>
+		<td><?php echo  $row->keuangan;?></td>
+		<td>Rp. <?php echo number_format($row->keuangan_rp,2,',','.');?></td>
+		<td><?php echo  '<a href=\'#\'><img border=\'0\' onclick="update2('.$d_skmpnen_id.','.$row->rencana_id.','.$row->bulan.');" src=\''.base_url().'images/icons/edit_icon(16x16).png\'></a></td>'; ?></td>
 	</tr>
 	<?php } ?>																									
 </table>

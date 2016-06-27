@@ -3,7 +3,7 @@
 	 var x = document.getElementById('program');
 	 getVal = x.value;
 	 $.ajax({
-		 url: '<?php echo base_url()?>index.php/master_data/master_iku/valid/'+kode,
+		 url: '<?php echo  base_url()?>index.php/master_data/master_iku/valid/'+kode,
 		 data: 'kdprog='+getVal,
 		 type: 'GET',
 		 beforeSend: function()
@@ -29,7 +29,7 @@
 	IKU
 </div>
 <div id="content_tengah">
-	<form name="form_iku" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/master_data/master_Iku/save_Iku'; ?>">
+	<form name="form_iku" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/master_data/master_Iku/save_Iku'; ?>">
 		<table width="80%" height="25%">
 			<tr>
 				<td width="10%">Program</td>
@@ -41,7 +41,7 @@
 			</tr>
 			<tr>
 				<td width="10%">IKU</td>
-				<td width="70%"><textarea name="Iku" id="Iku" style="width:59%; padding:3px;" rows="3"/></textarea><?php echo form_error('Iku'); ?>
+				<td width="70%"><textarea name="Iku" id="Iku" style="width:59%; padding:3px;" rows="3"/></textarea><?php echo  form_error('Iku'); ?>
                 </td>
 			</tr>
             <tr>
@@ -62,11 +62,11 @@
 				<td>
 					<div class="buttons">
 						<button type="submit" class="regular" name="save" id="submit">
-							<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 							Save
 						</button>
 						<button type="reset" class="negative" name="reset">
-							<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 							Reset
 						</button>
 					</div>
@@ -75,7 +75,7 @@
             <tr>
                 <td>
                     <div class="buttons">
-                        <a href="<?php echo base_url();?>index.php/master_data/master_iku/grid_iku"><img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>Back</a>
+                        <a href="<?php echo  base_url();?>index.php/master_data/master_iku/grid_iku"><img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>Back</a>
                     </div>
                 </td>
 			</tr>

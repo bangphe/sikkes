@@ -15,16 +15,16 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 </style>
 
 <div id="judul" class="title">
-	<?php echo $judul; ?>
+	<?php echo  $judul; ?>
 </div>
 <div id="content_master">
 <table width="80%" height="25%" style="padding:10px">
-    <form name="tambah_prioritas" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-monev/laporan_monitoring/unggah/'.$d_skmpnen_id ?>">
+    <form name="tambah_prioritas" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-monev/laporan_monitoring/unggah/'.$d_skmpnen_id ?>">
     		<?php foreach($sub_komponen->result() as $row) {?>
             <tr>
 				<td width="10%" style="padding:5px">Tahun Anggaran</td>
 				<td width="70%">
-                <input type="text" width="15%" disabled="disabled" value="<?php echo $row->thang?>" />
+                <input type="text" width="15%" disabled="disabled" value="<?php echo  $row->thang?>" />
                 </td>
 			</tr>
             
@@ -45,7 +45,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
               <?php foreach($this->lmm->get_where('depkesgabungan.t_program','kdprogram',$row->kdprogram)->result() as $row2){ ?>
               <tr>
               	<td>tes</td>
-                <td><?php echo '['.$row2->kdprogram.'] - '.$row2->nmprogram?></td>
+                <td><?php echo  '['.$row2->kdprogram.'] - '.$row2->nmprogram?></td>
                 <td>tes</td>
                 <td>tes</td>
                 <td>tes</td>
@@ -56,7 +56,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
               <?php foreach($this->lmm->get_where('depkesgabungan.t_giat','kdgiat',$row->kdgiat)->result() as $row2){ ?>
               <tr>
               	<td>tes</td>
-                <td><?php echo '['.$row2->kdgiat.'] - '.$row2->nmgiat?></td>
+                <td><?php echo  '['.$row2->kdgiat.'] - '.$row2->nmgiat?></td>
                 <td>tes</td>
                 <td>tes</td>
                 <td>tes</td>
@@ -67,7 +67,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
               <?php foreach($this->lmm->get_where2('depkesgabungan.t_output','kdgiat',$row->kdgiat,'kdoutput',$row->kdoutput)->result() as $row3) { ?>
               <tr>
               	<td>tes</td>
-                <td><?php echo '['.$row3->kdoutput.'] - '.$row3->nmoutput?></td>
+                <td><?php echo  '['.$row3->kdoutput.'] - '.$row3->nmoutput?></td>
                 <td></td>
                 <td>tes</td>
                 <td>tes</td>
@@ -78,7 +78,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
               <?php foreach($this->lmm->get_where4('depkesgabungan.d_kmpnen','kdsoutput',$row->kdsoutput,'kdoutput',$row->kdoutput,'kdgiat',$row->kdgiat,'kdkmpnen',$row->kdkmpnen)->result() as $row3) { ?>
               <tr>
               	<td>tes</td>
-                <td><?php echo '['.$row3->kdkmpnen.'] - '.$row3->urkmpnen?></td>
+                <td><?php echo  '['.$row3->kdkmpnen.'] - '.$row3->urkmpnen?></td>
                 <td></td>
                 <td>tes</td>
                 <td>tes</td>
@@ -89,7 +89,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
               <?php foreach($this->lmm->get_where4('depkesgabungan.d_skmpnen','kdsoutput',$row->kdsoutput,'kdoutput',$row->kdoutput,'kdgiat',$row->kdgiat,'kdkmpnen',$row->kdkmpnen)->result() as $row3) { ?>
               <tr>
               	<td>tes</td>
-                <td><?php echo '['.$row3->kdskmpnen.'] - '.$row3->urskmpnen?></td>
+                <td><?php echo  '['.$row3->kdskmpnen.'] - '.$row3->urskmpnen?></td>
                 <td></td>
                 <td>tes</td>
                 <td>tes</td>
@@ -105,7 +105,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 				<td></td>
 				<td>
                     <div class="buttons">
-                        <a href="<?php echo base_url();?>index.php/e-monev/laporan_monitoring"><img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>Back</a>
+                        <a href="<?php echo  base_url();?>index.php/e-monev/laporan_monitoring"><img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>Back</a>
                     </div>
 				</td>
 			</tr>

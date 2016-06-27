@@ -4,8 +4,8 @@
 	$bulan_huruf = $this->general->konversi_bulan($bulan_angka);
 ?>  
 <div id="content">
-	<!--table title="<?php echo 'JUMLAH TAHAPAN PROPOSAL PER UNIT UTAMA '.$bulan_huruf.' '.$thang; ?>" class="easyui-treegrid" style="width:1110px;height:auto"  
-            url="<?php echo site_url(); ?>/e-planning/dashboard/get_unit"  
+	<!--table title="<?php echo  'JUMLAH TAHAPAN PROPOSAL PER UNIT UTAMA '.$bulan_huruf.' '.$thang; ?>" class="easyui-treegrid" style="width:1110px;height:auto"  
+            url="<?php echo  site_url(); ?>/e-planning/dashboard/get_unit"  
             rownumbers="true" showFooter="true" 
             idField="id" treeField="name" animate="true" >  
         <thead frozen="true">  
@@ -30,8 +30,8 @@
         </thead>  
     </table--> 
 	
-	<table title="<?php echo 'JUMLAH TAHAPAN PROPOSAL '.$bulan_huruf.' '.$thang; ?>" class="easyui-treegrid" style="width:1110px;height:600px"  
-            url="<?php echo site_url(); ?>/e-planning/dashboard/get_jnssat"  
+	<table title="<?php echo  'JUMLAH TAHAPAN PROPOSAL '.$bulan_huruf.' '.$thang; ?>" class="easyui-treegrid" style="width:1110px;height:600px"  
+            url="<?php echo  site_url(); ?>/e-planning/dashboard/get_jnssat"  
             rownumbers="true" showFooter="true" 
             idField="id" treeField="name" animate="true" >  
         <thead frozen="true">  

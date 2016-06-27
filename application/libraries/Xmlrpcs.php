@@ -117,7 +117,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc
 	function serve()
 	{
 		$r = $this->parseRequest();
-		$payload  = '<?xml version="1.0" encoding="'.$this->xmlrpc_defencoding.'"?'.'>'."\n";
+		$payload  = '<?phpxml version="1.0" encoding="'.$this->xmlrpc_defencoding.'"?'.'>'."\n";
 		$payload .= $this->debug_msg;
 		$payload .= $r->prepare_response();
 		

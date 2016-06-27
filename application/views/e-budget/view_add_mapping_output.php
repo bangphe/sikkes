@@ -18,8 +18,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
     <div id="judul" class="title">
         Mapping Output
         <!--
-        <label class="edit"><a href="#"><img src="<?php echo base_url(); ?>images/icons/Edit_icon.png" /></a></label>
-        <label class="detail"><a href="#"><img src="<?php echo base_url(); ?>images/icons/detail.png" /></a></label>
+        <label class="edit"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/Edit_icon.png" /></a></label>
+        <label class="detail"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/detail.png" /></a></label>
         -->
     </div>
     <div id="content_tengah">
@@ -28,7 +28,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
         $url = str_replace(' ', '', $url);
         ?>
 
-        <form method="post" action="<?php echo $url;?>" name="mapping2">
+        <form method="post" action="<?php echo  $url;?>" name="mapping2">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td width="15%"><h2>Rincian Output</h2></td>
@@ -36,19 +36,19 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
                 </tr>
                 <tr>
                     <td width="15%">Unit</td>
-                    <td width="85%"><?php echo $unit; ?></td>
+                    <td width="85%"><?php echo  $unit; ?></td>
                 </tr>
                 <tr>
                     <td width="15%">Program</td>
-                    <td width="85%"><?php echo $program; ?></td>
+                    <td width="85%"><?php echo  $program; ?></td>
                 </tr>
                 <tr>
                     <td width="15%">Kegiatan</td>
-                    <td width="85%"><?php echo $giat; ?></td>
+                    <td width="85%"><?php echo  $giat; ?></td>
                 </tr>
                 <tr>
                     <td width="15%">Output</td>
-                    <td width="85%"><?php echo $output; ?></td>
+                    <td width="85%"><?php echo  $output; ?></td>
                 </tr>
                 <tr>
                     <td width="15%">Ikk</td>
@@ -57,7 +57,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
                             <?php
                             foreach ($allikk as $key => $value) {
                                 ?>
-                                <option value="<?php echo $key?>"><?php echo $value; ?></option>
+                                <option value="<?php echo  $key?>"><?php echo  $value; ?></option>
                                 <?php
                             }
                             ?>
@@ -68,7 +68,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
                     <td>                            
                         <div class="buttons">
                             <button type="submit" class="regular" name="submit">
-                                <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+                                <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
                                 Simpan
                             </button>
                         </div>
@@ -91,9 +91,9 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
                     foreach($d_item->result() as $row){
                 ?>
                 <tr>
-                    <td><?php echo $no;?></td>
-                    <td><?php echo $row->kdakun.'-'.$row->nmakun;?></td>
-                    <td><?php echo $row->nmitem;
+                    <td><?php echo  $no;?></td>
+                    <td><?php echo  $row->kdakun.'-'.$row->nmakun;?></td>
+                    <td><?php echo  $row->nmitem;
                     if($row->vol1 !=0){
                         echo ' ['.$row->vol1.' '.$row->sat1;
                         if($row->vol2 ==0){
@@ -113,7 +113,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
                         }
                     }
                     ?></td>
-                    <td align="center">Rp. <?=number_format($row->jumlah,2,',','.');?></td>
+                    <td align="center">Rp. <?php echo number_format($row->jumlah,2,',','.');?></td>
                     
                 </tr>
                     <?php $no++; ?>

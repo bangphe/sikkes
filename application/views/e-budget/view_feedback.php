@@ -1,13 +1,13 @@
 <div id="tengah">
     <div id="judul"  class="title">
-        <?php echo $judul;?>
+        <?php echo  $judul;?>
         <!--
-        <label class="edit"><a href="#"><img src="<?php echo base_url(); ?>images/icons/Edit_icon.png" /></a></label>
-        <label class="detail"><a href="#"><img src="<?php echo base_url(); ?>images/icons/detail.png" /></a></label>
+        <label class="edit"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/Edit_icon.png" /></a></label>
+        <label class="detail"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/detail.png" /></a></label>
         -->
     </div>
     <div id="content_tengah">
-        <form class="appnitro" name="mapping" enctype="multipart/form-data" method="post" action="<?php echo base_url() . 'index.php/e-budget/feedback/grid_komponen/-1/-1/1'; ?>">
+        <form class="appnitro" name="mapping" enctype="multipart/form-data" method="post" action="<?php echo  base_url() . 'index.php/e-budget/feedback/grid_komponen/-1/-1/1'; ?>">
             <script language="JavaScript">
                 function unitChanged() {
                     var unit = document.mapping.unit;
@@ -45,7 +45,7 @@
                     <tr>
                         <td width="15%">Pilih Unit Utama</td>
                         <td width="85%">
-                            <?php echo form_dropdown('unit', $search, array(), 'id="unit" onchange="unitChanged();"'); ?>
+                            <?php echo  form_dropdown('unit', $search, array(), 'id="unit" onchange="unitChanged();"'); ?>
                         </td>
                     </tr>
                     <tr>
@@ -61,7 +61,7 @@
                         <td width="85%">  
                             <div class="buttons">
                                 <button type="submit" class="regular" name="submit">
-                                    <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+                                    <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
                                     Pilih
                                 </button>
                             </div>

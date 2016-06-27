@@ -1,5 +1,5 @@
 <div id="judul" class="title">
-	<?php echo $judul; ?>
+	<?php echo  $judul; ?>
 </div>
 	<div id="content">
 		<form name="form_update_visi" method="POST" id="form_update_visi" action="#">
@@ -7,29 +7,31 @@
 			<tr>
 				<td>Periode</td>
 				<td>
-					<?php $js = 'id="periode" style="width:15%; padding:3px;"'; 
-					echo form_dropdown('periode',$periode,$selected_periode,$js); ?>
+					<?php//php $js = 'id="periode" style="width:15%; padding:3px;"'; 
+					//echo form_dropdown('periode',$periode,$selected_periode,$js); ?>
+					<input name="periode_awal" id="periode_awal" style="width:14%; padding:3px;" value="<?php echo  $periode_awal; ?>" />
+					- <input name="periode_akhir" id="periode_akhir" style="width:14%; padding:3px;" value="<?php echo  $periode_akhir; ?>" />
 				</td>
 			</tr>
 			<tr>
 				<td>Tahun</td>
 				<td>
-					<?php $js = 'id="tahun" style="width:15%; padding:3px;"'; 
+					<?php $js = 'id="tahun" style="width:15%; padding:3px;" disabled="disabled"'; 
 					echo form_dropdown('tahun',$tahun,$selected_tahun,$js); ?>
 				</td>
 			</tr>
 			<tr>
 				<td>Visi</td>
 				<td>
-					<textarea id="visi" name="visi" rows="4" cols="60"><?php echo $visi; ?></textarea>
+					<textarea id="visi" name="visi" rows="4" cols="60"><?php echo  $visi; ?></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>
 					<div class="buttons">
-						<button type="submit" class="regular" name="update" onClick="update_data(<?php echo $idVisi;?>);">
-							<img src="<?php echo base_url(); ?>images/main/update.png" alt=""/>
+						<button type="submit" class="regular" name="update" onClick="update_data(<?php echo  $idVisi;?>);">
+							<img src="<?php echo  base_url(); ?>images/main/update.png" alt=""/>
 							Update
 						</button>
 					</div>

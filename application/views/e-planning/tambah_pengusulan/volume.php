@@ -1,6 +1,6 @@
-<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.js"></script>
-<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.ui.all.js"></script>
-<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.layout.js"></script>
+<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.js"></script>
+<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.ui.all.js"></script>
+<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.layout.js"></script>
 <div id="container">
 	<h1>Rincian Pengusul</h1>
 	<div id="body">
@@ -8,11 +8,11 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td><p>Kode Kegiatan</p></td>
-				<td><p><?php echo $kode_kegiatan; ?></p></td>
+				<td><p><?php echo  $kode_kegiatan; ?></p></td>
 			</tr>
 			<tr>
 				<td><p>Nama Kegiatan</p></td>
-				<td><p><?php echo $nama_kegiatan; ?></p></td>
+				<td><p><?php echo  $nama_kegiatan; ?></p></td>
 			</tr>
 			<tr>
 				<td><p>Volume</p></td>

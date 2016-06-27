@@ -865,7 +865,7 @@ class CI_Validation {
 	 */	
 	function encode_php_tags($str)
 	{
-		$_POST[$this->_current_field] = str_replace(array('<?php', '<?PHP', '<?', '?>'),  array('&lt;?php', '&lt;?PHP', '&lt;?', '?&gt;'), $str);
+		$_POST[$this->_current_field] = str_replace(array('<?php', '<?php', '<?php', '?>'),  array('&lt;?php', '&lt;?PHP', '&lt;?', '?&gt;'), $str);
 	}
 
 }

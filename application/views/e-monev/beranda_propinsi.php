@@ -41,7 +41,7 @@
             <td rowspan="3" class="text-bold">No</td>
             <td rowspan="3" class="text-bold">NAMA PROPINSI</td>
             <td rowspan="3" class="text-bold">TOTAL</td>
-            <td width="15" rowspan="<?php echo $propinsi_rows->num_rows()+2; ?>">&nbsp;</td>
+            <td width="15" rowspan="<?php echo  $propinsi_rows->num_rows()+2; ?>">&nbsp;</td>
             <td colspan="11" class="text-bold">
 				<?php 
                     $bulan_angka = $this->uri->segment(4);
@@ -70,10 +70,10 @@
                     $bulan_huruf = $this->general->konversi_bulan($bulan_angka);
 					$kodeunit = $this->uri->segment(5);
                 ?>
-                <a href="<?php echo base_url();?>index.php/e-monev/beranda/detail_propinsi/<?=$bulan_angka_minus;?>/<?=$kodeunit;?>"><<</a> 
-                &nbsp; <? echo $bulan_huruf; ?> &nbsp; 
-                <a href="<?php echo base_url();?>index.php/e-monev/beranda/detail_propinsi/<?=$bulan_angka_plus;?>/<?=$kodeunit;?>">>></a></td>
-            <td width="15" rowspan="<?php echo $propinsi_rows->num_rows()+3; ?>">&nbsp;</td>
+                <a href="<?php echo  base_url();?>index.php/e-monev/beranda/detail_propinsi/<?php echo $bulan_angka_minus;?>/<?php echo $kodeunit;?>"><<</a> 
+                &nbsp; <?php echo  $bulan_huruf; ?> &nbsp; 
+                <a href="<?php echo  base_url();?>index.php/e-monev/beranda/detail_propinsi/<?php echo $bulan_angka_plus;?>/<?php echo $kodeunit;?>">>></a></td>
+            <td width="15" rowspan="<?php echo  $propinsi_rows->num_rows()+3; ?>">&nbsp;</td>
           </tr>
           <tr>
             <td colspan="5" class="text-bold">KEUANGAN</td>
@@ -91,19 +91,19 @@
             <td class="text-bold">BIRU</td>
             <td class="text-bold">PROGRES</td>
           </tr>
-          <?php echo $list_propinsi;  ?>
+          <?php echo  $list_propinsi;  ?>
           <tr>
             <td colspan="3" align="right" class="text-bold">PROGRES UNIT</td>
-            <td colspan="4"><?php echo $total_satker; ?></td>
-            <td><?php echo round($total_hasil_progres_keuangan); ?>%</td>
-            <td colspan="4"><?php echo $total_satker; ?></td>
-            <td><?php echo round($total_hasil_progres_fisik); ?>%</td>
+            <td colspan="4"><?php echo  $total_satker; ?></td>
+            <td><?php echo  round($total_hasil_progres_keuangan); ?>%</td>
+            <td colspan="4"><?php echo  $total_satker; ?></td>
+            <td><?php echo  round($total_hasil_progres_fisik); ?>%</td>
           </tr>
         </table>
 		
 		<br /><br />
         <div class="buttons">
-            <a href="<?php echo base_url();?>index.php/e-monev/beranda/unit_kerja/<?=$bulan_angka?>"><img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>Back</a>
+            <a href="<?php echo  base_url();?>index.php/e-monev/beranda/unit_kerja/<?php echo $bulan_angka?>"><img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>Back</a>
         </div>
         &nbsp;&nbsp;&nbsp;&nbsp;<a href="#tengah">^ scroll ke Atas</a>
     </div>

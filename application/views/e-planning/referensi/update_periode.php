@@ -1,5 +1,5 @@
 <div id="judul" class="title">
-	<?php echo $judul; ?>
+	<?php echo  $judul; ?>
 </div>
 <div id="content">
 	<form name="form_update_periode" id="form_update_periode" method="post" action="#">
@@ -13,7 +13,7 @@
 							$periode = $temp+11;
 							while($temp < $periode){
 						?>
-						<option <?php if($temp==$periode_awal) echo "selected"; ?> value="<?php echo $temp; ?>"><?php echo $temp; ?></option>
+						<option <?php if($temp==$periode_awal) echo "selected"; ?> value="<?php echo  $temp; ?>"><?php echo  $temp; ?></option>
 						<?php
 							$temp++;
 							} 
@@ -30,7 +30,7 @@
 							$periode = $temp-11;
 							while($temp > $periode){
 						?>
-						<option <?php if($temp==$periode_akhir) echo "selected"; ?> value="<?php echo $temp; ?>"><?php echo $temp; ?></option>
+						<option <?php if($temp==$periode_akhir) echo "selected"; ?> value="<?php echo  $temp; ?>"><?php echo  $temp; ?></option>
 						<?php
 							$temp--;
 							} 
@@ -42,8 +42,8 @@
 				<td></td>
 				<td>
 					<div class="buttons">
-						<button type="submit" class="regular" name="update" onClick="update_data(<?php echo $idPeriode; ?>);">
-							<img src="<?php echo base_url(); ?>images/main/update.png" alt=""/>
+						<button type="submit" class="regular" name="update" onClick="update_data(<?php echo  $idPeriode; ?>);">
+							<img src="<?php echo  base_url(); ?>images/main/update.png" alt=""/>
 							Update
 						</button>
 					</div>

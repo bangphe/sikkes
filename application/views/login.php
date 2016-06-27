@@ -3,10 +3,10 @@
 <html>
 <head>
 	<title>Sistem Informasi Kementrian Kesehatan</title>
-	<link rel="icon" type="image/x-icon" href="<?php echo base_url() ?>images/icons/depkes.png" />
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/login/style.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/toastr/toastr.css">
+	<link rel="icon" type="image/x-icon" href="<?php echo  base_url() ?>images/icons/depkes.png" />
+	<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/login/style.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/toastr/toastr.css">
 </head>
 
 <body>
@@ -15,16 +15,16 @@
         <div class="col-md-4 col-md-offset-7">
         	<div class="formLogin">
         		<div class="col-md-offset-3 mgBtm20">
-        			<img src="<?php echo base_url() ?>images/login/logoerenggar_old.png" class="img-responsive">
+        			<img src="<?php echo  base_url() ?>images/login/logoerenggar_old.png" class="img-responsive">
         		</div>
-        		 <form id="login" class="form-horizontal" role="form" method="post" action="<?php echo base_url().'index.php/login/login_proses'; ?>" onsubmit="return validasi(username.value, password.value)">
+        		 <form id="login" class="form-horizontal" role="form" method="post" action="<?php echo  base_url().'index.php/login/login_proses'; ?>" onsubmit="return validasi(username.value, password.value)">
         		 	<div class="tahun_anggaran">
 						<h3 class="text-center col-md-offset-3">TAHUN ANGGARAN</h3> <br>
 						 <div class="form-group">
 	                        <label for="inputEmail3" class="col-sm-2 control-label"></label>
 	                        <div class="col-sm-8 col-md-offset-2 pdBtm40">
 	                           <div class="styled-select">
-									<?php echo form_dropdown('thn_anggaran',$thn_anggaran,date("Y")); ?>
+									<?php echo  form_dropdown('thn_anggaran',$thn_anggaran,date("Y")); ?>
 								</div>
 	                        </div>
 	                        <div class="col-sm-1"></div>
@@ -52,13 +52,13 @@
                     <div class="form-group last">
                         <div class="col-sm-offset-3 col-sm-9 pull-right">
                          <button type="submit" name="login" value="Login" style="margin-top:0px;outline:none;" class="customBtnLogin pull-right">
-							<img src="<?php echo base_url() ?>css/login/login-btn.png" />
+							<img src="<?php echo  base_url() ?>css/login/login-btn.png" />
 						</button>
                     </div>
                     </div>
                 </form>
                 <div class="forgetPass">
-                	<a href="<?php echo site_url().'/login/lupa_password'; ?>">Lupa password?</a>
+                	<a href="<?php echo  site_url().'/login/lupa_password'; ?>">Lupa password?</a>
                 </div>
         	</div>
         </div>
@@ -76,7 +76,7 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 <!--End of Zopim Live Chat Script-->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="<?= base_url() ?>css/toastr/toastr.js"></script>
+<script type="text/javascript" src="<?php echo  base_url() ?>css/toastr/toastr.js"></script>
 	
 <script type="text/javascript">
 toastr.options = {
@@ -97,7 +97,7 @@ toastr.options = {
   "hideMethod": "fadeOut"
 }
 
-toastr.success('Periode pengusulan perencanaan 2016 (pagu anggaran) telah dibuka mulai tanggal 04-31 Juli 2015.', 'PENGUMUMAN');
+// toastr.success('Periode pengusulan perencanaan 2016 (Pagu Anggaran) dibuka mulai tanggal 01 Januari s/d 10 April 2016.', 'PENGUMUMAN');
 toastr.info('Proses verifikasi pengusulan proposal telah dibuka kembali.', 'PENGUMUMAN');
 toastr.error('Apabila ada pertanyaan bisa melalui chatting di bagian kanan bawah.', 'PENGUMUMAN');
 
@@ -116,7 +116,7 @@ toastr.error('Apabila ada pertanyaan bisa melalui chatting di bagian kanan bawah
 	  alert("Password belum diisi.");
 	  return false;
 	  }
-	var url = '<?php echo base_url()?>index.php/login/validate/'+x+'/'+y;
+	var url = '<?php echo  base_url()?>index.php/login/validate/'+x+'/'+y;
 	//alert(v)
 	
 	};

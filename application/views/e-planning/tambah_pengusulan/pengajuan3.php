@@ -2,8 +2,8 @@
 <div id="judul" class="title">
 	Kinerja dan Anggaran
 	<!--
-	<label class="edit"><a href="#"><img src="<?php echo base_url(); ?>images/icons/Edit_icon.png" /></a></label>
-	<label class="detail"><a href="#"><img src="<?php echo base_url(); ?>images/icons/detail.png" /></a></label>
+	<label class="edit"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/Edit_icon.png" /></a></label>
+	<label class="detail"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/detail.png" /></a></label>
 	-->
 </div>
 
@@ -12,7 +12,7 @@
 function getSub(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/getSub/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/getSub/'+v;
 	//alert(v)
 	
 	$.ajax({
@@ -47,7 +47,7 @@ function getSub(v)
 function getOutcome(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/getOutcome/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/getOutcome/'+v;
 	//alert(v)
 	
 	$.ajax({
@@ -81,7 +81,7 @@ function getOutcome(v)
 function getOutput(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/getOutput/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/getOutput/'+v;
 	//alert(v)
 	
 	$.ajax({
@@ -116,7 +116,7 @@ function getOutput(v)
 function getIkk(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/getIkk/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/getIkk/'+v;
 	//alert(v)
 	
 	$.ajax({
@@ -153,7 +153,7 @@ function getIkk(v)
 function getIku(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/getIku/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/getIku/'+v;
 	//alert(v)
 	
 	$.ajax({
@@ -191,7 +191,7 @@ function getIku(v)
 function getKeg(x,y,z)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/getKeg/'+x+'/'+y+'/'+z;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/getKeg/'+x+'/'+y+'/'+z;
 	//alert(v)
 	
 	$.ajax({
@@ -226,7 +226,7 @@ function getKeg(x,y,z)
 }
 function getAktivitas(x){
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/getAktivitas/'+x;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/getAktivitas/'+x;
 	//alert(v)
 	
 	$.ajax({
@@ -297,12 +297,12 @@ function validateForm()
 			if(isset($reformasi_kesehatan)){
 			for($i=0; $i<count($fokus_prioritas);$i++){ 
 				foreach($this->pm->get_where('fokus_prioritas',$fokus_prioritas[$i]['idFokusPrioritas'], 'idFokusPrioritas')->result() as $row) {?>
-			var fp<?php echo $i;?> = document.forms["form_pengusulan"]["biaya_fp_<?php echo $row->idFokusPrioritas;?>"].value;
+			var fp<?php echo  $i;?> = document.forms["form_pengusulan"]["biaya_fp_<?php echo  $row->idFokusPrioritas;?>"].value;
 			<?php } ?>
 			<?php  foreach($this->pm->get_where('reformasi_kesehatan',$reformasi_kesehatan[$i]['idReformasiKesehatan'], 'idReformasiKesehatan')->result() as $row) {?>
-			var rk<?php echo $i;?> = document.forms["form_pengusulan"]["biaya_fp_<?php echo $row->idReformasiKesehatan;?>"].value;
+			var rk<?php echo  $i;?> = document.forms["form_pengusulan"]["biaya_fp_<?php echo  $row->idReformasiKesehatan;?>"].value;
 			<?php } ?>
-			if (fp<?php echo $i;?> == "0" || fp<?php echo $i;?> == 0 ||rk<?php echo $i;?> == "0" ||rk<?php echo $i;?> == 0){
+			if (fp<?php echo  $i;?> == "0" || fp<?php echo  $i;?> == 0 ||rk<?php echo  $i;?> == "0" ||rk<?php echo  $i;?> == 0){
 				alert("Biaya fokus prioritas dan reformasi kesehatan harus diisi.");
 				return false;
 			}
@@ -335,12 +335,12 @@ function validateForm()
 	}
 </script>
 <div id="content_tengah">
-	<form class="appnitro" name="form_pengusulan" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-planning/pendaftaran/pengajuan'; ?>" onsubmit="return validateForm()" >
+	<form class="appnitro" name="form_pengusulan" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-planning/pendaftaran/pengajuan'; ?>" onsubmit="return validateForm()" >
 	<ul id="tt" class="easyui-tree"
-			url="<?php echo base_url(); ?>index.php/e-planning/pendaftaran/json"
+			url="<?php echo  base_url(); ?>index.php/e-planning/pendaftaran/json"
 			checkbox="true">
 	</ul>
-	<input type="hidden" name="kd_pengajuan" id="kd_pengajuan" value="<?php echo $kd_pengajuan; ?>" /></td>
+	<input type="hidden" name="kd_pengajuan" id="kd_pengajuan" value="<?php echo  $kd_pengajuan; ?>" /></td>
 	
 	<h3>Ringkasan Fungsi</h3>
 	<table width="100%" height="3%">
@@ -471,7 +471,7 @@ function validateForm()
 	<p>&nbsp;</p>
 	<h3>Anggaran</h3>
 	<p>
-	  <input type="button" name="tambahaktivitas" id="tambahaktivitas" value="Tambah Aktivitas"  onclick="popAktivitas(<?php echo $kd_pengajuan; ?>)"/>
+	  <input type="button" name="tambahaktivitas" id="tambahaktivitas" value="Tambah Aktivitas"  onclick="popAktivitas(<?php echo  $kd_pengajuan; ?>)"/>
 	  
 	  <!--<a href="<?php // echo base_url().'index.php/e-planning/aktivitas/tambah_aktivitas'; ?>">Tambah Aktivitas</a> -->
 	</p>
@@ -500,15 +500,15 @@ function validateForm()
 					foreach($this->pm->get_where_double_join('aktivitas_temp','ref_jenis_usulan','aktivitas.KodeJenisUsulan=ref_jenis_usulan.KodeJenisUsulan','ref_satuan','aktivitas.KodeSatuan=ref_satuan.KodeSatuan','KD_PENGAJUAN',$kd_pengajuan)->result() as $row){ 
 					$kode_aktivitas = $row->KodeAktivitas; ?>
 					<tr>
-					<td><?php echo $row->JudulUsulan; ?></td>
-					<td><?php echo $row->JenisUsulan; ?></td>
-					<td><?php echo $row->Perincian; ?></td>
-					<td><?php echo $row->Volume; ?></td>
-					<td><?php echo $row->Satuan; ?></td>
-					<td><?php echo $row->HargaSatuan; ?></td>
-					<td><?php echo $row->Jumlah; ?></td>
-					<td><a href='edit_aktivitass<?php echo '/'.$kode_aktivitas; ?>'>Ubah</a></td>  
-					<td><a href='deleteAktivitas<?php echo '/'.$kode_aktivitas; ?>'>Hapus</a></td>
+					<td><?php echo  $row->JudulUsulan; ?></td>
+					<td><?php echo  $row->JenisUsulan; ?></td>
+					<td><?php echo  $row->Perincian; ?></td>
+					<td><?php echo  $row->Volume; ?></td>
+					<td><?php echo  $row->Satuan; ?></td>
+					<td><?php echo  $row->HargaSatuan; ?></td>
+					<td><?php echo  $row->Jumlah; ?></td>
+					<td><a href='edit_aktivitass<?php echo  '/'.$kode_aktivitas; ?>'>Ubah</a></td>  
+					<td><a href='deleteAktivitas<?php echo  '/'.$kode_aktivitas; ?>'>Hapus</a></td>
 					</tr>
 				<?php } ?>
 		  </thead>
@@ -529,8 +529,8 @@ function validateForm()
 				for($i=0; $i<count($fokus_prioritas);$i++){ 
 				foreach($this->pm->get_where('fokus_prioritas',$fokus_prioritas[$i]['idFokusPrioritas'], 'idFokusPrioritas')->result() as $row) {?>
               <tr>
-                <td width="83%"><?php echo $row->FokusPrioritas; ?></td>
-                <td width="17%"><input type="text" id="<?php echo 'biaya_fp_'.$row->idFokusPrioritas; ?>" name="<?php echo 'biaya_fp_'.$row->idFokusPrioritas; ?>" onchange="totalFp();"  onblur="if(this.value=='') this.value='0';" onfocus="if(this.value=='0') this.value='';" style="text-align:right" value="0"/></td>
+                <td width="83%"><?php echo  $row->FokusPrioritas; ?></td>
+                <td width="17%"><input type="text" id="<?php echo  'biaya_fp_'.$row->idFokusPrioritas; ?>" name="<?php echo  'biaya_fp_'.$row->idFokusPrioritas; ?>" onchange="totalFp();"  onblur="if(this.value=='') this.value='0';" onfocus="if(this.value=='0') this.value='';" style="text-align:right" value="0"/></td>
               </tr>
 			  <?php } } } else echo '<tr><td>Tidak ada fokus prioritas yang dipilih</td></tr>'; ?>
             </table></td>
@@ -551,8 +551,8 @@ function validateForm()
 				for($i=0; $i<count($reformasi_kesehatan);$i++){ 
 				foreach($this->pm->get_where('reformasi_kesehatan',$reformasi_kesehatan[$i]['idReformasiKesehatan'], 'idReformasiKesehatan')->result() as $row) {?>
               <tr>
-                <td width="83%"><?php echo $row->ReformasiKesehatan; ?></td>
-                <td width="17%"><input type="text" id="<?php echo 'biaya_rk_'.$row->idReformasiKesehatan; ?>" name="<?php echo 'biaya_rk_'.$row->idReformasiKesehatan; ?>" onchange="totalRk();"   onblur="if(this.value=='') this.value='0';" onfocus="if(this.value=='0') this.value='';" value="0"style="text-align:right" /></td>
+                <td width="83%"><?php echo  $row->ReformasiKesehatan; ?></td>
+                <td width="17%"><input type="text" id="<?php echo  'biaya_rk_'.$row->idReformasiKesehatan; ?>" name="<?php echo  'biaya_rk_'.$row->idReformasiKesehatan; ?>" onchange="totalRk();"   onblur="if(this.value=='') this.value='0';" onfocus="if(this.value=='0') this.value='';" value="0"style="text-align:right" /></td>
               </tr>
 			  <?php } } } else echo '<tr><td>Tidak ada reformasi kesehatan yang dipilih</td></tr>';  ?>
             </table>
@@ -566,35 +566,35 @@ function validateForm()
     </table>
 	<p>&nbsp;</p>
 	<div class="buttons">
-	<button type="button" class="negative" name="sebelumnya" onClick="history.go(-1);"> <img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/> Sebelumnya </button>
-      <button type="submit" class="regular" name="save" id="save"> <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/> Simpan </button>
+	<button type="button" class="negative" name="sebelumnya" onClick="history.go(-1);"> <img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/> Sebelumnya </button>
+      <button type="submit" class="regular" name="save" id="save"> <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/> Simpan </button>
 	  
 	  </div>
 	<p>&nbsp;</p>
 	</form>
 </div>
 </div>
-<!--<input id="submit-button" type="submit" name="lanjut" value="program" onclick="window.open('<?php echo base_url(); ?>index.php/e-planning/Filtering/program',null,'height=500,width=550,status=yes,toolbar=no,menubar=no,location=no,scrollbars=yes,left=0,top=0,screenX=0,screenY=0');"/> -->
+<!--<input id="submit-button" type="submit" name="lanjut" value="program" onclick="window.open('<?php echo  base_url(); ?>index.php/e-planning/Filtering/program',null,'height=500,width=550,status=yes,toolbar=no,menubar=no,location=no,scrollbars=yes,left=0,top=0,screenX=0,screenY=0');"/> -->
 
 <script type="text/javascript">
 
 function popAktivitas(x)
  {
-window.open("<?php echo base_url().'index.php/e-planning/pendaftaran/tambah_aktivitas/'; ?>"+x,'popAktivitas','toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,copyhistory=no,scrollbars=yes,width=800,height=800');
+window.open("<?php echo  base_url().'index.php/e-planning/pendaftaran/tambah_aktivitas/'; ?>"+x,'popAktivitas','toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,copyhistory=no,scrollbars=yes,width=800,height=800');
  }
  
 	<?php /* if(isset($reformasi_kesehatan)){foreach($reformasi_kesehatan as $row) { ?>
-		$('<?php echo "#biaya_rk_".$row->idReformasiKesehatan; ?>').hide();
+		$('<?php echo  "#biaya_rk_".$row->idReformasiKesehatan; ?>').hide();
 	<?php }} ?>
 	<?php if(isset($fokus_prioritas)){ foreach ($fokus_prioritas as $row) { ?>
-		$('<?php echo "#biaya_fp_".$row->idFokusPrioritas; ?>').hide();
+		$('<?php echo  "#biaya_fp_".$row->idFokusPrioritas; ?>').hide();
 	<?php }} */?>
 	
 	function get_data(kdsatker){
 		document.form_pengusulan.kdsatker.value = '';
 		document.form_pengusulan.provinsi.value = '';
 		$.ajax({
-			url: "<?php echo base_url(); ?>index.php/e-planning/pendaftaran/get_alamatSatker",
+			url: "<?php echo  base_url(); ?>index.php/e-planning/pendaftaran/get_alamatSatker",
 			global: false,
 			type: "POST",
 			async: false,
@@ -659,23 +659,23 @@ window.open("<?php echo base_url().'index.php/e-planning/pendaftaran/tambah_akti
 	}
 	
 	<?php /* if(isset($reformasi_kesehatan)){foreach($reformasi_kesehatan as $row) { ?>
-		$('<?php echo "#reformasi_kesehatan".$row->idReformasiKesehatan; ?>').click(function() {
+		$('<?php echo  "#reformasi_kesehatan".$row->idReformasiKesehatan; ?>').click(function() {
 		  if(this.checked){
-			$('<?php echo "#biaya_rk_".$row->idReformasiKesehatan; ?>').show();
+			$('<?php echo  "#biaya_rk_".$row->idReformasiKesehatan; ?>').show();
 		  }else{
-			$('<?php echo "#biaya_rk_".$row->idReformasiKesehatan; ?>').hide();
-			<?php echo "document.form_pengusulan.biaya_rk_".$row->idReformasiKesehatan.".value='0';"; ?>
+			$('<?php echo  "#biaya_rk_".$row->idReformasiKesehatan; ?>').hide();
+			<?php echo  "document.form_pengusulan.biaya_rk_".$row->idReformasiKesehatan.".value='0';"; ?>
 			totalRk();
 		  }
 		});
 	<?php }} ?>
 	<?php if(isset($fokus_prioritas)){foreach($fokus_prioritas as $row) { ?>
-		$('<?php echo "#fokus_prioritas".$row->idFokusPrioritas; ?>').click(function() {
+		$('<?php echo  "#fokus_prioritas".$row->idFokusPrioritas; ?>').click(function() {
 		  if(this.checked){
-			$('<?php echo "#biaya_fp_".$row->idFokusPrioritas; ?>').show();
+			$('<?php echo  "#biaya_fp_".$row->idFokusPrioritas; ?>').show();
 		  }else{
-			$('<?php echo "#biaya_fp_".$row->idFokusPrioritas; ?>').hide();
-			<?php echo "document.form_pengusulan.biaya_fp_".$row->idFokusPrioritas.".value='0';"; ?>
+			$('<?php echo  "#biaya_fp_".$row->idFokusPrioritas; ?>').hide();
+			<?php echo  "document.form_pengusulan.biaya_fp_".$row->idFokusPrioritas.".value='0';"; ?>
 			totalFp();
 		  }
 		});

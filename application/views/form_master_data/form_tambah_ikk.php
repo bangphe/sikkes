@@ -3,7 +3,7 @@
 	 var x = document.getElementById('kegiatan');
 	 getVal = x.value;
 	 $.ajax({
-		 url: '<?php echo base_url()?>index.php/master_data/master_ikk/valid/'+kode,
+		 url: '<?php echo  base_url()?>index.php/master_data/master_ikk/valid/'+kode,
 		 data: 'kdkeg='+getVal,
 		 type: 'GET',
 		 beforeSend: function()
@@ -29,7 +29,7 @@
 	IKK
 </div>
 <div id="content_tengah">
-	<form name="form_ikk" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/master_data/master_ikk/save_ikk'; ?>">
+	<form name="form_ikk" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/master_data/master_ikk/save_ikk'; ?>">
 		<table width="80%" height="25%">
 			<tr>
 				<td width="10%">Kegiatan</td>
@@ -41,7 +41,7 @@
 			</tr>
 			<tr>
 				<td width="10%">IKK</td>
-				<td width="70%"><textarea name="ikk" id="ikk" style="width:50%; padding:3px;" rows="3"/></textarea><?php echo form_error('ikk'); ?></td>
+				<td width="70%"><textarea name="ikk" id="ikk" style="width:50%; padding:3px;" rows="3"/></textarea><?php echo  form_error('ikk'); ?></td>
 			</tr>
             <tr>
 				<td width="10%">Tahun Anggaran</td>
@@ -61,11 +61,11 @@
 				<td>
 					<div class="buttons">
 						<button type="submit" class="regular" name="save" id="submit">
-							<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 							Save
 						</button>
 						<button type="reset" class="negative" name="reset">
-							<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 							Reset
 						</button>
 					</div>
@@ -74,7 +74,7 @@
             <tr>
                 <td>
                     <div class="buttons">
-                        <a href="<?php echo base_url();?>index.php/master_data/master_ikk/grid_ikk"><img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>Back</a>
+                        <a href="<?php echo  base_url();?>index.php/master_data/master_ikk/grid_ikk"><img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>Back</a>
                     </div>
                 </td>
 			</tr>

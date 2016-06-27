@@ -1,7 +1,7 @@
 <div id="tengah">
 <div id="judul" class="title">IKU</div>
 <div id="content_tengah">
-	<form name="form_kabupaten" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/master_data/master_iku/detail_iku/'.$KodeIku; ?>">
+	<form name="form_kabupaten" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/master_data/master_iku/detail_iku/'.$KodeIku; ?>">
 		<table width="80%" height="25%">
 			<tr>
 				<td width="10%">Program</td>
@@ -9,10 +9,10 @@
 			</tr>
             <tr>
 				<td width="10%">Kode IKU</td>
-				<td width="70%"><input type="text" id="kdiku" name="kdiku" style="width:10%; padding:3px" value="<?php echo $KodeIku?>" readonly="readonly" /></td>
+				<td width="70%"><input type="text" id="kdiku" name="kdiku" style="width:10%; padding:3px" value="<?php echo  $KodeIku?>" readonly="readonly" /></td>
 			<tr>
 				<td width="10%">IKU</td>
-				<td width="70%"><textarea name="Iku" id="Iku" style="width:50%; padding:3px;" rows="3" readonly="TRUE"/><?php echo $Iku; ?></textarea></td>
+				<td width="70%"><textarea name="Iku" id="Iku" style="width:50%; padding:3px;" rows="3" readonly="TRUE"/><?php echo  $Iku; ?></textarea></td>
 			</tr>
             <tr>
 				<td width="10%">Status</td>
@@ -21,7 +21,7 @@
             <tr>
                 <td>
                     <div class="buttons">
-                        <a href="<?php echo base_url();?>index.php/master_data/master_iku/grid_iku"><img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>Back</a>
+                        <a href="<?php echo  base_url();?>index.php/master_data/master_iku/grid_iku"><img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>Back</a>
                     </div>
                 </td>
 			</tr>

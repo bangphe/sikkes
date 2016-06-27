@@ -14,11 +14,11 @@
 				$kode = $row->KodeKegiatan;
 				$nama = $row->NamaKegiatan; 
 			?>
-			<tr style="cursor: hand" onmouseover="this.style.backgroundColor='#ffff00';" onmouseout="this.style.backgroundColor='#ffffff';" onclick="window.opener.document.getElementById('detail1').value=<?php echo $kode; ?>; window.opener.document.getElementById('detail2').value='<?php echo $nama; ?>'; window.close();">
-				<td><?php echo $no; ?></td>
-				<td><?php echo $kode; ?></td>
-				<td><?php echo $nama; ?></td>
-				<td><?php echo $nama; ?></td>
+			<tr style="cursor: hand" onmouseover="this.style.backgroundColor='#ffff00';" onmouseout="this.style.backgroundColor='#ffffff';" onclick="window.opener.document.getElementById('detail1').value=<?php echo  $kode; ?>; window.opener.document.getElementById('detail2').value='<?php echo  $nama; ?>'; window.close();">
+				<td><?php echo  $no; ?></td>
+				<td><?php echo  $kode; ?></td>
+				<td><?php echo  $nama; ?></td>
+				<td><?php echo  $nama; ?></td>
 			</tr>
 			<?php 
 				$no++;	

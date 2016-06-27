@@ -36,7 +36,7 @@ function whenkeydown(max_length)
 <table width=auto>
 		<br />
 		<div>
-		<?= anchor(site_url('e-monev/laporan_monitoring/input_masalah/'.$referensi_id.'#'),img(array('src'=>'images/flexigrid/prev.gif','border'=>'0','alt'=>'')).'Kembali Ke Daftar Referensi',array('onclick' => 'daftar_referensi();;return false;')); ?>
+		<?php echo  anchor(site_url('e-monev/laporan_monitoring/input_masalah/'.$referensi_id.'#'),img(array('src'=>'images/flexigrid/prev.gif','border'=>'0','alt'=>'')).'Kembali Ke Daftar Referensi',array('onclick' => 'daftar_referensi();;return false;')); ?>
 		</div>
 		<br />
 		<tr>
@@ -62,12 +62,12 @@ function whenkeydown(max_length)
 			<td></td>
 			<td>
 				<div class="buttons">
-					<button type="submit" class="regular" name="save" onClick="save_data(<?php echo $referensi_id;?>);">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+					<button type="submit" class="regular" name="save" onClick="save_data(<?php echo  $referensi_id;?>);">
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Save
 					</button>
 					<button type="reset" class="negative" name="reset" onClick="daftar_referensi();">
-						<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 						Cancel
 					</button>
 				</div>

@@ -19,7 +19,7 @@ function validasi_rencana(){
 			$("#rencana_kontrak").val(rencana_kontrak);
 			alert('Isian harus berupa angka.\nDesimal menggunakan titik(.).');
 		}else{
-			alert('Target Kontraktual harus diisi.');
+			alert('Target harus diisi.');
 		}
 	}else{
 		if(parseFloat(text) > 100){
@@ -76,11 +76,11 @@ function whenkeydown(max_length)
 		<tr>
 			<td><b>Bulan</b></td>
 			<td>
-				<?php echo $bulan;?>
+				<?php echo  $bulan;?>
 			</td>
 		</tr>
 		<tr>
-			<td><b>Target Kontraktual (%)</b></td>
+			<td><b>Target (%)</b></td>
 			<td>
 				<div>
 					<?php 
@@ -92,8 +92,8 @@ function whenkeydown(max_length)
 									);
 							echo form_input($data);
 						?>
-					<input type="hidden" name="bulan_hidden" id="bulan_hidden" value=<?php echo $bulan; ?> />
-					<input type="hidden" name="rencana_kontrak_hidden" id="rencana_kontrak_hidden" value=<?php echo $rencana_kontrak_sebelum; ?> />						
+					<input type="hidden" name="bulan_hidden" id="bulan_hidden" value=<?php echo  $bulan; ?> />
+					<input type="hidden" name="rencana_kontrak_hidden" id="rencana_kontrak_hidden" value=<?php echo  $rencana_kontrak_sebelum; ?> />						
 				</div>
 				<!--
 				<div>
@@ -106,12 +106,12 @@ function whenkeydown(max_length)
 			<td></td>
 			<td>
 				<div class="buttons">
-					<button type="submit" class="regular" name="save" onClick="save_rencana_kontrak(<?php echo $rencana_id.','.$idpaket;?>);">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+					<button type="submit" class="regular" name="save" onClick="save_rencana_kontrak(<?php echo  $rencana_id.','.$idpaket;?>);">
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Save
 					</button>
 					<button type="reset" class="negative" name="reset" onClick="daftar_rencana(); return false;">
-						<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 						Cancel
 					</button>
 				</div>

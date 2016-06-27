@@ -32,7 +32,7 @@
 						);
 					echo form_input($data);
 				?>
-				<input type="hidden" name="nilai_hps_oe" id="nilai_hps_oe" value="<?php echo $nilai_hps_oe;?>" />
+				<input type="hidden" name="nilai_hps_oe" id="nilai_hps_oe" value="<?php echo  $nilai_hps_oe;?>" />
 			</td>
 		</tr>
 		<tr>
@@ -40,11 +40,11 @@
 			<td>
 				<div class="buttons">
 					<button type="submit" class="regular" name="save" id="submit" onClick="update_detail_prakontrak();">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Save
 					</button>
 					<button type="reset" class="negative" name="reset" onClick="form_prakontrak();">
-						<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 						Cancel
 					</button>
 				</div>

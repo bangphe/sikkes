@@ -1,6 +1,6 @@
 <div id="judul" class="title">Detail RAB</div>
 <div id="content">
-	<form id="form_detail_aktivitas" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-planning/aktivitas/grid_aktivitas/'.$KD_PENGAJUAN.'/'.$KodeFungsi.'/'.$KodeSubFungsi.'/'.$KodeProgram.'/'.$KodeKegiatan; ?>">
+	<form id="form_detail_aktivitas" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-planning/aktivitas/grid_aktivitas/'.$KD_PENGAJUAN.'/'.$KodeFungsi.'/'.$KodeSubFungsi.'/'.$KodeProgram.'/'.$KodeKegiatan; ?>">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td  style="vertical-align:top;" width="15%">Jenis Usulan</td>
@@ -13,37 +13,37 @@
 		<tr><td><p>&nbsp;</p></td><tr>
 			<tr>
 				<td style="vertical-align:top;">Judul Usulan</td>
-				<td><?php echo $JudulUsulan; ?></td>
+				<td><?php echo  $JudulUsulan; ?></td>
 			</tr>
 		<tr><td><p>&nbsp;</p></td><tr>
 			<tr>
 				<td style="vertical-align:top;">Perincian</td>
-				<td><?php echo $Perincian; ?></td>
+				<td><?php echo  $Perincian; ?></td>
 			</tr>
 		<tr><td><p>&nbsp;</p></td><tr>
 			<tr>
 				<td style="vertical-align:top;">Volume</td>
-				<td><?php echo $Volume; ?></td>
+				<td><?php echo  $Volume; ?></td>
 			</tr>
 		<tr><td><p>&nbsp;</p></td><tr>
 			<tr>
 				<td style="vertical-align:top;">Satuan</td>
-				<td><?php echo $s_satuan; ?></td>
+				<td><?php echo  $s_satuan; ?></td>
 			</tr>
 		<tr><td><p>&nbsp;</p></td><tr>
 			<tr>
 				<td style="vertical-align:top;">Harga Satuan</td>
-				<td><?php echo $HargaSatuan; ?></td>
+				<td><?php echo  $HargaSatuan; ?></td>
 			</tr>
 		<tr><td><p>&nbsp;</p></td><tr>
 			<tr>
 				<td style="vertical-align:top;">Jumlah</td>
-				<td><?php echo $Jumlah; ?></td>
+				<td><?php echo  $Jumlah; ?></td>
 			</tr>
 		<tr><td><p>&nbsp;</p></td><tr>
 			<tr>
 				<td style="vertical-align:top;">Jenis Pembiayaan</td>
-				<td><?php echo $s_jenis_pembiayaan; ?></td>
+				<td><?php echo  $s_jenis_pembiayaan; ?></td>
 			</tr>
 		<tr><td><p>&nbsp;</p></td><tr>
 			<tr>
@@ -72,7 +72,7 @@
 			<td>
 				<div class="buttons">
 					<button type="button" onClick="history.go(-1);"  class="positive" name="save" id="save">
-						<img src="<?php echo base_url(); ?>images/main/ok.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/ok.png" alt=""/>
 						OK
 					</button>
 				</div>

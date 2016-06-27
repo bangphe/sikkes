@@ -41,7 +41,7 @@
             <td rowspan="3" class="text-bold">No</td>
             <td rowspan="3" class="text-bold">UNIT</td>
             <td rowspan="3" class="text-bold">TOTAL</td>
-            <td width="15" rowspan="<?php echo $get_unit->num_rows()+4; ?>">&nbsp;</td>
+            <td width="15" rowspan="<?php echo  $get_unit->num_rows()+4; ?>">&nbsp;</td>
             <td colspan="11" class="text-bold">
 				<?php 
                     $bulan_angka = $this->uri->segment(4);
@@ -69,10 +69,10 @@
                     
                     $bulan_huruf = $this->general->konversi_bulan($bulan_angka);
                 ?>
-                <a href="<?php echo base_url();?>index.php/e-monev/beranda/unit_kerja/<?=$bulan_angka_minus;?>"><<</a> 
-                &nbsp; <? echo $bulan_huruf; ?> &nbsp; 
-                <a href="<?php echo base_url();?>index.php/e-monev/beranda/unit_kerja/<?=$bulan_angka_plus;?>">>></a></td>
-            <td width="15" rowspan="<?php echo $get_unit->num_rows()+4; ?>">&nbsp;</td>
+                <a href="<?php echo  base_url();?>index.php/e-monev/beranda/unit_kerja/<?php echo $bulan_angka_minus;?>"><<</a> 
+                &nbsp; <?php echo  $bulan_huruf; ?> &nbsp; 
+                <a href="<?php echo  base_url();?>index.php/e-monev/beranda/unit_kerja/<?php echo $bulan_angka_plus;?>">>></a></td>
+            <td width="15" rowspan="<?php echo  $get_unit->num_rows()+4; ?>">&nbsp;</td>
           </tr>
           <tr>
             <td colspan="5" class="text-bold">KEUANGAN</td>
@@ -90,13 +90,13 @@
             <td class="text-bold">BIRU</td>
             <td class="text-bold">PROGRES</td>
           </tr>
-          <?php echo $list_unit;  ?>
+          <?php echo  $list_unit;  ?>
           <tr>
             <td colspan="3" align="right" class="text-bold">PROGRES KEMENTRIAN</td>
-            <td colspan="4"><?php echo $total_satker_unit; ?></td>
-            <td><?php echo round($total_progres_unit_keuangan); ?>%</td>
-            <td colspan="4"><?php echo $total_satker_unit; ?></td>
-            <td><?php echo round($total_progres_unit_fisik); ?>%</td>
+            <td colspan="4"><?php echo  $total_satker_unit; ?></td>
+            <td><?php echo  round($total_progres_unit_keuangan); ?>%</td>
+            <td colspan="4"><?php echo  $total_satker_unit; ?></td>
+            <td><?php echo  round($total_progres_unit_fisik); ?>%</td>
           </tr>
         </table>
 		<br><br>

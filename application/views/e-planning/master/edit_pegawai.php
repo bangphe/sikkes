@@ -2,7 +2,7 @@
 function getJabatan(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/master_data/master_pegawai/getJabatan/'+v;
+	var url = '<?php echo  base_url()?>index.php/master_data/master_pegawai/getJabatan/'+v;
 	
 	$.ajax({
 		//alert('test')
@@ -40,19 +40,19 @@ function getJabatan(v)
 <div id="tengah">
 <div id="judul" class="title">Pegawai</div>
 <div id="content_tengah">
-	<form class="appnitro" name="form_tambah_pegawai" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/master_data/master_pegawai/edit_proses/'.$id; ?>">
+	<form class="appnitro" name="form_tambah_pegawai" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/master_data/master_pegawai/edit_proses/'.$id; ?>">
 	<ul id="tt" class="easyui-tree"
-			url="<?php echo base_url(); ?>index.php/master_data/master_pegawai/json"
+			url="<?php echo  base_url(); ?>index.php/master_data/master_pegawai/json"
 			checkbox="true">
 	</ul>
 	<table width="100%" height="100%" cellpadding="0" cellspacing="0">
 		<tr>
 			<td width="15%">NIP Pegawai</td>
-			<td width="85%"><input name="nip_peg" id="nip_peg" type="text" style="padding:3px; width:20%" value="<?php echo $nip; ?>" /><?php echo form_error('nip_peg'); ?></td>
+			<td width="85%"><input name="nip_peg" id="nip_peg" type="text" style="padding:3px; width:20%" value="<?php echo  $nip; ?>" /><?php echo  form_error('nip_peg'); ?></td>
 		</tr>
         <tr>
 			<td width="15%">Nama Pegawai</td>
-			<td width="85%"><input name="nama_peg" id="nama_peg" type="text" style="padding:3px; width:20%" value="<?php echo $nama_peg; ?>" /><?php echo form_error('nama_peg'); ?></td>
+			<td width="85%"><input name="nama_peg" id="nama_peg" type="text" style="padding:3px; width:20%" value="<?php echo  $nama_peg; ?>" /><?php echo  form_error('nama_peg'); ?></td>
 		</tr>
         <tr id="menu_satker">
 			<td width="15%">Nama Satker</td>
@@ -66,7 +66,7 @@ function getJabatan(v)
 			<td width="15%">Jabatan</td>
 			<td width="85%">
 				<select id="jabatan" name="jabatan" style="width:48%; padding:3px">
-                <option><?php echo $jabatan; ?></option></select>
+                <option><?php echo  $jabatan; ?></option></select>
                 </td>
 		</tr>
         <tr>
@@ -74,11 +74,11 @@ function getJabatan(v)
 			<td>
 				<div class="buttons">
 					<button type="submit" class="regular" name="save">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Save
 					</button>
 					<button type="reset" class="negative" name="reset">
-						<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 						Reset
 					</button>
 				</div>
@@ -90,7 +90,7 @@ function getJabatan(v)
         <tr>
                 <td>
                     <div class="buttons">
-                        <a href="<?php echo base_url();?>index.php/master_data/master_pegawai/grid_pegawai"><img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>Back</a>
+                        <a href="<?php echo  base_url();?>index.php/master_data/master_pegawai/grid_pegawai"><img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>Back</a>
                     </div>
                 </td>
             </tr>

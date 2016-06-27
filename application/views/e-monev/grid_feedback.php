@@ -1,16 +1,16 @@
 <?php $role_open = array(1,4,5,8); ?>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/feedback.css">
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url();?>css/feedback.css">
 <script type="text/javascript">
     
     function save(id_permasalahan){
        // var feedback_text = document.getElementById('tinymce').value;
 	   var feedback_text = tinyMCE.activeEditor.getContent({format : 'raw'});
         var reply_from = document.getElementById("reply_from").value;
-        var id_user = <?php echo $id_user; ?>;
+        var id_user = <?php echo  $id_user; ?>;
 		        
-        $("#buttonSave").html('<img src="<?php echo base_url() . 'images/flexigrid/load.gif'; ?>"> saving...');
+        $("#buttonSave").html('<img src="<?php echo  base_url() . 'images/flexigrid/load.gif'; ?>"> saving...');
         $.ajax({
-            url: '<?= base_url() ?>index.php/e-monev/laporan_monitoring/save_feedback/'+id_permasalahan,
+            url: '<?php echo  base_url() ?>index.php/e-monev/laporan_monitoring/save_feedback/'+id_permasalahan,
             global: false,
             type: 'POST',
             async: false,
@@ -28,7 +28,7 @@
     }
     
 	function getFeedback(id){
-        $("#content_tengah").html('<img src="<?php echo base_url() . 'images/flexigrid/load.gif'; ?>"> loading...');
+        $("#content_tengah").html('<img src="<?php echo  base_url() . 'images/flexigrid/load.gif'; ?>"> loading...');
         get_html_data(base_url+"index.php/e-monev/laporan_monitoring/input_feedback/"+id,'', 'profile_detail_loading', 'content_tengah');
     }
 	
@@ -37,11 +37,11 @@
 		var ID = id;
 		
 		if(ID){
-			$("#moro"+ID).html('<img src="<?php echo base_url();?>/images/icons/loading.gif" />');
+			$("#moro"+ID).html('<img src="<?php echo  base_url();?>/images/icons/loading.gif" />');
 
 			$.ajax({
 				type: "POST",
-				url: "<?php echo base_url(); ?>index.php/e-monev/laporan_monitoring/load_more/<?php echo $id_permasalahan; ?>",
+				url: "<?php echo  base_url(); ?>index.php/e-monev/laporan_monitoring/load_more/<?php echo  $id_permasalahan; ?>",
 				data: "id_feedback="+ ID, 
 				cache: false,
 				success: function(html){
@@ -97,32 +97,32 @@
 	}
 </script>
 
-<h2 class="tablecloth">Tahun Anggaran : <?php echo $this->session->userdata('thn_anggaran'); ?></h2>
-<h2 class="tablecloth">Bulan : <?php echo $bulan; ?></h2>
-<h2 class="tablecloth">Nama Komponen/Sub Komponen : <?php echo $sub_komponen; ?></h2>
+<h2 class="tablecloth">Tahun Anggaran : <?php echo  $this->session->userdata('thn_anggaran'); ?></h2>
+<h2 class="tablecloth">Bulan : <?php echo  $bulan; ?></h2>
+<h2 class="tablecloth">Nama Komponen/Sub Komponen : <?php echo  $sub_komponen; ?></h2>
 <h2 class="tablecloth">Jenis Input : Feedback <?php if(!in_array($this->session->userdata("kd_role"), $role_open)){ echo "(hanya bisa input komentar)"; }?></h2>
 
 <table width=700>
     <tr>
         <td><b>Status</b></td>
-        <td><?php echo $data_masalah->status == 0 ? 'Belum Resolved' : 'Sudah Resolved'; ?></td>
+        <td><?php echo  $data_masalah->status == 0 ? 'Belum Resolved' : 'Sudah Resolved'; ?></td>
 
         <td><b>Pihak Terkait</b></td>
-        <td><?php echo $data_masalah->pihak_terkait == 0 ? 'Internal' : 'Eksternal'; ?></td>
+        <td><?php echo  $data_masalah->pihak_terkait == 0 ? 'Internal' : 'Eksternal'; ?></td>
     </tr>
     <tr>
         <td><b>Permasalahan</b></td>
-        <td><?php echo $data_masalah->isi_permasalahan; ?></td>
+        <td><?php echo  $data_masalah->isi_permasalahan; ?></td>
         <td><b>Keterangan Pihak Terkait</b></td>
         <td>
-            <?php echo $data_masalah->ket_pihak_terkait; ?>
+            <?php echo  $data_masalah->ket_pihak_terkait; ?>
         </td>
     </tr>
 </table>
 
 <br/>
 <div>
-    <?= anchor(site_url('e-monev/laporan_monitoring/input_masalah/' . $data_masalah->d_skmpnen_id . '#'), img(array('src' => 'images/flexigrid/prev.gif', 'border' => '0', 'alt' => '')) . 'Kembali Ke Daftar Permasalahan', array('onclick' => 'update(' . $data_masalah->d_skmpnen_id . ',' . $data_masalah->bulan . ', true);;return false;')); ?>
+    <?php echo  anchor(site_url('e-monev/laporan_monitoring/input_masalah/' . $data_masalah->d_skmpnen_id . '#'), img(array('src' => 'images/flexigrid/prev.gif', 'border' => '0', 'alt' => '')) . 'Kembali Ke Daftar Permasalahan', array('onclick' => 'update(' . $data_masalah->d_skmpnen_id . ',' . $data_masalah->bulan . ', true);;return false;')); ?>
 </div>
 
 <div class="clear"></div>
@@ -134,7 +134,7 @@
 		<div id="msg-reply" style="display: none"></div>
 		<div id="tutupAll" style="display: none">[ Tutup Komentar ]</div>
 		<input type="hidden" name="reply_from" value="0" id="reply_from">
-		<input type="hidden" name="id_user" value="<?php echo $id_user;?>"/>
+		<input type="hidden" name="id_user" value="<?php echo  $id_user;?>"/>
 		<?php 
 			if(!in_array($this->session->userdata("kd_role"), $role_open)){ 
 				$display_input = "block";
@@ -146,13 +146,13 @@
 				$disable_button = "disabled='disabled'";
 			}
 		?>
-		<div id="input_feedback_textarea" style="display:<?php echo $display_input; ?>">
+		<div id="input_feedback_textarea" style="display:<?php echo  $display_input; ?>">
 		<textarea id="feedback_text" name="feedback_text"></textarea>
 		</div>
-		<img src="<?php echo base_url()."images/main/disabled_feedback.png";?>" width="350" id="disabled_img" style="display:<?php echo $display_img; ?>">
+		<img src="<?php echo  base_url()."images/main/disabled_feedback.png";?>" width="350" id="disabled_img" style="display:<?php echo  $display_img; ?>">
 		<div class="clear"></div>
 		<div class="right tombol20" id="buttonSave">
-			<input type="button" value="Kirim" id="buttonClass" onclick="save(<?php echo $id_permasalahan; ?>)" class="buttonClass" <?php echo $disable_button; ?>>
+			<input type="button" value="Kirim" id="buttonClass" onclick="save(<?php echo  $id_permasalahan; ?>)" class="buttonClass" <?php echo  $disable_button; ?>>
 		</div>
 		<br><br><br><br>
 		<div class="clear"></div>
@@ -166,13 +166,13 @@
 		<?php $id_feedback = 0; ?>
 		<?php foreach ($history->result() as $row):?>
 			<li>
-				<a href="#"><img class="ava-stream" src="<?php echo base_url();?>images/icons/depkes.png" width="40" height="48" alt="<?php echo $row->USERNAME;?>" /></a>
+				<a href="#"><img class="ava-stream" src="<?php echo  base_url();?>images/icons/depkes.png" width="40" height="48" alt="<?php echo  $row->USERNAME;?>" /></a>
 				<div class="pesan-stream">
-					<div class="nama-stream"><?php echo (strtolower($row->USERNAME));?></div>
-					<div id="msg-stream-<?php echo $row->ID_FEEDBACK;?>"><?php echo $row->PESAN;?></div>
+					<div class="nama-stream"><?php echo  (strtolower($row->USERNAME));?></div>
+					<div id="msg-stream-<?php echo  $row->ID_FEEDBACK;?>"><?php echo  $row->PESAN;?></div>
 					<div class="date-stream">
-						<a href="#repnow" onclick="javascript:replyFrom(<?php echo $row->ID_FEEDBACK;?>)" class="reply-stream" id="reply-stream-<?php echo $row->ID_FEEDBACK;?>">komentar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a title="<?php echo date("d F Y   H:i ", strtotime($row->TANGGAL));?>WIB" class="time-reply"><?php echo $this->general->KonversiWaktu(strtotime($row->TANGGAL));?></a>
+						<a href="#repnow" onclick="javascript:replyFrom(<?php echo  $row->ID_FEEDBACK;?>)" class="reply-stream" id="reply-stream-<?php echo  $row->ID_FEEDBACK;?>">komentar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a title="<?php echo  date("d F Y   H:i ", strtotime($row->TANGGAL));?>WIB" class="time-reply"><?php echo  $this->general->KonversiWaktu(strtotime($row->TANGGAL));?></a>
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -184,12 +184,12 @@
 					foreach ($parent->result() as $brs):
 			?>
 						<li class="msg-stream-reply">
-							<a href="#"><img class="ava-stream-reply" src="<?php echo base_url();?>images/icons/depkes.png" width="30" height="38" alt="<?php echo $brs->USERNAME;?>" /></a>
+							<a href="#"><img class="ava-stream-reply" src="<?php echo  base_url();?>images/icons/depkes.png" width="30" height="38" alt="<?php echo  $brs->USERNAME;?>" /></a>
 							<div class="pesan-stream-reply">
-								<div class="nama-stream-reply"><?php echo (strtolower($brs->USERNAME));?></div>
-								<div><?php echo $brs->PESAN;?></div>
+								<div class="nama-stream-reply"><?php echo  (strtolower($brs->USERNAME));?></div>
+								<div><?php echo  $brs->PESAN;?></div>
 								<div class="date-stream-reply">
-									<a title="<?php echo date("d F Y   H:i ", strtotime($brs->TANGGAL));?>WIB"><?php echo $this->general->KonversiWaktu(strtotime($brs->TANGGAL));?></a>
+									<a title="<?php echo  date("d F Y   H:i ", strtotime($brs->TANGGAL));?>WIB"><?php echo  $this->general->KonversiWaktu(strtotime($brs->TANGGAL));?></a>
 								</div>
 							</div>
 							<div class="clear"></div>
@@ -205,8 +205,8 @@
 			<br><br><br>
 		<?php }else{ ?>
 			<!-- load moro -->
-			<a href="#" class="moro" id="<?php echo $id_feedback; ?>" onclick="getMore(<?php echo $id_feedback; ?>)">
-				<div id="moro<?php echo $id_feedback; ?>" class="morebox">selanjutnya</div>
+			<a href="#" class="moro" id="<?php echo  $id_feedback; ?>" onclick="getMore(<?php echo  $id_feedback; ?>)">
+				<div id="moro<?php echo  $id_feedback; ?>" class="morebox">selanjutnya</div>
 			</a>
 		<?php } ?>
 	</div>

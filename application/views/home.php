@@ -1,4 +1,4 @@
-<? if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 <div style="margin:5px; background-color:#ffffff">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:solid thin #000000; height:80%; ">
 	  <tr>
@@ -126,29 +126,29 @@
 						  ?></td>
 						<td>
 							<div class="qitem">
-								<a href="<?=site_url();?>/e-planning/manajemen/grid_pengajuan"><img src="<?=base_url();?>images/shortcut/2_2.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo site_url();?>/e-planning/manajemen/grid_pengajuan"><img src="<?php echo base_url();?>images/shortcut/2_2.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>x</h4><p>.</p></span>							</div>						</td>
 					
 						<td>
 							<div class="qitem">
-                            	<a href="<?=site_url();?>/e-planning/manajemen/grid_pengajuan_disetujui"><img src="<?=base_url();?>images/shortcut/3_3.gif" alt="Test 1" title="" width="126" height="126"/></a><span class="caption">
+                            	<a href="<?php echo site_url();?>/e-planning/manajemen/grid_pengajuan_disetujui"><img src="<?php echo base_url();?>images/shortcut/3_3.gif" alt="Test 1" title="" width="126" height="126"/></a><span class="caption">
 							  <h4>x</h4><p>.</p></span>						  </div>						</td>
 				  	</tr>
 				  	<tr>
 						<td>
 							<div class="qitem">
-								<a href="<?=site_url();?>/e-planning/manajemen/grid_pengajuan_ditolak"><img src="<?=base_url();?>images/shortcut/4_4.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo site_url();?>/e-planning/manajemen/grid_pengajuan_ditolak"><img src="<?php echo base_url();?>images/shortcut/4_4.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>x</h4><p>.</p></span>							</div>						
 						</td>
 						<td>
 							<div class="qitem">
-								<a href="<?=site_url();?>/e-planning/utility/grid_file"><img src="<?=base_url();?>images/shortcut/8.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo site_url();?>/e-planning/utility/grid_file"><img src="<?php echo base_url();?>images/shortcut/8.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>x</h4><p>.</p></span>							</div>						
 						</td>
 					
 						<td>
 							<div class="qitem">
-								<a href="<?=site_url();?>/beranda"><img src="<?=base_url();?>images/shortcut/5.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo site_url();?>/beranda"><img src="<?php echo base_url();?>images/shortcut/5.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>x</h4><p>.</p></span>							</div>						
 						</td>					
 				  	</tr>
@@ -156,17 +156,17 @@
 				  	<tr>
 						<td>
 							<div class="qitem">
-								<a href="<?=site_url();?>/beranda"><img src="<?=base_url();?>images/shortcut/6.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo site_url();?>/beranda"><img src="<?php echo base_url();?>images/shortcut/6.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>x</h4><p>.</p></span>							</div>						
 						</td>
 						<td>
 							<div class="qitem">
-								<a href="<?=site_url();?>/master_data/master_user/grid_user"><img src="<?=base_url();?>images/shortcut/7.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo site_url();?>/master_data/master_user/grid_user"><img src="<?php echo base_url();?>images/shortcut/7.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>Manajemen User</h4><p>Pengguna Aplikasi Melakukan Pengaturan Akun Aplikasi.</p></span>							</div>						
 						</td>
 						<td>
 							<div class="qitem">
-								<a href="<?php echo base_url(); ?>file/user_guide/<?php echo $file; ?>"><img src="<?=base_url();?>images/shortcut/9.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo  base_url(); ?>file/user_guide/<?php echo  $file; ?>"><img src="<?php echo base_url();?>images/shortcut/9.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>Bantuan Penggunaan</h4><p>Pengguna Aplikasi Meminta Dokumen Bantuan Penggunaan Aplikasi.</p></span>							</div>						
 						</td>
 				  	</tr>
@@ -189,18 +189,18 @@
 						  </td>
 						<td>
 							<div class="qitem">
-								<a href="<?=site_url();?>/e-planning/manajemen/grid_pengajuan"><img src="<?=base_url();?>images/shortcut/2_2.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo site_url();?>/e-planning/manajemen/grid_pengajuan"><img src="<?php echo base_url();?>images/shortcut/2_2.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>x</h4><p>.</p></span>							</div>						</td>
 					
 						<td>
 							<div class="qitem">
-                            	<a href="<?=site_url();?>/e-planning/manajemen/grid_pengajuan_telah_ditelaah"><img src="<?=base_url();?>images/shortcut/3_3.gif" alt="Test 1" title="" width="126" height="126"/></a><span class="caption">
+                            	<a href="<?php echo site_url();?>/e-planning/manajemen/grid_pengajuan_telah_ditelaah"><img src="<?php echo base_url();?>images/shortcut/3_3.gif" alt="Test 1" title="" width="126" height="126"/></a><span class="caption">
 							  <h4>x</h4><p>.</p></span>						  </div>						</td>
 				  	</tr>	
 					<tr>
 					<td>
 							<div class="qitem">
-								<a href="<?php echo base_url(); ?>file/user_guide/<?php echo $file; ?>"><img src="<?=base_url();?>images/shortcut/9.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo  base_url(); ?>file/user_guide/<?php echo  $file; ?>"><img src="<?php echo base_url();?>images/shortcut/9.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>Bantuan Penggunaan</h4><p>Pengguna Aplikasi Meminta Dokumen Bantuan Penggunaan Aplikasi.</p></span>							</div>						
 						</td>
 				  	</tr>
@@ -211,13 +211,13 @@
 					<tr>
 						<td>
 							<div class="qitem">
-								<a href="<?=site_url();?>/e-planning/manajemen/grid_pengajuan"><img src="<?=base_url();?>images/shortcut/2_2.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo site_url();?>/e-planning/manajemen/grid_pengajuan"><img src="<?php echo base_url();?>images/shortcut/2_2.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>x</h4><p>.</p></span>	</div></td>
 					
 						
 					<td>
 							<div class="qitem">
-								<a href="<?php echo base_url(); ?>file/user_guide/<?php echo $file; ?>"><img src="<?=base_url();?>images/shortcut/9.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo  base_url(); ?>file/user_guide/<?php echo  $file; ?>"><img src="<?php echo base_url();?>images/shortcut/9.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>Bantuan Penggunaan</h4><p>Pengguna Aplikasi Meminta Dokumen Bantuan Penggunaan Aplikasi.</p></span>							</div>						
 						</td>
 				  	</tr>
@@ -229,7 +229,7 @@
 						
 						<td>
 							<div class="qitem">
-								<a href="<?php echo base_url(); ?>file/user_guide/<?php echo $file; ?>"><img src="<?=base_url();?>images/shortcut/9.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo  base_url(); ?>file/user_guide/<?php echo  $file; ?>"><img src="<?php echo base_url();?>images/shortcut/9.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>Bantuan Penggunaan</h4><p>Pengguna Aplikasi Meminta Dokumen Bantuan Penggunaan Aplikasi.</p></span>							</div>						
 						</td>
 				  	</tr>
@@ -241,7 +241,7 @@
 						
 						<td>
 							<div class="qitem">
-								<a href="<?php echo base_url(); ?>file/user_guide/<?php echo $file; ?>"><img src="<?=base_url();?>images/shortcut/9.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo  base_url(); ?>file/user_guide/<?php echo  $file; ?>"><img src="<?php echo base_url();?>images/shortcut/9.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>Bantuan Penggunaan</h4><p>Pengguna Aplikasi Meminta Dokumen Bantuan Penggunaan Aplikasi.</p></span>							</div>						
 						</td>
 				  	</tr>
@@ -252,13 +252,13 @@
 					<tr>
 						<td>
 							<div class="qitem">
-								<a href="<?=site_url();?>/e-planning/manajemen/grid_persetujuan"><img src="<?=base_url();?>images/shortcut/2_2.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo site_url();?>/e-planning/manajemen/grid_persetujuan"><img src="<?php echo base_url();?>images/shortcut/2_2.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>x</h4><p>.</p></span>	</div></td>
 					
 						
 					<td>
 							<div class="qitem">
-								<a href="<?php echo base_url(); ?>file/user_guide/<?php echo $file; ?>"><img src="<?=base_url();?>images/shortcut/9.gif" alt="Test 1" title="" width="126" height="126"/></a>
+								<a href="<?php echo  base_url(); ?>file/user_guide/<?php echo  $file; ?>"><img src="<?php echo base_url();?>images/shortcut/9.gif" alt="Test 1" title="" width="126" height="126"/></a>
 								<span class="caption"><h4>Bantuan Penggunaan</h4><p>Pengguna Aplikasi Meminta Dokumen Bantuan Penggunaan Aplikasi.</p></span>							</div>						
 						</td>
 				  	</tr>
@@ -270,10 +270,10 @@
 </div>
 <div style="display: none;" id="displayBox">
 	<div class="qitem_2">
-		<a href="<?=site_url();?>/laporan_penangkaran_produksi_per_varietas"><img src="<?=base_url();?>images/shortcut/4.1.gif" alt="Test 1" title="" width="250" height="250"/></a>		
+		<a href="<?php echo site_url();?>/laporan_penangkaran_produksi_per_varietas"><img src="<?php echo base_url();?>images/shortcut/4.1.gif" alt="Test 1" title="" width="250" height="250"/></a>		
 	</div>
 	<div class="qitem_2">
-		<a href="<?=site_url();?>/laporan_penangkaran_produksi_per_groupKB"><img src="<?=base_url();?>images/shortcut/4.2.gif" alt="Test 1" title="" width="250" height="250"/></a>
+		<a href="<?php echo site_url();?>/laporan_penangkaran_produksi_per_groupKB"><img src="<?php echo base_url();?>images/shortcut/4.2.gif" alt="Test 1" title="" width="250" height="250"/></a>
 	</div>
 </div>
 <script language="JavaScript">

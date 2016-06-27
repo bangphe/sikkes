@@ -702,12 +702,7 @@ class Laporan_monitoring_model extends CI_Model {
 		$this->db->where($this->db->database.'.d_soutput.kdjendok',$kdjendok);
 		$this->db->where($this->db->database.'.d_soutput.kddekon',$kddekon);
 
-		if($this->db->get()->num_rows() > 0 ) {
-			return $this->db->get()->row()->ursoutput;
-		}
-		else {
-			return '-';
-		}
+		return $this->db->get()->row()->ursoutput;
 	}
 
 	function get_komponen_by_idskmpnen($thang, $kdsatker, $kddept, $kdunit, $kdprogram, $kdgiat, $kdoutput, $kdlokasi, $kdkabkota, $kdsoutput, $kdkmpnen, $kdjendok, $kddekon)

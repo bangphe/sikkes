@@ -91,9 +91,9 @@ function dump_my_html_tree($node, $show_attr=true, $deep=0, $last=true) {
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<html <?=$lang?>>
+<html <?php echo $lang?>>
 <head>
-    <?
+    <?php
         if ($lang!='')
             echo '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>';
         else if ($charset)
@@ -124,15 +124,15 @@ function dump_my_html_tree($node, $show_attr=true, $deep=0, $last=true) {
 	<div id="main">
 	<h4>Simple HTML DOM Test</h4>
     <form name="form1" method="post" action="">
-        find: <input name="query" type="text" size="60" maxlength="60" value="<?=htmlspecialchars($query)?>">
+        find: <input name="query" type="text" size="60" maxlength="60" value="<?php echo htmlspecialchars($query)?>">
         <input type="submit" name="Submit" value="Go">
     </form>
     <br>
-	HTML STAT (<?stat_dom($html);?>)<br>
+	HTML STAT (<?phpstat_dom($html);?>)<br>
     <br>
 	<div id="sidetreecontrol"><a href="?#">Collapse All</a> | <a href="?#">Expand All</a></div><br>
 	<ul class="treeview" id="html_tree">
-	    <?
+	    <?php
             ob_start();
             foreach($target as $e)
                 dump_my_html_tree($e, true);

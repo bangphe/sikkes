@@ -10,14 +10,14 @@ $separator = "-|;|-";
     <div id="judul" class="title">
         Hasil Pencarian Canggih
         <!--
-        <label class="edit"><a href="#"><img src="<?php echo base_url(); ?>images/icons/Edit_icon.png" /></a></label>
-        <label class="detail"><a href="#"><img src="<?php echo base_url(); ?>images/icons/detail.png" /></a></label>
+        <label class="edit"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/Edit_icon.png" /></a></label>
+        <label class="detail"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/detail.png" /></a></label>
         -->
     </div>
     <div id="content_tengah">
         <div>
             <div>
-                <form class="appnitro" name="pencarian" enctype="multipart/form-data" method="post" action="<?php echo base_url() . 'index.php/e-budget/pencarian/rekap_pencarian_canggih/'; ?>">
+                <form class="appnitro" name="pencarian" enctype="multipart/form-data" method="post" action="<?php echo  base_url() . 'index.php/e-budget/pencarian/rekap_pencarian_canggih/'; ?>">
                     <table width="180%" border="0" cellspacing="0" cellpadding="0" style="table-layout: fixed; width: 188%">
                         <tr>
                             <th width="6%" style="text-align:left;background-color:#C6DEFF;font-weight: bold;font-size: 16px">No</th>
@@ -33,7 +33,7 @@ $separator = "-|;|-";
                             <td colspan="12">
                                 <div class="buttons">
                                     <button type="submit" class="regular" name="submit">
-                                        <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+                                        <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
                                         Rekap
                                     </button>
                                 </div>
@@ -138,8 +138,8 @@ $separator = "-|;|-";
                                     $countkomponen = 0;
                                     ?>
                                     <tr>
-                                        <td style="background-color:#ADDFFF;font-weight: bold;font-size: 16px"><?php echo $kdunit; ?></td>
-                                        <td style="background-color:#ADDFFF;font-weight: bold;font-size: 16px"><?php echo $nmunit; ?></td>
+                                        <td style="background-color:#ADDFFF;font-weight: bold;font-size: 16px"><?php echo  $kdunit; ?></td>
+                                        <td style="background-color:#ADDFFF;font-weight: bold;font-size: 16px"><?php echo  $nmunit; ?></td>
                                         <td style="background-color:#ADDFFF;font-weight: bold"></td>
                                         <td style="background-color:#ADDFFF;font-weight: bold"></td>
                                         <td style="text-align:left;background-color:#ADDFFF;font-weight: bold"></td>
@@ -148,7 +148,7 @@ $separator = "-|;|-";
                                         <td style="background-color:#ADDFFF;font-weight: bold"></td>
                                         <td style="background-color:#ADDFFF;font-weight: bold"></td>
                                         <td style="background-color:#ADDFFF;font-weight: bold"></td>
-                                        <td style="text-align:right;background-color:#ADDFFF;font-weight: bold;font-size: 16px"><?php echo number_format($total_unit[$countunit], 0, ',', ','); ?></td>
+                                        <td style="text-align:right;background-color:#ADDFFF;font-weight: bold;font-size: 16px"><?php echo  number_format($total_unit[$countunit], 0, ',', ','); ?></td>
 
                                         <td style="background-color:#ADDFFF;font-weight: bold"></td>
                                     </tr>
@@ -167,8 +167,8 @@ $separator = "-|;|-";
                                     $countkomponen = 0;
                                     ?>
                                     <tr>
-                                        <td style="background-color:#BDEDFF;font-weight: bold;font-size: 14px"><?php echo $kdunit; ?>.<?php echo $kdsatker; ?></td>
-                                        <td style="background-color:#BDEDFF;font-weight: bold;font-size: 14px"><?php echo $nmsatker; ?></td>
+                                        <td style="background-color:#BDEDFF;font-weight: bold;font-size: 14px"><?php echo  $kdunit; ?>.<?php echo  $kdsatker; ?></td>
+                                        <td style="background-color:#BDEDFF;font-weight: bold;font-size: 14px"><?php echo  $nmsatker; ?></td>
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
                                         <td style="text-align:left;background-color:#BDEDFF;font-weight: bold"></td>
@@ -176,7 +176,7 @@ $separator = "-|;|-";
 
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
-                                        <td style="text-align:right;background-color:#BDEDFF;font-weight: bold;font-size: 14px"><?php echo number_format($total_satker[$countunit][$countsatker], 0, ',', ','); ?></td>
+                                        <td style="text-align:right;background-color:#BDEDFF;font-weight: bold;font-size: 14px"><?php echo  number_format($total_satker[$countunit][$countsatker], 0, ',', ','); ?></td>
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
 
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
@@ -195,8 +195,8 @@ $separator = "-|;|-";
                                     $countkomponen++;
                                     ?>
                                     <tr>
-                                        <td style="background-color:#BDEDFF;font-weight: bold;font-size: 12px"><!--<?php echo $kdunit; ?>.<?php echo $kdsatker; ?>.<?php echo $kdkmpnen; ?>--></td>
-                                        <td style="background-color:#BDEDFF;font-weight: bold;font-size: 12px"><?php echo $komponen; ?></td>
+                                        <td style="background-color:#BDEDFF;font-weight: bold;font-size: 12px"><!--<?php echo  $kdunit; ?>.<?php echo  $kdsatker; ?>.<?php echo  $kdkmpnen; ?>--></td>
+                                        <td style="background-color:#BDEDFF;font-weight: bold;font-size: 12px"><?php echo  $komponen; ?></td>
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
                                         <td style="text-align:left;background-color:#BDEDFF;font-weight: bold"></td>
@@ -219,14 +219,14 @@ $separator = "-|;|-";
                                     ?>
                                     <tr>
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
-                                        <td style="background-color:#BDEDFF;font-size: 12px"><?php echo $skomponen; ?></td>
+                                        <td style="background-color:#BDEDFF;font-size: 12px"><?php echo  $skomponen; ?></td>
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
                                         <td style="text-align:left;background-color:#BDEDFF;font-weight: bold"></td>
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
 
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
-                                        <td style="text-align:right;background-color:#BDEDFF;font-weight: bold;"><?php echo number_format($total_kegiatan[$countunit][$countsatker][$key], 0, ',', ','); ?></td>
+                                        <td style="text-align:right;background-color:#BDEDFF;font-weight: bold;"><?php echo  number_format($total_kegiatan[$countunit][$countsatker][$key], 0, ',', ','); ?></td>
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
                                         <td style="background-color:#BDEDFF;font-weight: bold"></td>
 
@@ -253,12 +253,12 @@ $separator = "-|;|-";
                                 ?>>
                                     <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF\""; else echo "style=\"background-color:#FFFFFF\"";} else {echo "style=\"background-color:yellow\"";}?>></td>
                                     <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF\""; else echo "style=\"background-color:#FFFFFF\"";} else {echo "style=\"background-color:yellow\"";}?>></td>
-                                    <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF\""; else echo "style=\"background-color:#FFFFFF\"";} else {echo "style=\"background-color:yellow\"";}?>><?php echo $akun; ?></td>
-                                    <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF\""; else echo "style=\"background-color:#FFFFFF\"";} else {echo "style=\"background-color:yellow\"";}?>><?php echo $nmitem; ?></td>
-                                    <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF\""; else echo "style=\"background-color:#FFFFFF\"";} else {echo "style=\"background-color:yellow\"";}?>><?php echo number_format($volkeg, 0, ',', ',') . " " . $satkeg; ?></td>
-                                    <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF;text-align:right\""; else echo "style=\"background-color:#FFFFFF;text-align:right\"";} else {echo "style=\"background-color:yellow;text-align:right\"";}?>><?php echo number_format($hargasat, 0, ',', ','); ?></td>
+                                    <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF\""; else echo "style=\"background-color:#FFFFFF\"";} else {echo "style=\"background-color:yellow\"";}?>><?php echo  $akun; ?></td>
+                                    <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF\""; else echo "style=\"background-color:#FFFFFF\"";} else {echo "style=\"background-color:yellow\"";}?>><?php echo  $nmitem; ?></td>
+                                    <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF\""; else echo "style=\"background-color:#FFFFFF\"";} else {echo "style=\"background-color:yellow\"";}?>><?php echo  number_format($volkeg, 0, ',', ',') . " " . $satkeg; ?></td>
+                                    <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF;text-align:right\""; else echo "style=\"background-color:#FFFFFF;text-align:right\"";} else {echo "style=\"background-color:yellow;text-align:right\"";}?>><?php echo  number_format($hargasat, 0, ',', ','); ?></td>
 
-                                    <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF;text-align:right\""; else echo "style=\"background-color:#FFFFFF;text-align:right\"";} else {echo "style=\"background-color:yellow;text-align:right\"";}?>><?php echo number_format($jumlah, 0, ',', ','); ?></td>
+                                    <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF;text-align:right\""; else echo "style=\"background-color:#FFFFFF;text-align:right\"";} else {echo "style=\"background-color:yellow;text-align:right\"";}?>><?php echo  number_format($jumlah, 0, ',', ','); ?></td>
                                     <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF;text-align:right\""; else echo "style=\"background-color:#FFFFFF;text-align:right\"";} else {echo "style=\"background-color:yellow;text-align:right\"";}?>></td>
                                     <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF;text-align:right\""; else echo "style=\"background-color:#FFFFFF;text-align:right\"";} else {echo "style=\"background-color:yellow;text-align:right\"";}?>></td>
                                     <td <?php if ($correct_akun == "1") {if ($mod == 0) echo "style=\"background-color:#E0FFFF;text-align:right\""; else echo "style=\"background-color:#FFFFFF;text-align:right\"";} else {echo "style=\"background-color:yellow;text-align:right\"";}?>></td>
@@ -277,7 +277,7 @@ $separator = "-|;|-";
                         ?>
                         <tr>
                             <td colspan="6" style="background-color:#ADDFFF;font-weight: bold;font-size: 16px">Jumlah Total</td>
-                            <td style="text-align:right;background-color:#ADDFFF;font-weight: bold;font-size: 16px" colspan="4"><?php echo number_format($total, 0, ',', ','); ?></td>
+                            <td style="text-align:right;background-color:#ADDFFF;font-weight: bold;font-size: 16px" colspan="4"><?php echo  number_format($total, 0, ',', ','); ?></td>
                             <td style="background-color:#ADDFFF"></td>
                         </tr>
                     </table>

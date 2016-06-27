@@ -1,8 +1,8 @@
-<link href="<?= base_url() ?>css/tablecloth.css" rel="stylesheet" type="text/css" media="screen" />
-<h1><center>Kontrak <?php echo '<a href="#" onClick="edit_kontrak();"><img border=\'0\' src=\''.base_url().'images/icon/iconedit.png\'></a>';?></center></h1>
+<link href="<?php echo  base_url() ?>css/tablecloth.css" rel="stylesheet" type="text/css" media="screen" />
+<h1><center>Kontrak <?php echo  '<a href="#" onClick="edit_kontrak();"><img border=\'0\' src=\''.base_url().'images/icon/iconedit.png\'></a>';?></center></h1>
 <br />
 	<table width="100%">
-		<?php echo $input_nilai_kontrak;?>
+		<?php echo  $input_nilai_kontrak;?>
 		<tr>
 			<td width="40%"><b>Nomor Kontrak :</b></td>
 			<td width="60%">

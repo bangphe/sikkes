@@ -6,24 +6,24 @@
 	  <table width="600px" border="0" align="center">
         <tr>
           <td colspan="3"><p align="right">&nbsp;</p>
-            <p align="right"><?php echo $tanggal; ?></p></td>
+            <p align="right"><?php echo  $tanggal; ?></p></td>
         </tr>
         <tr>
           <td>Nomor</td>
-          <td colspan="2">: <?php echo $kode_surat.'/'.$nomor_surat.'/'.$tahun_surat; ?></td>
+          <td colspan="2">: <?php echo  $kode_surat.'/'.$nomor_surat.'/'.$tahun_surat; ?></td>
         </tr>
         <tr>
           <td>Hal</td>
-          <td colspan="2">: Umpan balik usulan program / kegiatan <?php echo $judul; ?></td>
+          <td colspan="2">: Umpan balik usulan program / kegiatan <?php echo  $judul; ?></td>
         </tr>
         <tr>
           <td colspan="3"><p>&nbsp;</p>
             <p><b>Yang terhormat,</b><br />
-                <?php echo $nmsatker; ?><br />
-                <?php echo $provinsi; ?></p>
+                <?php echo  $nmsatker; ?><br />
+                <?php echo  $provinsi; ?></p>
             <h3>&nbsp;</h3>
-            <p align="justify" >Menindaklanjuti surat Saudara nomor <?php echo $nomor_pengajuan; ?> tanggal <?php echo $tanggal_pengajuan; ?> tentang <?php echo $perihal; ?> dengan ini kami sampaikan umpan balik sebagai berikut:</p>
-            <p align="justify"><?php echo $umpan_balik; ?></p>
+            <p align="justify" >Menindaklanjuti surat Saudara nomor <?php echo  $nomor_pengajuan; ?> tanggal <?php echo  $tanggal_pengajuan; ?> tentang <?php echo  $perihal; ?> dengan ini kami sampaikan umpan balik sebagai berikut:</p>
+            <p align="justify"><?php echo  $umpan_balik; ?></p>
             <p align="justify">Demikian kami sampaikan, atas perhatiannya kami ucapkan terima kasih. </p>
             <p align="justify">&nbsp;</p>
           <p align="justify"></p></td>

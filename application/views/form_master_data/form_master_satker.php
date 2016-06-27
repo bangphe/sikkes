@@ -1,7 +1,7 @@
 <script type="text/javascript">
  function validasiKode(kode){
 	 $.ajax({
-		 url: '<?php echo base_url()?>index.php/master_data/master_satker/valid/'+kode,
+		 url: '<?php echo  base_url()?>index.php/master_data/master_satker/valid/'+kode,
 		 data: '',
 		 type: 'GET',
 		 beforeSend: function()
@@ -25,25 +25,25 @@
 <div id="judul" class="title">
 	Satker
 	<!--
-	<label class="edit"><a href="#"><img src="<?php echo base_url(); ?>images/icons/Edit_icon.png" /></a></label>
-	<label class="detail"><a href="#"><img src="<?php echo base_url(); ?>images/icons/detail.png" /></a></label>
+	<label class="edit"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/Edit_icon.png" /></a></label>
+	<label class="detail"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/detail.png" /></a></label>
 	-->
 </div>
 <div id="content_master">
-	<form class="appnitro" name="form_master_satker" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/master_data/master_satker/save_satker'; ?>">
+	<form class="appnitro" name="form_master_satker" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/master_data/master_satker/save_satker'; ?>">
 
 	<table width="80%" height="25%">
 			<tr>
 				<td width="10%">Kode Satker</td>
-				<td width="70%"><input type="text" name="kdsatker" id="kdsatker" style="width:14%; padding:4px"/><?php echo form_error('kdsatker'); ?></td>
+				<td width="70%"><input type="text" name="kdsatker" id="kdsatker" style="width:14%; padding:4px"/><?php echo  form_error('kdsatker'); ?></td>
 			</tr>
 			<tr>
 				<td width="10%">Kode Induk</td>
-				<td width="70%"><input type="text" name="kdinduk" id="kdinduk" style="width:14%; padding:4px"/><?php echo form_error('kdinduk'); ?></td>
+				<td width="70%"><input type="text" name="kdinduk" id="kdinduk" style="width:14%; padding:4px"/><?php echo  form_error('kdinduk'); ?></td>
 			</tr>
             <tr>
 				<td width="10%">Nama Satker</td>
-				<td width="70%"><textarea name="nmsatker" id="nmsatker" style="width:70%; padding:4px"  rows="3"/></textarea><?php echo form_error('nmsatker'); ?></td>
+				<td width="70%"><textarea name="nmsatker" id="nmsatker" style="width:70%; padding:4px"  rows="3"/></textarea><?php echo  form_error('nmsatker'); ?></td>
 			</tr>
              <tr>
 				<td width="10%">Departemen</td>
@@ -64,7 +64,7 @@
 			</tr>
             <tr>
 				<td width="10%">Nomor SP</td>
-				<td width="70%"><input type="text" name="nomorsp" id="nomorsp" style="width:14%; padding:4px" onchange="validasiKode(this.value)"/><?php echo form_error('nomorsp'); ?></td>
+				<td width="70%"><input type="text" name="nomorsp" id="nomorsp" style="width:14%; padding:4px" onchange="validasiKode(this.value)"/><?php echo  form_error('nomorsp'); ?></td>
 			</tr>
             <tr>
 				<td width="10%">KPPN</td>
@@ -79,11 +79,11 @@
 				<td>
 					<div class="buttons">
 						<button type="submit" class="regular" name="save" id="submit">
-							<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 							Save
 						</button>
 						<button type="reset" class="negative" name="reset">
-							<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 							Reset
 						</button>
 					</div>
@@ -92,7 +92,7 @@
             <tr>
                 <td>
                     <div class="buttons">
-                        <a href="<?php echo base_url();?>index.php/master_data/master_satker/grid_daftar"><img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>Back</a>
+                        <a href="<?php echo  base_url();?>index.php/master_data/master_satker/grid_daftar"><img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>Back</a>
                     </div>
                 </td>
             </tr>
@@ -105,7 +105,7 @@
 function getKab(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_kab/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_kab/'+v;
 	//alert(v)
 	
 	$.ajax({

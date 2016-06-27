@@ -1,14 +1,14 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $(function() {
-			get_html_data(base_url+"index.php/e-monev/laporan_monitoring/daftar_spm/"+<?php echo $spm_id;?>,'','profile_detail_loading', 'daftar_spm');
+			get_html_data(base_url+"index.php/e-monev/laporan_monitoring/daftar_spm/"+<?php echo  $spm_id;?>,'','profile_detail_loading', 'daftar_spm');
 	});
 });
 
 function get_alokasi_akun(d_skmpnen_id){
 		var kdakun = $("#akun").val();
 		$.ajax({
-			url: '<?=base_url()?>index.php/e-monev/laporan_monitoring/get_alokasi_akun/'+d_skmpnen_id,
+			url: '<?php echo base_url()?>index.php/e-monev/laporan_monitoring/get_alokasi_akun/'+d_skmpnen_id,
 			global: false,
 			type: 'POST',
 			async: false,
@@ -43,12 +43,12 @@ function unformat_nominal(){
 }
 </script>
 <div class="buttons">
-	<button type="submit" class="regular" name="grafik" onClick="daftar_progres_keuangan(<?php echo $d_skmpnen_id;?>);">
-		<img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>
+	<button type="submit" class="regular" name="grafik" onClick="daftar_progres_keuangan(<?php echo  $d_skmpnen_id;?>);">
+		<img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>
 		Kembali
 	</button>
-	<button type="submit" class="regular" name="grafik" onClick="grafik(<?php echo $d_skmpnen_id;?>);">
-		<img src="<?php echo base_url(); ?>images/icon/grafik.png" alt=""/>
+	<button type="submit" class="regular" name="grafik" onClick="grafik(<?php echo  $d_skmpnen_id;?>);">
+		<img src="<?php echo  base_url(); ?>images/icon/grafik.png" alt=""/>
 		Grafik
 	</button>
 	
@@ -110,12 +110,12 @@ function unformat_nominal(){
 			<td></td>
 			<td>
 				<div class="buttons">
-					<button type="submit" class="regular" name="save" id="submit" onClick="save_data_spm(<?php echo $spm_id;?>);">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+					<button type="submit" class="regular" name="save" id="submit" onClick="save_data_spm(<?php echo  $spm_id;?>);">
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Save
 					</button>
 					<button type="reset" class="negative" name="reset" onClick="reset();">
-						<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 						Reset
 					</button>
 				</div>

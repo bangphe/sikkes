@@ -1,5 +1,5 @@
 <div id="judul" class="title">
-	<?php echo $judul; ?>
+	<?php echo  $judul; ?>
 </div>
 	<div id="content">
 		<form name="form_tambah_visi" method="POST" id="form_tambah_visi" action="#">
@@ -22,7 +22,7 @@
 								$periode = $temp+11;
 								while($temp < $periode){
 							?>
-							<option value="<?php echo $temp; ?>"><?php echo $temp; ?></option>
+							<option value="<?php echo  $temp; ?>"><?php echo  $temp; ?></option>
 							<?php
 								$temp++;
 								} 
@@ -39,7 +39,7 @@
 								$periode = $temp-11;
 								while($temp > $periode){
 							?>
-							<option value="<?php echo $temp; ?>"><?php echo $temp; ?></option>
+							<option value="<?php echo  $temp; ?>"><?php echo  $temp; ?></option>
 							<?php
 								$temp--;
 								} 
@@ -65,7 +65,7 @@
 			<tr>
 				<td>Visi</td>
 				<td>
-					<textarea name="visi" id="visi" rows="4" cols="60"><?php echo form_error('visi')?></textarea>
+					<textarea name="visi" id="visi" rows="4" cols="60"><?php echo  form_error('visi')?></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -73,11 +73,11 @@
 				<td>
 					<div class="buttons">
 						<button type="submit" class="regular" name="save" onClick="save_data();">
-							<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 							Save
 						</button>
 						<button type="reset" class="negative" name="reset">
-							<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 							Reset
 						</button>
 					</div>

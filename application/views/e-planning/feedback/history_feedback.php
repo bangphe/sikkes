@@ -24,7 +24,7 @@
             </tr>
             <tr>
                 <td>Propinsi</td>
-                <td><?php echo $provinsi; ?></td>
+                <td><?php echo  $provinsi; ?></td>
             </tr>
             <tr>
                 <td>Jenis Satker</td>
@@ -38,40 +38,40 @@
             <tr>
                 <td width="15%" style="vertical-align:top;">Judul Proposal</td>
                 <td width="85%">
-                    <?php echo $judul; ?>
+                    <?php echo  $judul; ?>
                 </td>
             </tr>
             <tr>
                 <td width="15%" style="vertical-align:top;">Nomor Surat Pengantar</td>
                 <td width="85%">
-                    <?php echo $nomor; ?>
+                    <?php echo  $nomor; ?>
                 </td>
             </tr>
             <tr>
                 <td style="vertical-align:top;">Tanggal Surat</td>
-                <td><p><?php echo $tanggal_pembuatan; ?></p></td>
+                <td><p><?php echo  $tanggal_pembuatan; ?></p></td>
             </tr>
             <tr>
                 <td width="15%" style="vertical-align:top;">Perihal Surat</td>
-                <td width="85%"><?php echo $perihal; ?></td>
+                <td width="85%"><?php echo  $perihal; ?></td>
             </tr>
             <tr>
                 <td style="vertical-align:top;">Th. Anggaran</td>
-                <td><?php echo $thn_anggaran; ?></td>
+                <td><?php echo  $thn_anggaran; ?></td>
             </tr>
         </table>
     </div>
     <div>
         <h3>Feedback</h3>
-	<?php echo form_open($post_action);?>
+	<?php echo  form_open($post_action);?>
         <textarea id="feedback_text" name="feedback_text"></textarea>
-        <a href="<?php echo site_url(); ?>/e-planning/manajemen/grid_pengajuan" class="negative">
-            <img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>Batal
+        <a href="<?php echo  site_url(); ?>/e-planning/manajemen/grid_pengajuan" class="negative">
+            <img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>Batal
         </a>
         <button type="submit" class="regular" name="save" id="save"> 
-            <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/> Kirim 
+            <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/> Kirim 
         </button>
-        <?php echo form_close();?>
+        <?php echo  form_close();?>
     </div>
 </div>
 

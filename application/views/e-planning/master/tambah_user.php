@@ -75,7 +75,7 @@ $(document).ready(function(){
 function get_jenis_kewenangan_penyetuju()
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_jenis_kewenangan_penyetuju/';
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_jenis_kewenangan_penyetuju/';
 	//alert(v)
 	
 	$.ajax({
@@ -110,7 +110,7 @@ function get_jenis_kewenangan_penyetuju()
 function get_jenis_kewenangan()
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_jenis_kewenangan/';
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_jenis_kewenangan/';
 	//alert(v)
 	
 	$.ajax({
@@ -145,7 +145,7 @@ function get_jenis_kewenangan()
 function get_kab(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_kab/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_kab/'+v;
 	//alert(v)
 	
 	$.ajax({
@@ -180,7 +180,7 @@ function get_kab(v)
 function get_satker(v,x)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_satker/'+v+'/'+x;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_satker/'+v+'/'+x;
 	//alert(v)
 	
 	$.ajax({
@@ -215,7 +215,7 @@ function get_satker(v,x)
 function get_satker_unit_utama()
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_satker_unit_utama';
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_satker_unit_utama';
 	//alert(v)
 	
 	$.ajax({
@@ -250,7 +250,7 @@ function get_satker_unit_utama()
 function get_satker_dekon()
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_satker_dekon';
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_satker_dekon';
 	//alert(v)
 	
 	$.ajax({
@@ -285,7 +285,7 @@ function get_satker_dekon()
 function get_satker_kp()
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_satker_kp';
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_satker_kp';
 	//alert(v)
 	
 	$.ajax({
@@ -320,7 +320,7 @@ function get_satker_kp()
 function get_satker_kd()
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_satker_kd';
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_satker_kd';
 	//alert(v)
 	
 	$.ajax({
@@ -356,7 +356,7 @@ function get_satker_kd()
 function get_jabatan(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_jabatan/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_jabatan/'+v;
 	alert(v)
 	
 	$.ajax({
@@ -418,9 +418,9 @@ function validate_form()
 <div id="tengah">
 <div id="judul" class="title">Tambah User</div>
 <div id="content_tengah">
-	<form class="appnitro" name="form_tambah_user" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-planning/pendaftaran/save_user'; ?>" onsubmit="return validate_form()">
+	<form class="appnitro" name="form_tambah_user" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-planning/pendaftaran/save_user'; ?>" onsubmit="return validate_form()">
 	<ul id="tt" class="easyui-tree"
-			url="<?php echo base_url(); ?>index.php/e-planning/pendaftaran/json"
+			url="<?php echo  base_url(); ?>index.php/e-planning/pendaftaran/json"
 			checkbox="true">
 	</ul>
 	<table width="100%" height="100%" cellpadding="0" cellspacing="0">
@@ -469,19 +469,19 @@ function validate_form()
 		</tr>
 		<tr>
 			<td width="15%">Nama*</td>
-			<td width="85%"><input name="nama" type="text" id="nama" size="70"/><?php echo form_error('nama'); ?></td>
+			<td width="85%"><input name="nama" type="text" id="nama" size="70"/><?php echo  form_error('nama'); ?></td>
 		</tr>
 		<tr>
 			<td width="15%">Email*</td>
-			<td width="85%"><input name="email" type="text" id="email" size="70" /><?php echo form_error('email'); ?></td>
+			<td width="85%"><input name="email" type="text" id="email" size="70" /><?php echo  form_error('email'); ?></td>
 		</tr>
 		<tr>
 			<td width="15%">Telepon*</td>
-			<td width="85%"><input name="telp" type="text" id="telp" size="50" /><?php echo form_error('telp'); ?></td>
+			<td width="85%"><input name="telp" type="text" id="telp" size="50" /><?php echo  form_error('telp'); ?></td>
 		</tr>
 		<tr>
 			<td width="15%">Alamat*</td>
-			<td width="85%"><textarea name="alamat" id="alamat" cols="72" rows="3"/></textarea><?php echo form_error('alamat'); ?></td>
+			<td width="85%"><textarea name="alamat" id="alamat" cols="72" rows="3"/></textarea><?php echo  form_error('alamat'); ?></td>
 		</tr>
 		<tr id="menu_jnsjabatan">
 			<td width="15%">Jenis Jabatan*</td>
@@ -496,13 +496,13 @@ function validate_form()
 			<td width="85%">
 				<select id="jabatan" name="jabatan">
 				<?php foreach($eselon1->result() as $row){ ?>
-					<option value="<?php echo '1-'.$row->kdunit.'-'.$row->eselon1 ?>"><strong><?php echo $row->eselon1 ?></strong></option>
+					<option value="<?php echo  '1-'.$row->kdunit.'-'.$row->eselon1 ?>"><strong><?php echo  $row->eselon1 ?></strong></option>
 						<?php foreach($this->pm->get_where('ref_eselon2',$row->kdunit,'kdunit')->result() as $row){ ?>
-							<option value="<?php echo '2-'.$row->kdunit.'.'.$row->id_eselon2.'-'.$row->eselon2 ?>">&nbsp&nbsp&nbsp&nbsp <?php echo $row->eselon2 ?></option>
+							<option value="<?php echo  '2-'.$row->kdunit.'.'.$row->id_eselon2.'-'.$row->eselon2 ?>">&nbsp&nbsp&nbsp&nbsp <?php echo  $row->eselon2 ?></option>
 							<?php foreach($this->pm->get_where_double('ref_eselon3',$row->kdunit,'kdunit',$row->id_eselon2,'id_eselon2')->result() as $row){ ?>
-								<option value="<?php echo '3-'.$row->kdunit.'.'.$row->id_eselon2.'.'.$row->id_eselon3.'-'.$row->eselon3 ?>">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <?php echo $row->eselon3 ?></option>
+								<option value="<?php echo  '3-'.$row->kdunit.'.'.$row->id_eselon2.'.'.$row->id_eselon3.'-'.$row->eselon3 ?>">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <?php echo  $row->eselon3 ?></option>
 								<?php foreach($this->pm->get_where_triple('ref_eselon4',$row->kdunit,'kdunit',$row->id_eselon2,'id_eselon2',$row->id_eselon3,'id_eselon3')->result() as $row){ ?>
-									<option value="<?php echo '4-'.$row->kdunit.'.'.$row->id_eselon2.'.'.$row->id_eselon3.'.'.$row->id_eselon4.'-'.$row->eselon4 ?>">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <?php echo $row->eselon4 ?></option>
+									<option value="<?php echo  '4-'.$row->kdunit.'.'.$row->id_eselon2.'.'.$row->id_eselon3.'.'.$row->id_eselon4.'-'.$row->eselon4 ?>">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <?php echo  $row->eselon4 ?></option>
 								<?php } ?>
 							<?php } ?>
 						<?php } ?>
@@ -513,15 +513,15 @@ function validate_form()
 		</tr>
 		<tr>
 			<td width="15%">Username*</td>
-			<td width="85%"><input name="username" id="username" type="text" /><?php echo form_error('username'); ?></td>
+			<td width="85%"><input name="username" id="username" type="text" /><?php echo  form_error('username'); ?></td>
 		</tr>
 		<tr>
 			<td width="15%">Password*</td>
-			<td width="85%"><input name="password" id="password" type="password" onchange="pass_check()" onfocusout="pass_check()" /><?php echo form_error('password'); ?></td>
+			<td width="85%"><input name="password" id="password" type="password" onchange="pass_check()" onfocusout="pass_check()" /><?php echo  form_error('password'); ?></td>
 		</tr>
 		<tr>
 			<td width="15%">Confirm Password*</td>
-			<td width="85%"><input name="confpass" id="confpass" type="password" onchange="pass_check()" onfocusout="pass_check()"/><?php echo form_error('confpass'); ?><div id="label" style="color:red;"></td>
+			<td width="85%"><input name="confpass" id="confpass" type="password" onchange="pass_check()" onfocusout="pass_check()"/><?php echo  form_error('confpass'); ?><div id="label" style="color:red;"></td>
 		</tr>
 	</table>
 	<table width="100%" height="100%" cellpadding="0" cellspacing="0">
@@ -530,11 +530,11 @@ function validate_form()
 			<td>
 				<div class="buttons">
 					<button type="submit" class="regular" name="save" id="save">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Simpan
 					</button>
 					<button type="reset" class="negative" name="reset">
-						<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 						Reset
 					</button>
 				</div>

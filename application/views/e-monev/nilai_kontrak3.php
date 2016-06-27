@@ -42,7 +42,7 @@
 						);
 			echo form_input($data);
 		?>
-		<input type="hidden" name="nilai_kontrak" id="nilai_kontrak" value="<?php echo $nilai_kontrak;?>" />
+		<input type="hidden" name="nilai_kontrak" id="nilai_kontrak" value="<?php echo  $nilai_kontrak;?>" />
 	</td>
 </tr>
 <tr>
@@ -59,6 +59,6 @@
 						);
 			echo form_input($data);
 		?>
-		<input type="hidden" name="phln" id="phln" value="<?php echo $phln;?>"/>
+		<input type="hidden" name="phln" id="phln" value="<?php echo  $phln;?>"/>
 	</td>
 </tr>

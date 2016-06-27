@@ -2,10 +2,10 @@
 	$bulan_angka = date("n")-1;
 	$bulan_huruf = $this->general->konversi_bulan($bulan_angka);
 ?>  
-<div id="judul" class="title"><p align="center">DASHBOARD PROPINSI <?php echo $namaProv.' '.$thang.' '.$bulan_huruf; ?></p></div>
+<div id="judul" class="title"><p align="center">DASHBOARD PROPINSI <?php echo  $namaProv.' '.$thang.' '.$bulan_huruf; ?></p></div>
 <div id="content">
 	<table title="" class="easyui-treegrid" style="width:1157px;"  
-            url="<?= base_url() ?>index.php/e-monev/dashboard_propinsi/gridSatker"  
+            url="<?php echo  base_url() ?>index.php/e-monev/dashboard_propinsi/gridSatker"  
             rownumbers="true" showFooter="true" 
             idField="id" treeField="name" animate:"true">  
         <thead frozen="true">  

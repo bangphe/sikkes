@@ -4,56 +4,56 @@
 	<title>Sistem Informasi Kementrian Kesehatan</title>
 	
 <!-- ICON -->
-		<link rel="icon" type="image/x-icon" href="<?php echo base_url() ?>images/icons/depkes.png" />
+		<link rel="icon" type="image/x-icon" href="<?php echo  base_url() ?>images/icons/depkes.png" />
 		
 		<!-- Link CSS -->
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/flexigrid.css" media="screen, tv, projection" title="Default" />
-		<link rel="stylesheet" type="text/css" href="<?= base_url() ?>css/shortcut.css" media="screen, tv, projection" title="Default" />
-		<link rel="stylesheet" type="text/css" href="<?= base_url() ?>css/main.css" media="screen, tv, projection" title="Default" />
-		<link rel="stylesheet" type="text/css" href="<?= base_url() ?>css/default/jquery.css" media="screen, tv, projection" title="Default" />
-		<link rel="stylesheet" type="text/css" href="<?= base_url() ?>css/button.css" media="screen, tv, projection" title="Default" />
-		<link rel="stylesheet" type="text/css" href="<?= base_url() ?>css/accordion.css" media="screen, tv, projection" title="Default" />
-		<link rel="stylesheet" type="text/css" href="<?= base_url() ?>css/form/form.css" media="screen, tv, projection" title="Default" />	
-		<link rel="stylesheet" type="text/css" href="<?= base_url() ?>css/tab_view/tab-view.css" media="screen, tv, projection" title="Default" />	
-		<link rel="stylesheet" type="text/css" href="<?= base_url() ?>css/datepicker.css" media="screen, tv, projection" title="Default" />	
-		<link rel="stylesheet" type="text/css" href="<?= base_url() ?>css/ext-all.css" />
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/jquery-ui-1.8.18.custom.css" media="screen, tv, projection" title="Default" />
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/jquery.tree.css" media="screen, tv, projection" title="Default" />
+		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/flexigrid.css" media="screen, tv, projection" title="Default" />
+		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/shortcut.css" media="screen, tv, projection" title="Default" />
+		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/main.css" media="screen, tv, projection" title="Default" />
+		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/default/jquery.css" media="screen, tv, projection" title="Default" />
+		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/button.css" media="screen, tv, projection" title="Default" />
+		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/accordion.css" media="screen, tv, projection" title="Default" />
+		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/form/form.css" media="screen, tv, projection" title="Default" />	
+		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/tab_view/tab-view.css" media="screen, tv, projection" title="Default" />	
+		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/datepicker.css" media="screen, tv, projection" title="Default" />	
+		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/ext-all.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/jquery-ui-1.8.18.custom.css" media="screen, tv, projection" title="Default" />
+		<link rel="stylesheet" type="text/css" href="<?php echo  base_url() ?>css/jquery.tree.css" media="screen, tv, projection" title="Default" />
 
 		
 			
 		
 		
 		<!-- JAVASCRIPT -->
-		<script type="text/javascript" src="<?= base_url() ?>js/jquery.js"></script>
-		<script type="text/javascript" src="<?= base_url() ?>js/jquery.ui.all.js"></script>
-		<script type="text/javascript" src="<?= base_url() ?>form_attribute/view.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.ui.all.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>form_attribute/view.js"></script>
 		<!--
-		<script type="text/javascript" src="<?= base_url() ?>js/datepicker.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/datepicker.js"></script>
 		-->
-		<script type="text/javascript" src="<?= base_url() ?>js/wufoo.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/wufoo.js"></script>
 		
-		<script type="text/javascript" src="<?php echo base_url() ?>js/ajax.js"></script>
-		<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.js"></script>
-		<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.ui.all.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/ajax.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.ui.all.js"></script>
 		
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.layout.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.layout.js"></script>
 		
 		
-		<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.ui.autocomplete.js"></script>
-		<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.tree.js"></script>
-		<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.treeajax.js"></script>
-		<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.treecheckbox.js"></script>
-		<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.treecollapse.js"></script>
-		<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.treecontextmenu.js"></script>
-		<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.treednd.js"></script>
-		<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.treeselect.js"></script>
-		<script type="text/javascript" src="<?php echo base_url() ?>js/flexigrid.pack.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.ui.autocomplete.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.tree.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.treeajax.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.treecheckbox.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.treecollapse.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.treecontextmenu.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.treednd.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/jquery.treeselect.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/flexigrid.pack.js"></script>
 		
-		<script type="text/javascript" src="<?php echo base_url() ?>js/FusionCharts.js"></script>
-		<script type="text/javascript" src="<?php echo base_url() ?>js/tiny_mce/tiny_mce.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/FusionCharts.js"></script>
+		<script type="text/javascript" src="<?php echo  base_url() ?>js/tiny_mce/tiny_mce.js"></script>
 		
 		<script type="text/javascript">
 			<!-- <MENU_KANAN>
@@ -71,8 +71,8 @@
 				//slides the element with class "menu_body" when mouse is over the paragraph
 				$("#secondpane p.menu_head").mouseover(function()
 				{
-					 $(this).css({backgroundImage:"url(<?= base_url() ?>images/main/down.png)"}).next("div.menu_body").slideDown(500).siblings("div.menu_body").slideUp("slow");
-					 $(this).siblings().css({backgroundImage:"url(<?= base_url() ?>images/main/left.png)"});
+					 $(this).css({backgroundImage:"url(<?php echo  base_url() ?>images/main/down.png)"}).next("div.menu_body").slideDown(500).siblings("div.menu_body").slideUp("slow");
+					 $(this).siblings().css({backgroundImage:"url(<?php echo  base_url() ?>images/main/left.png)"});
 				});
 			});
 		</script>
@@ -111,20 +111,20 @@
 	<body>
 		<div class="ui-layout-north">
 			<div class="top_panel_left">
-			  <div align="bottom" class="style1" style="vertical-align:bottom">Selamat datang, <?php echo $this->session->userdata('username');?></div>
-			  <div align="right" class="style1" style="vertical-align:bottom">Anda terdaftar atas nama <?php echo $this->session->userdata('nama_user');?></div>
-			  <div align="right" class="style1" style="vertical-align:bottom">Kode Satker: <?php echo $this->session->userdata('kdsatker');?></div>
+			  <div align="bottom" class="style1" style="vertical-align:bottom">Selamat datang, <?php echo  $this->session->userdata('username');?></div>
+			  <div align="right" class="style1" style="vertical-align:bottom">Anda terdaftar atas nama <?php echo  $this->session->userdata('nama_user');?></div>
+			  <div align="right" class="style1" style="vertical-align:bottom">Kode Satker: <?php echo  $this->session->userdata('kdsatker');?></div>
 			</div>
 			<div class="top_panel_right"></div>
 			
 		</div>
 		
 		<div class="outer-center">
-			<div class="content_panel"><? echo $content;?></div>
+			<div class="content_panel"><?php echo  $content;?></div>
 		</div> 
 
 		<div class="outer-west">
-			<div class="leftmenu_panel"><? $this->load->view('menu_kiri');?></div>
+			<div class="leftmenu_panel"><?php $this->load->view('menu_kiri');?></div>
 		</div>
 		
 		<div class="ui-layout-south">

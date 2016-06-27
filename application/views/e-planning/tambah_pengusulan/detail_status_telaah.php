@@ -8,13 +8,13 @@
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;"><p>JUDUL PROPOSAL</p></td>
 				<td>:</td>
-				<td><?php echo $judul;?></td>
+				<td><?php echo  $judul;?></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td width="200px" style="padding-left:10px;vertical-align:top;"><p>TELAAH</p></td>
 				<td>:</td>
-				<td><?php echo '<a href="'.site_url().'/e-planning/telaah/detail_telaah_staff/'.$kd_telaah.'/'.$kd_pengajuan.'">'; ?>Lihat Detail Telaah</a></td>
+				<td><?php echo  '<a href="'.site_url().'/e-planning/telaah/detail_telaah_staff/'.$kd_telaah.'/'.$kd_pengajuan.'">'; ?>Lihat Detail Telaah</a></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
@@ -58,35 +58,35 @@
 			?>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;" colspan=2>Staf&nbsp;</td>
-				<td align="left"><?php echo $status_staf; ?></td>
+				<td align="left"><?php echo  $status_staf; ?></td>
 			</tr>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;" colspan=2>Kasubag&nbsp;</td>
-				<td align="left"><?php echo $status_kasubag; ?></td>
+				<td align="left"><?php echo  $status_kasubag; ?></td>
 			</tr>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;" colspan=2>Kabag&nbsp;</td>
-				<td align="left"><?php echo $status_kabag; ?></td>
+				<td align="left"><?php echo  $status_kabag; ?></td>
 			</tr>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;" colspan=2>Kabiro&nbsp;</td>
-				<td align="left"><?php echo $status_kabiro; ?> <?php echo $this->session->userdata('eselon'); ?></td>
+				<td align="left"><?php echo  $status_kabiro; ?> <?php echo  $this->session->userdata('eselon'); ?></td>
 			</tr>
 			<tr>
 			<td></td><td></td>
 			<td><div class="buttons">
-					<button type="button" class="negative" name="kembali" onClick="history.go(-1);"> <img src="<?php echo base_url(); ?>images/main/back.png" alt=""/> Kembali </button>
+					<button type="button" class="negative" name="kembali" onClick="history.go(-1);"> <img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/> Kembali </button>
 			<?php if($this->session->userdata('eselon') != '0'){ ?>
 			<a href="#" class="positive" >
-					<img src="<?php echo base_url(); ?>images/main/ok.png" alt=""/> Minta Koreksi </a>
+					<img src="<?php echo  base_url(); ?>images/main/ok.png" alt=""/> Minta Koreksi </a>
 			<?php } ?>
 			<?php if($this->session->userdata('eselon') == '4' || $this->session->userdata('eselon') == '3'){ ?>
-			<a href="<?php echo base_url()?>index.php/e-planning/telaah/kirim/<?php echo $kd_telaah;?>" class="positive" >
-					<img src="<?php echo base_url(); ?>images/main/ok.png" alt=""/> Kirim </a>
+			<a href="<?php echo  base_url()?>index.php/e-planning/telaah/kirim/<?php echo  $kd_telaah;?>" class="positive" >
+					<img src="<?php echo  base_url(); ?>images/main/ok.png" alt=""/> Kirim </a>
 			<?php }
 			elseif($this->session->userdata('eselon') == '2'){ ?>
 			<a href="#" class="positive" >
-					<img src="<?php echo base_url(); ?>images/main/ok.png" alt=""/> Setujui Telaah </a>
+					<img src="<?php echo  base_url(); ?>images/main/ok.png" alt=""/> Setujui Telaah </a>
 			<?php } ?>
 				</div>
 			</td>

@@ -18,8 +18,8 @@
         }
         ?>
         <!--
-        <label class="edit"><a href="#"><img src="<?php echo base_url(); ?>images/icons/Edit_icon.png" /></a></label>
-        <label class="detail"><a href="#"><img src="<?php echo base_url(); ?>images/icons/detail.png" /></a></label>
+        <label class="edit"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/Edit_icon.png" /></a></label>
+        <label class="detail"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/detail.png" /></a></label>
         -->
     </div>
     <div id="content_tengah">
@@ -135,7 +135,7 @@
                 return true;
             }
         </script>    
-        <form class="appnitro" name="pencarian" enctype="multipart/form-data" method="post" action="<?php echo base_url() . 'index.php/e-budget/pencarian/result_pencarian_canggih/' . $type; ?>">
+        <form class="appnitro" name="pencarian" enctype="multipart/form-data" method="post" action="<?php echo  base_url() . 'index.php/e-budget/pencarian/result_pencarian_canggih/' . $type; ?>">
             <div>
                 <table width="100%" height="100%">
                     <tr>
@@ -145,7 +145,7 @@
                                 <?php
                                 foreach ($units as $key => $value) {
                                     ?>
-                                    <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                    <option value="<?php echo  $key; ?>"><?php echo  $value; ?></option>
                                     <?php
                                 }
                                 ?>
@@ -166,7 +166,7 @@
                                 <?php
                                 foreach ($programs as $key => $value) {
                                     ?>
-                                    <option value="<?php echo $key; ?>" ><?php echo $value; ?></option>
+                                    <option value="<?php echo  $key; ?>" ><?php echo  $value; ?></option>
                                     <?php
                                 }
                                 ?>
@@ -198,7 +198,7 @@
                             <?php
                             foreach ($lokasis as $key => $value) {
                                 ?>
-                                <input type="checkbox" name="lokasi[]" value="<?php echo $key; ?>" /><?php echo $value; ?><br />
+                                <input type="checkbox" name="lokasi[]" value="<?php echo  $key; ?>" /><?php echo  $value; ?><br />
                                 <?php
                             }
                             ?>
@@ -221,7 +221,7 @@
                             <?php
                             foreach ($bebans as $key => $value) {
                                 ?>
-                                <input type="checkbox" name="beban[]" value="<?php echo $key; ?>" /><?php echo $value; ?><br />
+                                <input type="checkbox" name="beban[]" value="<?php echo  $key; ?>" /><?php echo  $value; ?><br />
                                 <?php
                             }
                             ?>
@@ -244,7 +244,7 @@
                             <?php
                             foreach ($jenissats as $key => $value) {
                                 ?>
-                                <input type="checkbox" name="jenissat[]" value="<?php echo $key; ?>" /><?php echo $value; ?><br />
+                                <input type="checkbox" name="jenissat[]" value="<?php echo  $key; ?>" /><?php echo  $value; ?><br />
                                 <?php
                             }
                             ?>
@@ -267,7 +267,7 @@
                                 <?php
                                 foreach ($reformasi_kesehatans as $key => $value) {
                                     ?>
-                                    <option value="<?php echo $key; ?>" ><?php echo $value; ?></option>
+                                    <option value="<?php echo  $key; ?>" ><?php echo  $value; ?></option>
                                     <?php
                                 }
                                 ?>
@@ -282,7 +282,7 @@
                                 <?php
                                 foreach ($fokus_prioritass as $key => $value) {
                                     ?>
-                                    <option value="<?php echo $key; ?>" ><?php echo $value; ?></option>
+                                    <option value="<?php echo  $key; ?>" ><?php echo  $value; ?></option>
                                     <?php
                                 }
                                 ?>
@@ -297,7 +297,7 @@
                                 <?php
                                 foreach ($sinonims as $key => $value) {
                                     ?>
-                                    <option value="<?php echo $value[0]; ?>"><?php echo $value[1]; ?></option>
+                                    <option value="<?php echo  $value[0]; ?>"><?php echo  $value[1]; ?></option>
                                     <?php
                                 }
                                 ?>
@@ -312,7 +312,7 @@
                                 <?php
                                 foreach ($sinonim_negatif as $key => $value) {
                                     ?>
-                                    <option value="<?php echo $value[0]; ?>"><?php echo $value[1]; ?></option>
+                                    <option value="<?php echo  $value[0]; ?>"><?php echo  $value[1]; ?></option>
                                     <?php
                                 }
                                 ?>
@@ -351,7 +351,7 @@
                                 <?php
                                 foreach ($akungroups as $key => $value) {
                                     ?>
-                                    <option value="<?php echo $value[0]; ?>"><?php echo $value[1]; ?></option>
+                                    <option value="<?php echo  $value[0]; ?>"><?php echo  $value[1]; ?></option>
                                     <?php
                                 }
                                 ?>
@@ -392,7 +392,7 @@
                         <td width="85%">  
                             <div class="buttons">
                                 <button type="submit" class="regular" name="submit">
-                                    <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+                                    <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
                                     Cari
                                 </button>
                             </div>

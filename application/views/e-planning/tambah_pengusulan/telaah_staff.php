@@ -3,8 +3,8 @@
 	Telaah Staff
 </div>
 <div id="content">
-	<!--form id="form_telaah_staff" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-planning/telaah/telaah_staff/'.$kd_pengajuan; ?>" > <!--onsubmit="return validate_form()"-->
-	<?php echo form_open('e-planning/telaah/telaah_staff/'.$kd_pengajuan); ?>
+	<!--form id="form_telaah_staff" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-planning/telaah/telaah_staff/'.$kd_pengajuan; ?>" > <!--onsubmit="return validate_form()"-->
+	<?php echo  form_open('e-planning/telaah/telaah_staff/'.$kd_pengajuan); ?>
 		<div style="color:red"><?php //echo validation_errors(); ?>
 		 <h1><?php if(isset($warning)) echo $warning; ?></h1></div>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -68,10 +68,10 @@
 			<td>
 				<div class="buttons">
 					<button type="submit" class="regular" name="save" id="save">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Simpan
 					</button>
-					<button type="button" class="negative" name="batal" onClick="history.go(-1);"> <img src="<?php echo base_url(); ?>images/main/back.png" alt=""/> Batal </button>
+					<button type="button" class="negative" name="batal" onClick="history.go(-1);"> <img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/> Batal </button>
 				</div>
 			</td>
 			</tr>

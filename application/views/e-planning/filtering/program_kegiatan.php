@@ -1,7 +1,7 @@
 <div id="container">
 	<h1>Rincian Pengusul</h1>
 	<div id="body">
-		<form id="form_program" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/E-Planning/Filtering/search'; ?>">
+		<form id="form_program" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/E-Planning/Filtering/search'; ?>">
 			<p>search </p>
 			<input id="keyword" name="keyword" /> 
 			<select id="kategori" name="kategori">
@@ -27,13 +27,13 @@
 			?>
 			<tr style="cursor: hand" onmouseover="this.style.backgroundColor='#ffff00';" 
 			onmouseout="this.style.backgroundColor='#ffffff';" 
-			onclick="window.opener.document.getElementById('prioritas').value='<?php echo $nama; ?>';
-			window.opener.document.getElementById('kode_prioritas').value='<?php echo $kode; ?>'; 
+			onclick="window.opener.document.getElementById('prioritas').value='<?php echo  $nama; ?>';
+			window.opener.document.getElementById('kode_prioritas').value='<?php echo  $kode; ?>'; 
 			window.close();">
-				<td><?php echo $no; ?></td>
-				<td><?php echo $kode; ?></td>
-				<td><?php echo $nama; ?></td>
-				<td><?php echo $output; ?></td>
+				<td><?php echo  $no; ?></td>
+				<td><?php echo  $kode; ?></td>
+				<td><?php echo  $nama; ?></td>
+				<td><?php echo  $output; ?></td>
 			</tr>
 			<?php 
 				$no++;	

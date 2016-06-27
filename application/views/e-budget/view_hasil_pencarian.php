@@ -8,8 +8,8 @@ ini_set("memory_limit","1500M");
     <div id="judul" class="title">
         Hasil Pencarian
         <!--
-        <label class="edit"><a href="#"><img src="<?php echo base_url(); ?>images/icons/Edit_icon.png" /></a></label>
-        <label class="detail"><a href="#"><img src="<?php echo base_url(); ?>images/icons/detail.png" /></a></label>
+        <label class="edit"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/Edit_icon.png" /></a></label>
+        <label class="detail"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/detail.png" /></a></label>
         -->
     </div>
     <div id="content_tengah">
@@ -95,13 +95,13 @@ ini_set("memory_limit","1500M");
                                 $countsatker = 0;
                                 ?>
                                 <tr>
-                                    <td style="background-color:#ADDFFF;font-weight: bold;font-size: 16px"><?php echo $countunit; ?></td>
-                                    <td style="background-color:#ADDFFF;font-weight: bold;font-size: 16px"><?php echo $nmunit; ?></td>
+                                    <td style="background-color:#ADDFFF;font-weight: bold;font-size: 16px"><?php echo  $countunit; ?></td>
+                                    <td style="background-color:#ADDFFF;font-weight: bold;font-size: 16px"><?php echo  $nmunit; ?></td>
                                     <td style="background-color:#ADDFFF;font-weight: bold"></td>
                                     <td style="background-color:#ADDFFF;font-weight: bold"></td>
                                     <td style="background-color:#ADDFFF;font-weight: bold"></td>
                                     <td style="background-color:#ADDFFF;font-weight: bold"></td>
-                                    <td style="text-align:right;background-color:#ADDFFF;font-weight: bold;font-size: 16px"><?php echo number_format($total_unit[$countunit], 0, ',', ','); ?></td>
+                                    <td style="text-align:right;background-color:#ADDFFF;font-weight: bold;font-size: 16px"><?php echo  number_format($total_unit[$countunit], 0, ',', ','); ?></td>
                                 </tr>
                                 <?php
                             }
@@ -113,13 +113,13 @@ ini_set("memory_limit","1500M");
                                 $countsatker++;
                                 ?>
                                 <tr>
-                                    <td style="background-color:#BDEDFF;font-weight: bold;font-size: 14px"><?php echo $countunit; ?>.<?php echo $countsatker; ?></td>
-                                    <td style="background-color:#BDEDFF;font-weight: bold;font-size: 14px"><?php echo $nmsatker; ?></td>
+                                    <td style="background-color:#BDEDFF;font-weight: bold;font-size: 14px"><?php echo  $countunit; ?>.<?php echo  $countsatker; ?></td>
+                                    <td style="background-color:#BDEDFF;font-weight: bold;font-size: 14px"><?php echo  $nmsatker; ?></td>
                                     <td style="background-color:#BDEDFF;font-weight: bold"></td>
                                     <td style="background-color:#BDEDFF;font-weight: bold"></td>
                                     <td style="background-color:#BDEDFF;font-weight: bold"></td>
                                     <td style="background-color:#BDEDFF;font-weight: bold"></td>
-                                    <td style="text-align:right;background-color:#BDEDFF;font-weight: bold;font-size: 14px"><?php echo number_format($total_satker[$countunit][$countsatker], 0, ',', ','); ?></td>
+                                    <td style="text-align:right;background-color:#BDEDFF;font-weight: bold;font-size: 14px"><?php echo  number_format($total_satker[$countunit][$countsatker], 0, ',', ','); ?></td>
                                 </tr>
                                 <?php
                             }
@@ -129,10 +129,10 @@ ini_set("memory_limit","1500M");
                                 <td></td>
                                 <td>
                                 </td>
-                                <td><?php echo $nmitem; ?></td>
-                                <td><?php echo number_format($volkeg, 0, ',', ',') . " " . $satkeg; ?></td>
-                                <td style="text-align:right"><?php echo number_format($hargasat, 0, ',', ','); ?></td>
-                                <td style="text-align:right"><?php echo number_format($jumlah, 0, ',', ','); ?></td>
+                                <td><?php echo  $nmitem; ?></td>
+                                <td><?php echo  number_format($volkeg, 0, ',', ',') . " " . $satkeg; ?></td>
+                                <td style="text-align:right"><?php echo  number_format($hargasat, 0, ',', ','); ?></td>
+                                <td style="text-align:right"><?php echo  number_format($jumlah, 0, ',', ','); ?></td>
                                 <td></td>
                             </tr>
                             <?php
@@ -141,7 +141,7 @@ ini_set("memory_limit","1500M");
                     ?>
                     <tr>
                         <td colspan="6" style="background-color:#ADDFFF;font-weight: bold;font-size: 16px">Jumlah Total</td>
-                        <td style="text-align:right;background-color:#ADDFFF;font-weight: bold;font-size: 16px"><?php echo number_format($total, 0, ',', ','); ?></td>
+                        <td style="text-align:right;background-color:#ADDFFF;font-weight: bold;font-size: 16px"><?php echo  number_format($total, 0, ',', ','); ?></td>
                     </tr>
                 </table>
             </div>  

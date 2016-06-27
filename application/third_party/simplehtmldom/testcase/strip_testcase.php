@@ -63,12 +63,12 @@ assert(count($dom->find('script'))==3);
 // -----------------------------------------------------------------------------
 // php short tag test
 $str = <<<HTML
-<a href="<?=h('ok')?>">hello</a>
-<input type=submit name="btnG" value="<?php echoh('ok')?>">
+<a href="<?php echo h('ok')?>">hello</a>
+<input type=submit name="btnG" value="<?php echo h('ok')?>">
 HTML;
 $dom->load($str);
-assert($dom->find('a', 0)->href==="<?=h('ok')?>");
-assert($dom->find('input', 0)->value==="<?php echoh('ok')?>");
+assert($dom->find('a', 0)->href==="<?php echo h('ok')?>");
+assert($dom->find('input', 0)->value==="<?php echo h('ok')?>");
 
 // -----------------------------------------------------------------------------
 // noise stripping test

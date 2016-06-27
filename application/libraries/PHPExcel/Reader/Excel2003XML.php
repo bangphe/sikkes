@@ -190,8 +190,8 @@ class PHPExcel_Reader_Excel2003XML implements PHPExcel_Reader_IReader
 		//
 
 		$signature = array(
-				'<?xml version="1.0"',
-				'<?mso-application progid="Excel.Sheet"?>'
+				'<?phpxml version="1.0"',
+				'<?phpmso-application progid="Excel.Sheet"?>'
 			);
 
 		// Check if file exists
@@ -214,7 +214,7 @@ class PHPExcel_Reader_Excel2003XML implements PHPExcel_Reader_IReader
 		}
 
 		//	Retrieve charset encoding
-		if(preg_match('/<?xml.*encoding=[\'"](.*?)[\'"].*?>/um',$data,$matches)) {
+		if(preg_match('/<?phpxml.*encoding=[\'"](.*?)[\'"].*?>/um',$data,$matches)) {
 			$this->_charSet = strtoupper($matches[1]);
 		}
 //		echo 'Character Set is ',$this->_charSet,'<br />';

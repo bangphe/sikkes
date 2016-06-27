@@ -33,7 +33,7 @@ function whenkeydown2(max_length)
     });
 }
 </script>
-<?php echo form_open_multipart('e-monev/master_bank/save_progres/1'); ?>
+<?php echo  form_open_multipart('e-monev/master_bank/save_progres/1'); ?>
 <table class="tablecloth" width=auto>
 		
 		<br />
@@ -55,4 +55,4 @@ function whenkeydown2(max_length)
 			</td>
 		</tr>
 	</table>
-<?php echo form_close();?>
+<?php echo  form_close();?>

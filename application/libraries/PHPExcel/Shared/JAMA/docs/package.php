@@ -12,7 +12,7 @@ Source Listing:
   $files = array_merge($files, glob("util/*.php"));
   foreach ($files as $fileName) {
     ?>
-  	<li><a href="package.php?view=<?php echo sha1($fileName);?>"><?php echo $fileName;?></a>&nbsp;-&nbsp;<?php echo date ("F d Y - g:i a", filemtime($fileName));?></li>
+  	<li><a href="package.php?view=<?php echo  sha1($fileName);?>"><?php echo  $fileName;?></a>&nbsp;-&nbsp;<?php echo  date ("F d Y - g:i a", filemtime($fileName));?></li>
     <?php
   }
   ?>
@@ -24,7 +24,7 @@ if( isset($_REQUEST['view']) ) {
 	$fileName = $files[$n];
   ?>
   <hr />  
-	Viewing: <?php echo $fileName;?>	
+	Viewing: <?php echo  $fileName;?>	
 	<hr />
 	<?php
 	highlight_file($fileName);

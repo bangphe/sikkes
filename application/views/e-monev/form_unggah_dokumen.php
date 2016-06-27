@@ -2,24 +2,24 @@
 <div id="judul" class="title">
 	Unggah Dokumen
 	<!--
-	<label class="edit"><a href="#"><img src="<?php echo base_url(); ?>images/icons/Edit_icon.png" /></a></label>
-	<label class="detail"><a href="#"><img src="<?php echo base_url(); ?>images/icons/detail.png" /></a></label>
+	<label class="edit"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/Edit_icon.png" /></a></label>
+	<label class="detail"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/detail.png" /></a></label>
 	-->
 </div>
 <div id="content_master">
-	<form class="appnitro" name="form_unggah_dokumen" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-monev/laporan_monitoring/do_unggah/'.$d_skmpnen_id; ?>">
+	<form class="appnitro" name="form_unggah_dokumen" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-monev/laporan_monitoring/do_unggah/'.$d_skmpnen_id; ?>">
 
 	<table width="80%" height="25%">
 	<div>
-		<?= anchor(site_url('e-monev/laporan_monitoring/daftar_dokumen/'.$d_skmpnen_id),img(array('src'=>'images/flexigrid/prev.gif','border'=>'0','alt'=>'')).'Kembali Ke Daftar Dokumen'); ?>
+		<?php echo  anchor(site_url('e-monev/laporan_monitoring/daftar_dokumen/'.$d_skmpnen_id),img(array('src'=>'images/flexigrid/prev.gif','border'=>'0','alt'=>'')).'Kembali Ke Daftar Dokumen'); ?>
 		</div>
 		<br />
 		<?php if($error_file != ''){ ?>
 		<tr>
 				<td width="10%">&nbsp;</td>
-				<td width="70%"><?php echo $error_file; ?></td>
+				<td width="70%"><?php echo  $error_file; ?></td>
 		</tr>
-		<? } ?>
+		<?php } ?>
 		<tr>
 				<td width="10%">File Dokumen</td>
 				<td width="70%"><div id="error_file"></div><input id="file_unggah" name="file_unggah" class="element file" type="file"/></td>
@@ -45,8 +45,8 @@
 	</table>
 	<table width="100%"><tr><td  width="100%" style="text-align:center">
 	<div class="buttons">
-	  <button type="button" class="negative" name="batal" onClick="history.go(-1);"> <img src="<?php echo base_url(); ?>images/main/back.png" alt=""/> Batal </button>
-      <button type="submit" class="regular" name="save" id="save" onClick="return cek_ket_file()"> <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/> Simpan </button>
+	  <button type="button" class="negative" name="batal" onClick="history.go(-1);"> <img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/> Batal </button>
+      <button type="submit" class="regular" name="save" id="save" onClick="return cek_ket_file()"> <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/> Simpan </button>
 	  </div>
 	 </td></tr></table>
 	</form>

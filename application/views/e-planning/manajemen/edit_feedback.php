@@ -1,7 +1,7 @@
 <div id="tengah">
 <div id="judul" class="title"></div>
 <div id="content_tengah">
-	<form class="appnitro" name="form_feedback" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-planning/manajemen/update_feedback/'.$perintah.'/'.$kd_pengajuan;?>"  onsubmit="return validateForm()">
+	<form class="appnitro" name="form_feedback" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-planning/manajemen/update_feedback/'.$perintah.'/'.$kd_pengajuan;?>"  onsubmit="return validateForm()">
 	  <table width="500" border="1" align="center">
         <tr>
           <td><p>&nbsp;</p>
@@ -9,21 +9,21 @@
               <tr>
                 <td style="padding-left:10px;"><p>Tanggal</p>
                 <p>&nbsp;</p></td>
-                  <td><p><input name="tanggal" id="tanggal" type="text" value="<?php echo $tanggal ?>" /> (hh-bb-tttt)</p></td>
+                  <td><p><input name="tanggal" id="tanggal" type="text" value="<?php echo  $tanggal ?>" /> (hh-bb-tttt)</p></td>
                    <p>&nbsp;  </p>
                 </div></td>
               </tr>
               <tr>
                 <td style="padding-left:10px;"><p>Kode Surat </p>
                 <p>&nbsp;</p></td>
-                <td><?php echo form_dropdown('kode_surat',$option_kode_surat, $kode_surat); ?>
+                <td><?php echo  form_dropdown('kode_surat',$option_kode_surat, $kode_surat); ?>
                 <p>&nbsp;</p></td>
               </tr>
               <tr>
                 <td style="padding-left:10px;"><p>Nomor Surat</p>
                 <p>&nbsp; </p></td>
                 <td><p>
-                  <input name="nomor_surat" type="text" size="32" value="<?php echo $nomor_surat ?>" />
+                  <input name="nomor_surat" type="text" size="32" value="<?php echo  $nomor_surat ?>" />
                 </p>
                 <p>&nbsp; </p></td>
               </tr>
@@ -31,14 +31,14 @@
                 <td style="padding-left:10px;"><p>Tahun Surat</p>
                 <p>&nbsp; </p></td>
                 <td><p>
-                  <input name="tahun_surat" type="text" maxlength="4" size="4"  value="<?php echo $tahun_surat ?>" />
+                  <input name="tahun_surat" type="text" maxlength="4" size="4"  value="<?php echo  $tahun_surat ?>" />
                 </p>
                 <p>&nbsp; </p></td>
               </tr>
               <tr>
                 <td width="19%" style="padding-left:10px;"><p>Hal</p>
                 <p>&nbsp;</p></td>
-                <td width="81%"><?php echo $judul; ?>
+                <td width="81%"><?php echo  $judul; ?>
                   <p>
                     <?php ?>                
                   </p>
@@ -47,37 +47,37 @@
               <tr>
                 <td style="padding-left:10px;"><p>Kepada</p>
                 <p>&nbsp;</p></td>
-                <td><?php echo $nmsatker; ?>
+                <td><?php echo  $nmsatker; ?>
                 <p>&nbsp;</p></td>
               </tr>
               <tr>
                 <td style="padding-left:10px;"><p>Alamat</p>
                 <p>&nbsp;</p></td>
-                <td><?php echo $alamat; ?>
+                <td><?php echo  $alamat; ?>
                 <p>&nbsp;</p></td>
               </tr>
               <tr>
                 <td style="padding-left:10px;"><p>Nomor Pengajuan</p>
                 <p>&nbsp; </p></td>
-                <td><?php echo $nomor_pengajuan; ?>
+                <td><?php echo  $nomor_pengajuan; ?>
                 <p>&nbsp;</p></td>
               </tr>
               <tr>
                 <td style="padding-left:10px;"><p>Tanggal Pengajuan </p>
                 <p>&nbsp;</p></td>
-                <td><?php echo $tanggal_pengajuan; ?>
+                <td><?php echo  $tanggal_pengajuan; ?>
                 <p>&nbsp;</p></td>
               </tr>
               <tr>
                 <td style="padding-left:10px;"><p>Perihal Pengajuan </p>
                 <p>&nbsp;</p></td>
-                <td><?php echo $perihal; ?>
+                <td><?php echo  $perihal; ?>
                 <p>&nbsp;</p></td>
               </tr>
               <tr>
                 <td style="padding-left:10px;">Umpan balik: </td>
                 <td><p>
-                  <textarea name="umpan_balik"><?php echo $umpan_balik ?></textarea>
+                  <textarea name="umpan_balik"><?php echo  $umpan_balik ?></textarea>
                 </p>
                 <p style="padding-left:50px;">&nbsp;</p></td>
               </tr>
@@ -116,7 +116,7 @@
 	</form>
 </div>
 </div>
-<!--<input id="submit-button" type="submit" name="lanjut" value="program" onclick="window.open('<?php echo base_url(); ?>index.php/e-planning/Filtering/program',null,'height=500,width=550,status=yes,toolbar=no,menubar=no,location=no,scrollbars=yes,left=0,top=0,screenX=0,screenY=0');"/> -->
+<!--<input id="submit-button" type="submit" name="lanjut" value="program" onclick="window.open('<?php echo  base_url(); ?>index.php/e-planning/Filtering/program',null,'height=500,width=550,status=yes,toolbar=no,menubar=no,location=no,scrollbars=yes,left=0,top=0,screenX=0,screenY=0');"/> -->
 <script type="text/javascript">
 
 $(document).ready(function(){

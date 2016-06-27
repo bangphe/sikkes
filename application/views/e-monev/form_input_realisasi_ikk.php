@@ -1,5 +1,5 @@
 <div>
-    <?= anchor(site_url('e-monev/laporan_kinerja/'), img(array('src' => 'images/flexigrid/prev.gif', 'border' => '0', 'alt' => '')) . 'Kembali Ke Laporan Kinerja'); ?>
+    <?php echo  anchor(site_url('e-monev/laporan_kinerja/'), img(array('src' => 'images/flexigrid/prev.gif', 'border' => '0', 'alt' => '')) . 'Kembali Ke Laporan Kinerja'); ?>
 </div>
 <br />
 <?php if (isset($noRencana)): echo "<h1>$noRencana</h1>";?>
@@ -8,13 +8,13 @@
     <tr>
         <td width="10%"><b>Kode</b></td>
         <td colspan="2">
-            <?php echo $ikk[0]->KodeIkk; ?>
+            <?php echo  $ikk[0]->KodeIkk; ?>
         </td>
     </tr>    
     <tr>
         <td width="10%"><b>Nama IKK </b></td>
         <td colspan="2">
-            <?php echo $ikk[0]->Ikk; ?>
+            <?php echo  $ikk[0]->Ikk; ?>
         </td>
     </tr>
     <tr>
@@ -27,15 +27,15 @@
     </tr>
     <?php foreach ($bulan as $id => $val): $str = "bulan_$id"; ?>
         <tr>
-            <td align="right"><b><?php echo $val; ?></b>&nbsp;&nbsp;</td>
+            <td align="right"><b><?php echo  $val; ?></b>&nbsp;&nbsp;</td>
             <td>
-                <input type="text" name="<?php echo "rencana_bulan_$id"; ?>" id="<?php echo "rencana_bulan_$id"; ?>" value="<?php echo $rencana[0]->$str;?>" disabled="disabled" />
+                <input type="text" name="<?php echo  "rencana_bulan_$id"; ?>" id="<?php echo  "rencana_bulan_$id"; ?>" value="<?php echo  $rencana[0]->$str;?>" disabled="disabled" />
             </td>
             <td>
                 <?php if (isset($realisasi[0]) && $realisasi[0]->$str != NULL): ?>
-                <input type="text" id="<?php echo "bulan_$id"; ?>" name="<?php echo "bulan_$id"; ?>" value="<?php echo $realisasi[0]->$str;?>" onChange="set_realisasi(<?php echo $id; ?>)"/>
+                <input type="text" id="<?php echo  "bulan_$id"; ?>" name="<?php echo  "bulan_$id"; ?>" value="<?php echo  $realisasi[0]->$str;?>" onChange="set_realisasi(<?php echo  $id; ?>)"/>
                 <?php else :?>
-                <input type="text" id="<?php echo "bulan_$id"; ?>" name="<?php echo "bulan_$id"; ?>" value="<?php echo set_value("bulan_$id"); ?>" onChange="set_realisasi(<?php echo $id; ?>)" />
+                <input type="text" id="<?php echo  "bulan_$id"; ?>" name="<?php echo  "bulan_$id"; ?>" value="<?php echo  set_value("bulan_$id"); ?>" onChange="set_realisasi(<?php echo  $id; ?>)" />
                 <?php endif; echo form_error("bulan_$id"); ?>
             </td>
         </tr>
@@ -45,11 +45,11 @@
         <td>
             <div class="buttons">
                 <button type="submit" class="regular" name="save">
-                    <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+                    <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
                     Save
                 </button>&nbsp;&nbsp;
                 <button type="reset" class="negative" name="reset">
-                    <img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+                    <img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
                     Cancel
                 </button>
             </div>

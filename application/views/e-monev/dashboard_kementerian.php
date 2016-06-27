@@ -3,11 +3,11 @@
 	$bulan_angka = date("n")-1;
 	$bulan_huruf = $this->general->konversi_bulan($bulan_angka);
 ?>
-<div id="judul" class="title"><p align="center">DASHBOARDLAPORAN MONITORING KEMENTERIAN KESEHATAN <?php echo $bulan_huruf.' '.$thang; ?></p></div> 
-<a href="<?php echo base_url();?>index.php/e-monev/dashboard/main_grafik/">
+<div id="judul" class="title"><p align="center">DASHBOARDLAPORAN MONITORING KEMENTERIAN KESEHATAN <?php echo  $bulan_huruf.' '.$thang; ?></p></div> 
+<a href="<?php echo  base_url();?>index.php/e-monev/dashboard/main_grafik/">
     <div class="buttons">
         <button type="submit" class="regular" name="submit">
-            <img src="<?php echo base_url(); ?>images/icon/grafik.png" alt=""/>
+            <img src="<?php echo  base_url(); ?>images/icon/grafik.png" alt=""/>
             Grafik
         </button>
     </div>
@@ -16,7 +16,7 @@
 
 <div id="content">
 	<table title="" class="easyui-treegrid" style="width:1157px;"  
-            url="<?= base_url() ?>index.php/e-monev/dashboard/grid_kementerian"  
+            url="<?php echo  base_url() ?>index.php/e-monev/dashboard/grid_kementerian"  
             rownumbers="true" showFooter="true" 
             idField="id" treeField="name" animate="true" >  
         <thead frozen="true">  

@@ -2,7 +2,7 @@
 <head>
 </head>
 <body>
-<body onLoad="window.print(); window.location='<?php echo site_url(); ?>/e-planning/manajemen/grid_pengajuan_disetujui';">
+<body onLoad="window.print(); window.location='<?php echo  site_url(); ?>/e-planning/manajemen/grid_pengajuan_disetujui';">
 <div width="560px" align="center">
 <div align="right" width="660px">CM. 005/Teknis-Roren</div>
 <div align="center" width="660px">
@@ -27,10 +27,10 @@
 			foreach($pengusulan->result() as $row){
 		?>
 			<tr style='font-size:12px;'>
-				<td align="center"><strong><?php echo $no; ?></strong></td>
-				<td><strong><?php echo $row->JUDUL_PROPOSAL ?></strong></td>
+				<td align="center"><strong><?php echo  $no; ?></strong></td>
+				<td><strong><?php echo  $row->JUDUL_PROPOSAL ?></strong></td>
 				<td></td>
-				<td><strong><?php echo number_format($this->mm->sum('data_program','Biaya', 'KD_PENGAJUAN',$row->KD_PENGAJUAN)); ?></strong></td>
+				<td><strong><?php echo  number_format($this->mm->sum('data_program','Biaya', 'KD_PENGAJUAN',$row->KD_PENGAJUAN)); ?></strong></td>
 			</tr>
 			<?php foreach($this->mm->get_where('data_fungsi','KD_PENGAJUAN',$row->KD_PENGAJUAN)->result() as $row2){?>
 				<tr>
@@ -41,7 +41,7 @@
 						<col width=340>
 						<tr style='font-size:12px;'>
 							<td></td>
-							<td><?php echo $row2->NamaFungsi; ?></td>
+							<td><?php echo  $row2->NamaFungsi; ?></td>
 						</tr>
 						</table>
 					</td>
@@ -57,7 +57,7 @@
 							<col width=340>
 							<tr style='font-size:12px;'>
 								<td></td>
-								<td><?php echo $row3->NamaSubFungsi; ?></td>
+								<td><?php echo  $row3->NamaSubFungsi; ?></td>
 							</tr>
 							</table>
 						<td></td>
@@ -72,12 +72,12 @@
 								<col width=340>
 								<tr style='font-size:12px;'>
 									<td></td>
-									<td><?php echo $row4->NamaProgram; ?></td>
+									<td><?php echo  $row4->NamaProgram; ?></td>
 								</tr>
 								</table>
 							</td>
 							<td></td>
-							<td style='font-size:12px;'><?php echo number_format($row4->Biaya); ?></td>
+							<td style='font-size:12px;'><?php echo  number_format($row4->Biaya); ?></td>
 						</tr>
 						<?php foreach($this->mm->get_where4_join('data_iku','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'data_iku.KodeProgram',$row4->KodeProgram,'ref_iku','data_iku.KodeIku=ref_iku.KodeIku')->result() as $row5){?>
 							<tr>
@@ -88,11 +88,11 @@
 									<col width=330>
 									<tr style='font-size:12px;'>
 										<td></td>
-										<td><?php echo $row5->Iku; ?></td>
+										<td><?php echo  $row5->Iku; ?></td>
 									</tr>
 									</table>
 								</td>
-								<td style='font-size:12px;'><?php echo number_format($row5->Jumlah); ?></td>
+								<td style='font-size:12px;'><?php echo  number_format($row5->Jumlah); ?></td>
 								<td></td>
 							</tr>
 							<?php foreach($this->mm->get_where4('data_kegiatan','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeFungsi.'.'.$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram)->result() as $row6){?>
@@ -104,12 +104,12 @@
 										<col width=330>
 										<tr style='font-size:12px;'>
 											<td></td>
-											<td><?php echo $row6->NamaKegiatan; ?></td>
+											<td><?php echo  $row6->NamaKegiatan; ?></td>
 										</tr>
 										</table>
 									</td>
 									<td></td>
-									<td style='font-size:12px;'><?php echo number_format($row6->Biaya); ?></td>
+									<td style='font-size:12px;'><?php echo  number_format($row6->Biaya); ?></td>
 								</tr>
 								<?php foreach($this->mm->get_where5_join('data_ikk','KD_PENGAJUAN',$row->KD_PENGAJUAN,'KodeFungsi',$row2->KodeFungsi,'KodeSubFungsi',$row3->KodeSubFungsi,'KodeProgram',$row4->KodeProgram,'data_ikk.KodeKegiatan',$row6->KodeKegiatan,'ref_ikk','data_ikk.KodeIkk=ref_ikk.KodeIkk')->result() as $row7){?>
 									<tr>
@@ -120,11 +120,11 @@
 											<col width=320>
 											<tr style='font-size:12px;'>
 												<td></td>
-												<td><?php echo $row7->Ikk; ?></td>
+												<td><?php echo  $row7->Ikk; ?></td>
 											</tr>
 											</table>
 										</td>
-										<td style='font-size:12px;'><?php echo number_format($row7->Jumlah); ?></td>
+										<td style='font-size:12px;'><?php echo  number_format($row7->Jumlah); ?></td>
 										<td></td>
 									</tr>
 								<?php } ?>

@@ -15,7 +15,9 @@
 |
 */
 
-$config['base_url']	= 'http://localhost/sikkes/';
+//$config['base_url']	= 'http://113.20.29.51/sikkes/';
+
+$config['base_url']	= 'http://localhost/github/sikkes/';
 
 
 /*

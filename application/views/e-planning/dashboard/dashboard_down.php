@@ -25,12 +25,12 @@
   </tr>
   <?php for($i=1; $i<=$count; $i++){ ?>
   <tr>
-    <td bgcolor="#C1FFA4"><?php echo $name[$i]; ?></td>
-    <td bgcolor="#C1FFA4" align="center"><?php echo $total_prop[$i]; ?></td>
-    <td bgcolor="#C1FFA4" align="right"><?php echo $draft['jml'][$i];?></td>
-    <td bgcolor="#C1FFA4" align="right"><?php echo 'Rp '.number_format($draft['nil'][$i]);?></td>
-    <td bgcolor="#C1FFA4" align="right"><?php echo $terkirim['jml'][$i];?></td>
-    <td bgcolor="#C1FFA4" align="right"><?php echo 'Rp '.number_format($terkirim['nil'][$i]);?></td>
+    <td bgcolor="#C1FFA4"><?php echo  $name[$i]; ?></td>
+    <td bgcolor="#C1FFA4" align="center"><?php echo  $total_prop[$i]; ?></td>
+    <td bgcolor="#C1FFA4" align="right"><?php echo  $draft['jml'][$i];?></td>
+    <td bgcolor="#C1FFA4" align="right"><?php echo  'Rp '.number_format($draft['nil'][$i]);?></td>
+    <td bgcolor="#C1FFA4" align="right"><?php echo  $terkirim['jml'][$i];?></td>
+    <td bgcolor="#C1FFA4" align="right"><?php echo  'Rp '.number_format($terkirim['nil'][$i]);?></td>
   </tr>
   <?php } ?>
 </table>

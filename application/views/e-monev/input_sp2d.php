@@ -1,7 +1,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $(function() {
-			get_html_data(base_url+"index.php/e-monev/laporan_monitoring/daftar_sp2d/"+<?php echo $sp2d_id;?>,'','profile_detail_loading', 'daftar_sp2d');
+			get_html_data(base_url+"index.php/e-monev/laporan_monitoring/daftar_sp2d/"+<?php echo  $sp2d_id;?>,'','profile_detail_loading', 'daftar_sp2d');
 	});
 });
 
@@ -27,12 +27,12 @@ function unformat_nominal(){
 }
 </script>
 <div class="buttons">
-	<button type="submit" class="regular" name="grafik" onClick="spm(<?php echo $d_skmpnen_id;?>,<?php echo $spm_id;?>,<?php echo $bulan;?>);">
-		<img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>
+	<button type="submit" class="regular" name="grafik" onClick="spm(<?php echo  $d_skmpnen_id;?>,<?php echo  $spm_id;?>,<?php echo  $bulan;?>);">
+		<img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>
 		Kembali
 	</button>
-	<button type="submit" class="regular" name="grafik" onClick="grafik(<?php echo $d_skmpnen_id;?>);">
-		<img src="<?php echo base_url(); ?>images/icon/grafik.png" alt=""/>
+	<button type="submit" class="regular" name="grafik" onClick="grafik(<?php echo  $d_skmpnen_id;?>);">
+		<img src="<?php echo  base_url(); ?>images/icon/grafik.png" alt=""/>
 		Grafik
 	</button>
 	
@@ -55,7 +55,7 @@ function unformat_nominal(){
 		<tr>
 			<td width="40%">Nominal SPM :</td>
 			<td width="60%">
-				Rp. <?=number_format($total_spm,2,',','.');?>
+				Rp. <?php echo number_format($total_spm,2,',','.');?>
 			</td>
 		</tr>
 		<tr>
@@ -85,19 +85,19 @@ function unformat_nominal(){
 					echo form_input($data);
 				?>
 				<input type="hidden" name="nominal" id="nominal" />
-				<input type="hidden" name="spm_hidden" id="spm_hidden" value="<?php echo $total_spm;?>"/>
+				<input type="hidden" name="spm_hidden" id="spm_hidden" value="<?php echo  $total_spm;?>"/>
 			</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>
 				<div class="buttons">
-					<button type="submit" class="regular" name="save" id="submit" onClick="save_data_sp2d(<?php echo $sp2d_id;?>);">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+					<button type="submit" class="regular" name="save" id="submit" onClick="save_data_sp2d(<?php echo  $sp2d_id;?>);">
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Save
 					</button>
 					<button type="reset" class="negative" name="reset" onClick="reset();">
-						<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 						Reset
 					</button>
 				</div>

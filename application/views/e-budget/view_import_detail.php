@@ -70,7 +70,7 @@
     });
 </script>   
     <div id="judul" class="title">
-        <?php echo $judul; ?>
+        <?php echo  $judul; ?>
     </div>
         <div>
 	<?php
@@ -80,10 +80,10 @@
 	<table id="user" style="display:none"></table>
         </div>
         <div id="petunjuk">            
-		<?=$this->config->item('petunjuk');?>
-		<?=$notification; $this->session->unset_userdata('notification');?>
-		<? if (isset($failed_form)) { echo $failed_form; $this->session->unset_userdata('failed_form'); }?>
-		<? if(isset($no_asal)) echo $no_asal;?>
+		<?php echo $this->config->item('petunjuk');?>
+		<?php echo $notification; $this->session->unset_userdata('notification');?>
+		<?php if (isset($failed_form)) { echo $failed_form; $this->session->unset_userdata('failed_form'); }?>
+		<?php if(isset($no_asal)) echo $no_asal;?>
 	</div>
     </div>
     <?php if (isset($div)){echo $div;}?>

@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/feedback.css">
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url();?>css/feedback.css">
 <style type="text/css">
 table.myTable { width:100%; border-collapse:collapse;  }
 table.myTable .tes { 
@@ -59,7 +59,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 						</tr>
 						<tr>
 							<td class="tdInfo">Propinsi</td>
-							<td><?php echo $provinsi; ?></td>
+							<td><?php echo  $provinsi; ?></td>
 						</tr>
 						<tr>
 							<td class="tdInfo">Jenis Satker</td>
@@ -73,7 +73,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 						<tr>
 							<td class="tdInfo">Judul Proposal</td>
 							<td>
-								<?php echo $judul; ?>
+								<?php echo  $judul; ?>
 							</td>
 						</tr>
 					</table>
@@ -81,20 +81,20 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 						<tr>
 							<td class="tdInfo">No. Surat Pengantar</td>
 							<td>
-								<?php echo $nomor; ?>
+								<?php echo  $nomor; ?>
 							</td>
 						</tr>
 						<tr>
 							<td class="tdInfo">Tanggal Surat</td>
-							<td><p><?php echo $tanggal_pembuatan; ?></p></td>
+							<td><p><?php echo  $tanggal_pembuatan; ?></p></td>
 						</tr>
 						<tr>
 							<td class="tdInfo">Perihal Surat</td>
-							<td><?php echo $perihal; ?></td>
+							<td><?php echo  $perihal; ?></td>
 						</tr>
 						<tr>
 							<td class="tdInfo">Th. Anggaran</td>
-							<td><?php echo $thn_anggaran; ?></td>
+							<td><?php echo  $thn_anggaran; ?></td>
 						</tr>
 					</table>
 				</td>
@@ -102,7 +102,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 		</table>
     </div>
     <div>
-		<?= anchor(site_url('e-planning/manajemen/grid_pengajuan'),img(array('src'=>'images/flexigrid/prev.gif','border'=>'0','alt'=>'')).'Kembali Ke Daftar Pengajuan'); ?>
+		<?php echo  anchor(site_url('e-planning/manajemen/grid_pengajuan'),img(array('src'=>'images/flexigrid/prev.gif','border'=>'0','alt'=>'')).'Kembali Ke Daftar Pengajuan'); ?>
 	</div>
 	<div class="clear"></div>
 	<div class="garis"></div>
@@ -116,7 +116,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
   </ul>
   <div id="tabs-1">
   <?php if ($cek_periode_satu) {?>
-  <form class="appnitro" name="form_edit_pengusulan" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-planning/manajemen/update_lampiran_periode_satu/'.$kd_pengajuan; ?>">
+  <form class="appnitro" name="form_edit_pengusulan" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-planning/manajemen/update_lampiran_periode_satu/'.$kd_pengajuan; ?>">
   	<table width="100%" height="100%">
 		<?php if ($this->session->userdata('kd_role') == Role_model::DIREKTORAT) { ?>
 		<tr>
@@ -153,8 +153,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($proposal != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$proposal; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$proposal; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -165,8 +165,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($proposal != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo site_url().'/e-planning/manajemen/delete_file_proposal/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
-								<img src="<?php echo base_url(); ?>images/flexigrid/tolak.png" alt=""/>
+						    <a href="<?php echo  site_url().'/e-planning/manajemen/delete_file_proposal/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
+								<img src="<?php echo  base_url(); ?>images/flexigrid/tolak.png" alt=""/>
 								Hapus
 							</a>
 						</div>
@@ -184,8 +184,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($tor != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$tor; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$tor; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -196,8 +196,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($tor != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo site_url().'/e-planning/manajemen/delete_file_tor/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
-								<img src="<?php echo base_url(); ?>images/flexigrid/tolak.png" alt=""/>
+						    <a href="<?php echo  site_url().'/e-planning/manajemen/delete_file_tor/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
+								<img src="<?php echo  base_url(); ?>images/flexigrid/tolak.png" alt=""/>
 								Hapus
 							</a>
 						</div>
@@ -215,8 +215,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($data_pendukung_lainnya != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$data_pendukung_lainnya; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$data_pendukung_lainnya; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -227,8 +227,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($data_pendukung_lainnya != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo site_url().'/e-planning/manajemen/delete_file_pendukung/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
-								<img src="<?php echo base_url(); ?>images/flexigrid/tolak.png" alt=""/>
+						    <a href="<?php echo  site_url().'/e-planning/manajemen/delete_file_pendukung/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
+								<img src="<?php echo  base_url(); ?>images/flexigrid/tolak.png" alt=""/>
 								Hapus
 							</a>
 						</div>
@@ -244,7 +244,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td>
 						<div class="buttons">
 							<button type="submit" class="regular" name="save" id="save">
-								<img src="<?php echo base_url(); ?>images/main/update.png" alt=""/>
+								<img src="<?php echo  base_url(); ?>images/main/update.png" alt=""/>
 								Koreksi
 							</button>
 						</div>
@@ -267,8 +267,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($proposal != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$proposal; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$proposal; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -283,8 +283,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($tor != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$tor; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$tor; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -299,8 +299,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($data_pendukung_lainnya != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$data_pendukung_lainnya; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$data_pendukung_lainnya; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -351,8 +351,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($proposal != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$proposal; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$proposal; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -362,7 +362,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					</td>
 					<td style="vertical-align:top;">
 						<?php if($proposal != '-') { ?>
-						<?php echo $proposal; ?>
+						<?php echo  $proposal; ?>
 						<?php } else { ?>
 						Tidak ada lampiran file
 						<?php } ?>
@@ -373,8 +373,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($tor != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$tor; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$tor; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -384,7 +384,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					</td>
 					<td style="vertical-align:top;">
 						<?php if($tor != '-') { ?>
-						<?php echo $tor; ?>
+						<?php echo  $tor; ?>
 						<?php } else { ?>
 						Tidak ada lampiran file
 						<?php } ?>
@@ -395,8 +395,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($data_pendukung_lainnya != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$data_pendukung_lainnya; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$data_pendukung_lainnya; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -406,7 +406,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					</td>
 					<td style="vertical-align:top;">
 						<?php if($data_pendukung_lainnya != '-') { ?>
-						<?php echo $data_pendukung_lainnya;?>
+						<?php echo  $data_pendukung_lainnya;?>
 						<?php } else { ?>
 						Tidak ada lampiran file
 						<?php } ?>
@@ -428,8 +428,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($proposal != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$proposal; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$proposal; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -439,7 +439,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					</td>
 					<td style="vertical-align:top;">
 						<?php if($proposal != '-') { ?>
-						<?php echo $proposal; ?>
+						<?php echo  $proposal; ?>
 						<?php } else { ?>
 						Tidak ada lampiran file
 						<?php } ?>
@@ -450,8 +450,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($tor != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$tor; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$tor; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -461,7 +461,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					</td>
 					<td style="vertical-align:top;">
 						<?php if($tor != '-') { ?>
-						<?php echo $tor; ?>
+						<?php echo  $tor; ?>
 						<?php } else { ?>
 						Tidak ada lampiran file
 						<?php } ?>
@@ -472,8 +472,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($data_pendukung_lainnya != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$data_pendukung_lainnya; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$data_pendukung_lainnya; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -483,7 +483,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					</td>
 					<td style="vertical-align:top;">
 						<?php if($data_pendukung_lainnya != '-') { ?>
-						<?php echo $data_pendukung_lainnya; ?>
+						<?php echo  $data_pendukung_lainnya; ?>
 						<?php } else { ?>
 						Tidak ada lampiran file
 						<?php } ?>
@@ -500,9 +500,9 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
   	<?php if ($cek_periode_dua) { ?>
   	<div class="alert alert-danger text-center">
 		<h4>PENGUMUMAN</h4>
-		<p style="font-size:13px;">Periode Anggaran (01 April 2015 - 30 Juni 2015).</p>
+		<p style="font-size:13px;">Periode Anggaran (01 Mei 2015 - 30 Juni 2015).</p>
 	</div>
-	  <form class="appnitro" name="form_edit_pengusulan" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-planning/manajemen/update_lampiran_periode_dua/'.$kd_pengajuan; ?>">
+	  <form class="appnitro" name="form_edit_pengusulan" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-planning/manajemen/update_lampiran_periode_dua/'.$kd_pengajuan; ?>">
 	  	<table width="100%" height="100%">
 			<?php if ($this->session->userdata('kd_role') == Role_model::DIREKTORAT) { ?>
 			<tr>
@@ -539,8 +539,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 						<td style="vertical-align:top;">
 							<?php if($proposal_2 != '-') { ?>
 							<div class="buttons">
-							    <a href="<?php echo base_url().'file/'.$proposal_2; ?>" class="negative">
-									<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+							    <a href="<?php echo  base_url().'file/'.$proposal_2; ?>" class="negative">
+									<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 									Download
 								</a>
 							</div>
@@ -551,8 +551,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 						<td style="vertical-align:top;">
 							<?php if($proposal_2 != '-') { ?>
 							<div class="buttons">
-							    <a href="<?php echo site_url().'/e-planning/manajemen/delete_file_proposal/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
-									<img src="<?php echo base_url(); ?>images/flexigrid/tolak.png" alt=""/>
+							    <a href="<?php echo  site_url().'/e-planning/manajemen/delete_file_proposal/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
+									<img src="<?php echo  base_url(); ?>images/flexigrid/tolak.png" alt=""/>
 									Hapus
 								</a>
 							</div>
@@ -570,8 +570,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 						<td style="vertical-align:top;">
 							<?php if($tor_2 != '-') { ?>
 							<div class="buttons">
-							    <a href="<?php echo base_url().'file/'.$tor_2; ?>" class="negative">
-									<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+							    <a href="<?php echo  base_url().'file/'.$tor_2; ?>" class="negative">
+									<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 									Download
 								</a>
 							</div>
@@ -582,8 +582,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 						<td style="vertical-align:top;">
 							<?php if($tor_2 != '-') { ?>
 							<div class="buttons">
-							    <a href="<?php echo site_url().'/e-planning/manajemen/delete_file_tor/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
-									<img src="<?php echo base_url(); ?>images/flexigrid/tolak.png" alt=""/>
+							    <a href="<?php echo  site_url().'/e-planning/manajemen/delete_file_tor/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
+									<img src="<?php echo  base_url(); ?>images/flexigrid/tolak.png" alt=""/>
 									Hapus
 								</a>
 							</div>
@@ -601,8 +601,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 						<td style="vertical-align:top;">
 							<?php if($data_pendukung_lainnya_2 != '-') { ?>
 							<div class="buttons">
-							    <a href="<?php echo base_url().'file/'.$data_pendukung_lainnya_2; ?>" class="negative">
-									<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+							    <a href="<?php echo  base_url().'file/'.$data_pendukung_lainnya_2; ?>" class="negative">
+									<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 									Download
 								</a>
 							</div>
@@ -613,8 +613,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 						<td style="vertical-align:top;">
 							<?php if($data_pendukung_lainnya_2 != '-') { ?>
 							<div class="buttons">
-							    <a href="<?php echo site_url().'/e-planning/manajemen/delete_file_pendukung/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
-									<img src="<?php echo base_url(); ?>images/flexigrid/tolak.png" alt=""/>
+							    <a href="<?php echo  site_url().'/e-planning/manajemen/delete_file_pendukung/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
+									<img src="<?php echo  base_url(); ?>images/flexigrid/tolak.png" alt=""/>
 									Hapus
 								</a>
 							</div>
@@ -630,7 +630,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 						<td>
 							<div class="buttons">
 								<button type="submit" class="regular" name="save" id="save">
-									<img src="<?php echo base_url(); ?>images/main/update.png" alt=""/>
+									<img src="<?php echo  base_url(); ?>images/main/update.png" alt=""/>
 									Koreksi
 								</button>
 							</div>
@@ -653,8 +653,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 						<td style="vertical-align:top;">
 							<?php if($proposal_2 != '-') { ?>
 							<div class="buttons">
-							    <a href="<?php echo base_url().'file/'.$proposal_2; ?>" class="negative">
-									<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+							    <a href="<?php echo  base_url().'file/'.$proposal_2; ?>" class="negative">
+									<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 									Download
 								</a>
 							</div>
@@ -669,8 +669,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 						<td style="vertical-align:top;">
 							<?php if($tor_2 != '-') { ?>
 							<div class="buttons">
-							    <a href="<?php echo base_url().'file/'.$tor_2; ?>" class="negative">
-									<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+							    <a href="<?php echo  base_url().'file/'.$tor_2; ?>" class="negative">
+									<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 									Download
 								</a>
 							</div>
@@ -685,8 +685,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 						<td style="vertical-align:top;">
 							<?php if($data_pendukung_lainnya_2 != '-') { ?>
 							<div class="buttons">
-							    <a href="<?php echo base_url().'file/'.$data_pendukung_lainnya_2; ?>" class="negative">
-									<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+							    <a href="<?php echo  base_url().'file/'.$data_pendukung_lainnya_2; ?>" class="negative">
+									<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 									Download
 								</a>
 							</div>
@@ -710,7 +710,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
   </div>
   <div id="tabs-3">
     <?php if ($cek_periode_tiga) { ?>
-    <form class="appnitro" name="form_edit_pengusulan" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-planning/manajemen/update_lampiran_periode_tiga/'.$kd_pengajuan; ?>">
+    <form class="appnitro" name="form_edit_pengusulan" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-planning/manajemen/update_lampiran_periode_tiga/'.$kd_pengajuan; ?>">
   	<table width="100%" height="100%">
 		<?php if ($this->session->userdata('kd_role') == Role_model::DIREKTORAT) { ?>
 		<tr>
@@ -747,8 +747,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($proposal_3 != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$proposal_3; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$proposal_3; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -759,8 +759,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($proposal_3 != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo site_url().'/e-planning/manajemen/delete_file_proposal/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
-								<img src="<?php echo base_url(); ?>images/flexigrid/tolak.png" alt=""/>
+						    <a href="<?php echo  site_url().'/e-planning/manajemen/delete_file_proposal/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
+								<img src="<?php echo  base_url(); ?>images/flexigrid/tolak.png" alt=""/>
 								Hapus
 							</a>
 						</div>
@@ -778,8 +778,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($tor_3 != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$tor_3; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$tor_3; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -790,8 +790,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($tor_3 != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo site_url().'/e-planning/manajemen/delete_file_tor/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
-								<img src="<?php echo base_url(); ?>images/flexigrid/tolak.png" alt=""/>
+						    <a href="<?php echo  site_url().'/e-planning/manajemen/delete_file_tor/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
+								<img src="<?php echo  base_url(); ?>images/flexigrid/tolak.png" alt=""/>
 								Hapus
 							</a>
 						</div>
@@ -809,8 +809,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($data_pendukung_lainnya_3 != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$data_pendukung_lainnya_3; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$data_pendukung_lainnya_3; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -821,8 +821,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($data_pendukung_lainnya_3 != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo site_url().'/e-planning/manajemen/delete_file_pendukung/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
-								<img src="<?php echo base_url(); ?>images/flexigrid/tolak.png" alt=""/>
+						    <a href="<?php echo  site_url().'/e-planning/manajemen/delete_file_pendukung/'.$kd_pengajuan; ?>" class="negative" onclick="return confirm('Apakah anda yakin ingin menghapus file?')">
+								<img src="<?php echo  base_url(); ?>images/flexigrid/tolak.png" alt=""/>
 								Hapus
 							</a>
 						</div>
@@ -838,7 +838,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td>
 						<div class="buttons">
 							<button type="submit" class="regular" name="save" id="save">
-								<img src="<?php echo base_url(); ?>images/main/update.png" alt=""/>
+								<img src="<?php echo  base_url(); ?>images/main/update.png" alt=""/>
 								Koreksi
 							</button>
 						</div>
@@ -861,8 +861,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($proposal_3 != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$proposal_3; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$proposal_3; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -877,8 +877,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($tor_3 != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$tor_3; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$tor_3; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>
@@ -893,8 +893,8 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 					<td style="vertical-align:top;">
 						<?php if($data_pendukung_lainnya_3 != '-') { ?>
 						<div class="buttons">
-						    <a href="<?php echo base_url().'file/'.$data_pendukung_lainnya_3; ?>" class="negative">
-								<img src="<?php echo base_url(); ?>images/icon/download2.png" alt=""/>
+						    <a href="<?php echo  base_url().'file/'.$data_pendukung_lainnya_3; ?>" class="negative">
+								<img src="<?php echo  base_url(); ?>images/icon/download2.png" alt=""/>
 								Download
 							</a>
 						</div>

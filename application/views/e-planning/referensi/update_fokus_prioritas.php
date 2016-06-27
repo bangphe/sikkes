@@ -1,5 +1,5 @@
 <div id="judul" class="title">
-	<?php echo $judul; ?>
+	<?php echo  $judul; ?>
 </div>
 	<div id="content">
 		<form name="form_update_fokus_prioritas" method="POST" id="form_update_fokus_prioritas" action="#">
@@ -7,21 +7,21 @@
 			<tr>
 				<td>Periode</td>
 				<td>
-					<?php echo form_dropdown('periode', $periode, $selected_periode); ?>
+					<?php echo  form_dropdown('periode', $periode, $selected_periode); ?>
 				</td>
 			</tr>
 			<tr>
 				<td>Fokus Prioritas</td>
 				<td>
-					<textarea id="fokus_prioritas" name="fokus_prioritas" cols=100><?php echo $fokus_prioritas; ?></textarea>
+					<textarea id="fokus_prioritas" name="fokus_prioritas" cols=100><?php echo  $fokus_prioritas; ?></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>
 					<div class="buttons">
-						<button type="submit" class="regular" name="update" onClick="update_data(<?php echo $idFokusPrioritas;?>);">
-							<img src="<?php echo base_url(); ?>images/main/update.png" alt=""/>
+						<button type="submit" class="regular" name="update" onClick="update_data(<?php echo  $idFokusPrioritas;?>);">
+							<img src="<?php echo  base_url(); ?>images/main/update.png" alt=""/>
 							Update
 						</button>
 					</div>

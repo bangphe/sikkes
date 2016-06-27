@@ -1,4 +1,4 @@
-<link href="<?= base_url() ?>css/tablecloth.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="<?php echo  base_url() ?>css/tablecloth.css" rel="stylesheet" type="text/css" media="screen" />
 <script type="text/javascript">
 $(document).ready(function(){
   $(function() {
@@ -53,7 +53,7 @@ function unformat_phln(){
 <h1><center>Kontrak</center></h1>
 <br />
 	<table width=auto>
-		<?php echo $input_nilai_kontrak;?>
+		<?php echo  $input_nilai_kontrak;?>
 		<tr>
 			<td width="40%">Nomor Kontrak :</td>
 			<td width="60%">
@@ -179,11 +179,11 @@ function unformat_phln(){
 			<td>
 				<div class="buttons">
 					<button type="submit" class="regular" name="save" id="submit" onClick="save_data_detail_kontrak();">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Save
 					</button>
 					<button type="reset" class="negative" name="reset" onClick="reset();">
-						<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 						Reset
 					</button>
 				</div>

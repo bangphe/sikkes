@@ -4,7 +4,7 @@
 	<!--label class="edit"><a href="<?php //echo base_url(); ?>index.php/e-planning/manajemen/detail_pengajuan/<?php //echo $kd_pengajuan ?>/2"><img src="<?php //echo base_url(); ?>images/icons/Edit_icon.png" /></a></label-->
 </div>
 <div id="content_tengah">
-<form id="detail_pengajuan" name="biaya_fprk" method="POST"  action="<?php echo base_url().'index.php/e-planning/manajemen/update_biaya_fprk/'.$kd_pengajuan; ?>">
+<form id="detail_pengajuan" name="biaya_fprk" method="POST"  action="<?php echo  base_url().'index.php/e-planning/manajemen/update_biaya_fprk/'.$kd_pengajuan; ?>">
 	
 	<table width="100%" height="auto">
 		<tr>
@@ -12,13 +12,13 @@
 			<td><table border="0">
 				<?php foreach ($fp_selected as $row) { ?>
 				<tr>
-				<td width="85%"><?php echo $this->mm->get_where('fokus_prioritas','idFokusPrioritas',$row->idFokusPrioritas)->row()->FokusPrioritas; ?> </td>
-					<td align="right"><input style="text-align:right" type="text" name="<?php echo 'biaya_fp_'.$row->idFokusPrioritas;?>" onchange="totalFp()" onfocusout="totalFp()" <?php echo 'value="'.$row->Biaya.'"';?>  onfocusin="if(this.value=='0') this.value=''" onblur="if(this.value=='') this.value='0'"/> </td>
+				<td width="85%"><?php echo  $this->mm->get_where('fokus_prioritas','idFokusPrioritas',$row->idFokusPrioritas)->row()->FokusPrioritas; ?> </td>
+					<td align="right"><input style="text-align:right" type="text" name="<?php echo  'biaya_fp_'.$row->idFokusPrioritas;?>" onchange="totalFp()" onfocusout="totalFp()" <?php echo  'value="'.$row->Biaya.'"';?>  onfocusin="if(this.value=='0') this.value=''" onblur="if(this.value=='') this.value='0'"/> </td>
 				</tr>
 				<?php } ?>
 				
 				<tr><td align="center">Total Biaya</td>
-				<td align="right"><input style="text-align:right" name="total_fp"  type="text" readonly="true" value="<?php echo $this->pm->sum('data_fokus_prioritas','Biaya','KD_PENGAJUAN',$kd_pengajuan); ?>"/></td>
+				<td align="right"><input style="text-align:right" name="total_fp"  type="text" readonly="true" value="<?php echo  $this->pm->sum('data_fokus_prioritas','Biaya','KD_PENGAJUAN',$kd_pengajuan); ?>"/></td>
 				</tr>
 				</table>
 			</td>
@@ -28,13 +28,13 @@
 			<td>
 				<table border="0">
 				<?php foreach ($rk_selected as $row) { ?>
-				<tr><td width="85%"><?php echo $this->mm->get_where('reformasi_kesehatan','idReformasiKesehatan',$row->idReformasiKesehatan)->row()->ReformasiKesehatan;?> </td>
-				<td align="right"><input style="text-align:right" type="text" name="<?php echo 'biaya_rk_'.$row->idReformasiKesehatan;?>"  onchange="totalRk()" onfocusout="totalRk()" <?php echo 'value="'.$row->Biaya.'"';?> onfocusin="if(this.value=='0') this.value=''" onblur="if(this.value=='') this.value='0'"/> </td>
+				<tr><td width="85%"><?php echo  $this->mm->get_where('reformasi_kesehatan','idReformasiKesehatan',$row->idReformasiKesehatan)->row()->ReformasiKesehatan;?> </td>
+				<td align="right"><input style="text-align:right" type="text" name="<?php echo  'biaya_rk_'.$row->idReformasiKesehatan;?>"  onchange="totalRk()" onfocusout="totalRk()" <?php echo  'value="'.$row->Biaya.'"';?> onfocusin="if(this.value=='0') this.value=''" onblur="if(this.value=='') this.value='0'"/> </td>
 				</tr>
 				<?php } ?>
 				
 				<tr><td align="center">Total Biaya</td>
-				<td align="right"><input style="text-align:right" name="total_rk" type="text"  readonly="true"  value="<?php echo $this->pm->sum('data_reformasi_kesehatan','Biaya','KD_PENGAJUAN',$kd_pengajuan); ?>"/></td>
+				<td align="right"><input style="text-align:right" name="total_rk" type="text"  readonly="true"  value="<?php echo  $this->pm->sum('data_reformasi_kesehatan','Biaya','KD_PENGAJUAN',$kd_pengajuan); ?>"/></td>
 				</tr>
 				</table>
 				<div id="label" class="negative"></div>
@@ -45,11 +45,11 @@
 			<td>
 				
 	<div class="buttons">
-	  <a href="<?php echo site_url(); ?>/e-planning/manajemen/grid_pengajuan" class="negative">
-						<img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>
+	  <a href="<?php echo  site_url(); ?>/e-planning/manajemen/grid_pengajuan" class="negative">
+						<img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>
 						Batal
 					 </a>
-      <button type="submit" class="regular" name="save" id="save"> <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/> Simpan </button>
+      <button type="submit" class="regular" name="save" id="save"> <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/> Simpan </button>
 	  </div>
 			</td>
 		</tr>

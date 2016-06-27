@@ -11,10 +11,10 @@
 		foreach($daftar_ref->result() as $row){
 	?>
 	<tr>
-		<td width="5%"><?php echo $no++;?></td>
-		<td width="70%"><?php echo $row->ketentuan;?></td>
-		<td width="10%"><?php echo $row->tanggal;?></td>
-		<td width="5%"><?php echo '<a href=\'#\'><img border=\'0\' onclick="update('.$row->referensi_id.');" src=\''.base_url().'images/icons/edit_icon(16x16).png\'></a></td>'; ?></td>
+		<td width="5%"><?php echo  $no++;?></td>
+		<td width="70%"><?php echo  $row->ketentuan;?></td>
+		<td width="10%"><?php echo  $row->tanggal;?></td>
+		<td width="5%"><?php echo  '<a href=\'#\'><img border=\'0\' onclick="update('.$row->referensi_id.');" src=\''.base_url().'images/icons/edit_icon(16x16).png\'></a></td>'; ?></td>
 	</tr>
 	<?php } ?>																									
 </table>

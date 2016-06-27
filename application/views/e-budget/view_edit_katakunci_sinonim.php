@@ -38,18 +38,18 @@
     <div id="judul" class="title">
         Tambah Kata Kunci
         <!--
-        <label class="edit"><a href="#"><img src="<?php echo base_url(); ?>images/icons/Edit_icon.png" /></a></label>
-        <label class="detail"><a href="#"><img src="<?php echo base_url(); ?>images/icons/detail.png" /></a></label>
+        <label class="edit"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/Edit_icon.png" /></a></label>
+        <label class="detail"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/detail.png" /></a></label>
         -->
     </div>
     <div id="content_tengah">
-        <form class="appnitro" name="addsinonim" enctype="multipart/form-data" method="post" action="<?php echo base_url() . 'index.php/e-budget/sinonim/edit_katakunci_action/'.$id.'/'.$pagesinonim; ?>" onsubmit="return validate();">
+        <form class="appnitro" name="addsinonim" enctype="multipart/form-data" method="post" action="<?php echo  base_url() . 'index.php/e-budget/sinonim/edit_katakunci_action/'.$id.'/'.$pagesinonim; ?>" onsubmit="return validate();">
             <div>
                 <table width="100%" height="100%">
                     <tr>
                         <td width="15%">Nama Sinonim</td>
                         <td width="85%">
-                            <?php echo $nmsinonim;?>
+                            <?php echo  $nmsinonim;?>
                         </td>
                     </tr>
                     <tr>
@@ -63,14 +63,14 @@
                         <td width="85%">  
                             <div class="buttons">
                                 <button type="submit" class="regular" name="submit">
-                                    <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+                                    <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
                                     Tambah
                                 </button>
                             </div>
-                            <a href='<?php echo site_url()."/e-budget/sinonim/grid_katakunci/$id/$pagesinonim" ;?>'>
+                            <a href='<?php echo  site_url()."/e-budget/sinonim/grid_katakunci/$id/$pagesinonim" ;?>'>
                                 <div class="buttons">
                                     <button type="button" class="regular" name="submit">
-                                        <img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>
+                                        <img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>
                                         Kembali
                                     </button>
                                 </div>
@@ -79,7 +79,7 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td width="15%"><?php echo $error; ?></td>
+                        <td width="15%"><?php echo  $error; ?></td>
                         <td width="85%">
                             
                         </td>

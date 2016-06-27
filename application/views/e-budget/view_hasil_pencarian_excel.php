@@ -106,13 +106,13 @@ readfile($export_file);
                                                 $countsatker = 0;
                                                 ?>
                                                 <tr>
-                                                    <td style="font-weight: bold;font-size: 16px"><?php echo $countunit; ?></td>
-                                                    <td style="font-weight: bold;font-size: 16px"><?php echo $nmunit; ?></td>
+                                                    <td style="font-weight: bold;font-size: 16px"><?php echo  $countunit; ?></td>
+                                                    <td style="font-weight: bold;font-size: 16px"><?php echo  $nmunit; ?></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
-                                                    <td style="text-align:right;font-weight: bold;font-size: 16px"><?php echo number_format($total_unit[$countunit], 0, ',', ','); ?></td>
+                                                    <td style="text-align:right;font-weight: bold;font-size: 16px"><?php echo  number_format($total_unit[$countunit], 0, ',', ','); ?></td>
                                                 </tr>
             <?php
         }
@@ -124,13 +124,13 @@ readfile($export_file);
                                                 $countsatker++;
                                                 ?>
                                                 <tr>
-                                                    <td style="font-weight: bold;font-size: 14px"><?php echo $countunit; ?>.<?php echo $countsatker; ?></td>
-                                                    <td style="font-weight: bold;font-size: 14px"><?php echo $nmsatker; ?></td>
+                                                    <td style="font-weight: bold;font-size: 14px"><?php echo  $countunit; ?>.<?php echo  $countsatker; ?></td>
+                                                    <td style="font-weight: bold;font-size: 14px"><?php echo  $nmsatker; ?></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
-                                                    <td style="text-align:right;font-weight: bold;font-size: 14px"><?php echo number_format($total_satker[$countunit][$countsatker], 0, ',', ','); ?></td>
+                                                    <td style="text-align:right;font-weight: bold;font-size: 14px"><?php echo  number_format($total_satker[$countunit][$countsatker], 0, ',', ','); ?></td>
                                                 </tr>
             <?php
         }
@@ -140,10 +140,10 @@ readfile($export_file);
                                                 <td></td>
                                                 <td>
                                                 </td>
-                                                <td><?php echo $nmitem; ?></td>
-                                                <td><?php echo number_format($volkeg, 0, ',', ','). " " . $satkeg; ?></td>
-                                                <td style="text-align:right"><?php echo number_format($hargasat, 0, ',', ','); ?></td>
-                                                <td style="text-align:right"><?php echo number_format($jumlah, 0, ',', ','); ?></td>
+                                                <td><?php echo  $nmitem; ?></td>
+                                                <td><?php echo  number_format($volkeg, 0, ',', ','). " " . $satkeg; ?></td>
+                                                <td style="text-align:right"><?php echo  number_format($hargasat, 0, ',', ','); ?></td>
+                                                <td style="text-align:right"><?php echo  number_format($jumlah, 0, ',', ','); ?></td>
                                                 <td></td>
                                             </tr>
         <?php
@@ -152,7 +152,7 @@ readfile($export_file);
 ?>
                                             <tr>
                                                 <td colspan="6" style="font-weight: bold;font-size: 16px">Jumlah Total</td>
-                                                <td style="text-align:right;font-weight: bold;font-size: 16px"><?php echo number_format($total, 0, ',', ','); ?></td>
+                                                <td style="text-align:right;font-weight: bold;font-size: 16px"><?php echo  number_format($total, 0, ',', ','); ?></td>
                                             </tr>
                                 </table>
                             </div>  

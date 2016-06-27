@@ -101,9 +101,9 @@ $separator = "-|;|-";
                                                         $kdunit = $keys[4];                                                        
                                                         ?>
                                                         <tr>
-                                                            <td><b><h3>024-<?php echo $kdunit; ?></h3></b></td>
-                                                            <td><b><h3><?php echo $nmunit; ?></h3></b></td>
-                                                            <td style="text-align:right"><b><h3><?php echo number_format($total_unit[$countunit], 0, ',', ','); ?></h3></b></td>
+                                                            <td><b><h3>024-<?php echo  $kdunit; ?></h3></b></td>
+                                                            <td><b><h3><?php echo  $nmunit; ?></h3></b></td>
+                                                            <td style="text-align:right"><b><h3><?php echo  number_format($total_unit[$countunit], 0, ',', ','); ?></h3></b></td>
                                                         </tr>
                                                         <?php
                                                     }
@@ -117,9 +117,9 @@ $separator = "-|;|-";
                                                         if (($rekap == "1")) {
                                                             ?>
                                                             <tr>
-                                                                <td><b>024-<?php echo $kdunit; ?>-<?php echo $kdsatker; ?></b></td>
-                                                                <td><b><?php echo $nmsatker; ?></b></td>
-                                                                <td style="text-align:right"><b><?php echo number_format($total_satker[$countunit][$countsatker], 0, ',', ','); ?></b></td>
+                                                                <td><b>024-<?php echo  $kdunit; ?>-<?php echo  $kdsatker; ?></b></td>
+                                                                <td><b><?php echo  $nmsatker; ?></b></td>
+                                                                <td style="text-align:right"><b><?php echo  number_format($total_satker[$countunit][$countsatker], 0, ',', ','); ?></b></td>
                                                             </tr>
                                                             <?php
                                                         }
@@ -129,7 +129,7 @@ $separator = "-|;|-";
                                             ?>
                                             <tr>
                                                 <td colspan="2"><h2><b>Jumlah Total</b></h2></td>
-                                                <td style="text-align:right"><h2><b><?php echo number_format($total, 0, ',', ','); ?></b></h2></td>
+                                                <td style="text-align:right"><h2><b><?php echo  number_format($total, 0, ',', ','); ?></b></h2></td>
                                             </tr>
                                         </table>
                                     </div>  

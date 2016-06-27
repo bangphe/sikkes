@@ -1,7 +1,15 @@
+<style type="text/css">
+.help-block {
+ margin-top: 5px;
+ margin-bottom: 5px;
+ padding: 5px;
+}
+</style>
+
 <div id="tengah">
 	<div id="judul" class="title">Tambah RAB</div>
 <div id="content_tengah">
-	<form id="form_tambah_aktivitas" name="form_tambah_aktivitas" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-planning/aktivitas/save_aktivitas/'.$idRencanaAnggaran.'/'.$KD_PENGAJUAN; ?>" onsubmit="return validate_form()">
+	<form id="form_tambah_aktivitas" name="form_tambah_aktivitas" class="appnitro" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-planning/aktivitas/save_aktivitas/'.$idRencanaAnggaran.'/'.$KD_PENGAJUAN; ?>" onsubmit="return validate_form()">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		
 		<div>
@@ -19,12 +27,12 @@
 			<tr>
 				<td style="vertical-align:top;" ></td>
 				<td><input type="radio" name="rincian" id="rincian2" value="2" onchange="change(this)" />Rincian lain:<p></p>
-				<textarea name="judul_usulan" id="judul_usulan" rows="2" cols="72" disabled></textarea><?php echo form_error('judul_usulan'); ?>
+				<textarea name="judul_usulan" id="judul_usulan" rows="2" cols="72" disabled></textarea><?php echo  form_error('judul_usulan'); ?>
 				</td>
 			</tr>
 		<tr><td><p>&nbsp;</p></td><tr>
 			<tr>
-				<td>Jenis Usulan*<?php echo form_error(); ?></td>
+				<td>Jenis Usulan*<?php echo  form_error(); ?></td>
 				<td>
 					<?php $attr = 'id="jenis_usulan" onchange="get_rk(this.value);get_fp(this.value);" onfocusout="get_rk(this.value);get_fp(this.value);" readonly="true"';
 						if(isset($jenis_usulan)) echo form_dropdown('jenis_usulan',$jenis_usulan, null,$attr); 
@@ -46,32 +54,32 @@
 				<input name="rinci_8" size="5" />
 				</td>
 			</tr>
-		<tr><td><p>&nbsp;</p></td><tr>
+		<tr><td></td>&nbsp;<td><span class="help-block">Contoh : 10 kali x 20 org</span></td><tr>
 			<tr>
 				<td style="vertical-align:top;" >Volume*</td>
 				<td><input type="text" name="volume"  id="volume"  style="text-align:right;vertical-align:top;"    onChange="hitungJumlah();" onfocusout="hitungJumlah();"  readonly="true" />
 				<!--input name="satuan_rinci" size="5" />-->
-				<?php echo form_dropdown('satuan',$satuan); ?><?php echo form_error('satuan'); ?></td>
+				<?php echo  form_dropdown('satuan',$satuan); ?><?php echo  form_error('satuan'); ?></td>
 			</tr>
 		<?php /*<tr><td><p>&nbsp;</p></td><tr>
 			<tr>
 				<td style="vertical-align:top;" >Satuan*</td>
-				<td><?php echo form_dropdown('satuan',$satuan); ?><?php echo form_error('satuan'); ?></td>
+				<td><?php echo  form_dropdown('satuan',$satuan); ?><?php echo  form_error('satuan'); ?></td>
 			</tr> */ ?>
 		<tr><td><p>&nbsp;</p></td><tr>
 			<tr>
 				<td style="vertical-align:top;" >Harga Satuan*</td>
-				<td><input type="text" name="harga_satuan" id="harga_satuan"   style="text-align:right;vertical-align:top;" onblur="if(this.value=='') this.value='0';" onfocus="if(this.value=='0') this.value='';"  value="0" onChange="hitungJumlah();" onfocusout="hitungJumlah();" /><?php echo form_error('harga_satuan'); ?></td>
+				<td><input type="text" name="harga_satuan" id="harga_satuan"   style="text-align:right;vertical-align:top;" onblur="if(this.value=='') this.value='0';" onfocus="if(this.value=='0') this.value='';"  value="0" onChange="hitungJumlah();" onfocusout="hitungJumlah();" /><?php echo  form_error('harga_satuan'); ?></td>
 			</tr>
 		<tr><td><p>&nbsp;</p></td><tr>
 			<tr>
 				<td style="vertical-align:top;" >Jumlah*</br>(Volume * Harga Satuan)</td>
-				<td><input type="text" name="jumlah" id="jumlah"  style="text-align:right;vertical-align:top;" value="0" readonly="true" /><?php echo form_error('jumlah'); ?></td>
+				<td><input type="text" name="jumlah" id="jumlah"  style="text-align:right;vertical-align:top;" value="0" readonly="true" /><?php echo  form_error('jumlah'); ?></td>
 			</tr>
 		<tr><td><p>&nbsp;</p></td><tr>
 			<tr>
 				<td style="vertical-align:top;" >Jenis Pembiayaan*</td>
-				<td><?php if(isset($jenis_pembiayaan)) echo form_dropdown('jenis_pembiayaan',$jenis_pembiayaan); ?><?php echo form_error('jenis_pembiayaan'); ?></td>
+				<td><?php if(isset($jenis_pembiayaan)) echo form_dropdown('jenis_pembiayaan',$jenis_pembiayaan); ?><?php echo  form_error('jenis_pembiayaan'); ?></td>
 			</tr>
 		<tr><td><p>&nbsp;</p></td><tr>
 			<tr>
@@ -92,16 +100,16 @@
 			<td></td>
 			<td>
 				<div class="buttons">
-					<input type="hidden" name="KodeFungsi" value="<?php echo $KodeFungsi; ?>" />
-					<input type="hidden" name="KodeSubFungsi" value="<?php echo $KodeSubFungsi; ?>" />
-					<input type="hidden" name="KodeProgram" value="<?php echo $KodeProgram; ?>" />
-					<input type="hidden" name="KodeKegiatan" value="<?php echo $KodeKegiatan; ?>" />
+					<input type="hidden" name="KodeFungsi" value="<?php echo  $KodeFungsi; ?>" />
+					<input type="hidden" name="KodeSubFungsi" value="<?php echo  $KodeSubFungsi; ?>" />
+					<input type="hidden" name="KodeProgram" value="<?php echo  $KodeProgram; ?>" />
+					<input type="hidden" name="KodeKegiatan" value="<?php echo  $KodeKegiatan; ?>" />
 					<button type="button" class="negative" onClick="history.go(-1);" name="batal">
-						<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 						Batal
 					</button>
 					<button type="submit" class="regular" name="save" id="save">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Simpan
 					</button>
 				</div>
@@ -120,7 +128,7 @@
 $(document).ready(function(){
 $("#rincian_kegiatan").change( function() {
 	var v = document.getElementById('rincian_kegiatan').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/aktivitas/get_jns_usulan/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/aktivitas/get_jns_usulan/'+v;
 	//alert(v)
 	
 	$.ajax({
@@ -146,7 +154,7 @@ $("#rincian_kegiatan").change( function() {
   				$('#jenis_usulan').val(id).attr("selected", "selected");
 				
 					var v2 = id;
-					var url2 = '<?php echo base_url()?>index.php/e-planning/aktivitas/get_fp/<?php echo $KD_PENGAJUAN;?>/'+v2;
+					var url2 = '<?php echo  base_url()?>index.php/e-planning/aktivitas/get_fp/<?php echo  $KD_PENGAJUAN;?>/'+v2;
 					//alert(v)
 					
 					$.ajax({
@@ -178,7 +186,7 @@ $("#rincian_kegiatan").change( function() {
 					});	
 						$("#fp").trigger("liszt:updated");
 						
-						var url = '<?php echo base_url()?>index.php/e-planning/aktivitas/get_rk/<?php echo $KD_PENGAJUAN;?>/'+v2;
+						var url = '<?php echo  base_url()?>index.php/e-planning/aktivitas/get_rk/<?php echo  $KD_PENGAJUAN;?>/'+v2;
 						//alert(v)
 						
 						$.ajax({
@@ -257,7 +265,7 @@ function change(option) {
 function get_fp(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/aktivitas/get_fp/<?php echo $KD_PENGAJUAN;?>/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/aktivitas/get_fp/<?php echo  $KD_PENGAJUAN;?>/'+v;
 	//alert(v)
 	
 	$.ajax({
@@ -295,7 +303,7 @@ function get_fp(v)
 function get_rk(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/aktivitas/get_rk/<?php echo $KD_PENGAJUAN;?>/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/aktivitas/get_rk/<?php echo  $KD_PENGAJUAN;?>/'+v;
 	//alert(v)
 	
 	$.ajax({

@@ -60,12 +60,12 @@ function whenkeydown(max_length)
 }
 </script>
 
-<?php echo form_open_multipart('e-monev/laporan_monitoring/save_progress_fisik/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput.'/'.$progress_id.'/'.$idpaket); ?>
+<?php echo  form_open_multipart('e-monev/laporan_monitoring/save_progress_fisik/'.$thang.'/'.$kdjendok.'/'.$kdsatker.'/'.$kddept.'/'.$kdunit.'/'.$kdprogram.'/'.$kdgiat.'/'.$kdoutput.'/'.$kdlokasi.'/'.$kdkabkota.'/'.$kddekon.'/'.$kdsoutput.'/'.$progress_id.'/'.$idpaket); ?>
 <table class="tablecloth" width="50%">
 		<tr>
 			<td><b>Bulan</b></td>
 			<td>
-				<?php echo $bulan;?>
+				<?php echo  $bulan;?>
 			</td>
 		</tr>
 		<tr>
@@ -102,4 +102,4 @@ function whenkeydown(max_length)
 			</td>
 		</tr>
 	</table>
-<?php echo form_close();?>
+<?php echo  form_close();?>

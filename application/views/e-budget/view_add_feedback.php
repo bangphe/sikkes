@@ -10,14 +10,14 @@
 </script>
 <div id="tengah">
     <div id="judul" class="title">
-        <?php echo $judul; ?>
+        <?php echo  $judul; ?>
     </div>
     <div id="content_tengah">
-        <form class="appnitro" name="addsinonim" enctype="multipart/form-data" method="post" action="<?php echo base_url() . 'index.php/e-budget/feedback/add_feedback_action/'.$kdunit.'/'.$satker.'/'.$page.'/'.$key_back.'/'.$key; ?>" onsubmit="return validate();">
+        <form class="appnitro" name="addsinonim" enctype="multipart/form-data" method="post" action="<?php echo  base_url() . 'index.php/e-budget/feedback/add_feedback_action/'.$kdunit.'/'.$satker.'/'.$page.'/'.$key_back.'/'.$key; ?>" onsubmit="return validate();">
             <div>
                 <table width="100%" height="100%">
                     <tr>
-                        <td width="15%"><?php echo $label; ?></td>
+                        <td width="15%"><?php echo  $label; ?></td>
                         <td width="85%">
                             <textarea name="feedback_text" id="feedback_text">
                             
@@ -29,14 +29,14 @@
                         <td width="85%">  
                             <div class="buttons">
                                 <button type="submit" class="regular" name="submit">
-                                    <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+                                    <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
                                     Tambah
                                 </button>
                             </div>
-                            <a href='<?php echo site_url().'/e-budget/feedback/feedback_edit/'.$kdunit.'/'.$satker.'/'.$page.'/'.$key_back.'/'.$key ;?>'>
+                            <a href='<?php echo  site_url().'/e-budget/feedback/feedback_edit/'.$kdunit.'/'.$satker.'/'.$page.'/'.$key_back.'/'.$key ;?>'>
                                 <div class="buttons">
                                     <button type="button" class="regular" name="submit">
-                                        <img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>
+                                        <img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>
                                         Kembali
                                     </button>
                                 </div>
@@ -45,7 +45,7 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td width="15%"><?php echo $error; ?></td>
+                        <td width="15%"><?php echo  $error; ?></td>
                         <td width="85%">
 
                         </td>

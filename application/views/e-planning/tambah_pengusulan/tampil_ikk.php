@@ -27,7 +27,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 				foreach($ikk as $row) { 
 			?>
 				<tr>
-					<td>(<?php echo $row->KodeIkk; ?>) <?php echo $row->Ikk; ?></td>
+					<td>(<?php echo  $row->KodeIkk; ?>) <?php echo  $row->Ikk; ?></td>
 					<td align="center" width="14%"><?php foreach($this->pm->get_where_double('target_ikk',  $row->KodeIkk, 'KodeIkk',$idTahun, 'idThnAnggaran')->result() as $r) echo $r->TargetNasional; ?></td>
 					<td align="center" width="14%">
 					<?php
@@ -58,7 +58,7 @@ table.myTable tr:nth-child(odd) { /*(odd) or (2n+1)*/
 							$warning_icon_target_ikk = '<img border=\'0\' src=\''.base_url().'images/flexigrid/tolak.png\'>';
 						}
 					?>
-					<td align="center" width="14%"><?php echo $warning_icon_target_ikk; ?></td>
+					<td align="center" width="14%"><?php echo  $warning_icon_target_ikk; ?></td>
 				</tr>
 			<?php } ?>
 			</table>

@@ -2,17 +2,17 @@
 	<div id="judul" class="title">
 		Info Umum Proposal
 	<!--
-	<label class="edit"><a href="#"><img src="<?php echo base_url(); ?>images/icons/Edit_icon.png" /></a></label>
-	<label class="detail"><a href="#"><img src="<?php echo base_url(); ?>images/icons/detail.png" /></a></label>
+	<label class="edit"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/Edit_icon.png" /></a></label>
+	<label class="detail"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/detail.png" /></a></label>
 -->
 </div>
 <div id="content_tengah">
-	<form class="appnitro" name="form_pengusulan" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/e-planning/pendaftaran/pengajuan'; ?>" onsubmit="return validateForm()" >
+	<form class="appnitro" name="form_pengusulan" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/e-planning/pendaftaran/pengajuan'; ?>" onsubmit="return validateForm()" >
 		<ul id="tt" class="easyui-tree"
-		url="<?php echo base_url(); ?>index.php/e-planning/pendaftaran/json"
+		url="<?php echo  base_url(); ?>index.php/e-planning/pendaftaran/json"
 		checkbox="true">
 	</ul>
-	<input type="hidden" name="kd_pengajuan" id="kd_pengajuan" value="<?php echo $kd_pengajuan; ?>" /></td>
+	<input type="hidden" name="kd_pengajuan" id="kd_pengajuan" value="<?php echo  $kd_pengajuan; ?>" /></td>
 	<?php if($error_file != ''){ 
 		echo $error_file;
 	} ?>
@@ -29,7 +29,7 @@
 			<h3>Rincian Pengusul</h3>
 			<table width="100%" height="19%">
 				<tr>
-					<td colspan="2"><input type="hidden" name="kdsatker" id="kdsatker" readonly="TRUE" value="<?php echo $kdsatker; ?>" /></td>
+					<td colspan="2"><input type="hidden" name="kdsatker" id="kdsatker" readonly="TRUE" value="<?php echo  $kdsatker; ?>" /></td>
 					<tr>
 						<td width="15%" height="24" style="padding-left:10px;">Nama Satker</td> 
 						<td>
@@ -38,13 +38,13 @@
 							else $disabled = 'id="satker" onChange="get_data(this)" style="width:50%; padding:3px;"'; 
 							echo form_dropdown('satker', $satker, $selected_worker, $disabled) 
 							?>
-							<?php echo form_error('satker'); ?>
+							<?php echo  form_error('satker'); ?>
 						</td>
 					</tr>
 					<tr>
 						<td height="24" style="padding-left:10px;">Propinsi</td>
-						<!--<?php echo form_dropdown('provinsi', $provinsi, $selected_state, 'class="element select medium"'); ?>-->
-						<td><input name="provinsi" id="provinsi" readonly="TRUE" style="padding:3px;" value="<?php echo $selected_state; ?>" /></td>
+						<!--<?php echo  form_dropdown('provinsi', $provinsi, $selected_state, 'class="element select medium"'); ?>-->
+						<td><input name="provinsi" id="provinsi" readonly="TRUE" style="padding:3px;" value="<?php echo  $selected_state; ?>" /></td>
 					</tr>
 					<tr>
 						<td style="padding-left:10px;">Jenis Kewenangan</td>
@@ -62,13 +62,13 @@
 						<td width="15%" height="37" style="padding-left:10px;vertical-align:top;">Judul Proposal*</td>
 						<td width="85%">
 							<textarea id="judul_proposal" name="judul_proposal" rows="4" cols="60"></textarea>
-							<?php echo form_error('judul_proposal'); ?></td>
+							<?php echo  form_error('judul_proposal'); ?></td>
 						</tr>
 						<tr>
 							<td width="15%" height="37" style="padding-left:10px;vertical-align:top;">Nomor Surat Pengantar*</td>
 							<td width="85%">
 								<input type="text" id="nomor_proposal" name="nomor_proposal" style="padding:3px;" />
-								<?php echo form_error('nomor_proposal'); ?></td>
+								<?php echo  form_error('nomor_proposal'); ?></td>
 							</tr>
 							<tr>
 								<td style="padding-left:10px;vertical-align:top;">Tanggal Surat*</td>
@@ -79,23 +79,23 @@
 							<tr>
 								<td width="15%" height="37" style="padding-left:10px;vertical-align:top;">Perihal Surat</td>
 								<td width="85%"><textarea id="perihal" name="perihal" rows="4" cols="60"></textarea>
-									<?php echo form_error('perihal'); ?> </td>
+									<?php echo  form_error('perihal'); ?> </td>
 								</tr>
 
 								<tr>
 									<td height="24" style="padding-left:10px;">Th. Anggaran</td>
-									<td><input type="text"  name="thn_anggaran" id="thn_anggaran" style="padding:3px;" readonly="TRUE" value="<?php echo $thn_anggaran; ?>"/></td>
+									<td><input type="text"  name="thn_anggaran" id="thn_anggaran" style="padding:3px;" readonly="TRUE" value="<?php echo  $thn_anggaran; ?>"/></td>
 								</tr>
 		<?php /*<tr>
 			<td height="24" style="padding-left:10px;">Triwulan</td> 
 			<td>
-				<input type="text" name="triwulan" id="triwulan"  readonly="TRUE" value="<?php echo $this->session->userdata('triwulan'); ?>"/>			</td>
+				<input type="text" name="triwulan" id="triwulan"  readonly="TRUE" value="<?php echo  $this->session->userdata('triwulan'); ?>"/>			</td>
 			</tr> */ ?>
 			<tr>
 				<td style="padding-left:10px;vertical-align:top;">Tupoksi</td>
 				<td><?php if(isset($tupoksi)){ foreach ($tupoksi as $row) { ?>
-					<input id="tupoksi" name="tupoksi[]" type="checkbox" value="<?php echo $row->KodeTupoksi; ?>" />
-					<?php echo $row->Tupoksi; ?></br>
+					<input id="tupoksi" name="tupoksi[]" type="checkbox" value="<?php echo  $row->KodeTupoksi; ?>" />
+					<?php echo  $row->Tupoksi; ?></br>
 					<?php }} ?>          </td>
 				</tr>
 
@@ -104,8 +104,8 @@
 					<td><table width="100%" height="100%">
 						<?php if(isset($fokus_prioritas)){ foreach ($fokus_prioritas as $row) { ?>
 						<tr>
-							<td>	<input  id="<?php echo "fokus_prioritas".$row->idFokusPrioritas; ?>" name="fokus_prioritas[]" type="checkbox" value="<?php echo $row->idFokusPrioritas; ?>" /> </td>
-							<td width="97%"><?php echo $row->FokusPrioritas; ?></td>
+							<td>	<input  id="<?php echo  "fokus_prioritas".$row->idFokusPrioritas; ?>" name="fokus_prioritas[]" type="checkbox" value="<?php echo  $row->idFokusPrioritas; ?>" /> </td>
+							<td width="97%"><?php echo  $row->FokusPrioritas; ?></td>
 						</tr>
 						<?php }} ?>
 					</table></td>
@@ -115,8 +115,8 @@
 					<td><table width="100%" height="100%">
 						<?php if(isset($reformasi_kesehatan)){ foreach($reformasi_kesehatan as $row) { ?>
 						<tr>
-							<td>	<input  id="<?php echo "reformasi_kesehatan".$row->idReformasiKesehatan; ?>" name="reformasi_kesehatan[]" type="checkbox" value="<?php echo $row->idReformasiKesehatan; ?>" /> </td>
-							<td width="97%"><?php echo $row->ReformasiKesehatan; ?></td>
+							<td>	<input  id="<?php echo  "reformasi_kesehatan".$row->idReformasiKesehatan; ?>" name="reformasi_kesehatan[]" type="checkbox" value="<?php echo  $row->idReformasiKesehatan; ?>" /> </td>
+							<td width="97%"><?php echo  $row->ReformasiKesehatan; ?></td>
 						</tr>
 						<?php }} ?>
 					</table></td>
@@ -293,11 +293,11 @@
 						<p>&nbsp;</p>
 						<table width="100%"><tr><td  width="100%" style="text-align:center">
 							<div class="buttons">
-								<a href="<?php echo site_url(); ?>/e-planning/manajemen/grid_pengajuan" class="negative">
-									<img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>
+								<a href="<?php echo  site_url(); ?>/e-planning/manajemen/grid_pengajuan" class="negative">
+									<img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>
 									Batal
 								</a>
-								<button type="submit" class="regular" name="save" id="save"> <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/> Simpan </button>
+								<button type="submit" class="regular" name="save" id="save"> <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/> Simpan </button>
 							</div>
 						</td></tr></table>
 						<p>&nbsp;</p>
@@ -316,7 +316,7 @@
 			function get_sub(v)
 			{
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_sub/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_sub/'+v;
 	//alert(v)
 	
 	$.ajax({
@@ -351,7 +351,7 @@
 function get_keg(x)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_keg/'+x;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_keg/'+x;
 	//alert(v)
 	
 	$.ajax({
@@ -387,7 +387,7 @@ function get_keg(x)
 function get_outcome(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_outcome/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_outcome/'+v;
 	//alert(v)
 	
 	$.ajax({
@@ -420,7 +420,7 @@ function get_outcome(v)
 function get_iku(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_iku/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_iku/'+v;
 	//alert(v)
 	
 	$.ajax({
@@ -458,7 +458,7 @@ function get_iku(v)
 function get_output(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_output/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_output/'+v;
 	//alert(v)
 	
 	$.ajax({
@@ -493,7 +493,7 @@ function get_output(v)
 function get_ikk(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/e-planning/pendaftaran/get_ikk/'+v;
+	var url = '<?php echo  base_url()?>index.php/e-planning/pendaftaran/get_ikk/'+v;
 	//alert(v)
 	
 	$.ajax({
@@ -576,7 +576,7 @@ function get_data(kdsatker){
 	document.form_pengusulan.kdsatker.value = '';
 	document.form_pengusulan.provinsi.value = '';
 	$.ajax({
-		url: "<?php echo base_url(); ?>index.php/e-planning/pendaftaran/get_alamatSatker",
+		url: "<?php echo  base_url(); ?>index.php/e-planning/pendaftaran/get_alamatSatker",
 		global: false,
 		type: "POST",
 		async: false,

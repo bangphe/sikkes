@@ -30,7 +30,7 @@ $(document).ready(function(){
 function cek_username(v)
 {
 	//var kdProv = document.getElementById('provinsi').value;
-	var url = '<?php echo base_url()?>index.php/master_data/master_user/cek_username/'+v;
+	var url = '<?php echo  base_url()?>index.php/master_data/master_user/cek_username/'+v;
 	
 	$.ajax({
 		//alert('test')
@@ -80,34 +80,34 @@ function validate_form()
 <div id="tengah">
 <div id="judul" class="title">Ubah User</div>
 <div id="content_tengah">
-	<form class="appnitro" name="form_edit_profil" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/master_data/master_user/update_profil/'; ?>" onsubmit="return validate_form()">
+	<form class="appnitro" name="form_edit_profil" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/master_data/master_user/update_profil/'; ?>" onsubmit="return validate_form()">
 	<table width="100%" height="100%" cellpadding="0" cellspacing="0">
 	<?php //if(isset($warning)){?>
 		<tr><td colspan="2"><div name="warning" id="label_warning" style="color:red" ></div></td></tr>
 	<?php // } ?>
 		<tr>
 			<td width="15%">Username*</td>
-			<td width="85%"><input name="username" id="username" disabled="disabled" style="padding:8px; width:25%" type="text" value="<?php echo $username; ?>" onchange="cek_username(this.value)" onfocusout="cek_username(this.value)"/></td>
+			<td width="85%"><input name="username" id="username" type="text"value="<?php echo  $username; ?>" onchange="cek_username(this.value)" onfocusout="cek_username(this.value)"/></td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
 		<tr>
 			<td width="15%">Nama*</td>
-			<td width="85%"><input name="nama" id="nama" disabled="disabled" style="padding:8px; width:25%" type="text" value="<?php echo $nama; ?>" /></td>
+			<td width="85%"><input name="nama" id="nama" type="text"value="<?php echo  $nama; ?>" /></td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
 		<tr>
 			<td width="15%">Email*</td>
-			<td width="85%"><input name="email" id="email" style="padding:8px; width:25%" type="text" value="<?php echo $email; ?>"/></td>
+			<td width="85%"><input name="email" id="email" type="text" value="<?php echo  $email; ?>"/></td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
 		<tr>
 			<td width="15%">Telepon*</td>
-			<td width="85%"><input name="telp" id="telp" type="text" style="padding:8px; width:25%" value="<?php echo $telp; ?>"/></td>
+			<td width="85%"><input name="telp" id="telp" type="text" value="<?php echo  $telp; ?>"/></td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
 		<tr>
 			<td width="15%">Alamat*</td>
-			<td width="85%"><textarea name="alamat" id="alamat" cols="72" rows="3"/><?php echo $alamat_user; ?></textarea></td>
+			<td width="85%"><textarea name="alamat" id="alamat" cols="72" rows="3"/><?php echo  $alamat_user; ?></textarea></td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
 	<?php if($jnskewenangan == '3'){?>
@@ -120,8 +120,8 @@ function validate_form()
 		</tr>
 		<tr id="menu_jabatan">
 			<td width="15%">Jabatan*</td>
-			<td width="85%"><?php echo form_dropdown('jabatan',$opt_jabatan,$jabatan,'');?>
-				<?php echo ' Jabatan sekarang: '.$nmjabatan; ?>
+			<td width="85%"><?php echo  form_dropdown('jabatan',$opt_jabatan,$jabatan,'');?>
+				<?php echo  ' Jabatan sekarang: '.$nmjabatan; ?>
 				</td>
 		</tr>
 	<?php } ?>
@@ -130,12 +130,12 @@ function validate_form()
 			<td></td>
 			<td>
 				<div class="buttons">
-	    <a href="<?php echo site_url(); ?>/master_data/master_user/detail_user" class="negative">
-						<img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>
+	    <a href="<?php echo  site_url(); ?>/master_data/master_user/detail_user" class="negative">
+						<img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>
 						Batal
 					 </a>
 					<button type="submit" class="regular" name="save" id="save">
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Ubah
 					</button>
 				</div>

@@ -1,7 +1,7 @@
 <div id="tengah">
 <div id="judul" class="title">Menu Kegiatan</div>
 <div id="content_tengah">
-	<form name="form_kabupaten" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/master_data/master_menu_kegiatan/detail/'.$KodeMenuKegiatan; ?>">
+	<form name="form_kabupaten" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/master_data/master_menu_kegiatan/detail/'.$KodeMenuKegiatan; ?>">
 		<table width="80%" height="25%">
 			<tr>
 				<td width="10%">Program</td>
@@ -32,12 +32,12 @@
 			</tr>
 			<tr>
 				<td width="10%">Menu Kegiatan</td>
-				<td width="70%"><textarea name="menu_kegiatan" id="menu_kegiatan" style="width:70%; padding:3px" readonly="TRUE" /><?php echo $menu_kegiatan; ?></textarea></td>
+				<td width="70%"><textarea name="menu_kegiatan" id="menu_kegiatan" style="width:70%; padding:3px" readonly="TRUE" /><?php echo  $menu_kegiatan; ?></textarea></td>
 			</tr>
             <tr>
                 <td>
                     <div class="buttons">
-                        <a href="<?php echo base_url();?>index.php/master_data/master_menu_kegiatan/grid_menu_kegiatan"><img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>Back</a>
+                        <a href="<?php echo  base_url();?>index.php/master_data/master_menu_kegiatan/grid_menu_kegiatan"><img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>Back</a>
                     </div>
                 </td>
             </tr>

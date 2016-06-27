@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/tooltip/tooltip-generic.css"/>
-<!--<script type="text/javascript" src="<?php echo base_url()?>js/jquery.tools.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/tooltip/tooltip-generic.css"/>
+<!--<script type="text/javascript" src="<?php echo  base_url()?>js/jquery.tools.min.js"></script> 
 -->
 <script>
   // execute your scripts when the DOM is ready. this is a good habit
@@ -26,7 +26,7 @@
 <script type="text/javascript">
  function getValue(kdunit){
 	 $.ajax({
-		 url: '<?php echo base_url()?>index.php/master_data/master_program/valid/',
+		 url: '<?php echo  base_url()?>index.php/master_data/master_program/valid/',
 		 data: 'kdunit='+kdunit,
 		 type: 'GET',
 		 beforeSend: function()
@@ -50,7 +50,7 @@
 	 var x = document.getElementById('unit_organisasi');
 	 getVal = x.value;
 	 $.ajax({
-		 url: '<?php echo base_url()?>index.php/master_data/master_program/valid/'+kode,
+		 url: '<?php echo  base_url()?>index.php/master_data/master_program/valid/'+kode,
 		 data: 'kdunit='+getVal,
 		 type: 'GET',
 		 beforeSend: function()
@@ -76,7 +76,7 @@
 	Program
 </div>
 <div id="content_tengah">
-	<form name="form_program" id="form_program" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/master_data/master_program/save_program'; ?>">
+	<form name="form_program" id="form_program" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/master_data/master_program/save_program'; ?>">
 		<table width="80%" height="25%">
             <tr>
 				<td width="10%">Unit Organisasi</td>
@@ -105,11 +105,11 @@
 				<td>
 					<div class="buttons">
 						<button type="submit" class="regular" name="save" id="submit">
-							<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 							Save
 						</button>
 						<button type="reset" class="negative" name="reset">
-							<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 							Reset
 						</button>
 					</div>
@@ -118,7 +118,7 @@
             <tr>
                 <td>
                     <div class="buttons">
-                        <a href="<?php echo base_url();?>index.php/master_data/master_program/grid_program"><img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>Back</a>
+                        <a href="<?php echo  base_url();?>index.php/master_data/master_program/grid_program"><img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>Back</a>
                     </div>
                 </td>
             </tr>

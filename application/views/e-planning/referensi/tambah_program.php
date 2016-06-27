@@ -1,5 +1,5 @@
 <div id="judul" class="title">
-	<?php echo $judul; ?>
+	<?php echo  $judul; ?>
 </div>
 <div id="content">
 	<form name="form_tambah_program" method="POST" id="form_tambah_program" action="#" onsubmit="save_data();">
@@ -7,7 +7,7 @@
 		<tr>
 			<td>Unit Organisasi</td>
 			<td>
-				<?php echo form_dropdown('KodeUnitOrganisasi',$unit); ?>
+				<?php echo  form_dropdown('KodeUnitOrganisasi',$unit); ?>
 			</td>
 		</tr>
 		<tr>
@@ -27,11 +27,11 @@
 			<td>
 				<div class="buttons">
 					<button type="submit" class="regular" name="save" >
-						<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 						Save
 					</button>
 					<button type="reset" class="negative" name="reset">
-						<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+						<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 						Reset
 					</button>
 				</div>

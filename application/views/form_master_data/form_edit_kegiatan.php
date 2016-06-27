@@ -3,11 +3,11 @@
 	Kegiatan
 </div>
 <div id="content_tengah">
-	<form name="form_kegiatan" enctype="multipart/form-data" method="post" action="<?php echo base_url().'index.php/master_data/master_kegiatan/update_kegiatan/'.$KodeKegiatan; ?>">
+	<form name="form_kegiatan" enctype="multipart/form-data" method="post" action="<?php echo  base_url().'index.php/master_data/master_kegiatan/update_kegiatan/'.$KodeKegiatan; ?>">
 		<table width="80%" height="25%">
 			<tr>
 				<td width="10%">Kode Kegiatan</td>
-                <td width="70%"><input type="text" name="kdkeg" id="kdkeg" style="padding:3px; width:5%" value="<?php echo $KodeKegiatan; ?>" readonly="true"/></td>
+                <td width="70%"><input type="text" name="kdkeg" id="kdkeg" style="padding:3px; width:5%" value="<?php echo  $KodeKegiatan; ?>" readonly="true"/></td>
 			</tr>
 			<tr>
 				<td width="10%">Unit Organisasi</td>
@@ -47,18 +47,18 @@
 			</tr>
 			<tr>
 				<td width="10%">Kegiatan</td>
-				<td width="70%"><textarea name="kegiatan" id="kegiatan" style="padding:3px;" cols="60" rows="4"><?php echo $kegiatan; ?></textarea><?php echo form_error('kegiatan'); ?></td>
+				<td width="70%"><textarea name="kegiatan" id="kegiatan" style="padding:3px;" cols="60" rows="4"><?php echo  $kegiatan; ?></textarea><?php echo  form_error('kegiatan'); ?></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>
 					<div class="buttons">
 						<button type="submit" class="regular" name="save">
-							<img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
 							Save
 						</button>
 						<button type="reset" class="negative" name="reset">
-							<img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+							<img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
 							Reset
 						</button>
 					</div>
@@ -67,7 +67,7 @@
             <tr>
                 <td>
                     <div class="buttons">
-                        <a href="<?php echo base_url();?>index.php/master_data/master_kegiatan/grid_kegiatan"><img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>Back</a>
+                        <a href="<?php echo  base_url();?>index.php/master_data/master_kegiatan/grid_kegiatan"><img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>Back</a>
                     </div>
                 </td>
             </tr>
@@ -79,7 +79,7 @@
 				function get_subfungsi(kd){
 					var prp = kd.value;
 						$.ajax({
-							url: "<?php echo base_url()?>index.php/master_data/master_kegiatan/get_subfungsi/",
+							url: "<?php echo  base_url()?>index.php/master_data/master_kegiatan/get_subfungsi/",
 							global: false,
 						type: "POST",
 							async: false,
@@ -96,7 +96,7 @@
 					  return false;
 				}
 function get_program(kdu){
-	var url = '<?php echo base_url()?>index.php/master_data/master_kegiatan/getprogram/'+kdu;
+	var url = '<?php echo  base_url()?>index.php/master_data/master_kegiatan/getprogram/'+kdu;
 	//alert(v)
 	
 	$.ajax({

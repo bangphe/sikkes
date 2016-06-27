@@ -14,9 +14,9 @@
         var ket_pihak_terkait = $("#ket_pihak_terkait").val();
         var status = $("#status").val();
         
-        $("#data-table").html('<img src="<?php echo base_url() . 'images/flexigrid/load.gif'; ?>"> saving...');
+        $("#data-table").html('<img src="<?php echo  base_url() . 'images/flexigrid/load.gif'; ?>"> saving...');
         $.ajax({
-            url: '<?= base_url() ?>index.php/e-monev/laporan_monitoring/save_masalah/'+id3+'/'+bulan,
+            url: '<?php echo  base_url() ?>index.php/e-monev/laporan_monitoring/save_masalah/'+id3+'/'+bulan,
             global: false,
             type: 'POST',
             async: false,
@@ -52,7 +52,7 @@
     function edit(id){
         $("#form_tambah_masalah").hide();
         
-        var url = '<?= base_url() ?>index.php/e-monev/laporan_monitoring/get_masalah/'+id;
+        var url = '<?php echo  base_url() ?>index.php/e-monev/laporan_monitoring/get_masalah/'+id;
         $.getJSON(url, function(data) {
             $("#form_edit_masalah").show("slow", function(){
                 $("#id_skmpnen").val(data.d_skmpnen_id);
@@ -76,9 +76,9 @@
         var ket_pihak_terkait = $("#edit_ket_pihak_terkait").val();
         var status = $("#edit_status option:selected").val();
         
-        $("#data-table").html('<img src="<?php echo base_url() . 'images/flexigrid/load.gif'; ?>"> saving...');
+        $("#data-table").html('<img src="<?php echo  base_url() . 'images/flexigrid/load.gif'; ?>"> saving...');
         $.ajax({
-            url: '<?= base_url() ?>index.php/e-monev/laporan_monitoring/update_masalah/',
+            url: '<?php echo  base_url() ?>index.php/e-monev/laporan_monitoring/update_masalah/',
             global: false,
             type: 'POST',
             async: false,
@@ -98,25 +98,25 @@
     }
     
     function getUpaya(id){
-        $("#content_tengah").html('<img src="<?php echo base_url() . 'images/flexigrid/load.gif'; ?>"> loading...');
+        $("#content_tengah").html('<img src="<?php echo  base_url() . 'images/flexigrid/load.gif'; ?>"> loading...');
         get_html_data(base_url+"index.php/e-monev/laporan_monitoring/get_upaya_penyelesaian/"+id,'', 'profile_detail_loading', 'content_tengah');
     }
 	
 	
     function getFeedback(id){
-        $("#content_tengah").html('<img src="<?php echo base_url() . 'images/flexigrid/load.gif'; ?>"> loading...');
+        $("#content_tengah").html('<img src="<?php echo  base_url() . 'images/flexigrid/load.gif'; ?>"> loading...');
         get_html_data(base_url+"index.php/e-monev/laporan_monitoring/input_feedback/"+id,'', 'profile_detail_loading', 'content_tengah');
     }
 </script>
 
-<h2 class="tablecloth">Tahun Anggaran : <?php echo $this->session->userdata('thn_anggaran'); ?></h2>
-<h2 class="tablecloth">Bulan : <?php echo $bulan; ?></h2>
-<h2 class="tablecloth">Nama Komponen/Sub Komponen : <?php echo $sub_komponen; ?></h2>
+<h2 class="tablecloth">Tahun Anggaran : <?php echo  $this->session->userdata('thn_anggaran'); ?></h2>
+<h2 class="tablecloth">Bulan : <?php echo  $bulan; ?></h2>
+<h2 class="tablecloth">Nama Komponen/Sub Komponen : <?php echo  $sub_komponen; ?></h2>
 
 <div>
-    <?= anchor(site_url('e-monev/laporan_monitoring/input_masalah/' . $d_skmpnen_id . '#'), img(array('src' => 'images/flexigrid/prev.gif', 'border' => '0', 'alt' => '')) . 'Kembali Ke Daftar Permasalahan', array('onclick' => 'kembali(' . $d_skmpnen_id . ');;return false;')); ?>
+    <?php echo  anchor(site_url('e-monev/laporan_monitoring/input_masalah/' . $d_skmpnen_id . '#'), img(array('src' => 'images/flexigrid/prev.gif', 'border' => '0', 'alt' => '')) . 'Kembali Ke Daftar Permasalahan', array('onclick' => 'kembali(' . $d_skmpnen_id . ');;return false;')); ?>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="#" id="load_masalah"><img src="<?php echo base_url() . 'images/flexigrid/add.png'; ?>"/>Tambah Permasalahan</a>
+    <a href="#" id="load_masalah"><img src="<?php echo  base_url() . 'images/flexigrid/add.png'; ?>"/>Tambah Permasalahan</a>
 </div>
 
 <div id="form_tambah_masalah">
@@ -150,14 +150,14 @@
 		}
         ?>
         <tr>
-            <td><?php echo $no; ?></td>
-            <td><?php echo $row->isi_permasalahan; ?></td>
-            <td><?php echo $row->pihak_terkait == 0 ? 'Internal' : 'Eksternal'; ?></td>
-            <td><?php echo $row->ket_pihak_terkait ?></td>
-            <td><?php echo $row->status == 0 ? 'Belum Resolved' : 'Sudah Resolved'; ?></td>                
-            <td><?php echo '<a href=\'#\'><img border=\'0\' onclick="edit(' . $row->permasalahan_id . ',' . $row->bulan . ');" src=\'' . base_url() . 'images/icon/iconedit.png\'></a></td>'; ?></td>
-            <td><?php echo $feedback; ?></td>
-            <td><?php echo '<a href=\'#\' onclick="getUpaya(' . $row->permasalahan_id . ');">Ada ' . $row->jml_penyelesaian . ' upaya penyelesaian</a></td>'; ?></td>
+            <td><?php echo  $no; ?></td>
+            <td><?php echo  $row->isi_permasalahan; ?></td>
+            <td><?php echo  $row->pihak_terkait == 0 ? 'Internal' : 'Eksternal'; ?></td>
+            <td><?php echo  $row->ket_pihak_terkait ?></td>
+            <td><?php echo  $row->status == 0 ? 'Belum Resolved' : 'Sudah Resolved'; ?></td>                
+            <td><?php echo  '<a href=\'#\'><img border=\'0\' onclick="edit(' . $row->permasalahan_id . ',' . $row->bulan . ');" src=\'' . base_url() . 'images/icon/iconedit.png\'></a></td>'; ?></td>
+            <td><?php echo  $feedback; ?></td>
+            <td><?php echo  '<a href=\'#\' onclick="getUpaya(' . $row->permasalahan_id . ');">Ada ' . $row->jml_penyelesaian . ' upaya penyelesaian</a></td>'; ?></td>
         </tr>
         <?php $no++;
     } ?>

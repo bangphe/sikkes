@@ -22,11 +22,11 @@
                 <input type="hidden" name="id_upaya_penyelesaian" id="id_upaya_penyelesaian" value=""/>
                 <input type="hidden" name="id_permasalahan" id="id_permasalahan" value=""/>
                 <button type="submit" class="regular" name="save" onClick="update_upaya();">
-                    <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+                    <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
                     Save
                 </button>
                 <button type="reset" class="negative" name="reset" onClick="reset_upaya(1);">
-                    <img src="<?php echo base_url(); ?>images/main/reset.png" alt=""/>
+                    <img src="<?php echo  base_url(); ?>images/main/reset.png" alt=""/>
                     Reset
                 </button>
             </div>

@@ -2,8 +2,8 @@
     <div id="judul" class="title">
         Mapping Komponen
         <!--
-        <label class="edit"><a href="#"><img src="<?php echo base_url(); ?>images/icons/Edit_icon.png" /></a></label>
-        <label class="detail"><a href="#"><img src="<?php echo base_url(); ?>images/icons/detail.png" /></a></label>
+        <label class="edit"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/Edit_icon.png" /></a></label>
+        <label class="detail"><a href="#"><img src="<?php echo  base_url(); ?>images/icons/detail.png" /></a></label>
         -->
     </div>
     <div id="content_tengah">
@@ -12,7 +12,7 @@
         $url = str_replace(' ', '', $url);
         ?>
 
-        <form method="post" action="<?php echo $url ?>" name="mapping2">
+        <form method="post" action="<?php echo  $url ?>" name="mapping2">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td width="15%"><h2>Rincian Komponen</h2></td>
@@ -20,31 +20,31 @@
                 </tr>
                 <tr>
                     <td width="15%">Unit</td>
-                    <td width="85%"><?php echo $unit; ?></td>
+                    <td width="85%"><?php echo  $unit; ?></td>
                 </tr>
                 <tr>
                     <td width="15%">Program</td>
-                    <td width="85%"><?php echo $program; ?></td>
+                    <td width="85%"><?php echo  $program; ?></td>
                 </tr>
                 <tr>
                     <td width="15%">Kegiatan</td>
-                    <td width="85%"><?php echo $kegiatan; ?></td>
+                    <td width="85%"><?php echo  $kegiatan; ?></td>
                 </tr>
                 <tr>
                     <td width="15%">Output</td>
-                    <td width="85%"><?php echo $output; ?></td>
+                    <td width="85%"><?php echo  $output; ?></td>
                 </tr>
                 <tr>
                     <td width="15%">Sub Output</td>
-                    <td width="85%"><?php echo $suboutput; ?></td>
+                    <td width="85%"><?php echo  $suboutput; ?></td>
                 </tr>
                 <tr>
                     <td width="15%">Komponen</td>
-                    <td width="85%"><?php echo $komponen; ?></td>
+                    <td width="85%"><?php echo  $komponen; ?></td>
                 </tr>
                 <tr>
                     <td width="15%">Sub Komponen</td>
-                    <td width="85%"><?php echo $subkomponen; ?></td>
+                    <td width="85%"><?php echo  $subkomponen; ?></td>
                 </tr>
                 <tr>
                     <td width="15%">Reformasi Kesehatan Utama</td>
@@ -53,7 +53,7 @@
                             <?php
                             foreach ($allreformasi as $key => $value) {
                                 ?>
-                                <option value="<?php echo $key; ?>" <?php if ($selected_reformasi_kesehatan_utama == $key) echo "selected" ?>><?php echo $value; ?></option>
+                                <option value="<?php echo  $key; ?>" <?php if ($selected_reformasi_kesehatan_utama == $key) echo "selected" ?>><?php echo  $value; ?></option>
                                 <?php
                             }
                             ?>
@@ -67,7 +67,7 @@
                             <?php
                             foreach ($allreformasi as $key => $value) {
                                 ?>
-                                <input type="checkbox" name="reformasi_kesehatan[]" value="<?php echo $key; ?>" <?php if (in_array($key, $selected_reformasi_kesehatan)) echo "checked" ?>/><?php echo $value; ?><br />
+                                <input type="checkbox" name="reformasi_kesehatan[]" value="<?php echo  $key; ?>" <?php if (in_array($key, $selected_reformasi_kesehatan)) echo "checked" ?>/><?php echo  $value; ?><br />
                                 <?php
                             }
                             ?>
@@ -81,7 +81,7 @@
                             <?php
                             foreach ($allfokus as $key => $value) {
                                 ?>
-                                <option value="<?php echo $key; ?>" <?php if ($selected_fokus_prioritas_utama == $key) echo "selected" ?>><?php echo $value; ?></option>
+                                <option value="<?php echo  $key; ?>" <?php if ($selected_fokus_prioritas_utama == $key) echo "selected" ?>><?php echo  $value; ?></option>
                                 <?php
                             }
                             ?>
@@ -95,7 +95,7 @@
                             <?php
                             foreach ($allfokus as $key => $value) {
                                 ?>
-                                <input type="checkbox" name="fokus_prioritas[]" value="<?php echo $key; ?>" <?php if (in_array($key, $selected_fokus_prioritas)) echo "checked" ?>/><?php echo $value; ?><br />
+                                <input type="checkbox" name="fokus_prioritas[]" value="<?php echo  $key; ?>" <?php if (in_array($key, $selected_fokus_prioritas)) echo "checked" ?>/><?php echo  $value; ?><br />
                                 <?php
                             }
                             ?>
@@ -109,7 +109,7 @@
                             <?php
                             foreach ($allikk as $key => $value) {
                                 ?>
-                                <option value="<?php echo $key; ?>" <?php if ($selected_ikk == $key) echo "selected" ?>><?php echo $value; ?></option>
+                                <option value="<?php echo  $key; ?>" <?php if ($selected_ikk == $key) echo "selected" ?>><?php echo  $value; ?></option>
                                 <?php
                             }
                             ?>
@@ -119,21 +119,21 @@
                 <tr>
                     <td width="15%"></td>
                     <td width="85%" style="font-weight: bold;color: red">
-                        <?php echo $notification; ?>
+                        <?php echo  $notification; ?>
                     </td>
                 </tr>
                 <tr>
                     <td>                            
                         <div class="buttons">
                             <button type="submit" class="regular" name="submit">
-                                <img src="<?php echo base_url(); ?>images/main/save.png" alt=""/>
+                                <img src="<?php echo  base_url(); ?>images/main/save.png" alt=""/>
                                 Simpan
                             </button>
                         </div>
-                        <a href='<?php echo site_url()."/e-budget/mapping/grid_komponen/$kdunit/$kdsatker/$page" ;?>'>
+                        <a href='<?php echo  site_url()."/e-budget/mapping/grid_komponen/$kdunit/$kdsatker/$page" ;?>'>
                         <div class="buttons">
                             <button type="button" class="regular" name="submit">
-                                <img src="<?php echo base_url(); ?>images/main/back.png" alt=""/>
+                                <img src="<?php echo  base_url(); ?>images/main/back.png" alt=""/>
                                 Kembali
                             </button>
                         </div>
@@ -163,17 +163,17 @@
                         $total = $total + $datas[5];
                         ?>
                         <tr>
-                            <td style="background-color:#ADDFFF"><?php echo $no; ?></td>
-                            <td style="background-color:#ADDFFF"><?php echo $datas[1] . " - " . $datas[0]; ?></td>
-                            <td style="background-color:#ADDFFF"><?php echo $datas[4]; ?></td>
-                            <td style="text-align:right;background-color:#ADDFFF"><?php echo number_format($datas[5], 0, ',', ','); ?></td>
+                            <td style="background-color:#ADDFFF"><?php echo  $no; ?></td>
+                            <td style="background-color:#ADDFFF"><?php echo  $datas[1] . " - " . $datas[0]; ?></td>
+                            <td style="background-color:#ADDFFF"><?php echo  $datas[4]; ?></td>
+                            <td style="text-align:right;background-color:#ADDFFF"><?php echo  number_format($datas[5], 0, ',', ','); ?></td>
                         </tr>   
                         <?php
                     }
                     ?>
                     <tr>
                         <td style="background-color:#ADDFFF"><b>Jumlah</b></td>
-                        <td style="text-align:right;background-color:#ADDFFF" colspan="3"><b><?php echo number_format($total, 0, ',', ','); ?></b></td>
+                        <td style="text-align:right;background-color:#ADDFFF" colspan="3"><b><?php echo  number_format($total, 0, ',', ','); ?></b></td>
                     </tr>   
                     <?php
                 } else {
